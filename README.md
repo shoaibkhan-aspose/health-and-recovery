@@ -4,15 +4,15 @@ Domain-agnostic agents that audit a web property and report what is broken, not 
 
 ## Latest reports
 
-One report per tenant (property), listed on the [landing page](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/):
+One report per tenant (property), listed on the [landing page](https://shoaibkhan-aspose.github.io/health-and-recovery/):
 
-- **[aspose.app](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/aspose.app/)**: summary, product family health, priorities, shared problems, all findings with a fix guide, page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/aspose.app/archive/).
-- **[conholdate.cloud](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/conholdate.cloud/)**: blog.conholdate.cloud for now. Previous versions: [archive](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/conholdate.cloud/archive/).
-- **[Fix guide](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/fix-guide/)**: one shared page for every report: what each check means, its impact, how to fix and verify it, and which reports have it open.
+- **[aspose.app](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/)**: summary, product family health, priorities, shared problems, all findings with a fix guide, page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/archive/).
+- **[conholdate.cloud](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/)**: blog.conholdate.cloud for now. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/archive/).
+- **[Fix guide](https://shoaibkhan-aspose.github.io/health-and-recovery/fix-guide/)**: one shared page for every report: what each check means, its impact, how to fix and verify it, and which reports have it open.
 
 Each report grades product families and, separately, every host without families (A–F, out of 100).
 
-[![Publish report](https://github.com/shoaibkhan-aspose/aspose-app-health-and-recovery/actions/workflows/pages.yml/badge.svg)](https://github.com/shoaibkhan-aspose/aspose-app-health-and-recovery/actions/workflows/pages.yml)
+[![Publish report](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml/badge.svg)](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml)
 
 The page is rebuilt and published by GitHub Actions on every push to `master`, from the run files committed in `reports/<tenant>/`. Audits themselves run locally (see Setup).
 
