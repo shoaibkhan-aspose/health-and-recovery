@@ -222,7 +222,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
 
         <rect class="d-key" x="976" y="676" width="300" height="56" rx="8"/>
         <text class="d-t" x="990" y="699">Site health reports</text>
-        <text class="d-s" x="990" y="718">GitHub Pages · /&lt;tenant&gt;/ · noindex</text>
+        <text class="d-s" x="990" y="718">Pages · /&lt;tenant&gt;/, /&lt;host&gt;/, fix guide</text>
 
         <!-- arrows: sources to steps -->
         <line class="d-a" x1="192" y1="88" x2="314" y2="88" marker-end="url(#ah)"/>
@@ -313,7 +313,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
           <tr><td class="step">5</td><td><code>python scripts/audit_text.py</code></td><td>title, H1 and meta description of every crawl-audit page (no requests to the sites), proofread by the internal LLM in each page's language; answers cached per page text</td><td>wording findings (typos; placeholder or garbled words; a title about a different product), each quoting the page, <code>reports/&lt;tenant&gt;/text-audit-runN.json</code></td><td>5 min</td></tr>
           <tr><td class="step">6</td><td><code>python scripts/prioritize.py</code></td><td>Search Console page clicks (now, previous 28 days, six months ago), GA4 organic sessions for hosts without Search Console</td><td>impact, traffic lost since six months ago and score on every finding, <code>reports/&lt;tenant&gt;/findings.json</code>, <code>reports/&lt;tenant&gt;/traffic-summary.json</code></td><td>1 min</td></tr>
           <tr><td class="step">7</td><td><code>python scripts/build_report.py --snapshot "…"</code></td><td>the run files, findings and traffic summary</td><td>the local report, a frozen copy in <code>reports/&lt;tenant&gt;/archive/</code>, family health in <code>reports/&lt;tenant&gt;/health-history.json</code></td><td>seconds</td></tr>
-          <tr><td class="step">8</td><td><code>git push github master</code></td><td>the committed <code>reports/&lt;tenant&gt;/</code> files</td><td>GitHub Actions runs <code>build_site.py</code>: a landing page, then per tenant the report (summary, families, priorities, shared problems, findings, changes, fix guide) at <code>/&lt;tenant&gt;/</code> with its archive</td><td>1 min</td></tr>
+          <tr><td class="step">8</td><td><code>git push github master</code></td><td>the committed <code>reports/&lt;tenant&gt;/</code> files</td><td>GitHub Actions runs <code>build_site.py</code>: a landing page; per tenant the report (summary, family and host health, priorities, shared problems, findings, changes) at <code>/&lt;tenant&gt;/</code> with its archive; one page per host at <code>/&lt;host&gt;/</code>; one shared fix guide at <code>/fix-guide/</code> (all noindex)</td><td>1 min</td></tr>
         </tbody>
       </table>
     </div>

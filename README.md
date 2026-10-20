@@ -6,7 +6,7 @@ Domain-agnostic agents that audit a web property and report what is broken, not 
 
 One report per tenant (property), listed on the [landing page](https://shoaibkhan-aspose.github.io/health-and-recovery/):
 
-- **[aspose.app](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/)**: summary, product family health, priorities, shared problems, all findings with a fix guide, page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/archive/).
+- **[aspose.app](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/)**: summary, product family and host health, priorities, shared problems, all findings (each linked to the fix guide), page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/archive/).
 - **[conholdate.cloud](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/)**: blog.conholdate.cloud for now. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/archive/).
 - **[Fix guide](https://shoaibkhan-aspose.github.io/health-and-recovery/fix-guide/)**: one shared page for every report: what each check means, its impact, how to fix and verify it, and which reports have it open.
 
@@ -14,7 +14,7 @@ Each report grades product families and every host (A–F, out of 100). Every ho
 
 [![Publish report](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml/badge.svg)](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml)
 
-The page is rebuilt and published by GitHub Actions on every push to `master`, from the run files committed in `reports/<tenant>/`. Audits themselves run locally (see Setup).
+The site (landing page, reports, host pages, archives, fix guide) is rebuilt by GitHub Actions (`scripts/build_site.py`) on every push to `master`, from the run files committed in `reports/<tenant>/`. Audits themselves run locally (see Setup). Links to the old address (`…/aspose-app-health-and-recovery/…`, before the repository was renamed) redirect here. Both reports move to a private domain later.
 
 ## Architecture
 
@@ -54,7 +54,7 @@ python scripts/audit_perf.py                                               # spe
 python scripts/audit_text.py                                               # text check: LLM proofreads titles, H1s, descriptions (~5 min)
 python scripts/prioritize.py                                               # Search Console traffic + score per finding
 python scripts/build_report.py --out reports/aspose.app/discovery-latest.html --snapshot "After <run>"   # report + archive snapshot
-python scripts/build_site.py --out site                                    # the Pages site: landing page + one report per tenant
+python scripts/build_site.py --out site                                    # the Pages site: landing, tenant + host pages, fix guide
 ```
 
 Each tenant keeps its files apart: `data/<tenant>/` (inventory, audit pages, findings store, Google and LLM caches; not in git) and `reports/<tenant>/` (run files, `findings.json`, traffic summary, health history, `archive/`; committed). GitHub Pages serves a landing page at the root and each tenant's report at `/<tenant>/` with its archive at `/<tenant>/archive/`; the old root links (`/#…`, `/archive/<date>/`) redirect to `/aspose.app/`. A tenant YAML can name its own key variable (`google_credentials_env`).
