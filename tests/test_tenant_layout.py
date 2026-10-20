@@ -72,8 +72,8 @@ def test_host_cards(tmp_path):
     report = {"hosts": {"blog.example.org": {"urls": 40}, "www.example.org": {"urls": 1}}, "findings": [finding],
               "_families": {"hosts": {"www.example.org": []}}}
     add_hosts(report, summary)
-    (card,) = report["_hosts"]  # www has family cards, so only the blog gets a host card
-    assert card["host"] == "blog.example.org" and card["urls"] == 40
+    card, www = report["_hosts"]  # www has a family host entry but no cards: plain host score, no rollup
+    assert card["host"] == "blog.example.org" and card["urls"] == 40 and "rollup" not in www
     assert card["health"] == 95 and card["grade"] == "A"  # incorrect 20 x share 0.25
     assert card["traffic"]["current"]["clicks"] == 5
 
@@ -92,3 +92,17 @@ def test_fix_guide_page(tmp_path, monkeypatch):
               "_guide": {"areas": [], "rows": {"title_missing": {}, "h1_missing": {}}}}
     html = build(report, [], None, guide_url="../fix-guide/")
     assert '"_guide_url": "../fix-guide/"' in html and "h1_missing" not in html  # only rows the report uses
+
+
+def test_family_host_rollup():
+    """A host with families: click-weighted family health minus host-wide findings; the lowest family is named."""
+    from scripts.build_report import family_rollup
+
+    cards = [{"family": "a", "health": 90, "grade": "A", "traffic": {"current": {"clicks": 300}}},
+             {"family": "b", "health": 50, "grade": "D", "traffic": {"current": {"clicks": 100}}}]
+    host_wide = {"id": "crawl-0001", "status": "open", "type": "broken", "check": "robots_unreachable",
+                 "subdomain": "p.example.org", "template": "host", "title": "robots.txt cannot be reached",
+                 "evidence": {"urls": ["https://p.example.org/robots.txt"]}}
+    r = family_rollup("p.example.org", cards, [host_wide], 1000)
+    assert r["rollup"]["weighted"] == 80 and r["rollup"]["host_wide"] == 40  # (90*300 + 50*100) / 400; broken x 1.0
+    assert r["health"] == 40 and r["grade"] == "D" and r["rollup"]["lowest"]["family"] == "b"

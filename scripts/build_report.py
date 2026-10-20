@@ -36,7 +36,7 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
-from core.scorecard import family_of, family_scorecards, scorecard  # noqa: E402
+from core.scorecard import family_of, family_scorecards, grade, scorecard  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
 
@@ -155,19 +155,38 @@ def add_families(report: dict, summary_path: Path) -> None:
         del report["_families"]
 
 
+def family_rollup(host: str, cards: list[dict], findings: list[dict], urls: int) -> dict:
+    """Health of a host with family cards: its families' health weighted by search clicks (equal weights without
+    traffic), minus the points of host-wide findings that belong to no family (root sitemap, robots.txt, ...).
+    The lowest family is named, because an average hides a failing one."""
+    clicks = {c["family"]: ((c.get("traffic") or {}).get("current") or {}).get("clicks") or 0 for c in cards}
+    total = sum(clicks.values())
+    weighted = (sum(c["health"] * clicks[c["family"]] for c in cards) / total if total
+                else sum(c["health"] for c in cards) / len(cards))
+    families = {c["family"] for c in cards}
+    host_wide = scorecard(host, [f for f in findings if not family_of(f, host, families)], urls)
+    health = max(0, round(weighted - (100 - host_wide["health"])))
+    low = min(cards, key=lambda c: c["health"])
+    return {"health": health, "grade": grade(health), "penalties": host_wide["penalties"],
+            "cosmetic_capped": host_wide["cosmetic_capped"],
+            "rollup": {"families": len(cards), "weighted": round(weighted), "host_wide": 100 - host_wide["health"],
+                       "by_clicks": bool(total), "lowest": {"family": low["family"], "grade": low["grade"],
+                                                           "health": low["health"]}}}
+
+
 def add_hosts(report: dict, summary_path: Path) -> None:
-    """A health card per host that has no family cards (same score as families, whole host as the scope), with
-    the host's search traffic from reports/<tenant>/traffic-summary.json."""
-    family_hosts = set((report.get("_families") or {}).get("hosts") or {})
+    """A health row per host (same score as families, whole host as the scope), with the host's search traffic
+    from reports/<tenant>/traffic-summary.json. A host with family cards rolls its families up (family_rollup)."""
+    family_cards = (report.get("_families") or {}).get("hosts") or {}
     totals = {}
     if summary_path.is_file():
         totals = json.loads(summary_path.read_text(encoding="utf-8")).get("host_totals") or {}
     cards = []
     for host, stats in sorted((report.get("hosts") or {}).items()):
-        if host in family_hosts:
-            continue
         mine = [f for f in report["findings"] if f["subdomain"] == host]
         card = scorecard(host, mine, stats.get("urls") or 0)
+        if family_cards.get(host):
+            card.update(family_rollup(host, family_cards[host], mine, stats.get("urls") or 0))
         card.update(host=card.pop("family"), urls=stats.get("urls") or 0, traffic=totals.get(host) or {})
         cards.append(card)
     if cards:
