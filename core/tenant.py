@@ -36,6 +36,11 @@ class Tenant:
         return [str(x) for x in (self.raw.get(src, []) if isinstance(src, str) else src)]
 
     @property
+    def credentials_env(self) -> str:
+        """Env variable holding this tenant's service-account key path (google_credentials_env)."""
+        return str(self.raw.get("google_credentials_env") or "GOOGLE_APPLICATION_CREDENTIALS")
+
+    @property
     def host_names(self) -> list[str]:
         return [h["host"] for h in self.hosts if not self.is_excluded(h["host"])]
 
@@ -49,6 +54,8 @@ def load_tenant(name: str, tenants_dir: Path = TENANTS_DIR) -> Tenant:
     for key in ("property", "hosts"):
         if key not in data:
             raise ValueError(f"{path.name}: missing required key '{key}'")
+    if data["property"] != name:  # data/<tenant>/ and reports/<tenant>/ are named after it
+        raise ValueError(f"{path.name}: property '{data['property']}' must match the file name '{name}'")
 
     gsc = data.get("gsc_properties") or []
     for site in gsc:

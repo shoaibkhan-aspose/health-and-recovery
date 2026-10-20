@@ -1,0 +1,37 @@
+# Tenant config: everything specific to conholdate.cloud lives here, nothing in core/ or agents/.
+# Tenant 2 (SK, 2026-10-20): only blog.conholdate.cloud for now; other conholdate.cloud hosts may be added later.
+property: conholdate.cloud
+
+# Hosts matching these patterns are never crawled or checked (blog-qa.conholdate.cloud is the staging blog).
+excluded_host_patterns:
+  - "*-qa.*"
+
+# Service account sk-serv-acc@health-and-recovery (SK, 2026-10-20; later for all tenants): .env variable with its key path.
+google_credentials_env: GOOGLE_CREDENTIALS_HEALTH_AND_RECOVERY
+
+gsc_properties:              # URL-prefix properties the service account can read (Restricted, 2026-10-20)
+  - https://blog.conholdate.cloud/
+ga4_property_id: "253119926"   # SK, 2026-10-20
+
+hosts:
+  - host: blog.conholdate.cloud
+    platform: hugo            # PaperMod theme, 23 languages, hugo deploy to S3 (us-west-2)
+    repo: github.com/conholdate-cloud/blog.conholdate.cloud
+    local_path: /Users/Apple/Work/Aspose/GitHub/blog.conholdate.cloud-PROD/blog.conholdate.cloud
+    sitemap: https://blog.conholdate.cloud/sitemap.xml       # index of 23 language sitemaps
+    robots: https://blog.conholdate.cloud/robots.txt
+    fix_channel: git-pr
+
+# Language prefixes from the blog's config.yml (English has no prefix).
+languages: [en, ar, cs, de, es, fa, fr, he, id, it, ja, ko, nl, pl, pt, ru, sv, th, tr, uk, vi, zh, zh-hant]
+
+audit:
+  default_lang: en
+
+# URL templates per host, matched in order against the path with the language segment removed.
+url_templates:
+  blog.conholdate.cloud:
+    - {name: home, pattern: '^/$'}
+    - {name: listing, pattern: '^/(?P<listing>archives|search|categories|tags)/?$'}
+    - {name: post, pattern: '^/(?P<category>[^/]+)/(?P<slug>[^/]+)/?$'}
+    - {name: category, pattern: '^/(?P<category>[^/]+)/?$'}

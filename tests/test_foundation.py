@@ -45,6 +45,18 @@ def test_missing_credentials(monkeypatch):
         get_credentials()
 
 
+def test_tenant_key_env_has_no_fallback(monkeypatch, tmp_path):
+    """A tenant naming its own key variable never silently gets the default key."""
+    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(tmp_path / "default.json"))
+    monkeypatch.delenv("TENANT_KEY_TEST", raising=False)
+    with pytest.raises(CredentialsError, match="TENANT_KEY_TEST"):
+        get_credentials(key_env="TENANT_KEY_TEST")
+    from core.tenant import load_tenant
+
+    assert load_tenant("conholdate.cloud").credentials_env == "GOOGLE_CREDENTIALS_HEALTH_AND_RECOVERY"
+    assert load_tenant("aspose.app").credentials_env == "GOOGLE_APPLICATION_CREDENTIALS"
+
+
 def test_gsc_window_lag():
     from datetime import date
 

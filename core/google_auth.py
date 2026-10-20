@@ -21,25 +21,34 @@ def assert_readonly(scopes: tuple[str, ...] | list[str]) -> None:
         raise CredentialsError(f"Phase 1 is read-only; refusing write-capable scopes: {bad}")
 
 
-def get_credentials(scopes: tuple[str, ...] = READONLY_SCOPES):
-    """Return (credentials, identity) using Application Default Credentials.
+DEFAULT_KEY_ENV = "GOOGLE_APPLICATION_CREDENTIALS"
 
-    Uses GOOGLE_APPLICATION_CREDENTIALS (a service-account key outside the repo).
+
+def get_credentials(scopes: tuple[str, ...] = READONLY_SCOPES, key_env: str = DEFAULT_KEY_ENV):
+    """Return (credentials, identity) for the service-account key named by the env variable `key_env`.
+
+    The default variable uses Application Default Credentials; a tenant can name another variable
+    (tenant YAML `google_credentials_env`) so each tenant uses its own service account. There is no
+    fallback to the default key: a missing variable is an error.
     Never logs or returns key material; `identity` is only the service-account email.
     """
     assert_readonly(scopes)
 
-    key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    key_path = os.environ.get(key_env)
     if not key_path:
         raise CredentialsError(
-            "GOOGLE_APPLICATION_CREDENTIALS is not set. Point it at the service-account key "
-            "(stored outside this repo)."
+            f"{key_env} is not set. Point it at the service-account key (stored outside this repo)."
         )
     if not os.path.isfile(key_path):
-        raise CredentialsError("GOOGLE_APPLICATION_CREDENTIALS points to a file that does not exist.")
+        raise CredentialsError(f"{key_env} points to a file that does not exist.")
 
-    import google.auth  # imported late so offline tests don't need the package
+    if key_env == DEFAULT_KEY_ENV:
+        import google.auth  # imported late so offline tests don't need the package
 
-    credentials, _project = google.auth.default(scopes=list(scopes))
+        credentials, _project = google.auth.default(scopes=list(scopes))
+    else:
+        from google.oauth2 import service_account
+
+        credentials = service_account.Credentials.from_service_account_file(key_path, scopes=list(scopes))
     identity = getattr(credentials, "service_account_email", None) or "unknown"
     return credentials, identity
