@@ -3,7 +3,9 @@
     python scripts/build_site.py --out site
 
 Every tenant with a committed findings export (reports/<tenant>/findings.json) gets its latest report at
-<out>/<tenant>/ and its archive at <out>/<tenant>/archive/. Renders only committed files: no store, no Google calls.
+<out>/<tenant>/ and its archive at <out>/<tenant>/archive/. The fix guide (every check: what it means, impact,
+fix, verify) is one shared page at <out>/fix-guide/ that the reports link to. Renders only committed files:
+no store, no Google calls.
 The site once served the first tenant's report at the root; LEGACY_TENANT keeps those links working
 (/#<anchor> and /archive/<date>/ redirect into its subfolder).
 """
@@ -19,6 +21,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
 from core.paths import published_tenants, tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
 from scripts import build_archive, build_report  # noqa: E402
@@ -54,13 +57,114 @@ if (location.hash.length > 1) location.replace("__LEGACY__/" + location.hash);
 </script>
 <main>
   <h1>Site health reports</h1>
-  <p>One report per property. Read-only audits: nothing on any site is changed.</p>
+  <p>One report per property. Read-only audits: nothing on any site is changed.
+  How to fix each kind of problem: <a href="fix-guide/">fix guide</a>.</p>
   <ol>
 __ITEMS__
   </ol>
 </main>
 </html>
 """
+
+
+GUIDE_URL = "../fix-guide/"  # from a tenant report at <out>/<tenant>/
+SEVERITY = {"broken": "Broken", "incorrect": "Incorrect", "not_optimized": "Not optimized", "improvable": "Improvable"}
+
+GUIDE_PAGE = HEAD + """<title>Fix guide</title>
+<style>
+:root { --bg: #f6f7f9; --surface: #fff; --fg: #18202b; --muted: #5b6676; --line: #dde2e9; --accent: #1f5f8b;
+  --tint: #eef2f6; --hit: #fff4d6; --broken: #b42318; --incorrect: #b54708; --notopt: #a15c07; --improvable: #475467 }
+@media (prefers-color-scheme: dark) { :root { --bg: #11161d; --surface: #182029; --fg: #e4e9f0; --muted: #98a3b3;
+  --line: #2a3542; --accent: #6fb0dc; --tint: #1e2935; --hit: #3a3218; --broken: #f97066; --incorrect: #fd853a;
+  --notopt: #fdb022; --improvable: #98a2b3; color-scheme: dark } }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
+main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 18px }
+h1 { margin: 0; font-size: 28px } p { margin: 0; color: var(--muted); max-width: 80ch }
+a { color: var(--accent) }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px }
+select { font: inherit; padding: 4px 8px }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px }
+table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 14px }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line) }
+thead th { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted);
+  background: var(--tint) }
+tr.area th { background: var(--tint); font-size: 15px; border-top: 2px solid var(--accent) }
+tr.area small { color: var(--muted); font-weight: 400; margin-left: 8px }
+td.name { font-weight: 600; min-width: 160px }
+td.sev { white-space: nowrap; font-weight: 600; color: var(--sev) }
+.sev-broken { --sev: var(--broken) } .sev-incorrect { --sev: var(--incorrect) }
+.sev-not_optimized { --sev: var(--notopt) } .sev-improvable { --sev: var(--improvable) }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sev); margin-right: 6px }
+td.open { font-size: 13px; color: var(--muted); min-width: 120px }
+tr:target td { background: var(--hit) }
+tr[id] { scroll-margin-top: 80px }
+</style>
+<main>
+  <h1>Fix guide</h1>
+  <p>One row per check the audits run: what a finding means, why it matters, how to fix it and how to verify the
+  fix. Every site health report links here. "Open findings" counts the open findings per report today.</p>
+  <p><a href="../">All reports</a></p>
+  <div class="filters"><label for="area">Area</label>
+    <select id="area"><option value="">All areas</option>__OPTIONS__</select>
+    <span>__COUNT__</span></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Check</th><th>Severity</th><th>What it means</th><th>Impact</th><th>How to fix</th>
+      <th>How to verify</th>
+      <th>Open findings</th></tr></thead>
+__BODY__
+  </table></div>
+</main>
+<script>
+document.getElementById("area").addEventListener("change", e => {
+  const area = e.target.value;
+  for (const tb of document.querySelectorAll("tbody[data-area]")) tb.hidden = !!area && tb.dataset.area !== area;
+});
+</script>
+</html>
+"""
+
+
+def open_by_check(tenants: list[str]) -> dict:
+    """guide key -> {tenant: open findings} from the committed exports."""
+    out: dict = {}
+    for t in tenants:
+        for f in json.loads(tenant_paths(t).findings_export.read_text(encoding="utf-8")):
+            k = guide_key(f.get("check"), f.get("source")) if f["status"] in ("open", "unverified") else None
+            if k:
+                out.setdefault(k, {}).setdefault(t, 0)
+                out[k][t] += 1
+    return out
+
+
+def guide_page(tenants: list[str]) -> str:
+    """The shared fix guide: rows grouped by area, worst severity first; anchors #g-<check> as in the reports."""
+    used = open_by_check(tenants)
+    order = list(SEVERITY)
+    body = []
+    for area in AREAS:
+        rows = sorted(((k, g) for k, g in GUIDE.items() if g["area"] == area),
+                      key=lambda kg: (order.index(kg[1]["severity"]) if kg[1]["severity"] in order else 9,
+                                      kg[1]["name"]))
+        if not rows:
+            continue
+        n_used = sum(1 for k, _ in rows if k in used)
+        head = (f'<tr class="area"><th colspan="7" scope="colgroup">{html.escape(area)}<small>{len(rows)} checks'
+                f'{f" · {n_used} with open findings" if n_used else ""}</small></th></tr>')
+        trs = []
+        for k, g in rows:
+            sev = g["severity"]
+            opened = ", ".join(f'<a href="../{html.escape(t)}/">{html.escape(t)}</a> {n}'
+                               for t, n in sorted(used.get(k, {}).items()))
+            trs.append(f'<tr id="g-{html.escape(k)}"><td class="name">{html.escape(g["name"])}</td>'
+                       f'<td class="sev sev-{html.escape(sev)}"><span class="dot"></span>{SEVERITY.get(sev, sev)}</td>'
+                       + "".join(f"<td>{html.escape(g[c])}</td>" for c in ("means", "impact", "fix", "verify"))
+                       + f'<td class="open">{opened or "–"}</td></tr>')
+        body.append(f'  <tbody data-area="{html.escape(area)}">{head}{"".join(trs)}</tbody>')
+    options = "".join(f'<option value="{html.escape(a)}">{html.escape(a)}</option>' for a in AREAS)
+    count = f"{len(GUIDE)} checks · {len(used)} with open findings"
+    return GUIDE_PAGE.replace("__OPTIONS__", options).replace("__COUNT__", count).replace("__BODY__", "\n".join(body))
 
 
 def redirect_page(target: str) -> str:
@@ -86,11 +190,13 @@ def build(out: Path, tenants: list[str]) -> None:
     for t in tenants:
         paths = tenant_paths(t)
         rc = build_report.main(["--tenant", t, "--findings", str(paths.findings_export), "--standalone",
-                                "--out", str(out / t / "index.html")])
+                                "--guide-url", GUIDE_URL, "--out", str(out / t / "index.html")])
         if rc:
             raise SystemExit(f"Report for {t} failed")
         n = build_archive.build(out / t / "archive", paths.archive, t)
         print(f"Archive: {n} snapshots for {t}")
+    (out / "fix-guide").mkdir(exist_ok=True)
+    (out / "fix-guide" / "index.html").write_text(guide_page(tenants), encoding="utf-8")
     legacy = LEGACY_TENANT if LEGACY_TENANT in tenants else (tenants[0] if tenants else "")
     items = "\n".join(tenant_item(t) for t in tenants)
     (out / "index.html").write_text(LANDING.replace("__LEGACY__", legacy).replace("__ITEMS__", items),

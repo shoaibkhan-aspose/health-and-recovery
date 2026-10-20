@@ -148,6 +148,16 @@ def traffic_summary(tenant, current: dict, history: dict) -> dict:
             sections[sec] = {label: {"clicks": round(t.clicks), "impressions": round(t.impressions), "pages": t.pages}
                              for label, idx in indexes.items() for t in [idx.get(host, sec)]}
         out["hosts"][host] = sections
+    # whole-host totals for the host health cards: Search Console where a property covers the host, else GA4
+    # organic sessions (current window only)
+    out["host_totals"] = {}
+    for host in tenant.host_names:
+        if host in indexes["current"].gsc_hosts:
+            out["host_totals"][host] = {"source": "gsc", **{
+                label: {"clicks": round(t.clicks), "impressions": round(t.impressions), "pages": t.pages}
+                for label, idx in indexes.items() for t in [idx.get(host)]}}
+        elif host in (current.get("ga4_organic") or {}):
+            out["host_totals"][host] = {"source": "ga4", "current": {"sessions": current["ga4_organic"][host]}}
     return out
 
 

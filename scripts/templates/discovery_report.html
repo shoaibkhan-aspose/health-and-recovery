@@ -203,6 +203,11 @@ table.guide tr.area th small { font: 500 13px var(--body); color: var(--muted); 
 table.guide tr.area:first-child th { border-top-width: 0 }
 table.guide td.sev { min-width: 120px; white-space: nowrap; color: var(--sev); font-weight: 600 }
 .sevdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sev); margin-right: 6px; vertical-align: middle }
+.gext { display: grid; gap: 10px }
+.glist { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14px }
+.glist li { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px }
+.glist .sev { display: inline-block; min-width: 118px; color: var(--sev); font-weight: 600 }
+.glist a { color: var(--accent) }
 .conf { font: 600 11px var(--body); letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; border: 1px dashed var(--muted); color: var(--muted) }
 .fixline { font-size: 13px; background: var(--tint); border-radius: 6px; padding: 8px 10px }
 .fixline a { margin-left: 6px }
@@ -229,7 +234,7 @@ footer a { color: var(--accent) }
   </header>
 
   <nav class="toc" aria-label="Contents">
-    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
+    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#hosts" id="toc-host">Hosts</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
   </nav>
 
   <section aria-labelledby="s-sum" id="summary">
@@ -258,6 +263,12 @@ footer a { color: var(--accent) }
     </div>
     <div class="cards" id="fam-cards"></div>
     <button type="button" class="more" id="fam-more" hidden></button>
+  </section>
+
+  <section aria-labelledby="s-host" id="hosts" hidden>
+    <h2 id="s-host">Host health <small id="host-meta"></small></h2>
+    <p class="lede">One card per host without product families, scored like a family: 100 minus points for each open problem, weighted by severity and by how much of the host it affects. A to Z. <a href="#method-health">How health is scored</a>.</p>
+    <div class="cards grid" id="host-cards"></div>
   </section>
 
   <section aria-labelledby="s-top" id="priorities" hidden>
@@ -294,8 +305,9 @@ footer a { color: var(--accent) }
 
   <section aria-labelledby="s-guide" id="fix-guide">
     <h2 id="s-guide">Fix guide <small>one row per check</small></h2>
-    <div class="filters"><label for="g-area">Area</label><select id="g-area"></select><span class="count" id="g-count"></span></div>
-    <div class="tablewrap"><table class="guide" id="guide"></table></div>
+    <div class="filters" id="g-filters"><label for="g-area">Area</label><select id="g-area"></select><span class="count" id="g-count"></span></div>
+    <div class="tablewrap" id="g-table"><table class="guide" id="guide"></table></div>
+    <div class="gext" id="g-ext" hidden></div>
   </section>
 
   <section aria-labelledby="s-ref" id="reference">
@@ -329,7 +341,7 @@ footer a { color: var(--accent) }
     <h2 id="s-method">How this audit works</h2>
     <div class="method">
       <div><h3>What runs</h3><p><b>Discovery</b> reads every host's robots.txt and every sitemap file (all of them, no sampling). The <b>crawl audit</b> then fetches a sample of pages per URL pattern (template): 2 English pages and 1 page in each of 2 other languages, plus every homepage and family hub, and runs 33 checks on each (2 of them for AI readiness: text visible without JavaScript, structured data). Both only read: GET requests, robots.txt respected, one request per host per second. The <b>speed audit</b> asks Google PageSpeed Insights about the 2 most-visited pages of each template (mobile): Core Web Vitals from real Chrome users over 28 days (75th percentile), plus a Lighthouse lab run that names the biggest savings. Google loads each page once; pages with too few visits have no real-user data and count neither way. The <b>AI audit</b> checks per host whether robots.txt or the firewall blocks AI search crawlers, and whether hosts and product families offer an llms.txt. The <b>text check</b> has an LLM proofread the title, H1 and meta description of every crawl-audit page in its own language, for misspellings, words typed twice, leftover words and a title about a different product; it fetches nothing, and a finding is kept only when the wrong words really appear on the page. The <b>prioritizer</b> adds Search Console traffic. Manual review findings come from people and are marked until a check confirms them.</p></div>
-      <div id="method-health"><h3>Family health (A–F)</h3><p>Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.</p></div>
+      <div id="method-health"><h3>Family and host health (A–F)</h3><p>Scored per product family, and per host that has no families. Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family or host it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.</p></div>
       <div id="method-score"><h3>Priority score (0–100)</h3><p>Search Console clicks on the affected pages over 28 days (impressions count 1% of a click), on a log scale, × severity (broken 1, incorrect 0.7, not optimized 0.4, improvable 0.2) ÷ effort (S 1, M 1.5, L 2.5). If the same pages lost traffic since six months ago, half of that loss counts when it is larger than today's traffic. Hosts without Search Console use GA4 organic sessions.</p></div>
       <div><h3>Samples and estimates</h3><p>"~N pages affected" applies each template's failing share of the sample to its number of URLs in the sitemaps. Confidence labels say how solid that is; findings marked <b>to confirm</b> rest on one page.</p></div>
       <div><h3>More</h3><p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/aspose-app-health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>. Earlier reports: <a href="archive/">archive</a>.</p></div>
@@ -365,6 +377,9 @@ footer a { color: var(--accent) }
   const CH = R._run_changes || { new: [], resolved: [], runs: [] };
   const NEW = new Set(CH.new || []);
   const GUIDE = (R._guide && R._guide.rows) || {};
+  // the published site keeps the full fix guide on one shared page; "How to fix" links go there
+  const GURL = R._guide_url || "";
+  const gHref = k => `${GURL}#g-${esc(k)}`;
   const fmt = n => (n == null ? "–" : Number(n).toLocaleString("en-US"));
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const $ = id => document.getElementById(id);
@@ -474,6 +489,42 @@ footer a { color: var(--accent) }
     const r0 = RISKS[0];
     $("verdict").innerHTML = `${graded ? `<b>${graded}.</b> ` : "No family is graded D or F. "}`
       + (r0 ? `Biggest risk: ${esc(r0.name.toLowerCase())} ${esc(riskCount(r0))}${riskTraffic(r0) ? ` (${esc(riskTraffic(r0))})` : ""}.` : "");
+  }
+
+  // host health cards (hosts without family cards)
+  const HOSTS = R._hosts || [];
+  if (!HOSTS.length) $("toc-host").hidden = true;
+  else {
+    $("hosts").hidden = false;
+    $("host-meta").textContent = `${HOSTS.length} host${HOSTS.length === 1 ? "" : "s"}`;
+    const trafficLine = t => !t.source ? `<span class="dim">no search data</span>`
+      : t.source === "ga4" ? `<b>${compact(t.current.sessions)}</b> organic sessions (GA4, no Search Console property)`
+      : `<b>${compact(t.current.clicks)}</b> clicks · ${compact(t.current.impressions)} impressions${t.previous ? ` · prev. 28 days ${compact(t.previous.clicks)}` : ""}`;
+    $("host-cards").innerHTML = HOSTS.map(c => {
+      const chips = [["broken", "broken"], ["incorrect", "incorrect"], ["not_optimized", "not optimized"], ["improvable", "improvable"]]
+        .filter(([k]) => c.counts[k]).map(([k, l]) => `<span class="chip ${k}">${c.counts[k]} ${l}</span>`).join("");
+      const why = c.penalties.filter(x => x.points >= 1).slice(0, 4).map(x => `${x.group.startsWith("manual:") ? "manual review" : x.group} −${Math.round(x.points)}`).join(" · ");
+      const n = Object.values(c.counts).reduce((a, b) => a + b, 0);
+      return `<article class="card g-${c.grade}" id="host-${esc(c.host)}">
+        <h3><span class="fam">${esc(c.host)}</span><span class="gradebox" title="Health ${c.health}/100"><b>${c.grade}</b><span>${c.health}</span></span></h3>
+        ${chips ? `<div class="chips">${chips}</div>` : `<div class="chips"><span class="chip ok">no open findings</span></div>`}
+        <div class="line">${trafficLine(c.traffic || {})}</div>
+        <div class="line">${c.urls ? `${fmt(c.urls)} URLs in sitemaps` : "no URLs in any sitemap"}</div>
+        ${c.top.length ? `<ol>${c.top.map(t => `<li>${t.blocker ? '<span class="blocker">BLOCKER</span>' : ""}<a href="#f-${esc(t.id)}" data-open="${esc(t.id)}">${esc(t.title)}</a></li>`).join("")}</ol>` : ""}
+        <div class="stat">${Object.entries(c.status).map(([k, v]) => `<span class="pill ${v}" title="${esc(k)}: ${v === "bad" ? "broken" : v === "warn" ? "needs attention" : "fine"}">${esc(k)}</span>`).join("")}</div>
+        ${why ? `<div class="why">Points lost: ${esc(why)}${c.cosmetic_capped ? " · cosmetic capped at 20" : ""}</div>` : ""}
+        ${n ? `<button type="button" class="more" data-host="${esc(c.host)}">See ${n} finding${n === 1 ? "" : "s"}</button>` : ""}
+      </article>`;
+    }).join("");
+    $("host-cards").addEventListener("click", e => {
+      const b = e.target.closest("button[data-host]");
+      if (!b) { if (e.target.closest("a[data-open]")) openFinding(e); return; }
+      for (const k of ["f-src", "f-type", "f-dim", "f-fam"]) $(k).value = "";
+      $("f-host").value = b.dataset.host;
+      for (const t of ORDER) expanded.add(t);
+      renderFindings();
+      $("s-find").scrollIntoView({ behavior: "smooth" });
+    });
   }
 
   // product family cards
@@ -616,7 +667,7 @@ footer a { color: var(--accent) }
   // top priorities
   const plain = f => (f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : f.title);
   const where = f => f._family ? `/${f._family}/` : f.subdomain;
-  const fixLink = f => f._guide ? `<a href="#g-${esc(f._guide)}" data-guide="${esc(f._guide)}">How to fix →</a>` : "";
+  const fixLink = f => f._guide ? `<a href="${gHref(f._guide)}" data-guide="${esc(f._guide)}">How to fix →</a>` : "";
   if (scored) {
     const top = findings.slice().sort((a, b) => sc(b) - sc(a)).slice(0, 10);
     const w = top[0] && top[0].impact.window;
@@ -728,7 +779,7 @@ footer a { color: var(--accent) }
     const renderSys = () => {
       const rows = sysAll ? SYS : SYS.slice(0, 8);
       $("sys-table").innerHTML = `<thead><tr><th>Problem</th><th>Severity</th><th class="n">Families</th><th>Where</th><th class="n">Clicks at stake</th><th></th></tr></thead><tbody>${rows.map(r =>
-        `<tr><td>${esc(r.name)}</td><td class="sev-${r.type}" style="color:var(--sev)">${esc(LABEL[r.type])}</td><td class="n">${r.families.length}</td><td class="issues">${r.families.map(x => `/${esc(x)}/`).join(" ")}</td><td class="n">${compact(r.clicks)}</td><td><a href="#g-${esc(r.check)}" data-guide="${esc(r.check)}">How to fix →</a></td></tr>`).join("")}</tbody>`;
+        `<tr><td>${esc(r.name)}</td><td class="sev-${r.type}" style="color:var(--sev)">${esc(LABEL[r.type])}</td><td class="n">${r.families.length}</td><td class="issues">${r.families.map(x => `/${esc(x)}/`).join(" ")}</td><td class="n">${compact(r.clicks)}</td><td><a href="${gHref(r.check)}" data-guide="${esc(r.check)}">How to fix →</a></td></tr>`).join("")}</tbody>`;
       $("sys-more").hidden = SYS.length <= 8;
       $("sys-more").textContent = sysAll ? "Show fewer" : `Show all ${SYS.length}`;
     };
@@ -736,8 +787,18 @@ footer a { color: var(--accent) }
     renderSys();
   } else { $("toc-sys").hidden = true; }
 
-  // fix guide
-  {
+  // fix guide: on the published site a short list of this report's checks, linking to the shared guide page
+  if (GURL) {
+    const AREAS = (R._guide && R._guide.areas) || [];
+    const count = {};
+    for (const f of R.findings) if (f._guide && GUIDE[f._guide]) count[f._guide] = (count[f._guide] || 0) + 1;
+    const keys = Object.keys(count).sort((a, b) => AREAS.indexOf(GUIDE[a].area) - AREAS.indexOf(GUIDE[b].area)
+      || ORDER.indexOf(GUIDE[a].severity) - ORDER.indexOf(GUIDE[b].severity) || GUIDE[a].name.localeCompare(GUIDE[b].name));
+    $("g-filters").hidden = $("g-table").hidden = true;
+    $("g-ext").hidden = false;
+    $("g-ext").innerHTML = `<p class="lede">What each check means, why it matters, how to fix it and how to verify the fix: <a href="${esc(GURL)}">the full fix guide</a> (one page for every report). The checks with open findings in this report:</p>
+      <ul class="glist">${keys.map(k => `<li><span class="sev sev-${esc(GUIDE[k].severity)}"><span class="sevdot"></span>${esc(LABEL[GUIDE[k].severity] || GUIDE[k].severity)}</span> <a href="${gHref(k)}">${esc(GUIDE[k].name)}</a> <span class="dim">${esc(GUIDE[k].area)} · ${count[k]} finding${count[k] === 1 ? "" : "s"}</span></li>`).join("")}</ul>`;
+  } else {
     const AREAS = (R._guide && R._guide.areas) || [];
     $("g-area").innerHTML = `<option value="">All areas</option>` + AREAS.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join("");
     const used = new Set(R.findings.map(f => f._guide).filter(Boolean));

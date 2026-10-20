@@ -36,7 +36,7 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
-from core.scorecard import family_of, family_scorecards  # noqa: E402
+from core.scorecard import family_of, family_scorecards, scorecard  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
 
@@ -49,8 +49,19 @@ STANDALONE_HEAD = (
 )
 
 
-def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False) -> str:
-    data = dict(report, _notes=notes, _run_date=run_date)
+# The Pages site has one shared fix guide page (scripts/build_site.py); a snapshot is served three levels below
+# the site root (/<tenant>/archive/<date>/).
+SNAPSHOT_GUIDE_URL = "../../../fix-guide/"
+
+
+def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
+          guide_url: str | None = None) -> str:
+    """The report page. With guide_url, "How to fix" links go to that shared fix guide page instead of a full
+    guide table inside the report (the table stays for local pages)."""
+    data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url)
+    if guide_url and report.get("_guide"):  # only the rows this report's findings link to
+        used = {f.get("_guide") for f in report["findings"]}
+        data["_guide"] = dict(report["_guide"], rows={k: v for k, v in report["_guide"]["rows"].items() if k in used})
     payload = json.dumps(data, default=str).replace("</", "<\\/")
     template = TEMPLATE.read_text(encoding="utf-8")
     page = template.replace("__TITLE__", f"{report['tenant']} Site Health").replace("__DATA__", payload)
@@ -142,6 +153,25 @@ def add_families(report: dict, summary_path: Path) -> None:
                 f["_family"] = fam
     if not report["_families"]["hosts"]:  # a tenant without sectioned hosts has no family cards
         del report["_families"]
+
+
+def add_hosts(report: dict, summary_path: Path) -> None:
+    """A health card per host that has no family cards (same score as families, whole host as the scope), with
+    the host's search traffic from reports/<tenant>/traffic-summary.json."""
+    family_hosts = set((report.get("_families") or {}).get("hosts") or {})
+    totals = {}
+    if summary_path.is_file():
+        totals = json.loads(summary_path.read_text(encoding="utf-8")).get("host_totals") or {}
+    cards = []
+    for host, stats in sorted((report.get("hosts") or {}).items()):
+        if host in family_hosts:
+            continue
+        mine = [f for f in report["findings"] if f["subdomain"] == host]
+        card = scorecard(host, mine, stats.get("urls") or 0)
+        card.update(host=card.pop("family"), urls=stats.get("urls") or 0, traffic=totals.get(host) or {})
+        cards.append(card)
+    if cards:
+        report["_hosts"] = cards
 
 
 def runs_label(report: dict) -> str:
@@ -265,6 +295,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/<tenant>/; "
                     "'' to leave out)")
     ap.add_argument("--out", help="output HTML path")
+    ap.add_argument("--guide-url", help="link to the shared fix guide page instead of including the guide table "
+                    "(build_site.py passes ../fix-guide/)")
     ap.add_argument("--standalone", action="store_true",
                     help="add doctype, charset, viewport and noindex (for GitHub Pages: --out docs/index.html)")
     ap.add_argument("--store", help="findings store (default: data/<tenant>/findings.sqlite)")
@@ -338,14 +370,15 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(f"No findings store at {store_path}; using the run's own findings.", file=sys.stderr)
     add_families(report, paths.traffic_summary)
+    add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)
     run_date = run_date_of(src, "discovery-")
 
     out = Path(args.out) if args.out else src.with_suffix(".html")
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(build(report, notes, run_date, args.standalone), encoding="utf-8")
+    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url), encoding="utf-8")
     if args.snapshot:
-        page = build(report, notes, run_date, standalone=True)
+        page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL)
         print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")
         record_health(report, paths.health_history)
     print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {src.name}"

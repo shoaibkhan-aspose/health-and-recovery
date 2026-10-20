@@ -57,3 +57,38 @@ def test_report_without_family_hosts(tmp_path):
     assert "_families" not in report
     add_views(report, [], tmp_path / "health-history.json")
     assert "_run_changes" in report
+
+
+def test_host_cards(tmp_path):
+    """Hosts without family cards get a health card scored like a family, with their search traffic."""
+    from scripts.build_report import add_hosts
+
+    summary = tmp_path / "traffic-summary.json"
+    summary.write_text(json.dumps({"windows": {}, "hosts": {}, "host_totals": {
+        "blog.example.org": {"source": "gsc", "current": {"clicks": 5, "impressions": 50, "pages": 3}}}}))
+    finding = {"id": "onpage-0001", "status": "open", "type": "incorrect", "check": "title_missing",
+               "subdomain": "blog.example.org", "template": "page", "title": "No title",
+               "evidence": {"urls": ["https://blog.example.org/"], "sample": {"post": [1, 4]}}}
+    report = {"hosts": {"blog.example.org": {"urls": 40}, "www.example.org": {"urls": 1}}, "findings": [finding],
+              "_families": {"hosts": {"www.example.org": []}}}
+    add_hosts(report, summary)
+    (card,) = report["_hosts"]  # www has family cards, so only the blog gets a host card
+    assert card["host"] == "blog.example.org" and card["urls"] == 40
+    assert card["health"] == 95 and card["grade"] == "A"  # incorrect 20 x share 0.25
+    assert card["traffic"]["current"]["clicks"] == 5
+
+
+def test_fix_guide_page(tmp_path, monkeypatch):
+    """One shared guide page with an anchor per check; reports link to it instead of embedding the table."""
+    from core.fix_guide import GUIDE
+    from scripts import build_site
+    from scripts.build_report import build
+
+    monkeypatch.setattr(build_site, "open_by_check", lambda tenants: {"title_missing": {"a.org": 2}})
+    page = build_site.guide_page(["a.org"])
+    assert page.count('<tr id="g-') == len(GUIDE)
+    assert '<a href="../a.org/">a.org</a> 2' in page
+    report = {"tenant": "a.org", "findings": [{"_guide": "title_missing"}],
+              "_guide": {"areas": [], "rows": {"title_missing": {}, "h1_missing": {}}}}
+    html = build(report, [], None, guide_url="../fix-guide/")
+    assert '"_guide_url": "../fix-guide/"' in html and "h1_missing" not in html  # only rows the report uses
