@@ -69,6 +69,21 @@ audit:
     llms_txt_skip_hosts:                          # no llms.txt expected: account app and API, not content for answers
       - dashboard.aspose.app
       - api.products.aspose.app
+  text:                                           # text check (scripts/audit_text.py)
+    ignore:                                       # reviewed LLM false positives (url, wrong text; no wrong = whole page)
+      - {url: "https://metrics.aspose.app/usages/sizes/tasks/", wrong: "Top 6 Microsoft Project File Formats Processing Apps"}  # tasks = MS Project
+      - {url: "https://products.aspose.app/diagram/conversion/bmp-to-vssm", wrong: "Convert visio files online free."}  # VSSM is Visio
+      - {url: "https://products.aspose.app/ebook/hr", wrong: "mangu"}  # Croatian accusative of manga
+      - {url: "https://products.aspose.app/html/it/pixel-calculator/in-to-em", wrong: "in"}  # unit: inches
+      - {url: "https://products.aspose.app/ocr/conversion/emf-to-md"}  # generic OCR title and description
+      - {url: "https://products.aspose.app/pdf/el/conversion/json", wrong: "Word εικόνες"}  # "Word, images": output list
+      - {url: "https://products.aspose.app/pdf/id/conversion/latex", wrong: "gambar Word"}  # same template as above
+      - {url: "https://products.aspose.app/pdf/fr/merger/pdf-to-excel", wrong: "Excel"}  # merger output format
+      - {url: "https://products.aspose.app/tasks/ar/conversion/mpp", wrong: "زبس"}  # XPS transliterated
+      - {url: "https://products.aspose.app/tasks/ar/conversion/mpp", wrong: "سفغ"}  # SVG transliterated
+      - {url: "https://products.aspose.app/tex/ja/equation-editor", wrong: "LaTex"}  # capitalization only
+      - {url: "https://www.aspose.app/da/", wrong: "filformatapps"}  # Danish compound word
+      - {url: "https://www.aspose.app/da/", wrong: "og"}  # Danish "and", correct
 
 # URL templates per host, matched in order against the path with the language segment removed.
 url_templates:

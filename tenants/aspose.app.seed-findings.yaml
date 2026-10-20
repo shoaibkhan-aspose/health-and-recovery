@@ -28,6 +28,7 @@ findings:
   fix_tier: 1
   fix_channel: git-pr
   status: open
+  superseded_by: onpage-0103
   detected_at: '2026-10-08'
   verification:
     verified: true
@@ -56,6 +57,7 @@ findings:
   fix_tier: 1
   fix_channel: git-pr
   status: open
+  superseded_by: onpage-0108
   detected_at: '2026-10-08'
   verification:
     verified: true
@@ -67,14 +69,13 @@ findings:
   template: family-hub
   dimension: onpage
   type: incorrect
-  title: Finance hub title has typos; family page title describes APIs, not free apps
+  title: Finance family page title describes APIs, not free apps
   evidence:
     urls:
-    - https://products.aspose.app/finance/
     - https://products.aspose.app/finance/family/
-    observed: /finance/ title 'Free App for for finance - Hanlde  XBRL and iXBRL Formats' (double 'for', 'Hanlde', double space); /finance/family/ title 'Global Digital Financial Reporting APIs - Aspose'
-    expected: Spelling-correct title about free XBRL/iXBRL apps
-  affected_pages: 2
+    observed: /finance/family/ title 'Global Digital Financial Reporting APIs - Aspose'. (The /finance/ title typos 'for for' and 'Hanlde' are tracked by the text check, onpage-0113.)
+    expected: Title about free XBRL/iXBRL apps, matching the H1 'Free Online Apps to Process XBRL, iXBRL Formats'
+  affected_pages: 1
   impact:
     clicks_28d: 0
     impressions_28d: 0
@@ -109,6 +110,7 @@ findings:
   fix_tier: 1
   fix_channel: git-pr
   status: open
+  superseded_by: onpage-0116
   detected_at: '2026-10-08'
   verification:
     verified: true

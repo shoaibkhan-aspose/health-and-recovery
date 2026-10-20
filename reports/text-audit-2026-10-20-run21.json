@@ -1,0 +1,1680 @@
+{
+  "tenant": "aspose.app",
+  "auditor": "text-audit",
+  "run_id": 21,
+  "params": {
+    "hosts": [
+      "about.aspose.app",
+      "api.products.aspose.app",
+      "blog.aspose.app",
+      "dashboard.aspose.app",
+      "forum.aspose.app",
+      "metrics.aspose.app",
+      "products.aspose.app",
+      "purchase.aspose.app",
+      "releases.aspose.app",
+      "status.aspose.app",
+      "websites.aspose.app",
+      "www.aspose.app"
+    ],
+    "crawl_runs": [
+      15
+    ],
+    "model": "gpt-oss",
+    "prompt_version": 2
+  },
+  "duration_s": 0.0,
+  "stopped_early": false,
+  "pages_checked": 605,
+  "unchecked": [],
+  "incomplete": false,
+  "llm": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "cache_hits": 605
+  },
+  "ignored": 14,
+  "summary": {
+    "about.aspose.app": {
+      "checked": 11,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "blog.aspose.app": {
+      "checked": 3,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "dashboard.aspose.app": {
+      "checked": 1,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "forum.aspose.app": {
+      "checked": 1,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "metrics.aspose.app": {
+      "checked": 15,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "products.aspose.app": {
+      "checked": 544,
+      "pages_with_issues": 32,
+      "issues": {
+        "text_leftover": 15,
+        "text_typo": 17,
+        "text_topic_mismatch": 11
+      }
+    },
+    "purchase.aspose.app": {
+      "checked": 1,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "releases.aspose.app": {
+      "checked": 11,
+      "pages_with_issues": 1,
+      "issues": {
+        "text_typo": 1
+      }
+    },
+    "status.aspose.app": {
+      "checked": 6,
+      "pages_with_issues": 0,
+      "issues": {}
+    },
+    "websites.aspose.app": {
+      "checked": 9,
+      "pages_with_issues": 1,
+      "issues": {
+        "text_typo": 1
+      }
+    },
+    "www.aspose.app": {
+      "checked": 3,
+      "pages_with_issues": 0,
+      "issues": {}
+    }
+  },
+  "findings": [
+    {
+      "id": "onpage-0001",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:cad",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/cad/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/cad/watermark/fbx-to-glb",
+          "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx"
+        ],
+        "observed": "2 of 23 checked pages: /cad/watermark/fbx-to-glb title: remove 'CADWatermarkTitle2'; /cad/watermark/fbx-to-glb H1: remove 'CADWatermarkTitle2'; /cad/watermark/fbx-to-glb meta description: remove 'CADWatermarkMetaDescription2'; /cad/es/watermark/dwfx-to-dwfx title: remove 'CADWatermarkTitle2'; /cad/es/watermark/dwfx-to-dwfx H1: remove 'CADWatermarkTitle2'; and 1 more",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+            "note": "title: remove 'CADWatermarkTitle2'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+            "note": "H1: remove 'CADWatermarkTitle2'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+            "note": "meta description: remove 'CADWatermarkMetaDescription2'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+            "note": "title: remove 'CADWatermarkTitle2'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+            "note": "H1: remove 'CADWatermarkTitle2'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+            "note": "meta description: remove 'CADWatermarkMetaDescription2'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0002",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:diagram",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/diagram/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/diagram/zh-cn/compress/vssx"
+        ],
+        "observed": "1 of 22 checked pages: /diagram/zh-cn/compress/vssx title: remove 'compress'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/diagram/zh-cn/compress/vssx",
+            "note": "title: remove 'compress'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0003",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:email",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/email/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/email/conversion/eml"
+        ],
+        "observed": "1 of 24 checked pages: /email/conversion/eml title: 'apps' → 'EML Converter'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/email/conversion/eml",
+            "note": "title: 'apps' → 'EML Converter'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0004",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:font",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/font/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/font/es/applications"
+        ],
+        "observed": "1 of 22 checked pages: /font/es/applications H1: remove 'de'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/font/es/applications",
+            "note": "H1: remove 'de'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0005",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:pdf",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/pdf/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/pdf/"
+        ],
+        "observed": "1 of 24 checked pages: /pdf/ title: remove 'test'; /pdf/ H1: remove 'test'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pdf/",
+            "note": "title: remove 'test'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pdf/",
+            "note": "H1: remove 'test'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0006",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:psd",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/psd/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/psd/conversion/ai-to-pdf"
+        ],
+        "observed": "1 of 24 checked pages: /psd/conversion/ai-to-pdf H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/psd/conversion/ai-to-pdf",
+            "note": "H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0007",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:tasks",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/tasks/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff"
+        ],
+        "observed": "1 of 24 checked pages: /tasks/hu/merger/ms-project-to-tiff title: remove 'Merge'; /tasks/hu/merger/ms-project-to-tiff H1: remove 'nak nek'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff",
+            "note": "title: remove 'Merge'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff",
+            "note": "H1: remove 'nak nek'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0008",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:words",
+      "dimension": "onpage",
+      "check": "text_leftover",
+      "type": "incorrect",
+      "title": "Placeholder or garbled words in titles, headings or descriptions (/words/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/words/th/conversion/mht-to-excel"
+        ],
+        "observed": "1 of 24 checked pages: /words/th/conversion/mht-to-excel meta description: remove 'ต'",
+        "expected": "Finished text in the page's language, without template keys or test words",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/words/th/conversion/mht-to-excel",
+            "note": "meta description: remove 'ต'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0009",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:audio",
+      "dimension": "onpage",
+      "check": "text_topic_mismatch",
+      "type": "incorrect",
+      "title": "Title or description is about a different product (/audio/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/audio/ja/conversion/mp2-to-ogg",
+          "https://products.aspose.app/audio/de/conversion/mpeg-to-wav"
+        ],
+        "observed": "2 of 18 checked pages: /audio/ja/conversion/mp2-to-ogg meta description: 'Visioファイル' → 'MP2ファイル'; /audio/de/conversion/mpeg-to-wav meta description: 'Visio-Dateien' → 'MPEG-Dateien'",
+        "expected": "Title and meta description describe the page's own product, like its H1",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/audio/ja/conversion/mp2-to-ogg",
+            "note": "meta description: 'Visioファイル' → 'MP2ファイル'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/audio/de/conversion/mpeg-to-wav",
+            "note": "meta description: 'Visio-Dateien' → 'MPEG-Dateien'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0010",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:svg",
+      "dimension": "onpage",
+      "check": "text_topic_mismatch",
+      "type": "incorrect",
+      "title": "Title or description is about a different product (/svg/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/svg/",
+          "https://products.aspose.app/svg/family/"
+        ],
+        "observed": "2 of 22 checked pages: /svg/ title: 'Create, Edit or Convert PSD & PSB files to PDF & image formats' → 'Create, Edit or Convert SVG files to PDF & image formats'; /svg/ meta description: 'edit Photoshop files' → 'edit SVG files'; /svg/family/ title: 'Free Online Viewer & Converter Apps for Photoshop Files' → 'Free Online Viewer & Converter Apps for SVG Files'; /svg/family/ meta description: 'Photoshop PSD & PSB files' → 'SVG files'",
+        "expected": "Title and meta description describe the page's own product, like its H1",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/svg/",
+            "note": "title: 'Create, Edit or Convert PSD & PSB files to PDF & image formats' → 'Create, Edit or Convert SVG files to PDF & image formats'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/svg/",
+            "note": "meta description: 'edit Photoshop files' → 'edit SVG files'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/svg/family/",
+            "note": "title: 'Free Online Viewer & Converter Apps for Photoshop Files' → 'Free Online Viewer & Converter Apps for SVG Files'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/svg/family/",
+            "note": "meta description: 'Photoshop PSD & PSB files' → 'SVG files'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0011",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:tasks",
+      "dimension": "onpage",
+      "check": "text_topic_mismatch",
+      "type": "incorrect",
+      "title": "Title or description is about a different product (/tasks/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/tasks/merger/xml-to-xlsx",
+          "https://products.aspose.app/tasks/merger/xml-to-jira",
+          "https://products.aspose.app/tasks/ko/merger/pdf",
+          "https://products.aspose.app/tasks/id/merger/xml"
+        ],
+        "observed": "4 of 24 checked pages: /tasks/merger/xml-to-xlsx meta description: 'MPP files' → 'XML files'; /tasks/merger/xml-to-jira meta description: 'Merge several MPP files into a single one, of PDF format.' → 'Merge XML files to Jira format.'; /tasks/ko/merger/pdf meta description: 'MPP' → 'PDF'; /tasks/id/merger/xml meta description: 'MPP' → 'XML'",
+        "expected": "Title and meta description describe the page's own product, like its H1",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/merger/xml-to-xlsx",
+            "note": "meta description: 'MPP files' → 'XML files'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/merger/xml-to-jira",
+            "note": "meta description: 'Merge several MPP files into a single one, of PDF format.' → 'Merge XML files to Jira format.'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/ko/merger/pdf",
+            "note": "meta description: 'MPP' → 'PDF'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tasks/id/merger/xml",
+            "note": "meta description: 'MPP' → 'XML'"
+          }
+        ]
+      },
+      "affected_pages": 4,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0012",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:total",
+      "dimension": "onpage",
+      "check": "text_topic_mismatch",
+      "type": "incorrect",
+      "title": "Title or description is about a different product (/total/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/total/compress/tga"
+        ],
+        "observed": "1 of 18 checked pages: /total/compress/tga meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'",
+        "expected": "Title and meta description describe the page's own product, like its H1",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/total/compress/tga",
+            "note": "meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0013",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:audio",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/audio/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/audio/de/conversion/mpeg-to-wav"
+        ],
+        "observed": "1 of 18 checked pages: /audio/de/conversion/mpeg-to-wav H1: 'KonverterWAV' → 'Konverter WAV'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/audio/de/conversion/mpeg-to-wav",
+            "note": "H1: 'KonverterWAV' → 'Konverter WAV'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0014",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:drawing",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/drawing/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/drawing/family/"
+        ],
+        "observed": "1 of 2 checked pages: /drawing/family/ meta description: 'iamges' → 'images'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/drawing/family/",
+            "note": "meta description: 'iamges' → 'images'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0015",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:finance",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/finance/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/finance/"
+        ],
+        "observed": "1 of 14 checked pages: /finance/ title: 'Hanlde' → 'Handle'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/finance/",
+            "note": "title: 'Hanlde' → 'Handle'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0016",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:font",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/font/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/font/pl/conversion/ttf",
+          "https://products.aspose.app/font/it/generator/woff-to-otf",
+          "https://products.aspose.app/font/es/applications"
+        ],
+        "observed": "3 of 22 checked pages: /font/pl/conversion/ttf meta description: 'Thia' → 'This'; /font/it/generator/woff-to-otf meta description: 'OTFfile' → 'OTF file'; /font/es/applications H1: 'Conventidor' → 'Convertidor'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/font/pl/conversion/ttf",
+            "note": "meta description: 'Thia' → 'This'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/font/it/generator/woff-to-otf",
+            "note": "meta description: 'OTFfile' → 'OTF file'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/font/es/applications",
+            "note": "H1: 'Conventidor' → 'Convertidor'"
+          }
+        ]
+      },
+      "affected_pages": 3,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0017",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:ocr",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/ocr/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/ocr/image-to-speech"
+        ],
+        "observed": "1 of 17 checked pages: /ocr/image-to-speech meta description: 'Image image' → 'Image'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/ocr/image-to-speech",
+            "note": "meta description: 'Image image' → 'Image'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0018",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:omr",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/omr/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/omr/family/"
+        ],
+        "observed": "1 of 9 checked pages: /omr/family/ title: 'Recoginze' → 'Recognize'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/omr/family/",
+            "note": "title: 'Recoginze' → 'Recognize'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0019",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:page",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/page/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/page/merger/ps",
+          "https://products.aspose.app/page/merger/eps"
+        ],
+        "observed": "2 of 22 checked pages: /page/merger/ps title: 'MergePS' → 'Merge PS'; /page/merger/eps title: 'MergeEPS' → 'Merge EPS'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/page/merger/ps",
+            "note": "title: 'MergePS' → 'Merge PS'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/page/merger/eps",
+            "note": "title: 'MergeEPS' → 'Merge EPS'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0020",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:pdf",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/pdf/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/pdf/el/conversion/excel-to-word"
+        ],
+        "observed": "1 of 24 checked pages: /pdf/el/conversion/excel-to-word title: 'Μετατροπη' → 'Μετατροπή'; /pdf/el/conversion/excel-to-word H1: 'Μετατροπη' → 'Μετατροπή'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
+            "note": "title: 'Μετατροπη' → 'Μετατροπή'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
+            "note": "H1: 'Μετατροπη' → 'Μετατροπή'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0021",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:psd",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/psd/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
+          "https://products.aspose.app/psd/font-replace/font-similar-to-arial"
+        ],
+        "observed": "2 of 24 checked pages: /psd/font-replace/font-similar-to-futura meta description: 'simular' → 'similar'; /psd/font-replace/font-similar-to-arial meta description: 'simular' → 'similar'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
+            "note": "meta description: 'simular' → 'similar'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/psd/font-replace/font-similar-to-arial",
+            "note": "meta description: 'simular' → 'similar'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0022",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:pub",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/pub/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/pub/applications",
+          "https://products.aspose.app/pub/cs/merger/pub-to-pptx"
+        ],
+        "observed": "2 of 14 checked pages: /pub/applications meta description: 'Сonvert' → 'Convert'; /pub/cs/merger/pub-to-pptx meta description: 'Flouze' → 'Fluže'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pub/applications",
+            "note": "meta description: 'Сonvert' → 'Convert'"
+          },
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/pub/cs/merger/pub-to-pptx",
+            "note": "meta description: 'Flouze' → 'Fluže'"
+          }
+        ]
+      },
+      "affected_pages": 2,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0023",
+      "tenant": "aspose.app",
+      "subdomain": "products.aspose.app",
+      "template": "page:tex",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions (/tex/)",
+      "evidence": {
+        "urls": [
+          "https://products.aspose.app/tex/it/viewer/tex"
+        ],
+        "observed": "1 of 18 checked pages: /tex/it/viewer/tex H1: 'onlien' → 'online'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://products.aspose.app/tex/it/viewer/tex",
+            "note": "H1: 'onlien' → 'online'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0024",
+      "tenant": "aspose.app",
+      "subdomain": "releases.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions",
+      "evidence": {
+        "urls": [
+          "https://releases.aspose.app/pdf/"
+        ],
+        "observed": "1 of 11 checked pages: /pdf/ meta description: 'Micros' → 'Micro'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://releases.aspose.app/pdf/",
+            "note": "meta description: 'Micros' → 'Micro'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-20"
+    },
+    {
+      "id": "onpage-0025",
+      "tenant": "aspose.app",
+      "subdomain": "websites.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "text_typo",
+      "type": "improvable",
+      "title": "Typos in titles, headings or descriptions",
+      "evidence": {
+        "urls": [
+          "https://websites.aspose.app/ru/codeporting/"
+        ],
+        "observed": "1 of 9 checked pages: /ru/codeporting/ title: 'Codeportings' → 'Codeporting'",
+        "expected": "Correctly spelled titles, H1s and meta descriptions",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://websites.aspose.app/ru/codeporting/",
+            "note": "title: 'Codeportings' → 'Codeporting'"
+          }
+        ]
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": "git-pr",
+      "status": "open",
+      "detected_at": "2026-10-20"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://products.aspose.app/audio/de/conversion/mpeg-to-wav",
+      "host": "products.aspose.app",
+      "section": "audio",
+      "lang": "de",
+      "issues": [
+        {
+          "field": "h1",
+          "kind": "misspelling",
+          "wrong": "KonverterWAV",
+          "fix": "Konverter WAV",
+          "why": "Two words run together"
+        },
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "Visio-Dateien",
+          "fix": "MPEG-Dateien",
+          "why": "Mentions Visio files on an audio conversion page"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/audio/ja/conversion/mp2-to-ogg",
+      "host": "products.aspose.app",
+      "section": "audio",
+      "lang": "ja",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "Visioファイル",
+          "fix": "MP2ファイル",
+          "why": "Description mentions Visio files, but page is about MP2 to OGG audio conversion"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+      "host": "products.aspose.app",
+      "section": "cad",
+      "lang": "es",
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkTitle2",
+          "fix": "",
+          "why": "placeholder not translated"
+        },
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkTitle2",
+          "fix": "",
+          "why": "placeholder not translated"
+        },
+        {
+          "field": "description",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkMetaDescription2",
+          "fix": "",
+          "why": "placeholder not translated"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+      "host": "products.aspose.app",
+      "section": "cad",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkTitle2",
+          "fix": "",
+          "why": "placeholder key left in title"
+        },
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkTitle2",
+          "fix": "",
+          "why": "placeholder key left in heading"
+        },
+        {
+          "field": "description",
+          "kind": "stray_word",
+          "wrong": "CADWatermarkMetaDescription2",
+          "fix": "",
+          "why": "placeholder meta description"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/diagram/zh-cn/compress/vssx",
+      "host": "products.aspose.app",
+      "section": "diagram",
+      "lang": "zh-cn",
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "compress",
+          "fix": "",
+          "why": "English placeholder left in Chinese title"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/drawing/family/",
+      "host": "products.aspose.app",
+      "section": "drawing",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "iamges",
+          "fix": "images",
+          "why": "misspelled word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/email/conversion/eml",
+      "host": "products.aspose.app",
+      "section": "email",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "apps",
+          "fix": "EML Converter",
+          "why": "Title is a generic placeholder that does not describe the page content."
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/finance/",
+      "host": "products.aspose.app",
+      "section": "finance",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "Hanlde",
+          "fix": "Handle",
+          "why": "misspelled word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/font/es/applications",
+      "host": "products.aspose.app",
+      "section": "font",
+      "lang": "es",
+      "issues": [
+        {
+          "field": "h1",
+          "kind": "misspelling",
+          "wrong": "Conventidor",
+          "fix": "Convertidor",
+          "why": "misspelled Spanish word"
+        },
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "de",
+          "fix": "",
+          "why": "stray preposition making phrase incomplete"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/font/it/generator/woff-to-otf",
+      "host": "products.aspose.app",
+      "section": "font",
+      "lang": "it",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "OTFfile",
+          "fix": "OTF file",
+          "why": "two words run together"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/font/pl/conversion/ttf",
+      "host": "products.aspose.app",
+      "section": "font",
+      "lang": "pl",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "Thia",
+          "fix": "This",
+          "why": "misspelled English word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/ocr/image-to-speech",
+      "host": "products.aspose.app",
+      "section": "ocr",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "repeated_word",
+          "wrong": "Image image",
+          "fix": "Image",
+          "why": "word repeated unintentionally"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/omr/family/",
+      "host": "products.aspose.app",
+      "section": "omr",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "Recoginze",
+          "fix": "Recognize",
+          "why": "misspelled word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/page/merger/eps",
+      "host": "products.aspose.app",
+      "section": "page",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "MergeEPS",
+          "fix": "Merge EPS",
+          "why": "run‑together words"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/page/merger/ps",
+      "host": "products.aspose.app",
+      "section": "page",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "MergePS",
+          "fix": "Merge PS",
+          "why": "two words run together"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/pdf/",
+      "host": "products.aspose.app",
+      "section": "pdf",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "test",
+          "fix": "",
+          "why": "placeholder word"
+        },
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "test",
+          "fix": "",
+          "why": "placeholder word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
+      "host": "products.aspose.app",
+      "section": "pdf",
+      "lang": "el",
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "Μετατροπη",
+          "fix": "Μετατροπή",
+          "why": "missing accent on Greek word"
+        },
+        {
+          "field": "h1",
+          "kind": "misspelling",
+          "wrong": "Μετατροπη",
+          "fix": "Μετατροπή",
+          "why": "missing accent on Greek word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/psd/conversion/ai-to-pdf",
+      "host": "products.aspose.app",
+      "section": "psd",
+      "lang": null,
+      "issues": [
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf",
+          "fix": "",
+          "why": "error placeholder left in heading"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/psd/font-replace/font-similar-to-arial",
+      "host": "products.aspose.app",
+      "section": "psd",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "simular",
+          "fix": "similar",
+          "why": "misspelled word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
+      "host": "products.aspose.app",
+      "section": "psd",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "simular",
+          "fix": "similar",
+          "why": "misspelled word"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/pub/applications",
+      "host": "products.aspose.app",
+      "section": "pub",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "Сonvert",
+          "fix": "Convert",
+          "why": "Cyrillic letter used instead of Latin"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/pub/cs/merger/pub-to-pptx",
+      "host": "products.aspose.app",
+      "section": "pub",
+      "lang": "cs",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "Flouze",
+          "fix": "Fluže",
+          "why": "nonsense word, likely misspelled"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/svg/",
+      "host": "products.aspose.app",
+      "section": "svg",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "topic_mismatch",
+          "wrong": "Create, Edit or Convert PSD & PSB files to PDF & image formats",
+          "fix": "Create, Edit or Convert SVG files to PDF & image formats",
+          "why": "title mentions Photoshop files instead of SVG"
+        },
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "edit Photoshop files",
+          "fix": "edit SVG files",
+          "why": "description refers to Photoshop files on an SVG page"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/svg/family/",
+      "host": "products.aspose.app",
+      "section": "svg",
+      "lang": null,
+      "issues": [
+        {
+          "field": "title",
+          "kind": "topic_mismatch",
+          "wrong": "Free Online Viewer & Converter Apps for Photoshop Files",
+          "fix": "Free Online Viewer & Converter Apps for SVG Files",
+          "why": "title mentions Photoshop files instead of SVG"
+        },
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "Photoshop PSD & PSB files",
+          "fix": "SVG files",
+          "why": "description refers to Photoshop files on an SVG page"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff",
+      "host": "products.aspose.app",
+      "section": "tasks",
+      "lang": "hu",
+      "issues": [
+        {
+          "field": "title",
+          "kind": "stray_word",
+          "wrong": "Merge",
+          "fix": "",
+          "why": "English word left untranslated in Hungarian title"
+        },
+        {
+          "field": "h1",
+          "kind": "stray_word",
+          "wrong": "nak nek",
+          "fix": "",
+          "why": "Garbled Hungarian phrase"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tasks/id/merger/xml",
+      "host": "products.aspose.app",
+      "section": "tasks",
+      "lang": "id",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "MPP",
+          "fix": "XML",
+          "why": "description mentions MPP files instead of XML"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tasks/ko/merger/pdf",
+      "host": "products.aspose.app",
+      "section": "tasks",
+      "lang": "ko",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "MPP",
+          "fix": "PDF",
+          "why": "Description mentions MPP files while page is about merging PDF files"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tasks/merger/xml-to-jira",
+      "host": "products.aspose.app",
+      "section": "tasks",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "Merge several MPP files into a single one, of PDF format.",
+          "fix": "Merge XML files to Jira format.",
+          "why": "Description mentions MPP files and PDF, which does not match the XML‑to‑Jira merger page."
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tasks/merger/xml-to-xlsx",
+      "host": "products.aspose.app",
+      "section": "tasks",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "MPP files",
+          "fix": "XML files",
+          "why": "description mentions wrong source format"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/tex/it/viewer/tex",
+      "host": "products.aspose.app",
+      "section": "tex",
+      "lang": "it",
+      "issues": [
+        {
+          "field": "h1",
+          "kind": "misspelling",
+          "wrong": "onlien",
+          "fix": "online",
+          "why": "Typo in 'online'"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/total/compress/tga",
+      "host": "products.aspose.app",
+      "section": "total",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "topic_mismatch",
+          "wrong": "PDF, Excel, PowerPoint and Word files",
+          "fix": "TGA files",
+          "why": "description lists unrelated file types"
+        }
+      ]
+    },
+    {
+      "url": "https://products.aspose.app/words/th/conversion/mht-to-excel",
+      "host": "products.aspose.app",
+      "section": "words",
+      "lang": "th",
+      "issues": [
+        {
+          "field": "description",
+          "kind": "stray_word",
+          "wrong": "ต",
+          "fix": "",
+          "why": "Stray character before แปลง"
+        }
+      ]
+    },
+    {
+      "url": "https://releases.aspose.app/pdf/",
+      "host": "releases.aspose.app",
+      "section": "",
+      "lang": null,
+      "issues": [
+        {
+          "field": "description",
+          "kind": "misspelling",
+          "wrong": "Micros",
+          "fix": "Micro",
+          "why": "misspelling"
+        }
+      ]
+    },
+    {
+      "url": "https://websites.aspose.app/ru/codeporting/",
+      "host": "websites.aspose.app",
+      "section": "",
+      "lang": "ru",
+      "issues": [
+        {
+          "field": "title",
+          "kind": "misspelling",
+          "wrong": "Codeportings",
+          "fix": "Codeporting",
+          "why": "extra 's' added to word"
+        }
+      ]
+    }
+  ]
+}

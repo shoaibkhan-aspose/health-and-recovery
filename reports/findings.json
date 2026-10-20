@@ -24530,6 +24530,1592 @@
     "notes": []
   },
   {
+    "id": "onpage-0099",
+    "key": "onpage/text_leftover/products.aspose.app/page:cad",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:cad",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/cad/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/cad/watermark/fbx-to-glb",
+        "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx"
+      ],
+      "observed": "2 of 23 checked pages: /cad/watermark/fbx-to-glb title: remove 'CADWatermarkTitle2'; /cad/watermark/fbx-to-glb H1: remove 'CADWatermarkTitle2'; /cad/watermark/fbx-to-glb meta description: remove 'CADWatermarkMetaDescription2'; /cad/es/watermark/dwfx-to-dwfx title: remove 'CADWatermarkTitle2'; /cad/es/watermark/dwfx-to-dwfx H1: remove 'CADWatermarkTitle2'; and 1 more",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+          "note": "title: remove 'CADWatermarkTitle2'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+          "note": "H1: remove 'CADWatermarkTitle2'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/watermark/fbx-to-glb",
+          "note": "meta description: remove 'CADWatermarkMetaDescription2'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+          "note": "title: remove 'CADWatermarkTitle2'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+          "note": "H1: remove 'CADWatermarkTitle2'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/cad/es/watermark/dwfx-to-dwfx",
+          "note": "meta description: remove 'CADWatermarkMetaDescription2'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0100",
+    "key": "onpage/text_leftover/products.aspose.app/page:diagram",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:diagram",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/diagram/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/diagram/zh-cn/compress/vssx"
+      ],
+      "observed": "1 of 22 checked pages: /diagram/zh-cn/compress/vssx title: remove 'compress'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/diagram/zh-cn/compress/vssx",
+          "note": "title: remove 'compress'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0101",
+    "key": "onpage/text_leftover/products.aspose.app/page:email",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:email",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/email/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/email/conversion/eml"
+      ],
+      "observed": "1 of 24 checked pages: /email/conversion/eml title: 'apps' → 'EML Converter'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/email/conversion/eml",
+          "note": "title: 'apps' → 'EML Converter'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 2,
+      "impressions_28d": 6,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 5,
+      "past_impressions": 21,
+      "lost_clicks": 3,
+      "lost_impressions": 15,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 7,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0102",
+    "key": "onpage/text_leftover/products.aspose.app/page:font",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:font",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/font/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/font/es/applications"
+      ],
+      "observed": "1 of 22 checked pages: /font/es/applications H1: remove 'de'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/font/es/applications",
+          "note": "H1: remove 'de'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0103",
+    "key": "onpage/text_leftover/products.aspose.app/page:pdf",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:pdf",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/pdf/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/pdf/"
+      ],
+      "observed": "1 of 24 checked pages: /pdf/ title: remove 'test'; /pdf/ H1: remove 'test'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pdf/",
+          "note": "title: remove 'test'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pdf/",
+          "note": "H1: remove 'test'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 2,
+      "impressions_28d": 4,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 9,
+      "past_impressions": 54,
+      "lost_clicks": 7,
+      "lost_impressions": 50,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "lost",
+      "score": 9,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0104",
+    "key": "onpage/text_leftover/products.aspose.app/page:psd",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:psd",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/psd/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/psd/conversion/ai-to-pdf"
+      ],
+      "observed": "1 of 24 checked pages: /psd/conversion/ai-to-pdf H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/psd/conversion/ai-to-pdf",
+          "note": "H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0105",
+    "key": "onpage/text_leftover/products.aspose.app/page:tasks",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:tasks",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/tasks/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff"
+      ],
+      "observed": "1 of 24 checked pages: /tasks/hu/merger/ms-project-to-tiff title: remove 'Merge'; /tasks/hu/merger/ms-project-to-tiff H1: remove 'nak nek'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff",
+          "note": "title: remove 'Merge'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/hu/merger/ms-project-to-tiff",
+          "note": "H1: remove 'nak nek'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0106",
+    "key": "onpage/text_leftover/products.aspose.app/page:words",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:words",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Placeholder or garbled words in titles, headings or descriptions (/words/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/words/th/conversion/mht-to-excel"
+      ],
+      "observed": "1 of 24 checked pages: /words/th/conversion/mht-to-excel meta description: remove 'ต'",
+      "expected": "Finished text in the page's language, without template keys or test words",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/words/th/conversion/mht-to-excel",
+          "note": "meta description: remove 'ต'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_leftover",
+    "notes": []
+  },
+  {
+    "id": "onpage-0107",
+    "key": "onpage/text_topic_mismatch/products.aspose.app/page:audio",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:audio",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Title or description is about a different product (/audio/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/audio/ja/conversion/mp2-to-ogg",
+        "https://products.aspose.app/audio/de/conversion/mpeg-to-wav"
+      ],
+      "observed": "2 of 18 checked pages: /audio/ja/conversion/mp2-to-ogg meta description: 'Visioファイル' → 'MP2ファイル'; /audio/de/conversion/mpeg-to-wav meta description: 'Visio-Dateien' → 'MPEG-Dateien'",
+      "expected": "Title and meta description describe the page's own product, like its H1",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/audio/ja/conversion/mp2-to-ogg",
+          "note": "meta description: 'Visioファイル' → 'MP2ファイル'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/audio/de/conversion/mpeg-to-wav",
+          "note": "meta description: 'Visio-Dateien' → 'MPEG-Dateien'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_topic_mismatch",
+    "notes": []
+  },
+  {
+    "id": "onpage-0108",
+    "key": "onpage/text_topic_mismatch/products.aspose.app/page:svg",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:svg",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Title or description is about a different product (/svg/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/svg/",
+        "https://products.aspose.app/svg/family/"
+      ],
+      "observed": "2 of 22 checked pages: /svg/ title: 'Create, Edit or Convert PSD & PSB files to PDF & image formats' → 'Create, Edit or Convert SVG files to PDF & image formats'; /svg/ meta description: 'edit Photoshop files' → 'edit SVG files'; /svg/family/ title: 'Free Online Viewer & Converter Apps for Photoshop Files' → 'Free Online Viewer & Converter Apps for SVG Files'; /svg/family/ meta description: 'Photoshop PSD & PSB files' → 'SVG files'",
+      "expected": "Title and meta description describe the page's own product, like its H1",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/svg/",
+          "note": "title: 'Create, Edit or Convert PSD & PSB files to PDF & image formats' → 'Create, Edit or Convert SVG files to PDF & image formats'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/svg/",
+          "note": "meta description: 'edit Photoshop files' → 'edit SVG files'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/svg/family/",
+          "note": "title: 'Free Online Viewer & Converter Apps for Photoshop Files' → 'Free Online Viewer & Converter Apps for SVG Files'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/svg/family/",
+          "note": "meta description: 'Photoshop PSD & PSB files' → 'SVG files'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 1,
+      "past_impressions": 14,
+      "lost_clicks": 1,
+      "lost_impressions": 14,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "lost",
+      "score": 3,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_topic_mismatch",
+    "notes": []
+  },
+  {
+    "id": "onpage-0109",
+    "key": "onpage/text_topic_mismatch/products.aspose.app/page:tasks",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:tasks",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Title or description is about a different product (/tasks/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/tasks/merger/xml-to-xlsx",
+        "https://products.aspose.app/tasks/merger/xml-to-jira",
+        "https://products.aspose.app/tasks/ko/merger/pdf",
+        "https://products.aspose.app/tasks/id/merger/xml"
+      ],
+      "observed": "4 of 24 checked pages: /tasks/merger/xml-to-xlsx meta description: 'MPP files' → 'XML files'; /tasks/merger/xml-to-jira meta description: 'Merge several MPP files into a single one, of PDF format.' → 'Merge XML files to Jira format.'; /tasks/ko/merger/pdf meta description: 'MPP' → 'PDF'; /tasks/id/merger/xml meta description: 'MPP' → 'XML'",
+      "expected": "Title and meta description describe the page's own product, like its H1",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/merger/xml-to-xlsx",
+          "note": "meta description: 'MPP files' → 'XML files'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/merger/xml-to-jira",
+          "note": "meta description: 'Merge several MPP files into a single one, of PDF format.' → 'Merge XML files to Jira format.'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/ko/merger/pdf",
+          "note": "meta description: 'MPP' → 'PDF'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tasks/id/merger/xml",
+          "note": "meta description: 'MPP' → 'XML'"
+        }
+      ]
+    },
+    "affected_pages": 4,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_topic_mismatch",
+    "notes": []
+  },
+  {
+    "id": "onpage-0110",
+    "key": "onpage/text_topic_mismatch/products.aspose.app/page:total",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:total",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Title or description is about a different product (/total/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/total/compress/tga"
+      ],
+      "observed": "1 of 18 checked pages: /total/compress/tga meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'",
+      "expected": "Title and meta description describe the page's own product, like its H1",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/total/compress/tga",
+          "note": "meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_topic_mismatch",
+    "notes": []
+  },
+  {
+    "id": "onpage-0111",
+    "key": "onpage/text_typo/products.aspose.app/page:audio",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:audio",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/audio/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/audio/de/conversion/mpeg-to-wav"
+      ],
+      "observed": "1 of 18 checked pages: /audio/de/conversion/mpeg-to-wav H1: 'KonverterWAV' → 'Konverter WAV'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/audio/de/conversion/mpeg-to-wav",
+          "note": "H1: 'KonverterWAV' → 'Konverter WAV'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0112",
+    "key": "onpage/text_typo/products.aspose.app/page:drawing",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:drawing",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/drawing/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/drawing/family/"
+      ],
+      "observed": "1 of 2 checked pages: /drawing/family/ meta description: 'iamges' → 'images'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/drawing/family/",
+          "note": "meta description: 'iamges' → 'images'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0113",
+    "key": "onpage/text_typo/products.aspose.app/page:finance",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:finance",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/finance/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/finance/"
+      ],
+      "observed": "1 of 14 checked pages: /finance/ title: 'Hanlde' → 'Handle'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/finance/",
+          "note": "title: 'Hanlde' → 'Handle'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0114",
+    "key": "onpage/text_typo/products.aspose.app/page:font",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:font",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/font/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/font/pl/conversion/ttf",
+        "https://products.aspose.app/font/it/generator/woff-to-otf",
+        "https://products.aspose.app/font/es/applications"
+      ],
+      "observed": "3 of 22 checked pages: /font/pl/conversion/ttf meta description: 'Thia' → 'This'; /font/it/generator/woff-to-otf meta description: 'OTFfile' → 'OTF file'; /font/es/applications H1: 'Conventidor' → 'Convertidor'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/font/pl/conversion/ttf",
+          "note": "meta description: 'Thia' → 'This'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/font/it/generator/woff-to-otf",
+          "note": "meta description: 'OTFfile' → 'OTF file'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/font/es/applications",
+          "note": "H1: 'Conventidor' → 'Convertidor'"
+        }
+      ]
+    },
+    "affected_pages": 3,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0115",
+    "key": "onpage/text_typo/products.aspose.app/page:ocr",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:ocr",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/ocr/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/ocr/image-to-speech"
+      ],
+      "observed": "1 of 17 checked pages: /ocr/image-to-speech meta description: 'Image image' → 'Image'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/ocr/image-to-speech",
+          "note": "meta description: 'Image image' → 'Image'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 234,
+      "impressions_28d": 4426,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 183,
+      "past_impressions": 4046,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 10,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0116",
+    "key": "onpage/text_typo/products.aspose.app/page:omr",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:omr",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/omr/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/omr/family/"
+      ],
+      "observed": "1 of 9 checked pages: /omr/family/ title: 'Recoginze' → 'Recognize'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/omr/family/",
+          "note": "title: 'Recoginze' → 'Recognize'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 11,
+      "impressions_28d": 77,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 11,
+      "past_impressions": 98,
+      "lost_clicks": 0,
+      "lost_impressions": 21,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 4,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0117",
+    "key": "onpage/text_typo/products.aspose.app/page:page",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/page/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/page/merger/ps",
+        "https://products.aspose.app/page/merger/eps"
+      ],
+      "observed": "2 of 22 checked pages: /page/merger/ps title: 'MergePS' → 'Merge PS'; /page/merger/eps title: 'MergeEPS' → 'Merge EPS'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/page/merger/ps",
+          "note": "title: 'MergePS' → 'Merge PS'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/page/merger/eps",
+          "note": "title: 'MergeEPS' → 'Merge EPS'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0118",
+    "key": "onpage/text_typo/products.aspose.app/page:pdf",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:pdf",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/pdf/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/pdf/el/conversion/excel-to-word"
+      ],
+      "observed": "1 of 24 checked pages: /pdf/el/conversion/excel-to-word title: 'Μετατροπη' → 'Μετατροπή'; /pdf/el/conversion/excel-to-word H1: 'Μετατροπη' → 'Μετατροπή'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
+          "note": "title: 'Μετατροπη' → 'Μετατροπή'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
+          "note": "H1: 'Μετατροπη' → 'Μετατροπή'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 71,
+      "impressions_28d": 324,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 72,
+      "past_impressions": 235,
+      "lost_clicks": 1,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 8,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0119",
+    "key": "onpage/text_typo/products.aspose.app/page:psd",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:psd",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/psd/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
+        "https://products.aspose.app/psd/font-replace/font-similar-to-arial"
+      ],
+      "observed": "2 of 24 checked pages: /psd/font-replace/font-similar-to-futura meta description: 'simular' → 'similar'; /psd/font-replace/font-similar-to-arial meta description: 'simular' → 'similar'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
+          "note": "meta description: 'simular' → 'similar'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/psd/font-replace/font-similar-to-arial",
+          "note": "meta description: 'simular' → 'similar'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0120",
+    "key": "onpage/text_typo/products.aspose.app/page:pub",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:pub",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/pub/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/pub/applications",
+        "https://products.aspose.app/pub/cs/merger/pub-to-pptx"
+      ],
+      "observed": "2 of 14 checked pages: /pub/applications meta description: 'Сonvert' → 'Convert'; /pub/cs/merger/pub-to-pptx meta description: 'Flouze' → 'Fluže'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pub/applications",
+          "note": "meta description: 'Сonvert' → 'Convert'"
+        },
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/pub/cs/merger/pub-to-pptx",
+          "note": "meta description: 'Flouze' → 'Fluže'"
+        }
+      ]
+    },
+    "affected_pages": 2,
+    "impact": {
+      "clicks_28d": 2,
+      "impressions_28d": 18,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 6,
+      "past_impressions": 98,
+      "lost_clicks": 4,
+      "lost_impressions": 80,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "lost",
+      "score": 2,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0121",
+    "key": "onpage/text_typo/products.aspose.app/page:tex",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "products.aspose.app",
+    "template": "page:tex",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions (/tex/)",
+    "evidence": {
+      "urls": [
+        "https://products.aspose.app/tex/it/viewer/tex"
+      ],
+      "observed": "1 of 18 checked pages: /tex/it/viewer/tex H1: 'onlien' → 'online'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://products.aspose.app/tex/it/viewer/tex",
+          "note": "H1: 'onlien' → 'online'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 5,
+      "impressions_28d": 27,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 5,
+      "past_impressions": 22,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 3,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0122",
+    "key": "onpage/text_typo/releases.aspose.app/page",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "releases.aspose.app",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions",
+    "evidence": {
+      "urls": [
+        "https://releases.aspose.app/pdf/"
+      ],
+      "observed": "1 of 11 checked pages: /pdf/ meta description: 'Micros' → 'Micro'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://releases.aspose.app/pdf/",
+          "note": "meta description: 'Micros' → 'Micro'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 1,
+      "lost_clicks": 0,
+      "lost_impressions": 1,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "lost",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": null,
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
+    "id": "onpage-0123",
+    "key": "onpage/text_typo/websites.aspose.app/page",
+    "source": "text-audit",
+    "tenant": "aspose.app",
+    "subdomain": "websites.aspose.app",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Typos in titles, headings or descriptions",
+    "evidence": {
+      "urls": [
+        "https://websites.aspose.app/ru/codeporting/"
+      ],
+      "observed": "1 of 9 checked pages: /ru/codeporting/ title: 'Codeportings' → 'Codeporting'",
+      "expected": "Correctly spelled titles, H1s and meta descriptions",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://websites.aspose.app/ru/codeporting/",
+          "note": "title: 'Codeportings' → 'Codeporting'"
+        }
+      ]
+    },
+    "affected_pages": 1,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 0,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-18",
+        "2026-04-14"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-16",
+        "2026-10-13"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "text-audit-run21",
+    "last_seen_run": "text-audit-run21",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_typo",
+    "notes": []
+  },
+  {
     "id": "perf-0001",
     "key": "perf/cls_needs_work/products.aspose.app/page:cells",
     "source": "perf-audit",
@@ -25595,7 +27181,7 @@
     "superseded_by": "ai-0004",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25654,7 +27240,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25711,7 +27297,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25769,7 +27355,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25827,7 +27413,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25874,7 +27460,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25930,7 +27516,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -25987,7 +27573,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26044,7 +27630,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26093,7 +27679,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26149,7 +27735,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26205,7 +27791,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26264,7 +27850,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26306,7 +27892,7 @@
     "superseded_by": "intl-0034",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26365,7 +27951,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26413,7 +27999,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26470,7 +28056,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26517,16 +28103,16 @@
     "effort": "S",
     "fix_tier": 1,
     "fix_channel": "git-pr",
-    "status": "open",
+    "status": "superseded",
     "verification": {
       "verified": true,
       "how": "live page fetch + repo file",
       "recheck": "crawl auditor: title/H1 typo check"
     },
-    "superseded_by": null,
+    "superseded_by": "onpage-0103",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26574,16 +28160,16 @@
     "effort": "S",
     "fix_tier": 1,
     "fix_channel": "git-pr",
-    "status": "open",
+    "status": "superseded",
     "verification": {
       "verified": true,
       "how": "repo files; live not yet fetched",
       "recheck": "crawl auditor: title vs H1 topic mismatch; confirm live"
     },
-    "superseded_by": null,
+    "superseded_by": "onpage-0108",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26598,16 +28184,15 @@
     "template": "family-hub",
     "dimension": "onpage",
     "type": "incorrect",
-    "title": "Finance hub title has typos; family page title describes APIs, not free apps",
+    "title": "Finance family page title describes APIs, not free apps",
     "evidence": {
       "urls": [
-        "https://products.aspose.app/finance/",
         "https://products.aspose.app/finance/family/"
       ],
-      "observed": "/finance/ title 'Free App for for finance - Hanlde  XBRL and iXBRL Formats' (double 'for', 'Hanlde', double space); /finance/family/ title 'Global Digital Financial Reporting APIs - Aspose'",
-      "expected": "Spelling-correct title about free XBRL/iXBRL apps"
+      "observed": "/finance/family/ title 'Global Digital Financial Reporting APIs - Aspose'. (The /finance/ title typos 'for for' and 'Hanlde' are tracked by the text check, onpage-0113.)",
+      "expected": "Title about free XBRL/iXBRL apps, matching the H1 'Free Online Apps to Process XBRL, iXBRL Formats'"
     },
-    "affected_pages": 2,
+    "affected_pages": 1,
     "impact": {
       "clicks_28d": 0,
       "impressions_28d": 0,
@@ -26640,7 +28225,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26687,16 +28272,16 @@
     "effort": "S",
     "fix_tier": 1,
     "fix_channel": "git-pr",
-    "status": "open",
+    "status": "superseded",
     "verification": {
       "verified": true,
       "how": "repo file",
       "recheck": "crawl auditor: spelling check"
     },
-    "superseded_by": null,
+    "superseded_by": "onpage-0116",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26752,7 +28337,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26794,7 +28379,7 @@
     "superseded_by": "crawl-0068",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26837,7 +28422,7 @@
     "superseded_by": "onpage-0012",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26893,7 +28478,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -26951,7 +28536,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -27007,7 +28592,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -27054,7 +28639,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
@@ -27098,7 +28683,7 @@
     "superseded_by": "ux-0005",
     "detected_at": "2026-10-08",
     "first_seen_run": "seed-2026-10-08",
-    "last_seen_run": "seed-2026-10-16",
+    "last_seen_run": "seed-2026-10-20",
     "resolved_run": null,
     "resolved_at": null,
     "check": null,
