@@ -86,6 +86,13 @@ def test_soft_404_errors_and_blocked():
     assert checks(page_issues(rec(url, final_url=final, redirects=[url], redirect_statuses=[302]), facts, False)) == {
         "redirected", "redirect_temporary", "soft_404"}
     assert checks(page_issues(rec(url, status=404), None, False)) == {"http_error"}
+    # redirect to an app's own error route ('page404'), generic title, error text only in the H1
+    url = "https://h.example/psd/conversion/ai-to-pdf"
+    final = "https://h.example/psd/page404?url=/psd/conversion/ai-to-pdf"
+    facts = parse_page(html(title="Edit PSD files", h1=("There is an error on this page or it does not exist",)), final)
+    got = page_issues(rec(url, final_url=final, redirects=[url], redirect_statuses=[302]), facts, False)
+    assert "soft_404" in checks(got) and "does not exist" in dict(got)["soft_404"]
+    assert "soft_404" in checks(page_issues(rec(url), facts, False))  # H1 alone, no redirect
     blocked = {**rec(url, status=None), "blocked": 1}
     assert checks(page_issues(blocked, None, False)) == {"robots_blocked"}
 

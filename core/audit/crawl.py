@@ -29,8 +29,9 @@ TITLE_LEN = (10, 70)  # display width (CJK characters count 2); outside this ran
 DESCRIPTION_LEN = (50, 170)
 REFRESH_URL_RE = re.compile(r"url\s*=\s*['\"]?([^'\";]+)", re.I)
 HREFLANG_RE = re.compile(r"^(x-default|[a-z]{2,3}(-[a-z]{4})?(-([a-z]{2}|\d{3}))?)$", re.I)
-SOFT_404_URL_RE = re.compile(r"(^|[/?&=_.-])(404|not-?found|notfound|error)([/?&=_.-]|$)", re.I)
+SOFT_404_URL_RE = re.compile(r"(^|[/?&=_.-])([a-z]*404|not-?found|notfound|error)([/?&=_.-]|$)", re.I)  # page404
 SOFT_404_TITLE_RE = re.compile(r"\b(404|page not found|not found)\b", re.I)
+SOFT_404_H1_RE = re.compile(r"\b(page not found|does not exist|error on this page)\b", re.I)  # error text, own title
 NO_ZOOM_RE = re.compile(r"user-scalable\s*=\s*(no|0)\b|maximum-scale\s*=\s*1(\.0*)?\b", re.I)
 MIN_TEXT_CHARS = 250  # visible characters (no spaces) in the raw HTML below which a page reads as empty to AI crawlers
 
@@ -140,9 +141,12 @@ def page_issues(rec: dict, facts, localized: bool) -> list[tuple[str, str]]:
         return issues
 
     title = facts.titles[0] if facts.titles else ""
+    h1 = facts.h1[0] if facts.h1 else ""
     final_path = urlsplit(rec["final_url"] or rec["url"])
-    if (hops and SOFT_404_URL_RE.search(final_path.path + "?" + final_path.query)) or SOFT_404_TITLE_RE.search(title):
-        issues.append(("soft_404", f"HTTP 200 at {rec['final_url']}, title '{title[:80]}'"))
+    if ((hops and SOFT_404_URL_RE.search(final_path.path + "?" + final_path.query))
+            or SOFT_404_TITLE_RE.search(title) or SOFT_404_H1_RE.search(h1)):
+        issues.append(("soft_404", f"HTTP 200 at {rec['final_url']}, title '{title[:80]}'"
+                                   + (f", H1 '{h1[:80]}'" if SOFT_404_H1_RE.search(h1) else "")))
         return issues  # an error page's other tags say nothing about the template
 
     if facts.refresh and REFRESH_URL_RE.search(facts.refresh):
