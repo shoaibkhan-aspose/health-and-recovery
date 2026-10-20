@@ -1,0 +1,583 @@
+[
+  {
+    "id": "ai-0001",
+    "key": "ai/content_needs_js/blog.conholdate.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "page",
+    "dimension": "ai",
+    "type": "incorrect",
+    "title": "Pages show almost no text without JavaScript",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/conholdate.total/",
+        "https://blog.conholdate.cloud/search/",
+        "https://blog.conholdate.cloud/ko/search/"
+      ],
+      "observed": "3 of 15 sampled pages (by template: category 1/4, listing 2/4). e.g. https://blog.conholdate.cloud/conholdate.total/: 224 characters of main text in the HTML; https://blog.conholdate.cloud/search/: 145 characters of main text in the HTML; https://blog.conholdate.cloud/ko/search/: 145 characters of main text in the HTML",
+      "expected": "the main text in the HTML itself (at least 250 characters); AI crawlers do not run JavaScript",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/conholdate.total/",
+          "note": "224 characters of main text in the HTML"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/search/",
+          "note": "145 characters of main text in the HTML"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/ko/search/",
+          "note": "145 characters of main text in the HTML"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.conholdate.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/ko/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "category": [
+          1,
+          4
+        ],
+        "listing": [
+          2,
+          4
+        ]
+      }
+    },
+    "affected_pages": 29,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 4,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 1,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "M",
+    "fix_tier": 2,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "crawl-audit-run1",
+    "last_seen_run": "crawl-audit-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "content_needs_js",
+    "notes": []
+  },
+  {
+    "id": "ai-0002",
+    "key": "ai/llms_txt_missing/blog.conholdate.cloud/llms.txt",
+    "source": "ai-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "llms.txt",
+    "dimension": "ai",
+    "type": "improvable",
+    "title": "No llms.txt for AI assistants",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/llms.txt"
+      ],
+      "observed": "https://blog.conholdate.cloud/llms.txt: HTTP 404",
+      "expected": "/llms.txt as plain text or Markdown: an H1 with the site name, a short summary and links to the key pages",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/llms.txt",
+          "note": "HTTP 404"
+        }
+      ]
+    },
+    "affected_pages": 0,
+    "impact": {
+      "clicks_28d": 1,
+      "impressions_28d": 133,
+      "source": "gsc-host",
+      "share": 1.0,
+      "past_clicks": 0,
+      "past_impressions": 83,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 2,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "ai-audit-run2",
+    "last_seen_run": "ai-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "llms_txt_missing",
+    "notes": []
+  },
+  {
+    "id": "intl-0001",
+    "key": "intl/hreflang_no_xdefault/blog.conholdate.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "page",
+    "dimension": "intl",
+    "type": "improvable",
+    "title": "hreflang set has no x-default",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/conholdate.cloud/",
+        "https://blog.conholdate.cloud/",
+        "https://blog.conholdate.cloud/archives/",
+        "https://blog.conholdate.cloud/total/manipulate-excel-spreadsheets/",
+        "https://blog.conholdate.cloud/conholdate.total/",
+        "https://blog.conholdate.cloud/zh-hant/",
+        "https://blog.conholdate.cloud/search/",
+        "https://blog.conholdate.cloud/total/convert-html-files/",
+        "https://blog.conholdate.cloud/he/conholdate.cloud/",
+        "https://blog.conholdate.cloud/ru/"
+      ],
+      "observed": "15 of 15 sampled pages (by template: category 4/4, home 3/3, listing 4/4, post 4/4). e.g. https://blog.conholdate.cloud/conholdate.cloud/: 1 entries: en; https://blog.conholdate.cloud/: 23 entries: en, ar, cs, de, es, fa; https://blog.conholdate.cloud/archives/: 23 entries: en, ar, cs, de, es, fa; https://blog.conholdate.cloud/total/manipulate-excel-spreadsheets/: 23 entries: en, ar, cs, de, es, fa; https://blog.conholdate.cloud/conholdate.total/: 1 entries: en",
+      "expected": "an x-default entry",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/conholdate.cloud/",
+          "note": "1 entries: en"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/",
+          "note": "23 entries: en, ar, cs, de, es, fa"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/archives/",
+          "note": "23 entries: en, ar, cs, de, es, fa"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/total/manipulate-excel-spreadsheets/",
+          "note": "23 entries: en, ar, cs, de, es, fa"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/conholdate.total/",
+          "note": "1 entries: en"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.conholdate.cloud/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "category": [
+          4,
+          4
+        ],
+        "home": [
+          3,
+          3
+        ],
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          4,
+          4
+        ]
+      }
+    },
+    "affected_pages": 163,
+    "impact": {
+      "clicks_28d": 1,
+      "impressions_28d": 133,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 83,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 2,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 2,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "crawl-audit-run1",
+    "last_seen_run": "crawl-audit-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "hreflang_no_xdefault",
+    "notes": []
+  },
+  {
+    "id": "onpage-0001",
+    "key": "onpage/description_length/blog.conholdate.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Meta descriptions are too long or too short",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/archives/",
+        "https://blog.conholdate.cloud/search/",
+        "https://blog.conholdate.cloud/nl/archives/",
+        "https://blog.conholdate.cloud/ko/search/",
+        "https://blog.conholdate.cloud/nl/total/manipulate-pdf-documents/"
+      ],
+      "observed": "5 of 15 sampled pages (by template: listing 4/4, post 1/4). e.g. https://blog.conholdate.cloud/archives/: width 8: 'archives'; https://blog.conholdate.cloud/search/: width 6: 'search'; https://blog.conholdate.cloud/nl/archives/: width 7: 'Archief'; https://blog.conholdate.cloud/ko/search/: width 4: '검색'; https://blog.conholdate.cloud/nl/total/manipulate-pdf-documents/: width 194: 'Ontdek hoe u PDF-documenten kunt manipuleren met Conholdate.Cloud. Converteer PDF's naar W'",
+      "expected": "50-170 characters (CJK count double)",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/archives/",
+          "note": "width 8: 'archives'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/search/",
+          "note": "width 6: 'search'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/nl/archives/",
+          "note": "width 7: 'Archief'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/ko/search/",
+          "note": "width 4: '검색'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/nl/total/manipulate-pdf-documents/",
+          "note": "width 194: 'Ontdek hoe u PDF-documenten kunt manipuleren met Conholdate.Cloud. Converteer PDF's naar W'"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.conholdate.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/nl/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/ko/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          1,
+          4
+        ]
+      }
+    },
+    "affected_pages": 64,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 14,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 8,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "crawl-audit-run1",
+    "last_seen_run": "crawl-audit-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "description_length",
+    "notes": []
+  },
+  {
+    "id": "onpage-0002",
+    "key": "onpage/h1_missing/blog.conholdate.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Pages have no H1",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/",
+        "https://blog.conholdate.cloud/zh-hant/",
+        "https://blog.conholdate.cloud/ru/"
+      ],
+      "observed": "3 of 15 sampled pages (by template: home 3/3). e.g. https://blog.conholdate.cloud/: no non-empty <h1>; https://blog.conholdate.cloud/zh-hant/: no non-empty <h1>; https://blog.conholdate.cloud/ru/: no non-empty <h1>",
+      "expected": "one H1 that states the page topic",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/zh-hant/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/ru/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.conholdate.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/zh-hant/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/ru/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "home": [
+          3,
+          3
+        ]
+      }
+    },
+    "affected_pages": 23,
+    "impact": {
+      "clicks_28d": 1,
+      "impressions_28d": 100,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 55,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 2,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "crawl-audit-run1",
+    "last_seen_run": "crawl-audit-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "h1_missing",
+    "notes": []
+  },
+  {
+    "id": "onpage-0003",
+    "key": "onpage/title_length/blog.conholdate.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Titles are too long or too short",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/archives/",
+        "https://blog.conholdate.cloud/search/",
+        "https://blog.conholdate.cloud/nl/archives/",
+        "https://blog.conholdate.cloud/pl/total/manipulate-excel-spreadsheets/",
+        "https://blog.conholdate.cloud/ko/search/"
+      ],
+      "observed": "5 of 15 sampled pages (by template: listing 4/4, post 1/4). e.g. https://blog.conholdate.cloud/archives/: width 7: 'Archive'; https://blog.conholdate.cloud/search/: width 6: 'Search'; https://blog.conholdate.cloud/nl/archives/: width 7: 'Archief'; https://blog.conholdate.cloud/pl/total/manipulate-excel-spreadsheets/: width 75: 'Manipuluj plikami Excel za pomocą REST API | Konwertuj, scalaj, dziel Excel'; https://blog.conholdate.cloud/ko/search/: width 4: '검색'",
+      "expected": "10-70 characters (CJK count double)",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/archives/",
+          "note": "width 7: 'Archive'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/search/",
+          "note": "width 6: 'Search'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/nl/archives/",
+          "note": "width 7: 'Archief'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/pl/total/manipulate-excel-spreadsheets/",
+          "note": "width 75: 'Manipuluj plikami Excel za pomocą REST API | Konwertuj, scalaj, dziel Excel'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.conholdate.cloud/ko/search/",
+          "note": "width 4: '검색'"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.conholdate.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/nl/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/pl/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.conholdate.cloud/ko/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          1,
+          4
+        ]
+      }
+    },
+    "affected_pages": 64,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 14,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 8,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-22",
+        "2026-04-18"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-20",
+        "2026-10-17"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-20",
+    "first_seen_run": "crawl-audit-run1",
+    "last_seen_run": "crawl-audit-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "title_length",
+    "notes": []
+  }
+]
