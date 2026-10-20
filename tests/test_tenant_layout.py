@@ -106,3 +106,14 @@ def test_family_host_rollup():
     r = family_rollup("p.example.org", cards, [host_wide], 1000)
     assert r["rollup"]["weighted"] == 80 and r["rollup"]["host_wide"] == 40  # (90*300 + 50*100) / 400; broken x 1.0
     assert r["health"] == 40 and r["grade"] == "D" and r["rollup"]["lowest"]["family"] == "b"
+
+
+def test_report_template_ids_are_unique():
+    """Two elements with one id break the report: $("x") finds only the first (a "hosts" section once emptied
+    the Reference tables)."""
+    import re
+    from collections import Counter
+
+    html = (ROOT / "scripts" / "templates" / "discovery_report.html").read_text(encoding="utf-8")
+    ids = Counter(re.findall(r'\bid="([^"$]+)"', html))
+    assert [k for k, n in ids.items() if n > 1] == []

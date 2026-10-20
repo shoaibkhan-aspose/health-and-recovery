@@ -234,7 +234,7 @@ footer a { color: var(--accent) }
   </header>
 
   <nav class="toc" aria-label="Contents">
-    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#hosts" id="toc-host">Hosts</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
+    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Hosts</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
   </nav>
 
   <section aria-labelledby="s-sum" id="summary">
@@ -265,7 +265,7 @@ footer a { color: var(--accent) }
     <button type="button" class="more" id="fam-more" hidden></button>
   </section>
 
-  <section aria-labelledby="s-host" id="hosts" hidden>
+  <section aria-labelledby="s-host" id="host-health" hidden>
     <h2 id="s-host">Host health <small id="host-meta"></small></h2>
     <p class="lede">One row per host, scored like a family: 100 minus points for each open problem, weighted by severity and by how much of the host it affects. A host with product families shows its families' health weighted by search clicks, minus host-wide problems (see Product families for each one). Hover a grade for the points lost. A to Z. <a href="#method-health">How health is scored</a>.</p>
     <div class="tablewrap"><table class="htab" id="host-table"></table></div>
@@ -494,7 +494,7 @@ footer a { color: var(--accent) }
   const HOSTS = R._hosts || [];
   if (!HOSTS.length) $("toc-host").hidden = true;
   else {
-    $("hosts").hidden = false;
+    $("host-health").hidden = false;
     $("host-meta").textContent = `${HOSTS.length} host${HOSTS.length === 1 ? "" : "s"}`;  // includes hosts with families (rolled up)
     const trafficLine = t => !t.source ? `<span class="dim">no data</span>`
       : t.source === "ga4" ? `<b>${compact(t.current.sessions)}</b> organic sessions <span class="dim" title="No Search Console property for this host">(GA4)</span>`
@@ -956,6 +956,9 @@ footer a { color: var(--accent) }
         const st = (g.live_status !== 200 || !g.live_urls || g.gsc_status !== "Success") ? "bad" : gap > 0.1 ? "warn" : "ok";
         return { st, w: g.gsc_discovered || g.live_urls || 0, html: `<tr><td class="mono">${mk(st)}${g.url ? `<a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.path)}</a>` : esc(g.path)}</td><td>${gs}</td><td class="n">${fmt(g.gsc_discovered)}</td><td>${live}</td><td class="n">${fmt(g.live_urls)}</td></tr>` };
       }), "gsc-st", "sitemaps");
+  } else {
+    $("gsc").outerHTML = `<p class="lede" style="padding:10px 14px">No Search Console sitemap snapshot for this property yet (tenant YAML <code>gsc_sitemaps_snapshot</code>), so there is nothing to compare with the live sitemaps.</p>`;
+    $("gsc-st").textContent = "· no snapshot";
   }
 
   $("foot").innerHTML = `<a href="#method">How this audit works</a> · <a href="archive/">Previous versions</a><br>` + esc(`Generated from discovery run ${R.run_id}${A ? `, crawl audit run ${A.run_id}` : ""}${R._perf ? `, speed audit run ${R._perf.run_id}` : ""}${R._ai ? `, AI audit run ${R._ai.run_id}` : ""}${R._text ? `, text check run ${R._text.run_id}` : ""} and the findings store. Read-only audit: nothing on any site was changed. Each finding lists URLs anyone can open to re-check it. For discovery findings "pages" counts URLs in the affected sitemaps; for crawl audit findings it is an estimate from the sample. Impact from Search Console and GA4 is added in the prioritization step.`);
