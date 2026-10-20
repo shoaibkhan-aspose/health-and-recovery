@@ -44,7 +44,8 @@ hosts:
   - {host: dashboard.aspose.app, platform: unknown, source: ga4}
   - {host: metrics.aspose.app, platform: unknown, source: ga4}
   - {host: status.aspose.app, platform: unknown, source: ga4}
-  - {host: api.products.aspose.app, platform: unknown, source: ga4}
+  # api.products.aspose.app dropped (SK, 2026-10-20): resolves and has GA4 sessions, but / answers 404 (S3
+  # NoSuchBucket); an API/backend host, not a website, so it is not audited.
 
 # Discovery: extra sitemap locations to probe beyond robots.txt and /sitemap.xml.
 discovery:
@@ -66,9 +67,8 @@ audit:
     - https://products.aspose.app/pdf/split       # seed-crawl-03: sitemap lists /split, hub links /splitter
     - https://products.aspose.app/pdf/splitter
   ai:                                             # AI-readiness audit (scripts/audit_ai.py)
-    llms_txt_skip_hosts:                          # no llms.txt expected: account app and API, not content for answers
+    llms_txt_skip_hosts:                          # no llms.txt expected: account app, not content for answers
       - dashboard.aspose.app
-      - api.products.aspose.app
   text:                                           # text check (scripts/audit_text.py)
     ignore:                                       # reviewed LLM false positives (url, wrong text; no wrong = whole page)
       - {url: "https://metrics.aspose.app/usages/sizes/tasks/", wrong: "Top 6 Microsoft Project File Formats Processing Apps"}  # tasks = MS Project

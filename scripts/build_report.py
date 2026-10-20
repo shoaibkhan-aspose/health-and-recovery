@@ -37,6 +37,7 @@ from core.report_view import (  # noqa: E402
     top_risks,
 )
 from core.scorecard import family_of, family_scorecards, grade, scorecard  # noqa: E402
+from core.tenant import load_tenant  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
 
@@ -191,6 +192,21 @@ def add_hosts(report: dict, summary_path: Path) -> None:
         cards.append(card)
     if cards:
         report["_hosts"] = cards
+
+
+def drop_hosts(report: dict, keep: set) -> list[str]:
+    """Leave out hosts the tenant no longer audits (dropped from its YAML after a run): run files are never
+    edited, so their per-host data is filtered here. Returns the hosts left out."""
+    audit, ai, perf, text = (report.get(k) or {} for k in ("_audit", "_ai", "_perf", "_text"))
+    tables = [report.get("hosts"), audit.get("summary"), ai.get("summary"), perf.get("summary"),
+              perf.get("origins"), text.get("summary")]
+    dropped: set = set()
+    for table in tables:
+        if isinstance(table, dict):
+            for h in [h for h in table if h not in keep]:
+                dropped.add(h)
+                del table[h]
+    return sorted(dropped)
 
 
 def runs_label(report: dict) -> str:
@@ -388,6 +404,12 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
     else:
         print(f"No findings store at {store_path}; using the run's own findings.", file=sys.stderr)
+    try:
+        dropped = drop_hosts(report, set(load_tenant(args.tenant).host_names))
+    except FileNotFoundError:
+        dropped = []
+    if dropped:
+        print(f"Left out hosts no longer in tenants/{args.tenant}.yaml: {', '.join(dropped)}", file=sys.stderr)
     add_families(report, paths.traffic_summary)
     add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)
