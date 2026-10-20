@@ -79,6 +79,7 @@ audit:
       - {url: "https://products.aspose.app/pdf/el/conversion/json", wrong: "Word εικόνες"}  # "Word, images": output list
       - {url: "https://products.aspose.app/pdf/id/conversion/latex", wrong: "gambar Word"}  # same template as above
       - {url: "https://products.aspose.app/pdf/fr/merger/pdf-to-excel", wrong: "Excel"}  # merger output format
+      - {url: "https://products.aspose.app/total/compress/tga", wrong: "PDF, Excel, PowerPoint and Word files"}  # Aspose.Total = all products (SK)
       - {url: "https://products.aspose.app/tasks/ar/conversion/mpp", wrong: "زبس"}  # XPS transliterated
       - {url: "https://products.aspose.app/tasks/ar/conversion/mpp", wrong: "سفغ"}  # SVG transliterated
       - {url: "https://products.aspose.app/tex/ja/equation-editor", wrong: "LaTex"}  # capitalization only

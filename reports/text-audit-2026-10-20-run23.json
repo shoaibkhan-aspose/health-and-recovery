@@ -1,7 +1,7 @@
 {
   "tenant": "aspose.app",
   "auditor": "text-audit",
-  "run_id": 21,
+  "run_id": 23,
   "params": {
     "hosts": [
       "about.aspose.app",
@@ -34,7 +34,7 @@
     "completion_tokens": 0,
     "cache_hits": 605
   },
-  "ignored": 14,
+  "ignored": 15,
   "summary": {
     "about.aspose.app": {
       "checked": 11,
@@ -63,11 +63,11 @@
     },
     "products.aspose.app": {
       "checked": 544,
-      "pages_with_issues": 32,
+      "pages_with_issues": 31,
       "issues": {
         "text_leftover": 15,
         "text_typo": 17,
-        "text_topic_mismatch": 11
+        "text_topic_mismatch": 10
       }
     },
     "purchase.aspose.app": {
@@ -566,41 +566,6 @@
       "id": "onpage-0012",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
-      "template": "page:total",
-      "dimension": "onpage",
-      "check": "text_topic_mismatch",
-      "type": "incorrect",
-      "title": "Title or description is about a different product (/total/)",
-      "evidence": {
-        "urls": [
-          "https://products.aspose.app/total/compress/tga"
-        ],
-        "observed": "1 of 18 checked pages: /total/compress/tga meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'",
-        "expected": "Title and meta description describe the page's own product, like its H1",
-        "locations": [
-          {
-            "role": "page",
-            "url": "https://products.aspose.app/total/compress/tga",
-            "note": "meta description: 'PDF, Excel, PowerPoint and Word files' → 'TGA files'"
-          }
-        ]
-      },
-      "affected_pages": 1,
-      "impact": {
-        "clicks_28d": 0,
-        "impressions_28d": 0,
-        "score": 0
-      },
-      "effort": "S",
-      "fix_tier": 1,
-      "fix_channel": "git-pr",
-      "status": "open",
-      "detected_at": "2026-10-20"
-    },
-    {
-      "id": "onpage-0013",
-      "tenant": "aspose.app",
-      "subdomain": "products.aspose.app",
       "template": "page:audio",
       "dimension": "onpage",
       "check": "text_typo",
@@ -633,7 +598,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0014",
+      "id": "onpage-0013",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:drawing",
@@ -668,7 +633,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0015",
+      "id": "onpage-0014",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:finance",
@@ -703,7 +668,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0016",
+      "id": "onpage-0015",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:font",
@@ -750,7 +715,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0017",
+      "id": "onpage-0016",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:ocr",
@@ -785,7 +750,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0018",
+      "id": "onpage-0017",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:omr",
@@ -820,7 +785,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0019",
+      "id": "onpage-0018",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:page",
@@ -861,7 +826,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0020",
+      "id": "onpage-0019",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:pdf",
@@ -901,7 +866,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0021",
+      "id": "onpage-0020",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:psd",
@@ -942,7 +907,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0022",
+      "id": "onpage-0021",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:pub",
@@ -983,7 +948,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0023",
+      "id": "onpage-0022",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:tex",
@@ -1018,7 +983,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0024",
+      "id": "onpage-0023",
       "tenant": "aspose.app",
       "subdomain": "releases.aspose.app",
       "template": "page",
@@ -1053,7 +1018,7 @@
       "detected_at": "2026-10-20"
     },
     {
-      "id": "onpage-0025",
+      "id": "onpage-0024",
       "tenant": "aspose.app",
       "subdomain": "websites.aspose.app",
       "template": "page",
@@ -1613,21 +1578,6 @@
           "wrong": "onlien",
           "fix": "online",
           "why": "Typo in 'online'"
-        }
-      ]
-    },
-    {
-      "url": "https://products.aspose.app/total/compress/tga",
-      "host": "products.aspose.app",
-      "section": "total",
-      "lang": null,
-      "issues": [
-        {
-          "field": "description",
-          "kind": "topic_mismatch",
-          "wrong": "PDF, Excel, PowerPoint and Word files",
-          "fix": "TGA files",
-          "why": "description lists unrelated file types"
         }
       ]
     },
