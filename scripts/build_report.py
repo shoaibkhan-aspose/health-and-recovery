@@ -56,10 +56,11 @@ SNAPSHOT_GUIDE_URL = "../../../fix-guide/"
 
 
 def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
-          guide_url: str | None = None) -> str:
+          guide_url: str | None = None, site_tenants: list[str] | None = None) -> str:
     """The report page. With guide_url, "How to fix" links go to that shared fix guide page instead of a full
-    guide table inside the report (the table stays for local pages)."""
-    data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url)
+    guide table inside the report (the table stays for local pages). With site_tenants (the published site),
+    the header offers a switch to the other tenants' reports."""
+    data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url, _tenants=site_tenants or [])
     if guide_url and report.get("_guide"):  # only the rows this report's findings link to
         used = {f.get("_guide") for f in report["findings"]}
         data["_guide"] = dict(report["_guide"], rows={k: v for k, v in report["_guide"]["rows"].items() if k in used})
@@ -330,6 +331,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/<tenant>/; "
                     "'' to leave out)")
     ap.add_argument("--out", help="output HTML path")
+    ap.add_argument("--site-tenants", help="comma-separated tenants on the published site: adds a property "
+                    "switch to the header (build_site.py passes it)")
     ap.add_argument("--guide-url", help="link to the shared fix guide page instead of including the guide table "
                     "(build_site.py passes ../fix-guide/)")
     ap.add_argument("--standalone", action="store_true",
@@ -417,7 +420,8 @@ def main(argv: list[str] | None = None) -> int:
 
     out = Path(args.out) if args.out else src.with_suffix(".html")
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url), encoding="utf-8")
+    site_tenants = args.site_tenants.split(",") if args.site_tenants else None
+    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants), encoding="utf-8")
     if args.snapshot:
         page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL)
         print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")

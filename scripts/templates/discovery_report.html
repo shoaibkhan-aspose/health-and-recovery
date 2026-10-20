@@ -31,6 +31,9 @@ h2 small { font: 500 13px var(--body); color: var(--muted) }
 .eyebrow { font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--accent) }
 .meta { color: var(--muted); font-size: 14px }
 header { display: grid; gap: 10px }
+.topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px }
+.switch { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted) }
+.switch select { font: 500 13px var(--body); padding: 3px 6px }
 section { display: grid; gap: 16px; min-width: 0 }
 .lede { max-width: 68ch; color: var(--muted) }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px }
@@ -227,7 +230,8 @@ footer a { color: var(--accent) }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Site health · Phase 1 audit</div>
+    <div class="topbar"><div class="eyebrow">Site health · Phase 1 audit</div>
+      <div class="switch" id="switch" hidden><label for="tenant-sw">Property</label><select id="tenant-sw"></select><a href="../">All reports</a></div></div>
     <h1 id="h1"></h1>
     <p class="verdict" id="verdict"></p>
     <div class="meta" id="meta"></div>
@@ -488,6 +492,14 @@ footer a { color: var(--accent) }
     const r0 = RISKS[0];
     $("verdict").innerHTML = `${graded ? `<b>${graded}.</b> ` : "No family is graded D or F. "}`
       + (r0 ? `Biggest risk: ${esc(r0.name.toLowerCase())} ${esc(riskCount(r0))}${riskTraffic(r0) ? ` (${esc(riskTraffic(r0))})` : ""}.` : "");
+  }
+
+  // property switch (published site): the same section of another tenant's report
+  const TENANTS = R._tenants || [];
+  if (TENANTS.length > 1) {
+    $("switch").hidden = false;
+    $("tenant-sw").innerHTML = TENANTS.map(t => `<option value="${esc(t)}"${t === R.tenant ? " selected" : ""}>${esc(t)}</option>`).join("");
+    $("tenant-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value)}/${location.hash}`; });
   }
 
   // host health cards (hosts without family cards)

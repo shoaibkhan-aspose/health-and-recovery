@@ -117,3 +117,12 @@ def test_report_template_ids_are_unique():
     html = (ROOT / "scripts" / "templates" / "discovery_report.html").read_text(encoding="utf-8")
     ids = Counter(re.findall(r'\bid="([^"$]+)"', html))
     assert [k for k, n in ids.items() if n > 1] == []
+
+
+def test_property_switch_only_on_the_site():
+    """Published reports list the site's tenants for the header switch; local pages and snapshots do not."""
+    from scripts.build_report import build
+
+    report = {"tenant": "a.org", "findings": []}
+    assert '"_tenants": ["a.org", "b.org"]' in build(report, [], None, site_tenants=["a.org", "b.org"])
+    assert '"_tenants": []' in build(report, [], None)

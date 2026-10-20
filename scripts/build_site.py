@@ -190,7 +190,8 @@ def build(out: Path, tenants: list[str]) -> None:
     for t in tenants:
         paths = tenant_paths(t)
         rc = build_report.main(["--tenant", t, "--findings", str(paths.findings_export), "--standalone",
-                                "--guide-url", GUIDE_URL, "--out", str(out / t / "index.html")])
+                                "--guide-url", GUIDE_URL, "--site-tenants", ",".join(tenants),
+                                "--out", str(out / t / "index.html")])
         if rc:
             raise SystemExit(f"Report for {t} failed")
         n = build_archive.build(out / t / "archive", paths.archive, t)
