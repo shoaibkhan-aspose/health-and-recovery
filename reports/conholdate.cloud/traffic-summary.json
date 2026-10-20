@@ -13,5 +13,25 @@
    "2026-04-18"
   ]
  },
- "hosts": {}
+ "hosts": {},
+ "host_totals": {
+  "blog.conholdate.cloud": {
+   "source": "gsc",
+   "current": {
+    "clicks": 1,
+    "impressions": 133,
+    "pages": 45
+   },
+   "previous": {
+    "clicks": 2,
+    "impressions": 310,
+    "pages": 54
+   },
+   "six_months_ago": {
+    "clicks": 0,
+    "impressions": 83,
+    "pages": 19
+   }
+  }
+ }
 }

@@ -509,5 +509,139 @@
     }
    }
   }
+ },
+ "host_totals": {
+  "www.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 4295
+   }
+  },
+  "products.aspose.app": {
+   "source": "gsc",
+   "current": {
+    "clicks": 1497310,
+    "impressions": 18618051,
+    "pages": 19145
+   },
+   "previous": {
+    "clicks": 1487984,
+    "impressions": 17839293,
+    "pages": 18828
+   },
+   "six_months_ago": {
+    "clicks": 1487943,
+    "impressions": 18871787,
+    "pages": 18837
+   }
+  },
+  "about.aspose.app": {
+   "source": "gsc",
+   "current": {
+    "clicks": 17,
+    "impressions": 2455,
+    "pages": 75
+   },
+   "previous": {
+    "clicks": 10,
+    "impressions": 2494,
+    "pages": 72
+   },
+   "six_months_ago": {
+    "clicks": 15,
+    "impressions": 4641,
+    "pages": 93
+   }
+  },
+  "blog.aspose.app": {
+   "source": "gsc",
+   "current": {
+    "clicks": 166,
+    "impressions": 64722,
+    "pages": 311
+   },
+   "previous": {
+    "clicks": 132,
+    "impressions": 60924,
+    "pages": 332
+   },
+   "six_months_ago": {
+    "clicks": 283,
+    "impressions": 79574,
+    "pages": 389
+   }
+  },
+  "forum.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 394
+   }
+  },
+  "websites.aspose.app": {
+   "source": "gsc",
+   "current": {
+    "clicks": 2,
+    "impressions": 791,
+    "pages": 37
+   },
+   "previous": {
+    "clicks": 3,
+    "impressions": 918,
+    "pages": 32
+   },
+   "six_months_ago": {
+    "clicks": 17,
+    "impressions": 1847,
+    "pages": 28
+   }
+  },
+  "releases.aspose.app": {
+   "source": "gsc",
+   "current": {
+    "clicks": 5,
+    "impressions": 882,
+    "pages": 85
+   },
+   "previous": {
+    "clicks": 4,
+    "impressions": 1521,
+    "pages": 86
+   },
+   "six_months_ago": {
+    "clicks": 13,
+    "impressions": 1560,
+    "pages": 60
+   }
+  },
+  "purchase.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 7647
+   }
+  },
+  "dashboard.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 3585
+   }
+  },
+  "metrics.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 60
+   }
+  },
+  "status.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 28
+   }
+  },
+  "api.products.aspose.app": {
+   "source": "ga4",
+   "current": {
+    "sessions": 75
+   }
+  }
  }
 }
