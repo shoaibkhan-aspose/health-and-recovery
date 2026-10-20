@@ -1,4 +1,4 @@
-"""Render the site health report (discovery, crawl audits, latest speed and AI audits) as one self-contained HTML page.
+"""Render the site health report (discovery, crawl audits, latest speed, AI and text checks) as one HTML page.
 
     python scripts/build_report.py                                   # newest discovery report + newest crawl audit
     python scripts/build_report.py --findings reports/findings.json  # without the store (GitHub Actions)
@@ -150,6 +150,8 @@ def runs_label(report: dict) -> str:
         runs += f", speed audit run {report['_perf']['run_id']}"
     if report.get("_ai"):
         runs += f", AI audit run {report['_ai']['run_id']}"
+    if report.get("_text"):
+        runs += f", text check run {report['_text']['run_id']}"
     return runs
 
 
@@ -167,6 +169,13 @@ def ai_summary(path: Path) -> dict:
     return {"run_id": a["run_id"], "date": run_date_of(path, "ai-audit-"), "summary": a["summary"]}
 
 
+def text_summary(path: Path) -> dict:
+    """What the page shows of a text-check run: run id, date, model, pages checked, per-host summary."""
+    a = json.loads(path.read_text(encoding="utf-8"))
+    return {"run_id": a["run_id"], "date": run_date_of(path, "text-audit-"), "model": a["params"]["model"],
+            "pages_checked": a["pages_checked"], "unchecked": len(a["unchecked"]), "summary": a["summary"]}
+
+
 def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Path = HEALTH_HISTORY) -> None:
     """Fix guide, confidence, merged root causes, systemic issues, top risks, grade summary, changes since the
     last run and the family health trend (see core/report_view.py)."""
@@ -182,6 +191,8 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
         refs.append(f"perf-audit-run{report['_perf']['run_id']}")
     if report.get("_ai"):
         refs.append(f"ai-audit-run{report['_ai']['run_id']}")
+    if report.get("_text"):
+        refs.append(f"text-audit-run{report['_text']['run_id']}")
     changes = run_changes(all_rows or findings, refs)
     titles = {f["id"]: f for f in (all_rows or findings)}
     changes["resolved"] = [{"id": i, "title": titles[i]["title"], "subdomain": titles[i]["subdomain"]}
@@ -248,6 +259,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--audit-notes", help="text file, one crawl-audit takeaway per line")
     ap.add_argument("--perf", help="speed-audit JSON (default: newest perf-audit run in reports/; '' to leave out)")
     ap.add_argument("--ai", help="AI-audit JSON (default: newest ai-audit run in reports/; '' to leave out)")
+    ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/; '' to leave out)")
     ap.add_argument("--out", help="output HTML path")
     ap.add_argument("--standalone", action="store_true",
                     help="add doctype, charset, viewport and noindex (for GitHub Pages: --out docs/index.html)")
@@ -283,6 +295,9 @@ def main(argv: list[str] | None = None) -> int:
     ai_src = Path(args.ai) if args.ai else newest("ai-audit-*-run*.json") if args.ai is None else None
     if ai_src:
         report["_ai"] = ai_summary(ai_src)
+    text_src = Path(args.text) if args.text else newest("text-audit-*-run*.json") if args.text is None else None
+    if text_src:
+        report["_text"] = text_summary(text_src)
     if args.findings:
         rows = json.loads(Path(args.findings).read_text(encoding="utf-8"))
         all_rows = rows
@@ -293,6 +308,8 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "perf-audit"]
         if not ai_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "ai-audit"]
+        if not text_src:
+            report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
     elif Path(args.store).is_file():
         store = FindingsStore(args.store)
         run_ref = f"discovery-run{report['run_id']}"
@@ -309,6 +326,8 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "perf-audit"]
         if not ai_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "ai-audit"]
+        if not text_src:
+            report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
     else:
         print(f"No findings store at {args.store}; using the run's own findings.", file=sys.stderr)
     add_families(report)
@@ -323,7 +342,8 @@ def main(argv: list[str] | None = None) -> int:
         record_health(report)
     print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {src.name}"
           + (f" and {len(audit_srcs)} crawl-audit runs (newest {audit_src.name})" if audit_src else "")
-          + (f" and {perf_src.name}" if perf_src else "") + (f" and {ai_src.name}" if ai_src else ""))
+          + (f" and {perf_src.name}" if perf_src else "") + (f" and {ai_src.name}" if ai_src else "")
+          + (f" and {text_src.name}" if text_src else ""))
     return 0
 
 

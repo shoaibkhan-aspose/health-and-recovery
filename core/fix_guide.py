@@ -246,6 +246,29 @@ _ROWS = [
      "Dilutes the main topic signal.",
      "Keep one H1; turn the others into H2.",
      "Next crawl audit has no finding."),
+    # --- spelling and wording (text check, LLM) ---
+    ("text_typo", "Spelling & wording", "Typos in titles, headings or descriptions",
+     "A title, H1 or meta description has a misspelled word or a word typed twice. Found by an LLM "
+     "proofreading each page in its own language; every finding quotes the page.",
+     "Titles and descriptions are what searchers and AI answers show: typos look careless and cost some "
+     "clicks and trust, and a misspelled key word may not match the query.",
+     "Correct the text where it is written (page front matter, template or translation file). The finding "
+     "lists the wrong and the corrected words per page.",
+     "The page shows the corrected text; next text check has no finding."),
+    ("text_leftover", "Spelling & wording", "Placeholder or garbled words in titles or headings",
+     "A title, H1 or meta description shows a template key ('CADWatermarkTitle2'), a test word ('test'), or "
+     "an untranslated or garbled word that breaks the sentence in its language.",
+     "The snippet in search and AI answers tells people nothing, or reads as broken: fewer clicks, less trust.",
+     "Fill in the missing text or translation where the key is defined (resource or translation file), and "
+     "remove test words.",
+     "The page shows finished text; next text check has no finding."),
+    ("text_topic_mismatch", "Spelling & wording", "Title or description is about a different product",
+     "The title or meta description names another product or file type than the page itself (often copied "
+     "from a sibling page), while the H1 and URL are right.",
+     "Search engines and AI answers describe the page as something it is not: wrong queries, fewer clicks "
+     "from the right ones.",
+     "Write a title and description for the page's own product, matching its H1.",
+     "The page's title and description match its H1; next text check has no finding."),
     # --- languages (page HTML) ---
     ("hreflang_missing", "Languages", "No language links in the page",
      "A page with language versions has no hreflang tags in its HTML.",
@@ -415,6 +438,7 @@ def _severities() -> dict[str, str]:
     from core.audit.ai import CHECKS as AI_CHECKS
     from core.audit.crawl import CHECKS
     from core.audit.perf import CHECKS as PERF_CHECKS
+    from core.audit.text import CHECKS as TEXT_CHECKS
     from core.discovery.run import SITEMAP_CHECKS
 
     out = dict(_DISCOVERY_ONLY)
@@ -423,6 +447,7 @@ def _severities() -> dict[str, str]:
     out.update({k: v[1] for k, v in CHECKS.items()})
     out.update({k: v[1] for k, v in PERF_CHECKS.items()})
     out.update({k: v[1] for k, v in AI_CHECKS.items()})
+    out.update({k: v[1] for k, v in TEXT_CHECKS.items()})
     return out
 
 

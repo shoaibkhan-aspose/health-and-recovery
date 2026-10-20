@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT))
 from core.audit.ai import CHECKS as AI_CHECKS  # noqa: E402
 from core.audit.crawl import CHECKS  # noqa: E402
 from core.audit.perf import CHECKS as PERF_CHECKS  # noqa: E402
+from core.audit.text import CHECKS as TEXT_CHECKS  # noqa: E402
 from core.discovery.run import SITEMAP_CHECKS  # noqa: E402
 from core.fix_guide import GUIDE, guide_key  # noqa: E402
 
@@ -21,6 +22,7 @@ def test_every_check_has_a_guide_row():
     missing = [c for c in CHECKS if guide_key(c, "crawl-audit") is None]
     missing += [c for c in PERF_CHECKS if guide_key(c, "perf-audit") is None]
     missing += [c for c in AI_CHECKS if guide_key(c, "ai-audit") is None]
+    missing += [c for c in TEXT_CHECKS if guide_key(c, "text-audit") is None]
     missing += [c for c in discovery if guide_key(c, "discovery") is None]
     assert not missing, missing
     assert guide_key("redirected", "discovery") == "sitemap_redirected"

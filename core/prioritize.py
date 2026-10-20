@@ -8,7 +8,7 @@ GA4 organic sessions per host (counted as clicks). What share of that traffic a 
 - discovery:   the section's (or host's) traffic x affected_pages / URLs in that section. Checks that cover a
                whole host or section (robots.txt, no working sitemap) with no page count take all of it; a
                failed sitemap file takes the URLs Search Console discovered from it (tenant snapshot), else 0
-- seed:        the exact pages in `evidence.urls`
+- seed, text check: the exact pages in `evidence.urls`
 
 score = min(100, 20 * log10(1 + click-equivalents)) * severity / effort, with impressions counted as
 IMPRESSION_WEIGHT click-equivalents each. 100k click-equivalents saturate the traffic factor.
@@ -35,6 +35,8 @@ EFFORT = {"S": 1.0, "M": 1.5, "L": 2.5}
 WHOLE_SCOPE_CHECKS = {"robots_missing", "robots_html", "robots_no_sitemap", "robots_unreachable",
                       "host_no_sitemap", "section_no_sitemap", "origin_cwv_poor", "origin_cwv_needs_work",
                       "ai_bot_blocked", "ai_bot_firewalled", "llms_txt_missing", "llms_txt_invalid"}
+# Sources whose findings name every affected page: traffic of exactly those pages.
+EXACT_PAGE_SOURCES = {"seed", "text-audit"}
 IMPRESSION_WEIGHT = 0.01  # ~1% CTR: 100 impressions count like one click
 TRAFFIC_SCALE = 20  # score points per decade of click-equivalents
 LOST_WEIGHT = 0.5
@@ -125,7 +127,7 @@ def finding_traffic(f: dict, idx: TrafficIndex, section_urls: dict | None = None
         return {"clicks_28d": round(sessions * share), "impressions_28d": None, "source": "ga4-host",
                 "share": round(share, 3)}
 
-    if source_kind == "seed":
+    if source_kind in EXACT_PAGE_SOURCES:
         clicks = impr = 0.0
         for u in f["evidence"]["urls"]:
             c, i = idx.pages.get(page_key(u), (0, 0))

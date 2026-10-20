@@ -43,6 +43,7 @@ GROUPS = {
     **dict.fromkeys(("lab_load_failed",), "page errors"),  # same root cause as HTTP errors
     **dict.fromkeys(("content_needs_js", "no_structured_data", "llms_txt_missing", "llms_txt_invalid",
                      "ai_bot_blocked", "ai_bot_firewalled"), "ai"),
+    **dict.fromkeys(("text_typo", "text_leftover", "text_topic_mismatch"), "wording"),
 }
 # the one-glance status line on a card: label -> groups it summarizes
 STATUS = {"Sitemap": ("sitemap",), "Pages": ("page errors",), "Canonical": ("canonical",), "hreflang": ("hreflang",)}
