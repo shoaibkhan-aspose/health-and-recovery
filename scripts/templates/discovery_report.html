@@ -34,6 +34,9 @@ header { display: grid; gap: 10px }
 .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px }
 .switch { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted) }
 .switch select { font: 500 13px var(--body); padding: 3px 6px }
+#host-sw-wrap { display: inline-flex; align-items: center; gap: 8px }
+#host-sw-wrap[hidden] { display: none }
+.partof { margin: -4px 0 0; color: var(--muted) } .partof a { color: var(--accent) }
 section { display: grid; gap: 16px; min-width: 0 }
 .lede { max-width: 68ch; color: var(--muted) }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px }
@@ -231,8 +234,9 @@ footer a { color: var(--accent) }
 <div class="wrap">
   <header>
     <div class="topbar"><div class="eyebrow">Site health · Phase 1 audit</div>
-      <div class="switch" id="switch" hidden><label for="tenant-sw">Property</label><select id="tenant-sw"></select><a href="../">All reports</a></div></div>
+      <div class="switch" id="switch" hidden><label for="tenant-sw">Property</label><select id="tenant-sw"></select><span id="host-sw-wrap" hidden><label for="host-sw">Host</label><select id="host-sw"></select></span><a href="../">All reports</a></div></div>
     <h1 id="h1"></h1>
+    <p class="partof" id="partof" hidden></p>
     <p class="verdict" id="verdict"></p>
     <div class="meta" id="meta"></div>
   </header>
@@ -347,7 +351,7 @@ footer a { color: var(--accent) }
       <div id="method-health"><h3>Family and host health (A–F)</h3><p>Scored per product family and per host. A host with families gets its families' health weighted by search clicks, minus the points of host-wide problems that belong to no family. Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family or host it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.</p></div>
       <div id="method-score"><h3>Priority score (0–100)</h3><p>Search Console clicks on the affected pages over 28 days (impressions count 1% of a click), on a log scale, × severity (broken 1, incorrect 0.7, not optimized 0.4, improvable 0.2) ÷ effort (S 1, M 1.5, L 2.5). If the same pages lost traffic since six months ago, half of that loss counts when it is larger than today's traffic. Hosts without Search Console use GA4 organic sessions.</p></div>
       <div><h3>Samples and estimates</h3><p>"~N pages affected" applies each template's failing share of the sample to its number of URLs in the sitemaps. Confidence labels say how solid that is; findings marked <b>to confirm</b> rest on one page.</p></div>
-      <div><h3>More</h3><p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>. Earlier reports: <a href="archive/">archive</a>.</p></div>
+      <div><h3>More</h3><p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>. Earlier reports: <a href="archive/" id="more-archive">archive</a>.</p></div>
     </div>
     <h3>Glossary</h3>
     <dl class="gloss">
@@ -441,7 +445,13 @@ footer a { color: var(--accent) }
   const scoreBadge = f => `<span class="score ${sc(f) >= 60 ? "hi" : sc(f) >= 35 ? "mid" : ""}" title="Priority score">${sc(f)}</span>`;
 
   // header
-  $("h1").textContent = R.tenant + " site health";
+  $("h1").textContent = (R._page_host || R.tenant) + " site health";
+  if (R._page_host) {
+    $("partof").hidden = false;
+    $("partof").innerHTML = `One host of the <a href="../${esc(R.tenant)}/">${esc(R.tenant)}</a> report: its own grade, findings and reference rows, scored as on the full report.`;
+  }
+  const ARCHIVE = R._page_host ? `../${R.tenant}/archive/` : "archive/";
+  $("more-archive").href = ARCHIVE;
   const date = (R._run_date || "");
   $("meta").textContent = `Discovery run ${R.run_id}${date ? " · " + day(date) : ""} · ${fmt(R.sitemaps_fetched)} sitemaps · ${fmt(R.requests)} requests · ${Math.round(R.duration_s / 60)} min`
     + (A ? ` — Crawl audit ${(A.runs || []).length > 1 ? "runs " + A.runs.map(r => r.run_id).join(", ") : "run " + A.run_id}${A.date ? " · " + day(A.date) : ""} · ${fmt(A.pages)} pages` : "");
@@ -495,11 +505,16 @@ footer a { color: var(--accent) }
   }
 
   // property switch (published site): the same section of another tenant's report
-  const TENANTS = R._tenants || [];
-  if (TENANTS.length > 1) {
+  const TENANTS = R._tenants || [], SITE_HOSTS = R._site_hosts || [];
+  if (TENANTS.length > 1 || SITE_HOSTS.length) {
     $("switch").hidden = false;
     $("tenant-sw").innerHTML = TENANTS.map(t => `<option value="${esc(t)}"${t === R.tenant ? " selected" : ""}>${esc(t)}</option>`).join("");
     $("tenant-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value)}/${location.hash}`; });
+  }
+  if (SITE_HOSTS.length) {  // host pages sit next to the tenant reports: ../<host>/
+    $("host-sw-wrap").hidden = false;
+    $("host-sw").innerHTML = `<option value="">All hosts</option>` + SITE_HOSTS.map(h => `<option value="${esc(h)}"${h === R._page_host ? " selected" : ""}>${esc(h)}</option>`).join("");
+    $("host-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value || R.tenant)}/${location.hash}`; });
   }
 
   // host health cards (hosts without family cards)
@@ -520,7 +535,8 @@ footer a { color: var(--accent) }
       const ru = c.rollup;
       const tip = ru ? `Health ${c.health}/100 = ${ru.families} families ${ru.weighted} (average${ru.by_clicks ? " weighted by clicks" : ""}) − ${ru.host_wide} for host-wide problems${why(c) ? ": " + why(c) : ""}`
         : `Health ${c.health}/100${why(c) ? ". Points lost: " + why(c) : ""}${c.cosmetic_capped ? " (cosmetic capped at 20)" : ""}`;
-      return `<tr id="host-${esc(c.host)}"><td><code>${esc(c.host)}</code>${ru ? `<br><a class="dim" href="#families">${ru.families} families · lowest /${esc(ru.lowest.family)}/ ${esc(ru.lowest.grade)} ${ru.lowest.health}</a>` : ""}</td>
+      const name = SITE_HOSTS.includes(c.host) && c.host !== R._page_host ? `<a href="../${esc(c.host)}/"><code>${esc(c.host)}</code></a>` : `<code>${esc(c.host)}</code>`;
+      return `<tr id="host-${esc(c.host)}"><td>${name}${ru ? `<br><a class="dim" href="#families">${ru.families} families · lowest /${esc(ru.lowest.family)}/ ${esc(ru.lowest.grade)} ${ru.lowest.health}</a>` : ""}</td>
         <td class="g-${c.grade}"><span class="gradebox" title="${esc(tip)}"><b>${c.grade}</b><span>${c.health}</span></span></td>
         <td><div class="chips">${chips || '<span class="chip ok">none</span>'}${total(c) ? `<button type="button" class="link" data-host="${esc(c.host)}">See ${total(c)} →</button>` : ""}</div></td>
         <td class="tr">${trafficLine(c.traffic || {})}</td>
@@ -973,6 +989,6 @@ footer a { color: var(--accent) }
     $("gsc-st").textContent = "· no snapshot";
   }
 
-  $("foot").innerHTML = `<a href="#method">How this audit works</a> · <a href="archive/">Previous versions</a><br>` + esc(`Generated from discovery run ${R.run_id}${A ? `, crawl audit run ${A.run_id}` : ""}${R._perf ? `, speed audit run ${R._perf.run_id}` : ""}${R._ai ? `, AI audit run ${R._ai.run_id}` : ""}${R._text ? `, text check run ${R._text.run_id}` : ""} and the findings store. Read-only audit: nothing on any site was changed. Each finding lists URLs anyone can open to re-check it. For discovery findings "pages" counts URLs in the affected sitemaps; for crawl audit findings it is an estimate from the sample. Impact from Search Console and GA4 is added in the prioritization step.`);
+  $("foot").innerHTML = `<a href="#method">How this audit works</a> · <a href="${ARCHIVE}">Previous versions</a><br>` + esc(`Generated from discovery run ${R.run_id}${A ? `, crawl audit run ${A.run_id}` : ""}${R._perf ? `, speed audit run ${R._perf.run_id}` : ""}${R._ai ? `, AI audit run ${R._ai.run_id}` : ""}${R._text ? `, text check run ${R._text.run_id}` : ""} and the findings store. Read-only audit: nothing on any site was changed. Each finding lists URLs anyone can open to re-check it. For discovery findings "pages" counts URLs in the affected sitemaps; for crawl audit findings it is an estimate from the sample. Impact from Search Console and GA4 is added in the prioritization step.`);
 })();
 </script>

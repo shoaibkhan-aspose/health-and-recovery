@@ -20,6 +20,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -56,17 +57,21 @@ SNAPSHOT_GUIDE_URL = "../../../fix-guide/"
 
 
 def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
-          guide_url: str | None = None, site_tenants: list[str] | None = None) -> str:
+          guide_url: str | None = None, site_tenants: list[str] | None = None,
+          site_hosts: list[str] | None = None) -> str:
     """The report page. With guide_url, "How to fix" links go to that shared fix guide page instead of a full
     guide table inside the report (the table stays for local pages). With site_tenants (the published site),
-    the header offers a switch to the other tenants' reports."""
-    data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url, _tenants=site_tenants or [])
+    the header offers a switch to the other tenants' reports, and with site_hosts to the tenant's host pages
+    (published at the site root next to the tenant reports)."""
+    data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url, _tenants=site_tenants or [],
+                _site_hosts=site_hosts or [])
     if guide_url and report.get("_guide"):  # only the rows this report's findings link to
         used = {f.get("_guide") for f in report["findings"]}
         data["_guide"] = dict(report["_guide"], rows={k: v for k, v in report["_guide"]["rows"].items() if k in used})
     payload = json.dumps(data, default=str).replace("</", "<\\/")
     template = TEMPLATE.read_text(encoding="utf-8")
-    page = template.replace("__TITLE__", f"{report['tenant']} Site Health").replace("__DATA__", payload)
+    title = f"{report.get('_page_host') or report['tenant']} Site Health"
+    page = template.replace("__TITLE__", title).replace("__DATA__", payload)
     return STANDALONE_HEAD + page if standalone else page
 
 
@@ -140,12 +145,14 @@ def audit_summary(paths: list[Path], notes: list[str]) -> dict:
 
 def add_families(report: dict, summary_path: Path) -> None:
     """Family scorecards per sectioned host (from reports/<tenant>/traffic-summary.json, written by prioritize.py), and
-    each finding's family for the report's Family filter."""
+    each finding's family for the report's Family filter. A host page (_page_host) keeps only its own host."""
     if not summary_path.is_file():
         return
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     report["_families"] = {"windows": summary["windows"], "hosts": {}}
     for host, traffic in summary["hosts"].items():
+        if report.get("_page_host") and host != report["_page_host"]:
+            continue
         families = list(traffic)
         report["_families"]["hosts"][host] = family_scorecards(
             report["findings"], host, families, (report.get("sections") or {}).get(host) or {}, traffic)
@@ -193,6 +200,30 @@ def add_hosts(report: dict, summary_path: Path) -> None:
         cards.append(card)
     if cards:
         report["_hosts"] = cards
+
+
+def focus_host(report: dict, host: str, all_rows: list[dict] | None, tenant) -> None:
+    """Turn the tenant report into one host's page: only that host's findings, changes, reference rows and (for a
+    host with families) family cards. Scores are the same as on the tenant page."""
+    drop_hosts(report, {host})
+    report["_page_host"] = host
+    audit = report.get("_audit")
+    if audit:  # pages audited on this host, not across the tenant
+        audit["pages"] = ((audit.get("summary") or {}).get(host) or {}).get("pages") or 0
+    report["findings"] = [f for f in report["findings"] if f["subdomain"] == host]
+    if all_rows is not None:
+        all_rows[:] = [f for f in all_rows if f["subdomain"] == host]
+    for key in ("sections", "sitemaps"):
+        if isinstance(report.get(key), dict):
+            report[key] = {h: v for h, v in report[key].items() if h == host}
+    snapshot = (tenant.raw.get("gsc_sitemaps_snapshot") or {}).get("property") or ""
+    if urlsplit(snapshot).netloc != host:
+        report["gsc_comparison"] = []
+    changes = report.get("_changes")
+    if isinstance(changes, dict):
+        ids = {f["id"] for f in report["findings"]}
+        changes["new"] = [i for i in changes.get("new") or [] if i in ids]
+        changes["resolved"] = [f for f in changes.get("resolved") or [] if f.get("subdomain") == host]
 
 
 def drop_hosts(report: dict, keep: set) -> list[str]:
@@ -331,6 +362,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/<tenant>/; "
                     "'' to leave out)")
     ap.add_argument("--out", help="output HTML path")
+    ap.add_argument("--host", help="one host's page: only that host's findings and rows (scores as on the "
+                    "tenant page)")
+    ap.add_argument("--site-hosts", help="comma-separated hosts with their own page on the published site: adds a "
+                    "host switch to the header (build_site.py passes it)")
     ap.add_argument("--site-tenants", help="comma-separated tenants on the published site: adds a property "
                     "switch to the header (build_site.py passes it)")
     ap.add_argument("--guide-url", help="link to the shared fix guide page instead of including the guide table "
@@ -345,6 +380,9 @@ def main(argv: list[str] | None = None) -> int:
                     "record the family health in reports/<tenant>/health-history.json (do this after every full run)")
     args = ap.parse_args(argv)
     paths: TenantPaths = tenant_paths(args.tenant)
+    if args.host and args.snapshot:
+        print("Snapshots are per tenant; build the tenant report with --snapshot, not a host page.", file=sys.stderr)
+        return 2
     folder = paths.reports
 
     if args.report:
@@ -408,11 +446,17 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(f"No findings store at {store_path}; using the run's own findings.", file=sys.stderr)
     try:
-        dropped = drop_hosts(report, set(load_tenant(args.tenant).host_names))
+        tenant = load_tenant(args.tenant)
     except FileNotFoundError:
-        dropped = []
+        tenant = None
+    dropped = drop_hosts(report, set(tenant.host_names)) if tenant else []
     if dropped:
         print(f"Left out hosts no longer in tenants/{args.tenant}.yaml: {', '.join(dropped)}", file=sys.stderr)
+    if args.host:
+        if not tenant or args.host not in tenant.host_names:
+            print(f"{args.host} is not a host of tenant {args.tenant}", file=sys.stderr)
+            return 2
+        focus_host(report, args.host, all_rows, tenant)
     add_families(report, paths.traffic_summary)
     add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)
@@ -421,7 +465,9 @@ def main(argv: list[str] | None = None) -> int:
     out = Path(args.out) if args.out else src.with_suffix(".html")
     out.parent.mkdir(parents=True, exist_ok=True)
     site_tenants = args.site_tenants.split(",") if args.site_tenants else None
-    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants), encoding="utf-8")
+    site_hosts = args.site_hosts.split(",") if args.site_hosts else None
+    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants, site_hosts),
+                   encoding="utf-8")
     if args.snapshot:
         page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL)
         print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")

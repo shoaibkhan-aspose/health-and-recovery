@@ -126,3 +126,35 @@ def test_property_switch_only_on_the_site():
     report = {"tenant": "a.org", "findings": []}
     assert '"_tenants": ["a.org", "b.org"]' in build(report, [], None, site_tenants=["a.org", "b.org"])
     assert '"_tenants": []' in build(report, [], None)
+
+
+def test_host_page_keeps_only_its_host(tmp_path):
+    """A host page shows one host's findings, reference rows and crawl count; the scores stay as on the tenant
+    page."""
+    from types import SimpleNamespace
+
+    from scripts.build_report import focus_host
+
+    f = lambda i, h: {"id": i, "subdomain": h, "status": "open"}  # noqa: E731
+    report = {"hosts": {"a.org": {}, "b.org": {}}, "findings": [f("x-1", "a.org"), f("x-2", "b.org")],
+              "sections": {"a.org": {}, "b.org": {}}, "sitemaps": {"b.org": {}}, "gsc_comparison": [{"path": "/s"}],
+              "_audit": {"pages": 30, "summary": {"a.org": {"pages": 21}, "b.org": {"pages": 9}}},
+              "_changes": {"new": ["x-1", "x-2"], "resolved": [f("x-3", "b.org")]}}
+    rows = list(report["findings"])
+    tenant = SimpleNamespace(raw={"gsc_sitemaps_snapshot": {"property": "https://b.org/"}})
+    focus_host(report, "a.org", rows, tenant)
+    assert [x["id"] for x in report["findings"]] == ["x-1"] and [x["id"] for x in rows] == ["x-1"]
+    assert list(report["hosts"]) == ["a.org"] and report["sitemaps"] == {} and report["gsc_comparison"] == []
+    assert report["_audit"]["pages"] == 21 and report["_changes"] == {"new": ["x-1"], "resolved": []}
+    assert report["_page_host"] == "a.org"
+
+
+def test_site_hosts_must_not_clash(monkeypatch):
+    """Flat URLs: a host may not share its name with a tenant or a site folder."""
+    from types import SimpleNamespace
+
+    from scripts import build_site
+
+    monkeypatch.setattr(build_site, "load_tenant", lambda t: SimpleNamespace(host_names=["fix-guide"]))
+    with pytest.raises(SystemExit, match="clashes"):
+        build_site.site_hosts(["a.org"])

@@ -3,7 +3,8 @@
     python scripts/build_site.py --out site
 
 Every tenant with a committed findings export (reports/<tenant>/findings.json) gets its latest report at
-<out>/<tenant>/ and its archive at <out>/<tenant>/archive/. The fix guide (every check: what it means, impact,
+<out>/<tenant>/ and its archive at <out>/<tenant>/archive/; each of its hosts a page at <out>/<host>/ (the
+tenant report filtered to that host). The fix guide (every check: what it means, impact,
 fix, verify) is one shared page at <out>/fix-guide/ that the reports link to. Renders only committed files:
 no store, no Google calls.
 The site once served the first tenant's report at the root; LEGACY_TENANT keeps those links working
@@ -180,20 +181,39 @@ def tenant_item(tenant: str) -> str:
     open_n = sum(1 for f in rows if f["status"] in ("open", "unverified"))
     hosts = load_tenant(tenant).host_names
     name = html.escape(tenant)
-    host_text = ", ".join(hosts) if len(hosts) <= 4 else f"{len(hosts)} hosts"
-    return (f'    <li><a href="{name}/"><b>{name}</b></a><span>{html.escape(host_text)} · {open_n:,} open findings · '
-            f'<a href="{name}/archive/">previous versions</a></span></li>')
+    links = " · ".join(f'<a href="{html.escape(h)}/">{html.escape(h)}</a>' for h in hosts)
+    return (f'    <li><a href="{name}/"><b>{name}</b></a><span>{open_n:,} open findings · '
+            f'<a href="{name}/archive/">previous versions</a></span><span>Hosts: {links}</span></li>')
+
+
+RESERVED = {"fix-guide", "archive"}  # site folders that are neither tenants nor hosts
+
+
+def site_hosts(tenants: list[str]) -> dict[str, list[str]]:
+    """Each tenant's hosts. Host pages sit at the site root next to the tenant reports (SK chose flat URLs), so a
+    host may not share its name with a tenant or a site folder."""
+    hosts = {t: load_tenant(t).host_names for t in tenants}
+    taken = set(tenants) | RESERVED
+    for t, hs in hosts.items():
+        for h in hs:
+            if h in taken:
+                raise SystemExit(f"Host {h} of {t} clashes with a tenant or site folder of the same name")
+            taken.add(h)
+    return hosts
 
 
 def build(out: Path, tenants: list[str]) -> None:
     out.mkdir(parents=True, exist_ok=True)
+    hosts = site_hosts(tenants)
     for t in tenants:
         paths = tenant_paths(t)
-        rc = build_report.main(["--tenant", t, "--findings", str(paths.findings_export), "--standalone",
-                                "--guide-url", GUIDE_URL, "--site-tenants", ",".join(tenants),
-                                "--out", str(out / t / "index.html")])
-        if rc:
+        common = ["--tenant", t, "--findings", str(paths.findings_export), "--standalone", "--guide-url", GUIDE_URL,
+                  "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
+        if build_report.main(common + ["--out", str(out / t / "index.html")]):
             raise SystemExit(f"Report for {t} failed")
+        for h in hosts[t]:  # one page per host: the tenant report filtered to that host
+            if build_report.main(common + ["--host", h, "--out", str(out / h / "index.html")]):
+                raise SystemExit(f"Host page {h} failed")
         n = build_archive.build(out / t / "archive", paths.archive, t)
         print(f"Archive: {n} snapshots for {t}")
     (out / "fix-guide").mkdir(exist_ok=True)
