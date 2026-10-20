@@ -46,5 +46,11 @@
     "date": "2026-10-20 (3)",
     "label": "Host health cards and the shared fix guide, before the host table",
     "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 23"
+  },
+  {
+    "file": "2026-10-20-4.html",
+    "date": "2026-10-20 (4)",
+    "label": "Host health table, before the products.aspose.app row",
+    "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 23"
   }
 ]
