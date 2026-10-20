@@ -87,7 +87,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
   <header>
     <div class="eyebrow">Site Health &amp; Recovery · Phase 1, audit only</div>
     <h1>Site Health Architecture</h1>
-    <p class="lede">How the audit for aspose.app runs today: six read-only steps on the Mac collect sitemaps, page checks, AI crawler access, page speed, an LLM proofread of the page text and search traffic into one findings store, and every push to GitHub rebuilds the published report. Dashed parts are planned and not built yet.</p>
+    <p class="lede">How the audit runs today, per tenant (aspose.app, conholdate.cloud): six read-only steps on the Mac collect sitemaps, page checks, AI crawler access, page speed, an LLM proofread of the page text and search traffic into one findings store per tenant, and every push to GitHub rebuilds the published reports. Dashed parts are planned and not built yet.</p>
   </header>
 
   <figure>
@@ -129,7 +129,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
 
         <rect class="d-store" x="16" y="578" width="176" height="62" rx="6"/>
         <text class="d-t" x="28" y="600">Tenant config</text>
-        <text class="d-s" x="28" y="618">aspose.app.yaml</text>
+        <text class="d-s" x="28" y="618">&lt;tenant&gt;.yaml</text>
         <text class="d-s" x="28" y="633">hosts, families, rules</text>
 
         <rect class="d-store" x="16" y="660" width="176" height="56" rx="6"/>
@@ -186,7 +186,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
         <text class="d-s" x="658" y="488">host/template</text>
 
         <rect class="d-store" x="644" y="520" width="220" height="190" rx="6"/>
-        <text class="d-t" x="658" y="542">reports/ · in git</text>
+        <text class="d-t" x="658" y="542">reports/&lt;tenant&gt;/ · in git</text>
         <text class="d-s" x="658" y="562">discovery-run8.json</text>
         <text class="d-s" x="658" y="578">crawl-audit-run15.json</text>
         <text class="d-s" x="658" y="594">ai-audit-run16.json</text>
@@ -218,11 +218,11 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
 
         <rect class="d-box" x="976" y="584" width="300" height="60" rx="6"/>
         <text class="d-t" x="990" y="607">GitHub Actions</text>
-        <text class="d-s" x="990" y="626">build_report.py + archive</text>
+        <text class="d-s" x="990" y="626">build_site.py · per tenant</text>
 
         <rect class="d-key" x="976" y="676" width="300" height="56" rx="8"/>
-        <text class="d-t" x="990" y="699">Site health report</text>
-        <text class="d-s" x="990" y="718">GitHub Pages · noindex, nofollow</text>
+        <text class="d-t" x="990" y="699">Site health reports</text>
+        <text class="d-s" x="990" y="718">GitHub Pages · /&lt;tenant&gt;/ · noindex</text>
 
         <!-- arrows: sources to steps -->
         <line class="d-a" x1="192" y1="88" x2="314" y2="88" marker-end="url(#ah)"/>
@@ -291,7 +291,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
         <text class="d-lab" x="920" y="302" text-anchor="middle">approved fixes</text>
       </svg>
     </div>
-    <figcaption>Everything left of the findings store runs on the Mac with read-only access: sites are fetched with GET only (PageSpeed Insights loads each sampled page once from Google's servers), and Google data comes through read-only scopes. The internal LLM receives only the public title, H1 and meta description of pages the crawl audit already fetched. The findings store is the single place every step reports to. Its export, with the run files, is committed to <code>reports/</code>, which is all the GitHub build needs. Writing to any site happens only in Phase 2, through separate fixer servers.</figcaption>
+    <figcaption>Everything left of the findings store runs on the Mac with read-only access: sites are fetched with GET only (PageSpeed Insights loads each sampled page once from Google's servers), and Google data comes through read-only scopes. The internal LLM receives only the public title, H1 and meta description of pages the crawl audit already fetched. The findings store is the single place every step reports to. Its export, with the run files, is committed to <code>reports/&lt;tenant&gt;/</code>, which is all the GitHub build needs. Writing to any site happens only in Phase 2, through separate fixer servers.</figcaption>
     <div class="legend">
       <span><i class="sw"></i>Step or service</span>
       <span><i class="sw store"></i>Data or config</span>
@@ -306,14 +306,14 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
       <table>
         <thead><tr><th></th><th>Command</th><th>Reads</th><th>Writes</th><th>Time</th></tr></thead>
         <tbody>
-          <tr><td class="step">1</td><td><code>python scripts/discover.py</code></td><td>robots.txt and every sitemap on the 12 hosts</td><td>URL inventory (<code>data/inventory.sqlite</code>), sitemap findings, <code>reports/discovery-runN.json</code></td><td>15 min</td></tr>
-          <tr><td class="step">2</td><td><code>python scripts/audit_crawl.py</code></td><td>the inventory (2 English + 2 translated pages per template), each host's homepage, family hubs; top Search Console pages for families with no sitemap</td><td>page checks (<code>data/audit.sqlite</code>), page findings with evidence locations, <code>reports/crawl-audit-runN.json</code></td><td>25 min</td></tr>
-          <tr><td class="step">3</td><td><code>python scripts/audit_ai.py</code></td><td>each host's robots.txt (rules for AI search and training crawlers), its homepage as each AI crawler, /llms.txt per host and per product family</td><td>AI access findings (AI search crawlers blocked by robots.txt or the firewall, missing or broken llms.txt), <code>reports/ai-audit-runN.json</code></td><td>5 min</td></tr>
-          <tr><td class="step">4</td><td><code>python scripts/audit_perf.py</code></td><td>PageSpeed Insights for the 2 most-visited pages of each crawl-audit template (mobile): Core Web Vitals from real Chrome users (28 days, 75th percentile) and a Lighthouse lab run</td><td>speed findings (real-user LCP, INP, CLS, TTFB; pages that do not load or paint nothing; whole-host Core Web Vitals), <code>reports/perf-audit-runN.json</code></td><td>40 min</td></tr>
-          <tr><td class="step">5</td><td><code>python scripts/audit_text.py</code></td><td>title, H1 and meta description of every crawl-audit page (no requests to the sites), proofread by the internal LLM in each page's language; answers cached per page text</td><td>wording findings (typos; placeholder or garbled words; a title about a different product), each quoting the page, <code>reports/text-audit-runN.json</code></td><td>5 min</td></tr>
-          <tr><td class="step">6</td><td><code>python scripts/prioritize.py</code></td><td>Search Console page clicks (now, previous 28 days, six months ago), GA4 organic sessions for hosts without Search Console</td><td>impact, traffic lost since six months ago and score on every finding, <code>reports/findings.json</code>, <code>reports/traffic-summary.json</code></td><td>1 min</td></tr>
-          <tr><td class="step">7</td><td><code>python scripts/build_report.py --snapshot "…"</code></td><td>the run files, findings and traffic summary</td><td>the local report, a frozen copy in <code>reports/archive/</code>, family health in <code>reports/health-history.json</code></td><td>seconds</td></tr>
-          <tr><td class="step">8</td><td><code>git push github master</code></td><td>the committed <code>reports/</code> files</td><td>GitHub Actions rebuilds the report (summary, families, priorities, shared problems, findings, changes, fix guide) and publishes it with the archive</td><td>1 min</td></tr>
+          <tr><td class="step">1</td><td><code>python scripts/discover.py</code></td><td>robots.txt and every sitemap on the tenant's hosts (aspose.app: 12)</td><td>URL inventory (<code>data/&lt;tenant&gt;/inventory.sqlite</code>), sitemap findings, <code>reports/&lt;tenant&gt;/discovery-runN.json</code></td><td>15 min</td></tr>
+          <tr><td class="step">2</td><td><code>python scripts/audit_crawl.py</code></td><td>the inventory (2 English + 2 translated pages per template), each host's homepage, family hubs; top Search Console pages for families with no sitemap</td><td>page checks (<code>data/&lt;tenant&gt;/audit.sqlite</code>), page findings with evidence locations, <code>reports/&lt;tenant&gt;/crawl-audit-runN.json</code></td><td>25 min</td></tr>
+          <tr><td class="step">3</td><td><code>python scripts/audit_ai.py</code></td><td>each host's robots.txt (rules for AI search and training crawlers), its homepage as each AI crawler, /llms.txt per host and per product family</td><td>AI access findings (AI search crawlers blocked by robots.txt or the firewall, missing or broken llms.txt), <code>reports/&lt;tenant&gt;/ai-audit-runN.json</code></td><td>5 min</td></tr>
+          <tr><td class="step">4</td><td><code>python scripts/audit_perf.py</code></td><td>PageSpeed Insights for the 2 most-visited pages of each crawl-audit template (mobile): Core Web Vitals from real Chrome users (28 days, 75th percentile) and a Lighthouse lab run</td><td>speed findings (real-user LCP, INP, CLS, TTFB; pages that do not load or paint nothing; whole-host Core Web Vitals), <code>reports/&lt;tenant&gt;/perf-audit-runN.json</code></td><td>40 min</td></tr>
+          <tr><td class="step">5</td><td><code>python scripts/audit_text.py</code></td><td>title, H1 and meta description of every crawl-audit page (no requests to the sites), proofread by the internal LLM in each page's language; answers cached per page text</td><td>wording findings (typos; placeholder or garbled words; a title about a different product), each quoting the page, <code>reports/&lt;tenant&gt;/text-audit-runN.json</code></td><td>5 min</td></tr>
+          <tr><td class="step">6</td><td><code>python scripts/prioritize.py</code></td><td>Search Console page clicks (now, previous 28 days, six months ago), GA4 organic sessions for hosts without Search Console</td><td>impact, traffic lost since six months ago and score on every finding, <code>reports/&lt;tenant&gt;/findings.json</code>, <code>reports/&lt;tenant&gt;/traffic-summary.json</code></td><td>1 min</td></tr>
+          <tr><td class="step">7</td><td><code>python scripts/build_report.py --snapshot "…"</code></td><td>the run files, findings and traffic summary</td><td>the local report, a frozen copy in <code>reports/&lt;tenant&gt;/archive/</code>, family health in <code>reports/&lt;tenant&gt;/health-history.json</code></td><td>seconds</td></tr>
+          <tr><td class="step">8</td><td><code>git push github master</code></td><td>the committed <code>reports/&lt;tenant&gt;/</code> files</td><td>GitHub Actions runs <code>build_site.py</code>: a landing page, then per tenant the report (summary, families, priorities, shared problems, findings, changes, fix guide) at <code>/&lt;tenant&gt;/</code> with its archive</td><td>1 min</td></tr>
         </tbody>
       </table>
     </div>
@@ -324,7 +324,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
     <div class="rules">
       <div class="rule"><h3>Checks are code</h3><p>Status codes, canonicals, hreflang, sitemaps and scores are deterministic and repeatable. LLM agents come in only where judgment is needed: content accuracy, diagnosis, writing fixes. The first LLM step, the text check, only proofreads, and a finding is kept only when its wrong words are on the page.</p></div>
       <div class="rule"><h3>Read and write are separate</h3><p>Phase 1 has no write access to any site. Fixers are separate MCP servers with their own credentials, so an audit cannot change a site even by mistake.</p></div>
-      <div class="rule"><h3>One tenant file per property</h3><p>Nothing in <code>core/</code> names aspose.app. Hosts, families, URL templates and audit rules live in <code>tenants/aspose.app.yaml</code>, so aspose.ai can be added as a second tenant.</p></div>
+      <div class="rule"><h3>One tenant file per property</h3><p>Nothing in <code>core/</code> names aspose.app. Hosts, families, URL templates, audit rules and the Google key live in <code>tenants/&lt;tenant&gt;.yaml</code> (aspose.app, conholdate.cloud); each tenant's stores and reports stay in its own <code>data/</code> and <code>reports/</code> folder.</p></div>
       <div class="rule"><h3>Findings are tracked, not re-listed</h3><p>Each finding keeps one id across runs. A later run that no longer sees it marks it resolved, and it reopens if it comes back. One template fix closes one finding.</p></div>
     </div>
   </section>
@@ -333,12 +333,12 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
     <h2>Code layout</h2>
     <div class="layout">
       <div class="dir">core/</div><div>Deterministic logic: discovery, page audit, AI-readiness audit, speed audit (PageSpeed Insights), text check (LLM client), findings store, prioritizer, family scorecards, fix guide, report views (confidence, shared problems, top risks, changes), Google clients</div><div><span class="tag built">built</span></div>
-      <div class="dir">scripts/</div><div>The commands: discover, audit_crawl, audit_ai, audit_perf, audit_text, prioritize, build_report, build_archive, findings, check_access</div><div><span class="tag built">built</span></div>
+      <div class="dir">scripts/</div><div>The commands (each takes <code>--tenant</code>): discover, audit_crawl, audit_ai, audit_perf, audit_text, prioritize, build_report, build_archive, build_site, findings, check_access</div><div><span class="tag built">built</span></div>
       <div class="dir">mcp_servers/</div><div><code>gsc</code> is built; <code>crawl</code>, <code>findings</code>, <code>ga4</code>, <code>pagespeed</code> are next; fixers in Phase 2</div><div><span class="tag part">partly</span></div>
       <div class="dir">agents/</div><div>LangGraph agents that call the MCP servers: diagnosis, content checks, reporting</div><div><span class="tag planned">planned</span></div>
       <div class="dir">tenants/</div><div>One YAML per property, plus its manual findings</div><div><span class="tag built">built</span></div>
-      <div class="dir">reports/</div><div>Committed run files and exports the published report is built from, plus the archive of frozen reports and the family health history</div><div><span class="tag built">built</span></div>
-      <div class="dir">data/</div><div>Local SQLite stores and Google data caches, not in git</div><div><span class="tag built">built</span></div>
+      <div class="dir">reports/</div><div>One folder per tenant: committed run files and exports its published report is built from, plus the archive of frozen reports and the family health history</div><div><span class="tag built">built</span></div>
+      <div class="dir">data/</div><div>One folder per tenant: local SQLite stores and Google and LLM caches, not in git</div><div><span class="tag built">built</span></div>
     </div>
   </section>
 </div>
