@@ -2241,49 +2241,6 @@
     "notes": []
   },
   {
-    "id": "crawl-0010",
-    "key": "crawl/robots_missing/api.products.aspose.app/robots.txt",
-    "source": "discovery",
-    "tenant": "aspose.app",
-    "subdomain": "api.products.aspose.app",
-    "template": "robots.txt",
-    "dimension": "crawl",
-    "type": "improvable",
-    "title": "No robots.txt on this host",
-    "evidence": {
-      "urls": [
-        "https://api.products.aspose.app/robots.txt"
-      ],
-      "observed": "HTTP 404",
-      "expected": "robots.txt with a Sitemap: line"
-    },
-    "affected_pages": 0,
-    "impact": {
-      "clicks_28d": 75,
-      "impressions_28d": null,
-      "source": "ga4-host",
-      "share": 1.0,
-      "score": 8,
-      "window": [
-        "2026-09-16",
-        "2026-10-13"
-      ]
-    },
-    "effort": "S",
-    "fix_tier": 3,
-    "fix_channel": null,
-    "status": "open",
-    "verification": null,
-    "superseded_by": null,
-    "detected_at": "2026-10-08",
-    "first_seen_run": "discovery-run7",
-    "last_seen_run": "discovery-run8",
-    "resolved_run": null,
-    "resolved_at": null,
-    "check": "robots_missing",
-    "notes": []
-  },
-  {
     "id": "crawl-0011",
     "key": "crawl/dup_in_file/products.aspose.app/sitemap:3d",
     "source": "discovery",
@@ -5378,49 +5335,6 @@
     "notes": []
   },
   {
-    "id": "crawl-0057",
-    "key": "crawl/host_no_sitemap/api.products.aspose.app/sitemap",
-    "source": "discovery",
-    "tenant": "aspose.app",
-    "subdomain": "api.products.aspose.app",
-    "template": "sitemap",
-    "dimension": "crawl",
-    "type": "not_optimized",
-    "title": "No working sitemap found for this host",
-    "evidence": {
-      "urls": [
-        "https://api.products.aspose.app/sitemap.xml"
-      ],
-      "observed": "no sitemap with URLs via robots.txt, /sitemap.xml or known paths",
-      "expected": "a sitemap listed in robots.txt and submitted in GSC"
-    },
-    "affected_pages": 0,
-    "impact": {
-      "clicks_28d": 75,
-      "impressions_28d": null,
-      "source": "ga4-host",
-      "share": 1.0,
-      "score": 15,
-      "window": [
-        "2026-09-16",
-        "2026-10-13"
-      ]
-    },
-    "effort": "S",
-    "fix_tier": 1,
-    "fix_channel": null,
-    "status": "open",
-    "verification": null,
-    "superseded_by": null,
-    "detected_at": "2026-10-08",
-    "first_seen_run": "discovery-run7",
-    "last_seen_run": "discovery-run8",
-    "resolved_run": null,
-    "resolved_at": null,
-    "check": "host_no_sitemap",
-    "notes": []
-  },
-  {
     "id": "crawl-0058",
     "key": "crawl/section_no_sitemap/products.aspose.app/sitemap:omr",
     "source": "discovery",
@@ -6249,62 +6163,6 @@
     "resolved_run": null,
     "resolved_at": null,
     "check": "head_tags_repeated",
-    "notes": []
-  },
-  {
-    "id": "crawl-0071",
-    "key": "crawl/http_error/api.products.aspose.app/page",
-    "source": "crawl-audit",
-    "tenant": "aspose.app",
-    "subdomain": "api.products.aspose.app",
-    "template": "page",
-    "dimension": "crawl",
-    "type": "broken",
-    "title": "Pages listed in sitemaps return an HTTP error",
-    "evidence": {
-      "urls": [
-        "https://api.products.aspose.app/"
-      ],
-      "observed": "1 of 1 sampled pages (by template: generic:/ 1/1). e.g. https://api.products.aspose.app/: HTTP 404",
-      "expected": "HTTP 200",
-      "locations": [
-        {
-          "role": "page",
-          "url": "https://api.products.aspose.app/",
-          "note": "HTTP 404"
-        }
-      ],
-      "sample": {
-        "generic:/": [
-          1,
-          1
-        ]
-      }
-    },
-    "affected_pages": 1,
-    "impact": {
-      "clicks_28d": 75,
-      "impressions_28d": null,
-      "source": "ga4-host",
-      "share": 1.0,
-      "score": 38,
-      "window": [
-        "2026-09-16",
-        "2026-10-13"
-      ]
-    },
-    "effort": "S",
-    "fix_tier": 1,
-    "fix_channel": null,
-    "status": "open",
-    "verification": null,
-    "superseded_by": null,
-    "detected_at": "2026-10-08",
-    "first_seen_run": "crawl-audit-run2",
-    "last_seen_run": "crawl-audit-run15",
-    "resolved_run": null,
-    "resolved_at": null,
-    "check": "http_error",
     "notes": []
   },
   {
