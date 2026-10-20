@@ -108,7 +108,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
         <!-- sources -->
         <rect class="d-box" x="16" y="56" width="176" height="72" rx="6"/>
         <text class="d-t" x="28" y="79">aspose.app hosts</text>
-        <text class="d-s" x="28" y="98">12 live hosts</text>
+        <text class="d-s" x="28" y="98">11 live hosts</text>
         <text class="d-s" x="28" y="115">GET only, 1 req/s</text>
 
         <rect class="d-box" x="16" y="160" width="176" height="56" rx="6"/>
@@ -306,7 +306,7 @@ td.step { font: 700 18px var(--display); color: var(--accent); width: 40px }
       <table>
         <thead><tr><th></th><th>Command</th><th>Reads</th><th>Writes</th><th>Time</th></tr></thead>
         <tbody>
-          <tr><td class="step">1</td><td><code>python scripts/discover.py</code></td><td>robots.txt and every sitemap on the tenant's hosts (aspose.app: 12)</td><td>URL inventory (<code>data/&lt;tenant&gt;/inventory.sqlite</code>), sitemap findings, <code>reports/&lt;tenant&gt;/discovery-runN.json</code></td><td>15 min</td></tr>
+          <tr><td class="step">1</td><td><code>python scripts/discover.py</code></td><td>robots.txt and every sitemap on the tenant's hosts (aspose.app: 11)</td><td>URL inventory (<code>data/&lt;tenant&gt;/inventory.sqlite</code>), sitemap findings, <code>reports/&lt;tenant&gt;/discovery-runN.json</code></td><td>15 min</td></tr>
           <tr><td class="step">2</td><td><code>python scripts/audit_crawl.py</code></td><td>the inventory (2 English + 2 translated pages per template), each host's homepage, family hubs; top Search Console pages for families with no sitemap</td><td>page checks (<code>data/&lt;tenant&gt;/audit.sqlite</code>), page findings with evidence locations, <code>reports/&lt;tenant&gt;/crawl-audit-runN.json</code></td><td>25 min</td></tr>
           <tr><td class="step">3</td><td><code>python scripts/audit_ai.py</code></td><td>each host's robots.txt (rules for AI search and training crawlers), its homepage as each AI crawler, /llms.txt per host and per product family</td><td>AI access findings (AI search crawlers blocked by robots.txt or the firewall, missing or broken llms.txt), <code>reports/&lt;tenant&gt;/ai-audit-runN.json</code></td><td>5 min</td></tr>
           <tr><td class="step">4</td><td><code>python scripts/audit_perf.py</code></td><td>PageSpeed Insights for the 2 most-visited pages of each crawl-audit template (mobile): Core Web Vitals from real Chrome users (28 days, 75th percentile) and a Lighthouse lab run</td><td>speed findings (real-user LCP, INP, CLS, TTFB; pages that do not load or paint nothing; whole-host Core Web Vitals), <code>reports/&lt;tenant&gt;/perf-audit-runN.json</code></td><td>40 min</td></tr>
