@@ -10,7 +10,7 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 ## Start here (session handoff, 2026-10-16)
 
-**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), **AI-readiness auditor** (built and first run 2026-10-16; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive.
+**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), **AI-readiness auditor** (built and first run 2026-10-16; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive. Last commit pushed to `github`, Pages live; working tree clean.
 
 **Next session, start with** (priority 3 continues; see "Priority order agreed with SK"):
 1. **Functional auditor** (apps upload/convert/download; dimension `functional`): discuss scope with SK first (browser or API calls, which apps, test files, frequency), then build it like `core/audit/ai.py` / `perf.py`.
@@ -226,6 +226,8 @@ set -a; source .env; set +a            # loads GOOGLE_APPLICATION_CREDENTIALS (k
 python scripts/check_access.py --tenant aspose.app
 python scripts/discover.py             # all hosts; --hosts/--sections/--max-sitemaps for samples
 python scripts/audit_crawl.py --sections barcode,html   # crawl audit; --sections narrows products only
+python scripts/audit_ai.py             # AI readiness: AI crawler access, llms.txt per host + family
+python scripts/audit_perf.py --plan    # speed audit: pages it would measure (run without --plan to measure)
 python scripts/prioritize.py           # traffic + score per finding (needs .env; --offline reuses cache)
 python scripts/findings.py summary     # findings store: summary | list | import-seed | import-discovery|import-audit <json>
 python scripts/build_report.py <run json> --notes reports/discovery-notes.txt --audit-notes reports/crawl-audit-notes.txt --out reports/discovery-latest.html
@@ -238,7 +240,7 @@ Conventions:
 - Errors in reports are short and secret-free (`_err()` pattern). Never print or store key material or tokens.
 - `core/` must not contain the string "aspose" (a test enforces this).
 - New dependencies go in `pyproject.toml` under the right extra.
-- Generated files go to `reports/` (**committed**: the repo is private and internal, SK 2026-10-08) or `data/` (gitignored: `inventory.sqlite` is ~750 MB and rebuilt by `discover.py`; `findings.sqlite` is exported to `reports/findings.json`). Never put key material in reports. Discovery runs kept in `reports/`: full runs 3 (before the double-slash/guessed-URL fixes), 6 (first clean run) and 7 (first run in the findings store). Sample runs 1, 2, 4 were deleted; run 5 was stopped early and has no file. Commit only full runs; delete sample-run JSON before committing. Crawl audit: `data/audit.sqlite` (gitignored), latest run JSON `reports/crawl-audit-2026-10-09-run5.json` (same scope as run 4, adds `evidence.sample`; run 4 deleted).
+- Generated files go to `reports/` (**committed**: the repo is private and internal, SK 2026-10-08) or `data/` (gitignored: `inventory.sqlite` is ~750 MB and rebuilt by `discover.py`; `findings.sqlite` is exported to `reports/findings.json`). Never put key material in reports. Discovery runs kept in `reports/`: full runs 3 (before the double-slash/guessed-URL fixes), 6 (first clean run) and 7 (first run in the findings store). Sample runs 1, 2, 4 were deleted; run 5 was stopped early and has no file. Commit only full runs; delete sample-run JSON before committing. Audits share `data/audit.sqlite` (gitignored; run ids count across auditors). Run JSONs kept in `reports/`: crawl audit run 15, speed audit run 12, AI audit run 16 (earlier crawl runs 5-9 and AI run 14 deleted as superseded).
 
 ## Multi-tenant rule
 
