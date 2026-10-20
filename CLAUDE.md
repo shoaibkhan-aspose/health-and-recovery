@@ -8,23 +8,24 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 **Keep this file current:** when a decision is made, a fact is confirmed or a build step finishes, update the relevant section (Status, Seed findings, Open items) in the same session. New issues found by hand go into `tenants/aspose.app.seed-findings.yaml`, never only into prose.
 
-## Start here (session handoff, 2026-10-16)
+## Start here (session handoff, 2026-10-20)
 
-**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), **AI-readiness auditor** (built and first run 2026-10-16; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive. Last commit pushed to `github`, Pages live; working tree clean.
+**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor (2026-10-16), **text check** (LLM spelling/topic check, built and first run 2026-10-20; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive. Text check, soft-404 fix, run 21, report snapshot and docs committed and pushed to `github` on 2026-10-20 (Pages rebuilt).
 
-**Next session, start with** (priority 3 continues; see "Priority order agreed with SK"):
-1. **Functional auditor** (apps upload/convert/download; dimension `functional`): discuss scope with SK first (browser or API calls, which apps, test files, frequency), then build it like `core/audit/ai.py` / `perf.py`.
-2. Then priority 4 (`crawl`, `findings` MCP servers).
-3. Watch: **ocr is intermittently failing.** Crawl audit run 15 (2026-10-16) caught 1 of 18 sampled ocr pages with HTTP 502 (`http_error` /ocr/, ~363 pages estimated, confidence "to confirm"); the AI audit got no answer from `/ocr/llms.txt`. On 2026-10-15 most sampled ocr pages failed (HTTP 500 / ~22 s). Re-check in the next run; if it keeps flapping, raise it with SK.
-4. Open questions for SK are under "Open discussions" below (shared problems severity, Aspose.ai comparison, sample transparency, a "Speed" pill on family cards, tenant 2, Pages rename), plus two small AI ones: whether short status incident pages should count in "almost no text without JavaScript", and whether dashboard/api.products are right to skip for llms.txt.
+**Next session, start with:**
+1. **Priority 4** (`findings`, then `crawl` MCP servers). The functional auditor is **postponed** (SK, 2026-10-20).
+2. **Soft 404 fix (2026-10-20, code only):** `/psd/conversion/ai-to-pdf` is listed in `/psd/sitemap.en.xml`, answers 302 to `/psd/page404?url=...` (HTTP 200, generic PSD title, H1 "There is an error on this page or it does not exist"); the crawl audit called it only a temporary redirect (its URL rule needed a separator before "404"). `soft_404` now matches `page404`-style targets and error wording in the H1; on run 15 data it adds only this page. Takes effect at the next crawl run: then count how many psd (and other) sitemap URLs end at page404.
+3. **Remind SK to get a dedicated LLM key** (see Open items) until he says it is in place.
+4. Watch: **ocr is intermittently failing.** Crawl audit run 15 (2026-10-16) caught 1 of 18 sampled ocr pages with HTTP 502 (`http_error` /ocr/, ~363 pages estimated, confidence "to confirm"); the AI audit got no answer from `/ocr/llms.txt`. On 2026-10-15 most sampled ocr pages failed (HTTP 500 / ~22 s). Re-check in the next run; if it keeps flapping, raise it with SK.
+5. Open questions for SK are under "Open discussions" below (shared problems severity, Aspose.ai comparison, sample transparency, a "Speed" pill on family cards, tenant 2, Pages rename), plus two small AI ones: whether short status incident pages should count in "almost no text without JavaScript", and whether dashboard/api.products are right to skip for llms.txt.
 
 **Live:**
 - Report (public, noindex): https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/ (rebuilt by GitHub Actions on every push to `master`); archive of frozen versions: https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/archive/
-- Architecture page (private, version 4 = AI audit step added 2026-10-16): https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm, source `docs/architecture/site-health-architecture.html`
-- Archive: 2026-10-12 (before the restructure), 2026-10-15 (restructured report, before the speed audit), 2026-10-15-2 (after the speed audit), 2026-10-16 (status pills, before the AI audit; downloaded from Pages), 2026-10-16-2 (after the AI audit and crawl audit run 15). Pages serve them at `/archive/<file without .html>/`.
+- Architecture page (private, version 5 = text check step added 2026-10-20): https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm, source `docs/architecture/site-health-architecture.html`
+- Archive: 2026-10-12 (before the restructure), 2026-10-15 (restructured report, before the speed audit), 2026-10-15-2 (after the speed audit), 2026-10-16 (status pills, before the AI audit; downloaded from Pages), 2026-10-16-2 (after the AI audit and crawl audit run 15; this was the live version before the text check, so no new download was needed), 2026-10-20 (after the text check). Pages serve them at `/archive/<file without .html>/`.
 - Older shared discovery report (private, not updated since run 7): https://claude.ai/artifact/MUUTzbXEymKq4tw5mmmPA5
 
-**Latest data:** discovery run 8 (2026-10-09), full crawl audit run 15 (2026-10-16, 652 pages, all 29 families + every host; replaces run 9), speed audit run 12 (2026-10-15, 353 pages), AI audit run 16 (2026-10-16, all hosts + 29 families), traffic window 2026-09-16..10-13 (+ previous 28 days and six months ago). 349 open findings (335 open + 14 unverified: crawl audit 213 incl. 16 `ai` page findings, discovery 88, seed 24, speed 15, AI audit 9), all scored.
+**Latest data:** discovery run 8 (2026-10-09), full crawl audit run 15 (2026-10-16, 652 pages, all 29 families + every host; replaces run 9), speed audit run 12 (2026-10-15, 353 pages), AI audit run 16 (2026-10-16, all hosts + 29 families), text check run 21 (2026-10-20, 605 pages), traffic window 2026-09-16..10-13 (+ previous 28 days and six months ago). 371 open findings (357 open + 14 unverified: crawl audit 213 incl. 16 `ai` page findings, discovery 88, text check 25, seed 21, speed 15, AI audit 9), all scored.
 
 **Full cycle** (on the Mac, from the repo, `.venv` active):
 ```bash
@@ -33,6 +34,7 @@ python scripts/discover.py --quiet           # 15 min; inventory + sitemap findi
 python scripts/audit_crawl.py --quiet        # 25 min; all hosts + families (or --sections a,b); incl. AI page checks
 python scripts/audit_ai.py --quiet           # 5 min; AI crawler access (robots.txt, firewall), llms.txt per host + family
 python scripts/audit_perf.py --quiet         # ~40 min; speed (PageSpeed Insights), 2 top-traffic pages per template
+python scripts/audit_text.py --quiet         # ~5 min (seconds when cached); LLM text check of the crawl audit's pages
 python scripts/prioritize.py                 # traffic, scores, reports/findings.json, traffic-summary.json
 python scripts/build_report.py --out reports/discovery-latest.html --snapshot "After <what changed>"
 #   --snapshot freezes this report into reports/archive/ (served at /archive/<date>/) and records family health
@@ -210,6 +212,12 @@ Done:
   - **Results (AI audit run 16 + crawl audit run 15, 2026-10-16):** no host blocks AI crawlers (robots.txt names none; BunnyCDN answers all bot user agents normally). No llms.txt on 9 hosts (only about has one; products has only `/pdf/llms.txt`). Almost no text without JavaScript: websites JS shells (`/fr/groupdocs/` 34 characters), purchase and dashboard homepages, and short status pages (incident pages are server-rendered but one line long: the fix guide names both causes). No JSON-LD: about, www, releases, status, websites, purchase, dashboard and products diagram (11.6k pages est.), words, psd, finance, ebook. Family health moved 1-2 points in 5 families (words, diagram, finance, psd, ebook).
   - Report built from findings store vs CI export differs only in `notes: []` vs `null` on one resolved finding in "Changes" (invisible; pre-existing).
 
+- **Text check (2026-10-20, SK chose it before priority 4):** first LLM use. `core/llm.py` (OpenAI-compatible client from `PROFESSIONALIZE_API_KEY` / `_BASE_URL` / `_LLM_MODEL`, model `gpt-oss`; up to 4 calls at once, all calls pause 30 s after a failure: SK wants normal speed, polite only on trouble), `core/audit/text.py` + `scripts/audit_text.py` (source `text-audit`, report `reports/text-audit-<date>-run<id>.json`, ~5 min uncached, 31 calls of 20 pages). Reads the crawl-audit pages (newest per URL; no requests to the site), sends path, language, title, H1, description; checks `text_typo` (misspelling, repeated word, leftover/placeholder or garbled word) `text_leftover` (template keys such as CADWatermarkTitle2, test words, garbled/untranslated words) and `text_topic_mismatch` (title/description names a different specific product than path + H1); dimension `onpage`; typo `improvable`, leftover and topic `incorrect` (SK, 2026-10-20); scorecard group `wording`, fix-guide area "Spelling & wording". Guards: an answer is kept only if its wrong text occurs in that field; digits-only and H1-shared topics dropped; answers cached per page text in `data/text-check-cache.json` keyed by prompt version + model (rerun on unchanged text = same result, no calls); runs with >10% unchecked pages resolve nothing; reviewed false positives in tenant `audit.text.ignore` (url, optional wrong). Prioritizer scores these on the exact pages (like seeds, `EXACT_PAGE_SOURCES`).
+  - Tuning: prompt v1 gave ~81 issues, ~30 false positives (generic titles called "different product", units, years, grammar). Prompt v2 + filters: 59 issues, 14 false positives, now in `audit.text.ignore`. Tuning runs 18 and 19 were removed from the findings store (backup in that session's scratchpad); **run 21 is the first real run**: 25 findings (onpage-0099..0123), 605 pages checked (runs 18-20 were tuning and severity changes; removed from the store, JSONs deleted).
+  - Real finds: template keys live on CAD watermark pages (`CADWatermarkTitle2`, `CADWatermarkMetaDescription2` as title/H1/description); audio converters described as "Visio" files (de, ja); tasks merger descriptions say MPP->PDF on XML/MPX/PDF pages; TGA compressor described as PDF/Word/Excel; typos iamges, simular, onlien, Onete, Image image, MergeEPS/MergePS, OTFfile, KonverterWAV; a Cyrillic "С" in "Сonvert" (/pub/applications); garbled translations (hu "nak nek", cs "Flouze", fa "To", zh-cn "compress"); /email/conversion/eml title is just "apps"; a soft 404 (see Next session). Seeds onpage-01, 02, 04 superseded by onpage-0103, 0108, 0116; seed-onpage-03 narrowed to the /finance/family/ "APIs" title (the typos are onpage-0113).
+  - Architecture diagram: Internal LLM source and step 5 audit_text.py added (prioritize is 6), PNG re-rendered with headless Chrome (1280x1130), artifact version 5.
+  - Health: a family with a leftover or wrong-product finding loses 5 (incorrect x min share 0.25); a plain typo costs 0.5 (cosmetic, capped with the others).
+
 Not done yet:
 - GSC properties for www and forum (none exist or none shared; the service account sees only the 5 URL-prefix properties).
 - `agents/` is an empty package. MCP servers still to build: `findings`, `ga4`, `crawl`, `pagespeed`.
@@ -240,7 +248,7 @@ Conventions:
 - Errors in reports are short and secret-free (`_err()` pattern). Never print or store key material or tokens.
 - `core/` must not contain the string "aspose" (a test enforces this).
 - New dependencies go in `pyproject.toml` under the right extra.
-- Generated files go to `reports/` (**committed**: the repo is private and internal, SK 2026-10-08) or `data/` (gitignored: `inventory.sqlite` is ~750 MB and rebuilt by `discover.py`; `findings.sqlite` is exported to `reports/findings.json`). Never put key material in reports. Discovery runs kept in `reports/`: full runs 3 (before the double-slash/guessed-URL fixes), 6 (first clean run) and 7 (first run in the findings store). Sample runs 1, 2, 4 were deleted; run 5 was stopped early and has no file. Commit only full runs; delete sample-run JSON before committing. Audits share `data/audit.sqlite` (gitignored; run ids count across auditors). Run JSONs kept in `reports/`: crawl audit run 15, speed audit run 12, AI audit run 16 (earlier crawl runs 5-9 and AI run 14 deleted as superseded).
+- Generated files go to `reports/` (**committed**: the repo is private and internal, SK 2026-10-08) or `data/` (gitignored: `inventory.sqlite` is ~750 MB and rebuilt by `discover.py`; `findings.sqlite` is exported to `reports/findings.json`). Never put key material in reports. Discovery runs kept in `reports/`: full runs 3 (before the double-slash/guessed-URL fixes), 6 (first clean run) and 7 (first run in the findings store). Sample runs 1, 2, 4 were deleted; run 5 was stopped early and has no file. Commit only full runs; delete sample-run JSON before committing. Audits share `data/audit.sqlite` (gitignored; run ids count across auditors). Run JSONs kept in `reports/`: crawl audit run 15, speed audit run 12, AI audit run 16, text check run 21 (earlier crawl runs 5-9 and AI run 14 deleted as superseded).
 
 ## Multi-tenant rule
 
@@ -470,8 +478,8 @@ Context gathered before discovery existed. The issues in it are tracked in `tena
 **Priority order agreed with SK (2026-10-09):**
 1. ~~**Prioritizer**~~ Done 2026-10-09 (see Status).
 2. ~~**Crawl audit of the other 27 products families**~~ Done 2026-10-09 (runs 6-8, see Status).
-3. **New auditors**: perf (PageSpeed/CrUX; built and run 2026-10-15), ai (llms.txt, AI bot access; built and run 2026-10-16), functional (apps upload/convert/download).
-4. **MCP servers**: `crawl`, `findings` (then `ga4`, `pagespeed`).
+3. **New auditors**: perf (PageSpeed/CrUX; built and run 2026-10-15), ai (llms.txt, AI bot access; built and run 2026-10-16), text check (LLM, built and run 2026-10-20). Functional (apps upload/convert/download) **postponed** (SK, 2026-10-20: furthest from the traffic goal, most expensive; the Aspose.ai monitor already does browser smoke tests).
+4. **MCP servers**: `findings`, `crawl` (then `ga4`, `pagespeed`). Next after the text check.
 
 **Ideas from the Aspose.ai Website Health monitor** (https://aspose.github.io/aspose-ai-website-health/, reviewed 2026-10-09). It is an ops/uptime monitor (7 hosts, availability, priority links, Playwright smoke + screenshots, daily/weekly digests, static `dashboard.json` + `app.js` on Pages), complementary to this SEO/GEO audit. Worth adopting:
 - Overall score + per-dimension bars, and scorecards per subdomain (the Reporter). Keep them evidence-backed: theirs shows 100/healthy from shallow checks.
@@ -484,6 +492,8 @@ Context gathered before discovery existed. The issues in it are tracked in `tena
 - aspose.ai could be tenant 2 later (core/ is tenant-agnostic).
 
 ## Open items
+
+- **LLM key (2026-10-20):** `.env` has `PROFESSIONALIZE_API_KEY` / `_BASE_URL` / `_LLM_MODEL` (internal OpenAI-compatible LLM, same `openai` client pattern as `conholdate/blog-translation-agent`). For now it is the **translation agent's key**; SK is requesting a dedicated one, and production will use a different key. Remind SK until the new key is in place. Sending public aspose.app page text to it is fine (SK).
 
 - Source of the individual app pages on products, and repos for about, websites, releases, not shared yet. This repo holds the agents, not the sites.
 - GA4 property `253117495` is readable and covers all subdomains (verified 2026-10-08). GSC: service account reads all 5 URL-prefix properties (products, about, blog, releases, websites). GSC properties for www and forum still missing. SK (2026-10-08): **all subdomains are in scope**, so GSC must cover every host. Recommended: a Domain property `sc-domain:aspose.app` (DNS-verified, covers all subdomains) with the service account added as Restricted user. Auth stays service account, not SK's personal OAuth (see conversation 2026-10-08).

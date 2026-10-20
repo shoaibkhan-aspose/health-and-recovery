@@ -12,7 +12,7 @@ The page is rebuilt and published by GitHub Actions on every push to `master`, f
 
 ## Architecture
 
-![Site health architecture: data flow from read-only sources through discover, crawl audit, AI audit, speed audit and prioritize into the findings store, then reports/ in git, GitHub Actions and the published report](docs/architecture/site-health-architecture.png)
+![Site health architecture: data flow from read-only sources through discover, crawl audit, AI audit, speed audit, text check (internal LLM) and prioritize into the findings store, then reports/ in git, GitHub Actions and the published report](docs/architecture/site-health-architecture.png)
 
 Full page with the step-by-step table, design rules and code layout: [`docs/architecture/site-health-architecture.html`](docs/architecture/site-health-architecture.html) (also published as a private claude.ai page: https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm).
 
@@ -43,11 +43,14 @@ python scripts/audit_crawl.py                                              # cra
 python scripts/audit_ai.py                                                 # AI readiness: AI crawler access, llms.txt (~5 min)
 python scripts/audit_perf.py --plan                                        # speed audit: list the pages it would measure
 python scripts/audit_perf.py                                               # speed audit via PageSpeed Insights (~40 min)
+python scripts/audit_text.py                                               # text check: LLM proofreads titles, H1s, descriptions (~5 min)
 python scripts/prioritize.py                                               # Search Console traffic + score per finding
 python scripts/build_report.py --out reports/discovery-latest.html --snapshot "After <run>"   # report + archive snapshot
 ```
 
-Findings from every run, plus the manual ones in `tenants/<tenant>.seed-findings.yaml`, are kept in `data/findings.sqlite` with permanent ids, first/last seen and resolved status (`python scripts/findings.py summary`). `scripts/build_report.py` turns the newest discovery, crawl-audit, speed-audit and AI-audit runs plus the store (or `--findings reports/findings.json`) into the HTML report.
+Findings from every run, plus the manual ones in `tenants/<tenant>.seed-findings.yaml`, are kept in `data/findings.sqlite` with permanent ids, first/last seen and resolved status (`python scripts/findings.py summary`). `scripts/build_report.py` turns the newest discovery, crawl-audit, speed-audit, AI-audit and text-check runs plus the store (or `--findings reports/findings.json`) into the HTML report.
+
+The text check needs the internal LLM settings in `.env` (`PROFESSIONALIZE_*`, see `.env.example`; install with `pip install -e ".[llm]"`). It reads the crawl audit's pages, fetches nothing, caches answers per page text in `data/`, and drops reviewed false positives listed under `audit.text.ignore` in the tenant YAML.
 
 ## MCP servers
 
