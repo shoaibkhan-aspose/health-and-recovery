@@ -2,13 +2,16 @@
 
 Domain-agnostic agents that audit a web property and report what is broken, not optimized, incorrect or improvable. Phase 1 is **audit only**. The project brief and rules are in [`CLAUDE.md`](CLAUDE.md).
 
-## Latest report
+## Latest reports
 
-**[aspose.app site health report](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/)**: summary, product family health, priorities, shared problems, all findings with a fix guide, page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/archive/).
+One report per tenant (property), listed on the [landing page](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/):
+
+- **[aspose.app](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/aspose.app/)**: summary, product family health, priorities, shared problems, all findings with a fix guide, page speed (Core Web Vitals), AI readiness (AI crawler access, llms.txt), and changes since the last run. Previous versions: [archive](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/aspose.app/archive/).
+- **[conholdate.cloud](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/conholdate.cloud/)**: blog.conholdate.cloud for now. Previous versions: [archive](https://shoaibkhan-aspose.github.io/aspose-app-health-and-recovery/conholdate.cloud/archive/).
 
 [![Publish report](https://github.com/shoaibkhan-aspose/aspose-app-health-and-recovery/actions/workflows/pages.yml/badge.svg)](https://github.com/shoaibkhan-aspose/aspose-app-health-and-recovery/actions/workflows/pages.yml)
 
-The page is rebuilt and published by GitHub Actions on every push to `master`, from the run files committed in `reports/`. Audits themselves run locally (see Setup).
+The page is rebuilt and published by GitHub Actions on every push to `master`, from the run files committed in `reports/<tenant>/`. Audits themselves run locally (see Setup).
 
 ## Architecture
 
@@ -22,10 +25,11 @@ Full page with the step-by-step table, design rules and code layout: [`docs/arch
 core/          deterministic logic (no tenant names allowed)
 mcp_servers/   MCP servers wrapping core (read-only in Phase 1)
 agents/        LLM agents (LangGraph)
-tenants/       one YAML per property, e.g. tenants/aspose.app.yaml
+tenants/       one YAML per property: tenants/aspose.app.yaml, tenants/conholdate.cloud.yaml
 scripts/       CLIs, e.g. check_access.py
 tests/         offline tests
-reports/       run JSON, findings.json and takeaway notes (committed; source of the published report)
+reports/       reports/<tenant>/: run JSON, findings.json, archive (committed; source of the published reports)
+data/          data/<tenant>/: SQLite stores and caches (not in git)
 ```
 
 ## Setup (macOS)
@@ -36,6 +40,7 @@ pip install -e ".[dev,crawl]"
 cp .env.example .env          # set the key path (quote it if it has spaces); the key file stays outside the repo
 set -a; source .env; set +a
 pytest                        # offline tests
+# every script takes --tenant (or TENANT in the environment; default aspose.app)
 python scripts/check_access.py --tenant aspose.app
 python scripts/discover.py --hosts products.aspose.app --sections pdf,words   # sample
 python scripts/discover.py                                                  # all hosts
@@ -45,17 +50,20 @@ python scripts/audit_perf.py --plan                                        # spe
 python scripts/audit_perf.py                                               # speed audit via PageSpeed Insights (~40 min)
 python scripts/audit_text.py                                               # text check: LLM proofreads titles, H1s, descriptions (~5 min)
 python scripts/prioritize.py                                               # Search Console traffic + score per finding
-python scripts/build_report.py --out reports/discovery-latest.html --snapshot "After <run>"   # report + archive snapshot
+python scripts/build_report.py --out reports/aspose.app/discovery-latest.html --snapshot "After <run>"   # report + archive snapshot
+python scripts/build_site.py --out site                                    # the Pages site: landing page + one report per tenant
 ```
 
-Findings from every run, plus the manual ones in `tenants/<tenant>.seed-findings.yaml`, are kept in `data/findings.sqlite` with permanent ids, first/last seen and resolved status (`python scripts/findings.py summary`). `scripts/build_report.py` turns the newest discovery, crawl-audit, speed-audit, AI-audit and text-check runs plus the store (or `--findings reports/findings.json`) into the HTML report.
+Each tenant keeps its files apart: `data/<tenant>/` (inventory, audit pages, findings store, Google and LLM caches; not in git) and `reports/<tenant>/` (run files, `findings.json`, traffic summary, health history, `archive/`; committed). GitHub Pages serves a landing page at the root and each tenant's report at `/<tenant>/` with its archive at `/<tenant>/archive/`; the old root links (`/#…`, `/archive/<date>/`) redirect to `/aspose.app/`. A tenant YAML can name its own key variable (`google_credentials_env`).
 
-The text check needs the internal LLM settings in `.env` (`PROFESSIONALIZE_*`, see `.env.example`; install with `pip install -e ".[llm]"`). It reads the crawl audit's pages, fetches nothing, caches answers per page text in `data/`, and drops reviewed false positives listed under `audit.text.ignore` in the tenant YAML.
+Findings from every run, plus the manual ones in `tenants/<tenant>.seed-findings.yaml`, are kept in `data/<tenant>/findings.sqlite` with permanent ids, first/last seen and resolved status (`python scripts/findings.py summary`). `scripts/build_report.py` turns the newest discovery, crawl-audit, speed-audit, AI-audit and text-check runs plus the store (or `--findings reports/<tenant>/findings.json`) into the HTML report.
+
+The text check needs the internal LLM settings in `.env` (`PROFESSIONALIZE_*`, see `.env.example`; install with `pip install -e ".[llm]"`). It reads the crawl audit's pages, fetches nothing, caches answers per page text in `data/<tenant>/`, and drops reviewed false positives listed under `audit.text.ignore` in the tenant YAML.
 
 ## MCP servers
 
 `mcp_servers/gsc`: read-only Search Console tools (`list_properties`, `search_performance`, `page_performance`, `compare_periods`, `list_sitemaps`, `inspect_url`). Needs `pip install -e ".[mcp]"`. Registered for Claude Code in `.mcp.json`; approve it once when Claude Code starts. It reads the key path from `GOOGLE_APPLICATION_CREDENTIALS` or, if unset, from `.env`. Run by hand: `python -m mcp_servers.gsc` (stdio).
 
-`discover.py` is read-only and polite (robots.txt respected, 1 request per host per second, QA hosts skipped). It walks robots.txt and sitemaps for every tenant host, stores the URL inventory in `data/inventory.sqlite` and writes a summary plus sitemap findings to `reports/discovery-<date>-run<N>.json`.
+`discover.py` is read-only and polite (robots.txt respected, 1 request per host per second, QA hosts skipped). It walks robots.txt and sitemaps for every tenant host, stores the URL inventory in `data/<tenant>/inventory.sqlite` and writes a summary plus sitemap findings to `reports/<tenant>/discovery-<date>-run<N>.json`.
 
-`check_access.py` is read-only. It reports which GSC properties the service account can read (with 28-day clicks, top pages and sitemap errors) and which hostnames GA4 tracks, then writes `reports/access-check-<date>.json`.
+`check_access.py` is read-only. It reports which GSC properties the service account can read (with 28-day clicks, top pages and sitemap errors) and which hostnames GA4 tracks, then writes `reports/<tenant>/access-check-<date>.json`.

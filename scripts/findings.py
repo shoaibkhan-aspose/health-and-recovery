@@ -1,14 +1,14 @@
 """Findings store CLI: import discovery runs and seed findings, list what is open.
 
     python scripts/findings.py import-seed                      # tenants/<tenant>.seed-findings.yaml
-    python scripts/findings.py import-discovery reports/discovery-2026-10-08-run6.json
-    python scripts/findings.py import-audit reports/crawl-audit-2026-10-08-run1.json
+    python scripts/findings.py import-discovery reports/aspose.app/discovery-2026-10-08-run6.json
+    python scripts/findings.py import-audit reports/aspose.app/crawl-audit-2026-10-08-run1.json
     python scripts/findings.py list --dimension intl --host products.aspose.app
     python scripts/findings.py summary
-    python scripts/findings.py export                           # reports/findings.json (committed)
+    python scripts/findings.py export                           # reports/<tenant>/findings.json (committed)
 
 discover.py imports its run automatically; import-discovery is for older run files.
-The store is data/findings.sqlite (gitignored).
+The store is data/<tenant>/findings.sqlite (gitignored); --tenant (or TENANT) picks the tenant.
 """
 
 from __future__ import annotations
@@ -29,10 +29,9 @@ sys.path.insert(0, str(REPO_ROOT))
 from core.audit.crawl import import_report as import_audit  # noqa: E402
 from core.discovery.run import import_report  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.tenant import TENANTS_DIR  # noqa: E402
 
-DEFAULT_STORE = REPO_ROOT / "data" / "findings.sqlite"
-DEFAULT_EXPORT = REPO_ROOT / "reports" / "findings.json"
 ALL_STATUSES = ("open", "unverified", "resolved", "superseded")
 
 
@@ -48,7 +47,7 @@ def import_seed(store: FindingsStore, tenant: str) -> dict | None:
     return store.import_seed(doc, f"seed-{date.today().isoformat()}")
 
 
-def export(store: FindingsStore, path: Path = DEFAULT_EXPORT) -> Path:
+def export(store: FindingsStore, path: Path) -> Path:
     """Every finding (all statuses) as readable JSON, sorted by id, so git diffs show what changed."""
     rows = sorted(store.findings(ALL_STATUSES), key=lambda f: f["id"])
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -66,7 +65,7 @@ def print_changes(result: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--store", default=str(DEFAULT_STORE))
+    ap.add_argument("--store", help="findings store (default: data/<tenant>/findings.sqlite)")
     ap.add_argument("--tenant", default=os.environ.get("TENANT", "aspose.app"))
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("import-seed", help="load the tenant's seed findings file")
@@ -80,11 +79,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--host")
     p.add_argument("--json", action="store_true")
     sub.add_parser("summary", help="counts by status, dimension and type")
-    p = sub.add_parser("export", help="write all findings to reports/findings.json")
-    p.add_argument("--out", default=str(DEFAULT_EXPORT))
+    p = sub.add_parser("export", help="write all findings to reports/<tenant>/findings.json")
+    p.add_argument("--out")
     args = ap.parse_args(argv)
 
-    store = FindingsStore(args.store)
+    paths = tenant_paths(args.tenant)
+    store = FindingsStore(args.store or str(paths.findings_store))
     if args.cmd == "import-seed":
         res = import_seed(store, args.tenant)
         if res is None:
@@ -106,7 +106,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"{f['id']:<18} {f['status']:<10} {f['type']:<13} {f['subdomain']:<24} {f['title']}")
             print(f"{len(rows)} findings")
     elif args.cmd == "export":
-        print(f"Wrote {export(store, Path(args.out))}")
+        print(f"Wrote {export(store, Path(args.out) if args.out else paths.findings_export)}")
     elif args.cmd == "summary":
         rows = store.findings(ALL_STATUSES)
         for field in ("status", "source", "dimension", "type"):

@@ -1,11 +1,11 @@
 """Prioritizer: attach 28-day Search Console traffic to every open finding and score it (impact x severity / effort).
 
     set -a; source .env; set +a
-    python scripts/prioritize.py                 # fetch GSC + GA4 (cached per window in data/), score, export
+    python scripts/prioritize.py                 # fetch GSC + GA4 (cached per window in data/<tenant>/), score, export
     python scripts/prioritize.py --offline       # reuse the newest cached traffic, no Google calls
 
 Read-only: Search Console page rows per property (webmasters.readonly) and GA4 organic sessions per host
-(analytics.readonly). Writes `impact` into the findings store and re-exports reports/findings.json.
+(analytics.readonly). Writes `impact` into the findings store and re-exports reports/<tenant>/findings.json.
 Run it after every discover.py / audit_crawl.py import.
 """
 
@@ -27,12 +27,11 @@ from datetime import date, timedelta  # noqa: E402
 from core.audit.crawl import latest_inventory_run  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
 from core.gsc import API_MAX_ROWS, default_window, previous_window  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.prioritize import TrafficIndex, prioritize, snapshot_discovered  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
-from scripts.findings import DEFAULT_STORE, export  # noqa: E402
+from scripts.findings import export  # noqa: E402
 
-CACHE_DIR = REPO_ROOT / "data"
-SUMMARY_PATH = REPO_ROOT / "reports" / "traffic-summary.json"
 SIX_MONTHS = 182  # days back for the "six months ago" window
 MAX_ROWS_PER_PROPERTY = 200_000
 
@@ -65,12 +64,12 @@ def fetch_ga4_organic(ga4, property_id: str) -> dict:
 
 def load_traffic(tenant, offline: bool, days: int) -> dict:
     if offline:
-        cached = sorted(CACHE_DIR.glob(f"traffic-{tenant.property}-*.json"))
+        cached = sorted(tenant_paths(tenant.property).data.glob(f"traffic-{tenant.property}-*.json"))
         if not cached:
             raise SystemExit("No cached traffic in data/; run without --offline first.")
         return json.loads(cached[-1].read_text(encoding="utf-8"))
     start, end = default_window(days)
-    path = CACHE_DIR / f"traffic-{tenant.property}-{start}_{end}.json"
+    path = tenant_paths(tenant.property).data / f"traffic-{tenant.property}-{start}_{end}.json"
     if path.is_file():
         print(f"Using cached traffic {path.name}")
         return json.loads(path.read_text(encoding="utf-8"))
@@ -79,7 +78,7 @@ def load_traffic(tenant, offline: bool, days: int) -> dict:
     from core.google_auth import get_credentials
     from core.gsc import GSCClient
 
-    credentials, identity = get_credentials()
+    credentials, identity = get_credentials(key_env=tenant.credentials_env)
     print(f"Identity: {identity}; window {start}..{end}")
     gsc = GSCClient(credentials)
     data = {"window": [start, end], "gsc": {}, "gsc_errors": {}, "ga4_organic": {}}
@@ -95,7 +94,7 @@ def load_traffic(tenant, offline: bool, days: int) -> dict:
             data["ga4_organic"] = fetch_ga4_organic(GA4Client(credentials), tenant.ga4_property_id)
         except Exception as exc:  # noqa: BLE001
             print(f"  GA4: {_err(exc)}")
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    tenant_paths(tenant.property).data.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data), encoding="utf-8")
     return data
 
@@ -112,7 +111,7 @@ def load_history(tenant, window: list[str], offline: bool) -> dict:
     out = {}
     gsc = None
     for label, (start, end) in history_windows(window).items():
-        path = CACHE_DIR / f"history-{tenant.property}-{start}_{end}.json"
+        path = tenant_paths(tenant.property).data / f"history-{tenant.property}-{start}_{end}.json"
         if path.is_file():
             out[label] = json.loads(path.read_text(encoding="utf-8"))
             continue
@@ -123,7 +122,7 @@ def load_history(tenant, window: list[str], offline: bool) -> dict:
             from core.google_auth import GSC_READONLY, get_credentials
             from core.gsc import GSCClient
 
-            gsc = GSCClient(get_credentials((GSC_READONLY,))[0])
+            gsc = GSCClient(get_credentials((GSC_READONLY,), key_env=tenant.credentials_env)[0])
         data = {"window": [start, end], "gsc": {}}
         for site in tenant.gsc_properties:
             try:
@@ -171,26 +170,30 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--tenant", default=os.environ.get("TENANT", "aspose.app"))
     ap.add_argument("--days", type=int, default=28)
-    ap.add_argument("--offline", action="store_true", help="use the newest cached traffic in data/")
-    ap.add_argument("--store", default=str(DEFAULT_STORE))
-    ap.add_argument("--inventory", default=str(REPO_ROOT / "data" / "inventory.sqlite"))
+    ap.add_argument("--offline", action="store_true", help="use the newest cached traffic in data/<tenant>/")
+    ap.add_argument("--store", help="default: data/<tenant>/findings.sqlite")
+    ap.add_argument("--inventory", help="default: data/<tenant>/inventory.sqlite")
     ap.add_argument("--top", type=int, default=25)
     args = ap.parse_args(argv)
 
     tenant = load_tenant(args.tenant)
+    paths = tenant_paths(tenant.property)
     data = load_traffic(tenant, args.offline, args.days)
     history = load_history(tenant, data["window"], args.offline)
-    SUMMARY_PATH.write_text(json.dumps(traffic_summary(tenant, data, history), indent=1) + "\n", encoding="utf-8")
-    print(f"Traffic summary: {SUMMARY_PATH}")
+    paths.reports.mkdir(parents=True, exist_ok=True)
+    paths.traffic_summary.write_text(json.dumps(traffic_summary(tenant, data, history), indent=1) + "\n",
+                                     encoding="utf-8")
+    print(f"Traffic summary: {paths.traffic_summary}")
     rows = [r for site_rows in data["gsc"].values() for r in site_rows]
     idx = TrafficIndex.build(tenant, rows, data.get("ga4_organic"), window=tuple(data["window"]))
 
-    store = FindingsStore(args.store)
+    store = FindingsStore(args.store or str(paths.findings_store))
     findings = store.findings()
     six = history.get("six_months_ago")
     past = (TrafficIndex.build(tenant, [r for rows in six["gsc"].values() for r in rows], window=tuple(six["window"]))
             if six else None)
-    impacts = prioritize(findings, idx, section_urls(Path(args.inventory), tenant), snapshot_discovered(tenant), past)
+    urls = section_urls(Path(args.inventory or paths.inventory), tenant)
+    impacts = prioritize(findings, idx, urls, snapshot_discovered(tenant), past)
     print(f"Scored {store.set_impacts(impacts)} findings (window {data['window'][0]}..{data['window'][1]})")
 
     by_id = {f["id"]: f for f in findings}
@@ -204,7 +207,7 @@ def main(argv: list[str] | None = None) -> int:
     none = [fid for fid, imp in impacts.items() if imp["source"] == "none"]
     if none:
         print(f"\nNo traffic data for {len(none)} findings (host has no GSC property and no GA4 sessions).")
-    print(f"Findings export: {export(store)}")
+    print(f"Findings export: {export(store, paths.findings_export)}")
     return 0
 
 

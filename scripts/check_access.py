@@ -10,7 +10,7 @@ It answers:
   3. Per readable property: 28-day clicks/impressions, top pages, submitted sitemaps + errors.
   4. GA4: which hostnames the property tracks, total vs organic sessions per host.
 
-Writes reports/access-check-<date>.json. Nothing is changed anywhere; only read scopes are used.
+Writes reports/<tenant>/access-check-<date>.json. Nothing is changed anywhere; only read scopes are used.
 Exit code 0 = every check passed, 1 = at least one failed (details in the report).
 """
 
@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from collections import defaultdict
 from datetime import date
@@ -28,6 +29,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from core.google_auth import CredentialsError, get_credentials  # noqa: E402
 from core.gsc import default_window  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
 
 TOP_N = 5
@@ -139,16 +141,16 @@ def print_summary(report: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--tenant", default="aspose.app")
+    ap.add_argument("--tenant", default=os.environ.get("TENANT", "aspose.app"))
     ap.add_argument("--days", type=int, default=28)
-    ap.add_argument("--out-dir", default=str(REPO_ROOT / "reports"))
+    ap.add_argument("--out-dir", help="default: reports/<tenant>/")
     args = ap.parse_args(argv)
 
     tenant = load_tenant(args.tenant)
     report: dict = {"tenant": tenant.property, "run_date": date.today().isoformat()}
 
     try:
-        credentials, identity = get_credentials()
+        credentials, identity = get_credentials(key_env=tenant.credentials_env)
     except CredentialsError as exc:
         print(f"Credentials problem: {exc}", file=sys.stderr)
         return 1
@@ -167,7 +169,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:  # noqa: BLE001
         report["ga4"] = {"ok": False, "error": _err(exc)}
 
-    out_dir = Path(args.out_dir)
+    out_dir = Path(args.out_dir) if args.out_dir else tenant_paths(tenant.property).reports
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / f"access-check-{report['run_date']}.json"
     out_file.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")

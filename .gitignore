@@ -19,9 +19,9 @@ dist/
 .pytest_cache/
 .ruff_cache/
 
-# Generated output. reports/ is committed (internal repo, SK 2026-10-08): run JSON, report HTML,
-# notes and the findings export. data/ is not: inventory.sqlite is ~750 MB and rebuilt by discover.py;
-# findings.sqlite is exported to reports/findings.json instead.
+# Generated output, one folder per tenant. reports/<tenant>/ is committed (SK 2026-10-08): run JSON, report HTML,
+# notes, the findings export and the archive. data/<tenant>/ is not: inventory.sqlite is ~1 GB and rebuilt by
+# discover.py; findings.sqlite is exported to reports/<tenant>/findings.json instead.
 data/
 
 # OS / editor

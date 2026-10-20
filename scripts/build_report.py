@@ -1,22 +1,22 @@
 """Render the site health report (discovery, crawl audits, latest speed, AI and text checks) as one HTML page.
 
-    python scripts/build_report.py                                   # newest discovery report + newest crawl audit
-    python scripts/build_report.py --findings reports/findings.json  # without the store (GitHub Actions)
-    python scripts/build_report.py reports/discovery-2026-10-08-run7.json --notes reports/discovery-notes.txt \
-        --audit-notes reports/crawl-audit-notes.txt --out reports/discovery-latest.html
+    python scripts/build_report.py                     # TENANT (default aspose.app): newest runs in reports/<tenant>/
+    python scripts/build_report.py --tenant conholdate.cloud --out reports/conholdate.cloud/discovery-latest.html
+    python scripts/build_report.py --findings reports/aspose.app/findings.json  # without the store (GitHub Actions)
 
 The page embeds the run's data as JSON and renders it in the browser (no external requests except
 Google Fonts). Findings come from the findings store (open + unverified, discovery and manual review,
 with notes and what is new or resolved in this run); without a store, from the run JSON.
 Optional --notes / --audit-notes: plain-text files, one key takeaway per line, shown at the top and in the
 crawl audit section. --audit '' leaves the crawl audit out.
-Output: reports/<input name>.html, or --out. GitHub Pages serves docs/index.html (built with --standalone).
+Output: reports/<tenant>/<input name>.html, or --out. GitHub Pages serves site/<tenant>/index.html (--standalone).
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -26,6 +26,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from core.findings import FindingsStore  # noqa: E402
 from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
+from core.paths import TenantPaths, tenant_paths  # noqa: E402
 from core.report_view import (  # noqa: E402
     confidence,
     grade_summary,
@@ -38,8 +39,6 @@ from core.report_view import (  # noqa: E402
 from core.scorecard import family_of, family_scorecards  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
-TRAFFIC_SUMMARY = REPO_ROOT / "reports" / "traffic-summary.json"
-HEALTH_HISTORY = REPO_ROOT / "reports" / "health-history.json"
 
 
 # For hosting the file on its own (GitHub Pages): the artifact host adds this skeleton itself.
@@ -69,22 +68,23 @@ def run_date_of(path: Path, prefix: str) -> str | None:
     return path.stem.split("-run")[0].removeprefix(prefix) if "-run" in path.stem else None
 
 
-def runs_by_name(pattern: str) -> list[Path]:
-    """Report files ordered by the date and run number in their names (file times are meaningless after a
-    git checkout)."""
+def runs_by_name(pattern: str, folder: Path) -> list[Path]:
+    """Report files in `folder` ordered by the date and run number in their names (file times are meaningless
+    after a git checkout)."""
     def key(p: Path):
         m = re.search(r"(\d{4}-\d{2}-\d{2})-run(\d+)", p.name)
         return (m.group(1), int(m.group(2))) if m else ("", 0)
-    return sorted((REPO_ROOT / "reports").glob(pattern), key=key)
+    return sorted(folder.glob(pattern), key=key)
 
 
-def newest(pattern: str) -> Path | None:
-    found = runs_by_name(pattern)
+def newest(pattern: str, folder: Path) -> Path | None:
+    found = runs_by_name(pattern, folder)
     return found[-1] if found else None
 
 
 def from_export(rows: list[dict], run_ref: str) -> tuple[list[dict], dict]:
-    """Open findings and what `run_ref` changed, from reports/findings.json (for CI, where the store is absent).
+    """Open findings and what `run_ref` changed, from reports/<tenant>/findings.json (for CI, where the store is
+    absent).
     Same shape as FindingsStore.findings() and .changes()."""
     findings = sorted((f for f in rows if f["status"] in ("open", "unverified")), key=lambda f: f["id"])
     def seq(ref: str | None) -> int:  # discovery-run7 -> 7
@@ -125,8 +125,8 @@ def audit_summary(paths: list[Path], notes: list[str]) -> dict:
             "sections": {h: sorted(v) for h, v in sections.items()}, "notes": notes}
 
 
-def add_families(report: dict, summary_path: Path = TRAFFIC_SUMMARY) -> None:
-    """Family scorecards per sectioned host (from reports/traffic-summary.json, written by prioritize.py), and
+def add_families(report: dict, summary_path: Path) -> None:
+    """Family scorecards per sectioned host (from reports/<tenant>/traffic-summary.json, written by prioritize.py), and
     each finding's family for the report's Family filter."""
     if not summary_path.is_file():
         return
@@ -140,6 +140,8 @@ def add_families(report: dict, summary_path: Path = TRAFFIC_SUMMARY) -> None:
             fam = family_of(f, host, set(families))
             if fam:
                 f["_family"] = fam
+    if not report["_families"]["hosts"]:  # a tenant without sectioned hosts has no family cards
+        del report["_families"]
 
 
 def runs_label(report: dict) -> str:
@@ -176,7 +178,7 @@ def text_summary(path: Path) -> dict:
             "pages_checked": a["pages_checked"], "unchecked": len(a["unchecked"]), "summary": a["summary"]}
 
 
-def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Path = HEALTH_HISTORY) -> None:
+def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Path | None = None) -> None:
     """Fix guide, confidence, merged root causes, systemic issues, top risks, grade summary, changes since the
     last run and the family health trend (see core/report_view.py)."""
     findings = report["findings"]
@@ -208,12 +210,12 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
     report["_systemic"] = systemic_issues(findings, host, families)
     report["_risks"] = top_risks(findings, host, families)
     report["_summary"] = grade_summary(cards)
-    history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.is_file() else []
+    history = json.loads(history_path.read_text(encoding="utf-8")) if history_path and history_path.is_file() else []
     report["_trend"] = health_trend(cards, history, runs_label(report))
 
 
-def record_health(report: dict, history_path: Path = HEALTH_HISTORY) -> None:
-    """Append this run's family health to reports/health-history.json (once per set of runs)."""
+def record_health(report: dict, history_path: Path) -> None:
+    """Append this run's family health to reports/<tenant>/health-history.json (once per set of runs)."""
     from datetime import date
 
     fam = report.get("_families")
@@ -229,12 +231,11 @@ def record_health(report: dict, history_path: Path = HEALTH_HISTORY) -> None:
     history_path.write_text(json.dumps(history, indent=1) + "\n", encoding="utf-8")
 
 
-def snapshot(page: str, label: str, report: dict) -> Path:
-    """Freeze a standalone report page into reports/archive/<date>[-n].html and list it in index.json.
+def snapshot(page: str, label: str, report: dict, archive: Path) -> Path:
+    """Freeze a standalone report page into reports/<tenant>/archive/<date>[-n].html and list it in index.json.
     Snapshots are never rebuilt (older reports stay as they were)."""
     from datetime import date
 
-    archive = REPO_ROOT / "reports" / "archive"
     archive.mkdir(parents=True, exist_ok=True)
     day = date.today().isoformat()
     name, n = f"{day}.html", 1
@@ -252,30 +253,36 @@ def snapshot(page: str, label: str, report: dict) -> Path:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("report", nargs="?", help="discovery JSON (default: newest in reports/)")
+    ap.add_argument("report", nargs="?", help="discovery JSON (default: newest in reports/<tenant>/)")
+    ap.add_argument("--tenant", default=os.environ.get("TENANT", "aspose.app"))
     ap.add_argument("--notes", help="text file, one key takeaway per line")
     ap.add_argument("--audit", help="comma-separated crawl-audit JSONs, merged oldest first "
-                    "(default: every crawl-audit run in reports/; '' to leave out)")
+                    "(default: every crawl-audit run in reports/<tenant>/; '' to leave out)")
     ap.add_argument("--audit-notes", help="text file, one crawl-audit takeaway per line")
-    ap.add_argument("--perf", help="speed-audit JSON (default: newest perf-audit run in reports/; '' to leave out)")
-    ap.add_argument("--ai", help="AI-audit JSON (default: newest ai-audit run in reports/; '' to leave out)")
-    ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/; '' to leave out)")
+    ap.add_argument("--perf", help="speed-audit JSON (default: newest perf-audit run in reports/<tenant>/; "
+                    "'' to leave out)")
+    ap.add_argument("--ai", help="AI-audit JSON (default: newest ai-audit run in reports/<tenant>/; '' to leave out)")
+    ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/<tenant>/; "
+                    "'' to leave out)")
     ap.add_argument("--out", help="output HTML path")
     ap.add_argument("--standalone", action="store_true",
                     help="add doctype, charset, viewport and noindex (for GitHub Pages: --out docs/index.html)")
-    ap.add_argument("--store", default=str(REPO_ROOT / "data" / "findings.sqlite"), help="findings store")
-    ap.add_argument("--findings", help="read findings from this export (reports/findings.json) instead of the store")
+    ap.add_argument("--store", help="findings store (default: data/<tenant>/findings.sqlite)")
+    ap.add_argument("--findings", help="read findings from this export (reports/<tenant>/findings.json) instead of "
+                    "the store")
     ap.add_argument("--snapshot", metavar="LABEL",
-                    help="also freeze this report (standalone) into reports/archive/ with this label, and record "
-                    "the family health in reports/health-history.json (do this after every full run)")
+                    help="also freeze this report (standalone) into reports/<tenant>/archive/ with this label, and "
+                    "record the family health in reports/<tenant>/health-history.json (do this after every full run)")
     args = ap.parse_args(argv)
+    paths: TenantPaths = tenant_paths(args.tenant)
+    folder = paths.reports
 
     if args.report:
         src = Path(args.report)
     else:
-        src = newest("discovery-*-run*.json")
+        src = newest("discovery-*-run*.json", folder)
         if src is None:
-            print("No reports/discovery-*.json found. Run scripts/discover.py first.", file=sys.stderr)
+            print(f"No discovery-*.json in {folder}. Run scripts/discover.py first.", file=sys.stderr)
             return 1
 
     report = json.loads(src.read_text(encoding="utf-8"))
@@ -285,17 +292,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.audit:
         audit_srcs = [Path(a) for a in args.audit.split(",")]
     elif args.audit is None:
-        audit_srcs = runs_by_name("crawl-audit-*-run*.json")
+        audit_srcs = runs_by_name("crawl-audit-*-run*.json", folder)
     audit_src = audit_srcs[-1] if audit_srcs else None
     if audit_srcs:
         report["_audit"] = audit_summary(audit_srcs, read_notes(args.audit_notes))
-    perf_src = Path(args.perf) if args.perf else newest("perf-audit-*-run*.json") if args.perf is None else None
+    perf_src = Path(args.perf) if args.perf else newest("perf-audit-*-run*.json", folder) if args.perf is None else None
     if perf_src:
         report["_perf"] = perf_summary(perf_src)
-    ai_src = Path(args.ai) if args.ai else newest("ai-audit-*-run*.json") if args.ai is None else None
+    ai_src = Path(args.ai) if args.ai else newest("ai-audit-*-run*.json", folder) if args.ai is None else None
     if ai_src:
         report["_ai"] = ai_summary(ai_src)
-    text_src = Path(args.text) if args.text else newest("text-audit-*-run*.json") if args.text is None else None
+    text_src = Path(args.text) if args.text else newest("text-audit-*-run*.json", folder) if args.text is None else None
     if text_src:
         report["_text"] = text_summary(text_src)
     if args.findings:
@@ -310,8 +317,8 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "ai-audit"]
         if not text_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
-    elif Path(args.store).is_file():
-        store = FindingsStore(args.store)
+    elif Path(store_path := args.store or str(paths.findings_store)).is_file():
+        store = FindingsStore(store_path)
         run_ref = f"discovery-run{report['run_id']}"
         if not store.db.execute("SELECT 1 FROM runs WHERE ref = ?", (run_ref,)).fetchone():
             print(f"{run_ref} is not in the findings store; run scripts/findings.py import-discovery {src}",
@@ -329,17 +336,18 @@ def main(argv: list[str] | None = None) -> int:
         if not text_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
     else:
-        print(f"No findings store at {args.store}; using the run's own findings.", file=sys.stderr)
-    add_families(report)
-    add_views(report, all_rows)
+        print(f"No findings store at {store_path}; using the run's own findings.", file=sys.stderr)
+    add_families(report, paths.traffic_summary)
+    add_views(report, all_rows, paths.health_history)
     run_date = run_date_of(src, "discovery-")
 
     out = Path(args.out) if args.out else src.with_suffix(".html")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(build(report, notes, run_date, args.standalone), encoding="utf-8")
     if args.snapshot:
-        print(f"Snapshot: {snapshot(build(report, notes, run_date, standalone=True), args.snapshot, report)}")
-        record_health(report)
+        page = build(report, notes, run_date, standalone=True)
+        print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")
+        record_health(report, paths.health_history)
     print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {src.name}"
           + (f" and {len(audit_srcs)} crawl-audit runs (newest {audit_src.name})" if audit_src else "")
           + (f" and {perf_src.name}" if perf_src else "") + (f" and {ai_src.name}" if ai_src else "")

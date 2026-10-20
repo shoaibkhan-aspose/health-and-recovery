@@ -1,5 +1,5 @@
 # Rebuild the site health report from the committed run files and publish it on GitHub Pages.
-# Renders only: audits run on SK's Mac (network + Google key) and commit reports/*.json and findings.json.
+# Renders only: audits run on SK's Mac (network + Google key) and commit reports/<tenant>/*.json and findings.json.
 name: Publish report
 
 on:
@@ -24,12 +24,10 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Build report (newest discovery run + newest crawl audit)
-        run: >
-          python scripts/build_report.py --findings reports/findings.json
-          --standalone --out site/index.html
-      - name: Add the report archive (frozen snapshots)
-        run: python scripts/build_archive.py --out site
+      - name: Install PyYAML (tenant configs)
+        run: python -m pip install pyyaml
+      - name: Build the site (landing page, one report + archive per tenant, redirects for old links)
+        run: python scripts/build_site.py --out site
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

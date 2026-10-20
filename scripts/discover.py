@@ -8,8 +8,8 @@ Run on the Mac (needs network; no Google credentials):
 Read-only and polite: GET requests only, robots.txt respected, one request per host per
 --interval seconds, identifiable user agent, excluded (QA) hosts never touched.
 
-Writes the inventory to data/inventory.sqlite (one run per invocation) and the summary plus
-findings to reports/discovery-<date>.json.
+Writes the inventory to data/<tenant>/inventory.sqlite (one run per invocation) and the summary plus
+findings to reports/<tenant>/discovery-<date>.json.
 """
 
 from __future__ import annotations
@@ -28,8 +28,9 @@ from core.discovery.fetch import DEFAULT_USER_AGENT, PoliteFetcher  # noqa: E402
 from core.discovery.run import discover, import_report  # noqa: E402
 from core.discovery.store import InventoryStore  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
-from scripts.findings import DEFAULT_STORE, export, import_seed, print_changes  # noqa: E402
+from scripts.findings import export, import_seed, print_changes  # noqa: E402
 
 
 def _csv(value: str | None) -> list[str] | None:
@@ -84,13 +85,18 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--max-sitemaps", type=int, help="stop after fetching this many sitemaps")
     ap.add_argument("--interval", type=float, default=1.0, help="seconds between requests to one host")
     ap.add_argument("--user-agent", default=os.environ.get("AUDIT_USER_AGENT", DEFAULT_USER_AGENT))
-    ap.add_argument("--db", default=str(REPO_ROOT / "data" / "inventory.sqlite"))
-    ap.add_argument("--out-dir", default=str(REPO_ROOT / "reports"))
-    ap.add_argument("--findings-store", default=str(DEFAULT_STORE), help="'' to skip the findings store")
+    ap.add_argument("--db", help="inventory (default: data/<tenant>/inventory.sqlite)")
+    ap.add_argument("--out-dir", help="default: reports/<tenant>/")
+    ap.add_argument("--findings-store", help="default: data/<tenant>/findings.sqlite; '' to skip the findings store")
     ap.add_argument("--quiet", action="store_true", help="no per-sitemap progress lines")
     args = ap.parse_args(argv)
 
     tenant = load_tenant(args.tenant)
+    paths = tenant_paths(tenant.property)
+    args.db = args.db or str(paths.inventory)
+    args.out_dir = args.out_dir or str(paths.reports)
+    if args.findings_store is None:
+        args.findings_store = str(paths.findings_store)
     hosts = _csv(args.hosts)
     unknown = [h for h in hosts or [] if h not in tenant.host_names]
     if unknown:
@@ -114,7 +120,7 @@ def main(argv: list[str] | None = None) -> int:
         import_seed(fstore, tenant.property)
         print(f"\nFindings store: {args.findings_store}")
         print_changes(import_report(fstore, report))
-        print(f"Findings export: {export(fstore)}")
+        print(f"Findings export: {export(fstore, paths.findings_export)}")
     return 0
 
 

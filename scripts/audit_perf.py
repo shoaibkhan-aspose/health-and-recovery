@@ -1,6 +1,6 @@
 """Speed audit: Core Web Vitals (real users) and a Lighthouse lab run per sampled page, via PageSpeed Insights.
 
-Run on the Mac after a crawl audit and prioritize.py (it reads data/audit.sqlite and the traffic cache):
+Run on the Mac after a crawl audit and prioritize.py (it reads data/<tenant>/audit.sqlite and the traffic cache):
 
     python scripts/audit_perf.py --plan                    # list the pages it would measure; no API calls
     python scripts/audit_perf.py --quiet                   # all hosts, 2 pages per template, mobile
@@ -9,8 +9,8 @@ Run on the Mac after a crawl audit and prioritize.py (it reads data/audit.sqlite
 Auth: the service account from GOOGLE_APPLICATION_CREDENTIALS (PageSpeed Insights API enabled in its Cloud
 project), or PAGESPEED_API_KEY. Google loads each page once from its own servers; nothing is written anywhere.
 
-Writes the report to reports/perf-audit-<date>-run<id>.json and the findings to the findings store (exported to
-reports/findings.json). Run prioritize.py afterwards to score the new findings.
+Writes the report to reports/<tenant>/perf-audit-<date>-run<id>.json and the findings to the findings store (exported to
+reports/<tenant>/findings.json). Run prioritize.py afterwards to score the new findings.
 """
 
 from __future__ import annotations
@@ -30,8 +30,9 @@ from core.audit.perf import audit, fmt, import_report, select_pages  # noqa: E40
 from core.audit.store import AuditStore  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
 from core.pagespeed import PageSpeedClient, PageSpeedError, make_session  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
-from scripts.findings import DEFAULT_STORE, export, import_seed, print_changes  # noqa: E402
+from scripts.findings import export, import_seed, print_changes  # noqa: E402
 
 
 def _csv(value: str | None) -> list[str] | None:
@@ -68,14 +69,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--workers", type=int, default=4, help="PageSpeed calls in parallel")
     ap.add_argument("--max-pages", type=int, help="measure at most this many pages (findings then resolve nothing)")
     ap.add_argument("--plan", action="store_true", help="only list the pages that would be measured")
-    ap.add_argument("--traffic", help="cached traffic JSON from prioritize.py (default: newest in data/)")
-    ap.add_argument("--db", default=str(REPO_ROOT / "data" / "audit.sqlite"))
-    ap.add_argument("--out-dir", default=str(REPO_ROOT / "reports"))
-    ap.add_argument("--findings-store", default=str(DEFAULT_STORE), help="'' to skip the findings store")
+    ap.add_argument("--traffic", help="cached traffic JSON from prioritize.py (default: newest in data/<tenant>/)")
+    ap.add_argument("--db", help="audit pages (default: data/<tenant>/audit.sqlite)")
+    ap.add_argument("--out-dir", help="default: reports/<tenant>/")
+    ap.add_argument("--findings-store", help="default: data/<tenant>/findings.sqlite; '' to skip the findings store")
     ap.add_argument("--quiet", action="store_true", help="no per-page progress lines")
     args = ap.parse_args(argv)
 
     tenant = load_tenant(args.tenant)
+    paths = tenant_paths(tenant.property)
+    args.db = args.db or str(paths.audit_db)
+    args.out_dir = args.out_dir or str(paths.reports)
+    if args.findings_store is None:
+        args.findings_store = str(paths.findings_store)
     hosts = _csv(args.hosts)
     unknown = [h for h in hosts or [] if h not in tenant.host_names]
     if unknown:
@@ -86,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     traffic = args.traffic
     if traffic is None:
-        cached = sorted((REPO_ROOT / "data").glob(f"traffic-{tenant.property}-*.json"))
+        cached = sorted(paths.data.glob(f"traffic-{tenant.property}-*.json"))
         traffic = str(cached[-1]) if cached else ""
     search_rows = []
     if traffic:
@@ -126,7 +132,7 @@ def main(argv: list[str] | None = None) -> int:
         import_seed(fstore, tenant.property)
         print(f"\nFindings store: {args.findings_store}")
         print_changes(import_report(fstore, report))
-        print(f"Findings export: {export(fstore)}  (run prioritize.py to score them)")
+        print(f"Findings export: {export(fstore, paths.findings_export)}  (run prioritize.py to score them)")
     return 0
 
 

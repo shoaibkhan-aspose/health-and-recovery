@@ -10,8 +10,8 @@ Page-level AI checks (text without JavaScript, structured data) run in scripts/a
 Read-only and polite: GET only, robots.txt respected, one request per host per --interval seconds. The firewall
 probe fetches each homepage once per AI crawler user agent, with the audit's name appended to stay identifiable.
 
-Writes the report to reports/ai-audit-<date>-run<id>.json and the findings to the findings store (exported to
-reports/findings.json). Run prioritize.py afterwards to score the new findings.
+Writes the report to reports/<tenant>/ai-audit-<date>-run<id>.json and the findings to the findings store (exported to
+reports/<tenant>/findings.json). Run prioritize.py afterwards to score the new findings.
 """
 
 from __future__ import annotations
@@ -30,8 +30,9 @@ from core.audit.ai import audit, import_report  # noqa: E402
 from core.audit.store import AuditStore  # noqa: E402
 from core.discovery.fetch import DEFAULT_USER_AGENT, PoliteFetcher  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
+from core.paths import tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
-from scripts.findings import DEFAULT_STORE, export, import_seed, print_changes  # noqa: E402
+from scripts.findings import export, import_seed, print_changes  # noqa: E402
 
 MAX_BYTES = 5 * 1024 * 1024
 
@@ -59,13 +60,18 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--hosts", help="comma-separated hosts (default: all tenant hosts)")
     ap.add_argument("--interval", type=float, default=1.0, help="seconds between requests to one host")
     ap.add_argument("--user-agent", default=os.environ.get("AUDIT_USER_AGENT", DEFAULT_USER_AGENT))
-    ap.add_argument("--db", default=str(REPO_ROOT / "data" / "audit.sqlite"))
-    ap.add_argument("--out-dir", default=str(REPO_ROOT / "reports"))
-    ap.add_argument("--findings-store", default=str(DEFAULT_STORE), help="'' to skip the findings store")
+    ap.add_argument("--db", help="audit pages (default: data/<tenant>/audit.sqlite)")
+    ap.add_argument("--out-dir", help="default: reports/<tenant>/")
+    ap.add_argument("--findings-store", help="default: data/<tenant>/findings.sqlite; '' to skip the findings store")
     ap.add_argument("--quiet", action="store_true", help="no per-host progress lines")
     args = ap.parse_args(argv)
 
     tenant = load_tenant(args.tenant)
+    paths = tenant_paths(tenant.property)
+    args.db = args.db or str(paths.audit_db)
+    args.out_dir = args.out_dir or str(paths.reports)
+    if args.findings_store is None:
+        args.findings_store = str(paths.findings_store)
     hosts = _csv(args.hosts)
     unknown = [h for h in hosts or [] if h not in tenant.host_names]
     if unknown:
@@ -86,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
         import_seed(fstore, tenant.property)
         print(f"\nFindings store: {args.findings_store}")
         print_changes(import_report(fstore, report))
-        print(f"Findings export: {export(fstore)}  (run prioritize.py to score them)")
+        print(f"Findings export: {export(fstore, paths.findings_export)}  (run prioritize.py to score them)")
     return 0
 
 

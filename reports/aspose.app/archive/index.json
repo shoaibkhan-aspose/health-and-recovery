@@ -34,5 +34,11 @@
     "date": "2026-10-20",
     "label": "After the text check (LLM spelling and topic check)",
     "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 21"
+  },
+  {
+    "file": "2026-10-20-2.html",
+    "date": "2026-10-20 (2)",
+    "label": "Text check run 23, before the per-tenant layout",
+    "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 23"
   }
 ]
