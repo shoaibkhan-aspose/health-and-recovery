@@ -10,7 +10,7 @@ One report per tenant (property), listed on the [landing page](https://shoaibkha
 - **[conholdate.cloud](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/)**: blog.conholdate.cloud for now. Previous versions: [archive](https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/archive/).
 - **[Fix guide](https://shoaibkhan-aspose.github.io/health-and-recovery/fix-guide/)**: one shared page for every report: what each check means, its impact, how to fix and verify it, and which reports have it open.
 
-Each report grades product families and, separately, every host without families (A–F, out of 100).
+Each report grades product families and every host (A–F, out of 100). Every host also has its own page at the site root, e.g. [https://shoaibkhan-aspose.github.io/health-and-recovery/blog.conholdate.cloud/](https://shoaibkhan-aspose.github.io/health-and-recovery/blog.conholdate.cloud/) or [https://shoaibkhan-aspose.github.io/health-and-recovery/forum.aspose.app/](https://shoaibkhan-aspose.github.io/health-and-recovery/forum.aspose.app/): the property report filtered to that host, for the team that owns it. The header switches between properties and hosts.
 
 [![Publish report](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml/badge.svg)](https://github.com/shoaibkhan-aspose/health-and-recovery/actions/workflows/pages.yml)
 
