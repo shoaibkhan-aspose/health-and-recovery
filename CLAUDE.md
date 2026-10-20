@@ -10,12 +10,16 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 ## Start here (session handoff, 2026-10-20)
 
-**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor (2026-10-16), **text check** (LLM spelling/topic check, built and first run 2026-10-20; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive. Text check, soft-404 fix, run 21, report snapshot and docs committed and pushed to `github` on 2026-10-20 (Pages rebuilt).
+**State:** Phase 1 (audit only). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor (2026-10-16), **text check** (LLM spelling/topic check, built and first run 2026-10-20; see Status), findings store, Prioritizer (GSC traffic + score, traffic lost), family scorecards (health A-F, status pills), the report (summary, families, priorities, shared problems, findings, changes, fix guide, reference incl. "Speed per host" and "AI access per host", method) and its archive. Everything is committed and pushed to `github` (last commit 3cd0620, 2026-10-20); Pages shows text check run 23; working tree clean.
+
+**Session 2026-10-20 in short:** SK postponed the functional auditor; chose the text check (first LLM use, internal endpoint) before priority 4; it was built, tuned (3 runs), and published; typo severity agreed (plain typo `improvable`, placeholder/garbled/wrong product `incorrect`); a soft-404 gap was fixed in the crawl auditor (code only); a Total false positive was removed (Aspose.Total = all products). Details: Status, "Text check".
 
 **Next session, start with:**
+0. **Archive first:** the live Pages report (text check run 23, pushed 2026-10-20 after the `2026-10-20` snapshot) is **not in the archive yet**. Before the next push that changes the report, `curl` it into `reports/archive/<date>.html` and add an index entry "Text check run 23, before <change>" (rule below).
 1. **Priority 4** (`findings`, then `crawl` MCP servers). The functional auditor is **postponed** (SK, 2026-10-20).
 2. **Soft 404 fix (2026-10-20, code only):** `/psd/conversion/ai-to-pdf` is listed in `/psd/sitemap.en.xml`, answers 302 to `/psd/page404?url=...` (HTTP 200, generic PSD title, H1 "There is an error on this page or it does not exist"); the crawl audit called it only a temporary redirect (its URL rule needed a separator before "404"). `soft_404` now matches `page404`-style targets and error wording in the H1; on run 15 data it adds only this page. Takes effect at the next crawl run: then count how many psd (and other) sitemap URLs end at page404.
 3. **Remind SK to get a dedicated LLM key** (see Open items) until he says it is in place.
+3a. Optional, offered to SK: Total's format pages share one generic description (e.g. /total/compress/tga lists PDF/Excel/PowerPoint/Word, no TGA). Not wrong (Aspose.Total = all products) but weak per page; belongs to the crawl audit's duplicate-description check, not the LLM.
 4. Watch: **ocr is intermittently failing.** Crawl audit run 15 (2026-10-16) caught 1 of 18 sampled ocr pages with HTTP 502 (`http_error` /ocr/, ~363 pages estimated, confidence "to confirm"); the AI audit got no answer from `/ocr/llms.txt`. On 2026-10-15 most sampled ocr pages failed (HTTP 500 / ~22 s). Re-check in the next run; if it keeps flapping, raise it with SK.
 5. Open questions for SK are under "Open discussions" below (shared problems severity, Aspose.ai comparison, sample transparency, a "Speed" pill on family cards, tenant 2, Pages rename), plus two small AI ones: whether short status incident pages should count in "almost no text without JavaScript", and whether dashboard/api.products are right to skip for llms.txt.
 
@@ -50,6 +54,8 @@ git add -A && git commit -m "..." && git push github master   # Actions rebuilds
 - **Archive before anything replaces the live report (SK, 2026-10-15: "store in archive whatever is necessary and don't forget it"):** before pushing a report whose structure or data changed, check `reports/archive/index.json`. If the version live on Pages is not archived yet, download it (`curl` the Pages URL into `reports/archive/<date>.html`, add an index entry "…, before <change>"; it equals a build of the last commit), then build the new report with `--snapshot "After <change>"`. Every version that was ever live must end up in the archive.
 - **Report wording names issues, never blames teams** (SK, 2026-10-13): no "worst", "failing", "weak"; the verdict names no family and shows totals ("2 families graded F and 6 graded D. Biggest risk: <issue> in 3 families and 1 host (13k clicks at stake)"); top risks list affected places alphabetically (or count them when more than 4). Priorities and findings stay per family (working lists for teams).
 - Discuss before building when SK asks a question ("discuss first", "do not implement").
+- **LLM use (SK, 2026-10-20):** the internal endpoint is shared by the team. Run at normal speed (4 parallel calls) and back off only on trouble (all calls pause 30 s after a failure); not one-at-a-time. Sending public aspose.app page text is fine. LLM findings are reviewed by hand after each run that sends new text; false positives go to `audit.text.ignore` in the tenant YAML with a reason, and a false positive that was already published is deleted from the findings store (not "resolved"), so the report never claims a fix that did not happen.
+- **Domain facts:** Aspose.Total (`/total/`) is the bundle of all Aspose products (Words, PDF, Cells, ...): broad format lists on its pages are correct.
 - Keep the architecture diagram in its current shape; update it when the architecture changes (see "Architecture diagram" below).
 - The Pages report stays `noindex, nofollow`; traffic numbers are published as is for now (moves to a private domain later).
 
@@ -227,7 +233,7 @@ Not done yet:
 ```bash
 python3 --version                      # needs 3.11+
 python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev,crawl]"          # extras: mcp, agents, crawl
+pip install -e ".[dev,crawl,llm]"      # extras: mcp, agents, crawl, llm (openai client for the text check)
 pytest                                 # offline, no network or keys needed
 ruff check .
 set -a; source .env; set +a            # loads GOOGLE_APPLICATION_CREDENTIALS (key outside the repo)
@@ -235,6 +241,7 @@ python scripts/check_access.py --tenant aspose.app
 python scripts/discover.py             # all hosts; --hosts/--sections/--max-sitemaps for samples
 python scripts/audit_crawl.py --sections barcode,html   # crawl audit; --sections narrows products only
 python scripts/audit_ai.py             # AI readiness: AI crawler access, llms.txt per host + family
+python scripts/audit_text.py --plan   # text check: pages, cached answers, LLM calls it would make (needs PROFESSIONALIZE_* in .env)
 python scripts/audit_perf.py --plan    # speed audit: pages it would measure (run without --plan to measure)
 python scripts/prioritize.py           # traffic + score per finding (needs .env; --offline reuses cache)
 python scripts/findings.py summary     # findings store: summary | list | import-seed | import-discovery|import-audit <json>
