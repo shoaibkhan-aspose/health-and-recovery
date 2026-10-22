@@ -1,0 +1,47 @@
+# Tenant config: everything specific to groupdocs.cloud lives here, nothing in core/ or agents/.
+# Tenant 4 (SK, 2026-10-22): only blog.groupdocs.cloud for now; other groupdocs.cloud hosts may be added later.
+property: groupdocs.cloud
+
+# Hosts matching these patterns are never crawled or checked (blog-qa.groupdocs.cloud is the staging blog).
+excluded_host_patterns:
+  - "*-qa.*"
+
+# Service account sk-serv-acc@health-and-recovery (same key as conholdate.cloud).
+google_credentials_env: GOOGLE_CREDENTIALS_HEALTH_AND_RECOVERY
+
+gsc_properties:              # URL-prefix properties the service account can read (Restricted, seen 2026-10-22)
+  - https://blog.groupdocs.cloud/
+ga4_property_id: "252358764"   # SK, 2026-10-22
+
+hosts:
+  - host: blog.groupdocs.cloud
+    platform: hugo            # PaperMod theme; S3 + CloudFront (2026-10-22); repo also has Ceph deploy workflows
+    repo: github.com/groupdocs-cloud/groupdocs-cloud-blog
+    local_path: /Users/Apple/Work/Aspose/GitHub/blog.groupdocs.cloud-PROD/groupdocs-cloud-blog
+    sitemap: https://blog.groupdocs.cloud/sitemap.xml       # index of 19 language sitemaps
+    robots: https://blog.groupdocs.cloud/robots.txt
+    fix_channel: git-pr
+
+# Language prefixes from the sitemap index (English has no prefix). Old posts are deliberately not
+# translated (SK, 2026-10-22).
+languages: [en, ja, ko, es, de, ru, fr, zh, it, pt, ar, vi, zh-hant, tr, id, th, fa, uk, pl]
+
+# Supported translations (SK, 2026-10-22; matches the repo: all 579 posts have all 18).
+translation_languages: [ar, de, es, fa, fr, id, it, ja, ko, pl, pt, ru, th, tr, uk, vi, zh, zh-hant]
+
+audit:
+  default_lang: en
+  per_template_by_host:      # SK chose option A (2026-10-22): bigger sample, 11k sitemap URLs
+    blog.groupdocs.cloud: 20
+  links:                     # link audit (scripts/audit_links.py): commits that count as translation work
+    translation_commits: '^(Translate articles for|Daily Blogs Translation)'   # SK's translation agent
+
+# URL templates per host, matched in order against the path with the language segment removed.
+# Tag pages are /tag/<name>/ (config.yml permalinks); they must match before post.
+url_templates:
+  blog.groupdocs.cloud:
+    - {name: home, pattern: '^/$'}
+    - {name: listing, pattern: '^/(?P<listing>archives|search|categories|tags)/?$'}
+    - {name: tag, pattern: '^/tag/(?P<tag>[^/]+)/?$'}
+    - {name: post, pattern: '^/(?P<category>[^/]+)/(?P<slug>[^/]+)/?$'}
+    - {name: category, pattern: '^/(?P<category>[^/]+)/?$'}

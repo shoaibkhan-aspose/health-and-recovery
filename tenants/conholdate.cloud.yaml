@@ -25,13 +25,19 @@ hosts:
 # Language prefixes from the blog's config.yml (English has no prefix).
 languages: [en, ar, cs, de, es, fa, fr, he, id, it, ja, ko, nl, pl, pt, ru, sv, th, tr, uk, vi, zh, zh-hant]
 
+# Supported translations (SK, 2026-10-22; matches the repo).
+translation_languages: [ar, cs, de, es, fa, fr, he, id, it, ja, ko, nl, pl, pt, ru, sv, th, tr, uk, vi, zh, zh-hant]
+
 audit:
   default_lang: en
+  links:                     # link audit (scripts/audit_links.py): commits that count as translation work
+    translation_commits: '^(Translate articles for|Daily Blogs Translation)'   # SK's translation agent
 
 # URL templates per host, matched in order against the path with the language segment removed.
 url_templates:
   blog.conholdate.cloud:
     - {name: home, pattern: '^/$'}
     - {name: listing, pattern: '^/(?P<listing>archives|search|categories|tags)/?$'}
+    - {name: tag, pattern: '^/tag/(?P<tag>[^/]+)/?$'}   # /tag/<name>/ (config.yml permalinks), before post
     - {name: post, pattern: '^/(?P<category>[^/]+)/(?P<slug>[^/]+)/?$'}
     - {name: category, pattern: '^/(?P<category>[^/]+)/?$'}

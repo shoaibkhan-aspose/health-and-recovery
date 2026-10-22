@@ -1,0 +1,48 @@
+# Tenant config: everything specific to aspose.cloud lives here, nothing in core/ or agents/.
+# Tenant 3 (SK, 2026-10-22): only blog.aspose.cloud for now; other aspose.cloud hosts may be added later.
+property: aspose.cloud
+
+# Hosts matching these patterns are never crawled or checked (blog-qa.aspose.cloud is the staging blog).
+excluded_host_patterns:
+  - "*-qa.*"
+
+# Service account sk-serv-acc@health-and-recovery (same key as conholdate.cloud).
+google_credentials_env: GOOGLE_CREDENTIALS_HEALTH_AND_RECOVERY
+
+gsc_properties:              # URL-prefix properties the service account can read (Restricted, seen 2026-10-22)
+  - https://blog.aspose.cloud/
+ga4_property_id: "252280807"   # SK, 2026-10-22
+
+hosts:
+  - host: blog.aspose.cloud
+    platform: hugo            # PaperMod theme; S3 + CloudFront (2026-10-22); repo also has Ceph deploy workflows
+    repo: github.com/aspose-cloud/aspose-cloud-blog
+    local_path: /Users/Apple/Work/Aspose/GitHub/blog.aspose.cloud-PROD/aspose-cloud-blog
+    sitemap: https://blog.aspose.cloud/sitemap.xml       # index of 24 language sitemaps
+    robots: https://blog.aspose.cloud/robots.txt
+    fix_channel: git-pr
+
+# Language prefixes from the sitemap index (English has no prefix). Old posts are deliberately not
+# translated (SK, 2026-10-22): ~1,244 English URLs vs ~585 per language is expected, not a finding.
+languages: [en, ja, ko, es, de, ru, fr, zh, it, pt, ar, vi, tr, th, el, fa, zh-tw, hu, da, ka, he, uk, cs, id]
+
+# Supported translations (SK, 2026-10-22; matches the repo: every translated post has all 21).
+# cs and id are in config.yml and the sitemap index but not supported: empty language homepages only.
+translation_languages: [ar, da, de, el, es, fa, fr, he, hu, it, ja, ka, ko, pt, ru, th, tr, uk, vi, zh, zh-tw]
+
+audit:
+  default_lang: en
+  per_template_by_host:      # SK chose option A (2026-10-22): bigger sample, 13.5k sitemap URLs
+    blog.aspose.cloud: 20
+  links:                     # link audit (scripts/audit_links.py): commits that count as translation work
+    translation_commits: '^(Translate articles for|Daily Blogs Translation)'   # SK's translation agent
+
+# URL templates per host, matched in order against the path with the language segment removed.
+# Tag pages are /tag/<name>/ (config.yml permalinks); they must match before post.
+url_templates:
+  blog.aspose.cloud:
+    - {name: home, pattern: '^/$'}
+    - {name: listing, pattern: '^/(?P<listing>archives|search|categories|tags)/?$'}
+    - {name: tag, pattern: '^/tag/(?P<tag>[^/]+)/?$'}
+    - {name: post, pattern: '^/(?P<category>[^/]+)/(?P<slug>[^/]+)/?$'}
+    - {name: category, pattern: '^/(?P<category>[^/]+)/?$'}
