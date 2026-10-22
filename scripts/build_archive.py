@@ -20,6 +20,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from core import brand  # noqa: E402
 from core.paths import tenant_paths  # noqa: E402
 
 PAGE = """<!doctype html>
@@ -28,6 +29,7 @@ PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Report archive</title>
+""" + brand.FAVICON_LINK + """
 <style>
 :root { --bg: #f6f7f9; --surface: #fff; --fg: #18202b; --muted: #5b6676; --line: #dde2e9; --accent: #1f5f8b }
 @media (prefers-color-scheme: dark) { :root { --bg: #11161d; --surface: #182029; --fg: #e4e9f0; --muted: #98a3b3;
@@ -36,7 +38,7 @@ PAGE = """<!doctype html>
 body { margin: 0; background: var(--bg); color: var(--fg);
   font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
 main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 20px }
-h1 { margin: 0; font-size: 28px } p { margin: 0; color: var(--muted) }
+h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px } p { margin: 0; color: var(--muted) }
 a { color: var(--accent) }
 ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px }
 li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;
@@ -44,7 +46,7 @@ li { background: var(--surface); border: 1px solid var(--line); border-radius: 8
 li b { font-size: 16px } li span { color: var(--muted); font-size: 14px }
 </style>
 <main>
-  <h1>Report archive</h1>
+  <h1>""" + brand.logo(36) + """Report archive</h1>
   <p>Frozen copies of the __TENANT__ site health report. Each copy shows the report exactly as it was on that date.
   <a href="../">Back to the latest report</a></p>
   <ol>

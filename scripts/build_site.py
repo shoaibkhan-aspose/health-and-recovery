@@ -22,6 +22,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from core import brand  # noqa: E402
 from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
 from core.paths import published_tenants, tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
@@ -34,7 +35,7 @@ HEAD = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-"""
+""" + brand.FAVICON_LINK + "\n"
 
 LANDING = HEAD + """<title>Site health reports</title>
 <style>
@@ -45,7 +46,7 @@ LANDING = HEAD + """<title>Site health reports</title>
 body { margin: 0; background: var(--bg); color: var(--fg);
   font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
 main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 20px }
-h1 { margin: 0; font-size: 28px } p { margin: 0; color: var(--muted) }
+h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px } p { margin: 0; color: var(--muted) }
 a { color: var(--accent) }
 ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px }
 li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
@@ -57,7 +58,7 @@ li b { font-size: 18px } li span { color: var(--muted); font-size: 14px; overflo
 if (location.hash.length > 1) location.replace("__LEGACY__/" + location.hash);
 </script>
 <main>
-  <h1>Site health reports</h1>
+  <h1>""" + brand.logo(36) + """Site health reports</h1>
   <p>One report per property. Read-only audits: nothing on any site is changed.
   How to fix each kind of problem: <a href="fix-guide/">fix guide</a>.</p>
   <ol>
@@ -82,7 +83,8 @@ GUIDE_PAGE = HEAD + """<title>Fix guide</title>
 body { margin: 0; background: var(--bg); color: var(--fg);
   font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
 main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 18px }
-h1 { margin: 0; font-size: 28px } p { margin: 0; color: var(--muted); max-width: 80ch }
+h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px }
+p { margin: 0; color: var(--muted); max-width: 80ch }
 a { color: var(--accent) }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px }
 select { font: inherit; padding: 4px 8px }
@@ -103,7 +105,7 @@ tr:target td { background: var(--hit) }
 tr[id] { scroll-margin-top: 80px }
 </style>
 <main>
-  <h1>Fix guide</h1>
+  <h1>""" + brand.logo(36) + """Fix guide</h1>
   <p>One row per check the audits run: what a finding means, why it matters, how to fix it and how to verify the
   fix. Every site health report links here. "Open findings" counts the open findings per report today.</p>
   <p><a href="../">All reports</a></p>

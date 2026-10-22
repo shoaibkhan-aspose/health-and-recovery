@@ -25,6 +25,7 @@ from urllib.parse import urlsplit
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from core import brand  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
 from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
 from core.paths import TenantPaths, tenant_paths  # noqa: E402
@@ -71,7 +72,8 @@ def build(report: dict, notes: list[str], run_date: str | None, standalone: bool
     payload = json.dumps(data, default=str).replace("</", "<\\/")
     template = TEMPLATE.read_text(encoding="utf-8")
     title = f"{report.get('_page_host') or report['tenant']} Site Health"
-    page = template.replace("__TITLE__", title).replace("__DATA__", payload)
+    page = (template.replace("__TITLE__", title).replace("__FAVICON__", brand.FAVICON_LINK)
+            .replace("__LOGO__", brand.logo(22)).replace("__DATA__", payload))
     return STANDALONE_HEAD + page if standalone else page
 
 
