@@ -423,6 +423,47 @@ _ROWS = [
      "Fix the file (H1, summary, links to live pages) or regenerate it with the site build; remove it if no "
      "one maintains it.",
      "The URL shows plain text with working links; next AI audit has no finding."),
+    # --- internal links and translations (link audit: source repo + live site) ---
+    ("link_missing_translation", "Links and translations", "Link to a translation that does not exist",
+     "A translated post links to /<lang>/<post>/, but that post was never translated into this language, so "
+     "the link returns 404. Typical when a translation step adds the language prefix to every internal link.",
+     "Readers of the translated post hit a dead end; search engines see broken links and pass no value on.",
+     "Add the language prefix only when the target translation exists; otherwise keep the link to the "
+     "default-language post. The fix list (link-audit CSV) gives the right URL for every link.",
+     "Every listed link returns 200; next link audit has no finding."),
+    ("link_damaged", "Links and translations", "Damaged internal link",
+     "An internal link was changed on the way into the translation: a double slash, or a slug cut short. The "
+     "original post links the full, working URL.",
+     "Readers get a 404 and search engines a broken link.",
+     "Copy each link from the original post unchanged and only then localize it; compare links before and "
+     "after translation in the translation step.",
+     "Every listed link returns 200; next link audit has no finding."),
+    ("link_wrong_language", "Links and translations", "Link to another language although a translation exists",
+     "A post links to the post in another language (usually the default language) while the post in the "
+     "page's own language exists.",
+     "Readers are sent out of their language; the translated posts get fewer internal links and rank lower.",
+     "Point the link at the post in the page's language (the fix list gives the URL); make the translation "
+     "step localize every internal link whose translation exists.",
+     "Next link audit has no finding."),
+    ("link_broken", "Links and translations", "Internal link to a page that does not exist",
+     "A post links to a page on the same blog that returns 404: a removed or renamed post, an old URL "
+     "pattern (e.g. WordPress /category/), or a typo. 'Copied from the original post' means the default-"
+     "language post has the same broken link.",
+     "Readers hit a dead end; search engines waste crawl budget and pass no value through the link.",
+     "Point the link at the current URL of the post (or remove it); add a redirect for old URL patterns that "
+     "many posts use. Fix the original post first, then its translations.",
+     "Every listed link returns 200; next link audit has no finding."),
+    ("translation_partial", "Links and translations", "Post missing some supported languages",
+     "The post is translated, but not into every supported language.",
+     "Readers in the missing languages get no page; language switchers and hreflang sets are incomplete.",
+     "Translate the post into the missing languages (or remove it from the translated set on purpose).",
+     "Each listed post exists in every supported language; next link audit has no finding."),
+    ("language_unsupported", "Links and translations", "Unsupported language published",
+     "The sitemaps list pages in a language the blog does not support, usually only an empty language "
+     "homepage without translated posts.",
+     "Search engines index thin pages; readers who pick the language find nothing.",
+     "Remove the language from the site's language list (and so from the sitemaps), or start supporting it.",
+     "The sitemap index no longer lists the language; next link audit has no finding."),
 ]
 
 # Severity per check, as the auditors assign it (checks only discovery's run.py names inline are listed here).
@@ -437,6 +478,7 @@ _DISCOVERY_ONLY = {
 def _severities() -> dict[str, str]:
     from core.audit.ai import CHECKS as AI_CHECKS
     from core.audit.crawl import CHECKS
+    from core.audit.links import CHECKS as LINK_CHECKS
     from core.audit.perf import CHECKS as PERF_CHECKS
     from core.audit.text import CHECKS as TEXT_CHECKS
     from core.discovery.run import SITEMAP_CHECKS
@@ -448,6 +490,7 @@ def _severities() -> dict[str, str]:
     out.update({k: v[1] for k, v in PERF_CHECKS.items()})
     out.update({k: v[1] for k, v in AI_CHECKS.items()})
     out.update({k: v[1] for k, v in TEXT_CHECKS.items()})
+    out.update({k: v[1] for k, v in LINK_CHECKS.items()})
     return out
 
 

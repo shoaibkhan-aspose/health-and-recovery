@@ -253,6 +253,8 @@ def runs_label(report: dict) -> str:
         runs += f", AI audit run {report['_ai']['run_id']}"
     if report.get("_text"):
         runs += f", text check run {report['_text']['run_id']}"
+    if report.get("_links"):
+        runs += f", link check run {report['_links']['run_id']}"
     return runs
 
 
@@ -277,6 +279,12 @@ def text_summary(path: Path) -> dict:
             "pages_checked": a["pages_checked"], "unchecked": len(a["unchecked"]), "summary": a["summary"]}
 
 
+def link_summary(path: Path) -> dict:
+    """What the page shows of a link-audit run: run id, date, per-host posts, links and issues."""
+    a = json.loads(path.read_text(encoding="utf-8"))
+    return {"run_id": a["run_id"], "date": run_date_of(path, "link-audit-"), "summary": a["summary"]}
+
+
 def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Path | None = None) -> None:
     """Fix guide, confidence, merged root causes, systemic issues, top risks, grade summary, changes since the
     last run and the family health trend (see core/report_view.py)."""
@@ -294,6 +302,8 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
         refs.append(f"ai-audit-run{report['_ai']['run_id']}")
     if report.get("_text"):
         refs.append(f"text-audit-run{report['_text']['run_id']}")
+    if report.get("_links"):
+        refs.append(f"link-audit-run{report['_links']['run_id']}")
     changes = run_changes(all_rows or findings, refs)
     titles = {f["id"]: f for f in (all_rows or findings)}
     changes["resolved"] = [{"id": i, "title": titles[i]["title"], "subdomain": titles[i]["subdomain"]}
@@ -363,6 +373,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--ai", help="AI-audit JSON (default: newest ai-audit run in reports/<tenant>/; '' to leave out)")
     ap.add_argument("--text", help="text-check JSON (default: newest text-audit run in reports/<tenant>/; "
                     "'' to leave out)")
+    ap.add_argument("--links", help="link-audit JSON (default: newest link-audit run in reports/<tenant>/; "
+                    "'' to leave out)")
     ap.add_argument("--out", help="output HTML path")
     ap.add_argument("--host", help="one host's page: only that host's findings and rows (scores as on the "
                     "tenant page)")
@@ -415,6 +427,10 @@ def main(argv: list[str] | None = None) -> int:
     text_src = Path(args.text) if args.text else newest("text-audit-*-run*.json", folder) if args.text is None else None
     if text_src:
         report["_text"] = text_summary(text_src)
+    link_src = (Path(args.links) if args.links else newest("link-audit-*-run*.json", folder)
+                if args.links is None else None)
+    if link_src:
+        report["_links"] = link_summary(link_src)
     if args.findings:
         rows = json.loads(Path(args.findings).read_text(encoding="utf-8"))
         all_rows = rows
@@ -427,6 +443,8 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "ai-audit"]
         if not text_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
+        if not link_src:
+            report["findings"] = [f for f in report["findings"] if f["source"] != "link-audit"]
     elif Path(store_path := args.store or str(paths.findings_store)).is_file():
         store = FindingsStore(store_path)
         run_ref = f"discovery-run{report['run_id']}"
@@ -445,6 +463,8 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"] = [f for f in report["findings"] if f["source"] != "ai-audit"]
         if not text_src:
             report["findings"] = [f for f in report["findings"] if f["source"] != "text-audit"]
+        if not link_src:
+            report["findings"] = [f for f in report["findings"] if f["source"] != "link-audit"]
     else:
         print(f"No findings store at {store_path}; using the run's own findings.", file=sys.stderr)
     try:

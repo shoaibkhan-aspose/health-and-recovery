@@ -44,6 +44,9 @@ GROUPS = {
     **dict.fromkeys(("content_needs_js", "no_structured_data", "llms_txt_missing", "llms_txt_invalid",
                      "ai_bot_blocked", "ai_bot_firewalled"), "ai"),
     **dict.fromkeys(("text_typo", "text_leftover", "text_topic_mismatch"), "wording"),
+    **dict.fromkeys(("link_missing_translation", "link_damaged", "link_wrong_language", "link_broken"),
+                    "internal links"),
+    **dict.fromkeys(("translation_partial", "language_unsupported"), "translations"),
 }
 # the one-glance status line on a card: label -> groups it summarizes
 STATUS = {"Sitemap": ("sitemap",), "Pages": ("page errors",), "Canonical": ("canonical",), "hreflang": ("hreflang",)}

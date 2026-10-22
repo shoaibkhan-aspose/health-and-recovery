@@ -8,7 +8,7 @@ GA4 organic sessions per host (counted as clicks). What share of that traffic a 
 - discovery:   the section's (or host's) traffic x affected_pages / URLs in that section. Checks that cover a
                whole host or section (robots.txt, no working sitemap) with no page count take all of it; a
                failed sitemap file takes the URLs Search Console discovered from it (tenant snapshot), else 0
-- seed, text check: the exact pages in `evidence.urls`
+- seed, text check, link audit: the exact pages in `evidence.urls`
 
 score = min(100, 20 * log10(1 + click-equivalents)) * severity / effort, with impressions counted as
 IMPRESSION_WEIGHT click-equivalents each. 100k click-equivalents saturate the traffic factor.
@@ -36,7 +36,7 @@ WHOLE_SCOPE_CHECKS = {"robots_missing", "robots_html", "robots_no_sitemap", "rob
                       "host_no_sitemap", "section_no_sitemap", "origin_cwv_poor", "origin_cwv_needs_work",
                       "ai_bot_blocked", "ai_bot_firewalled", "llms_txt_missing", "llms_txt_invalid"}
 # Sources whose findings name every affected page: traffic of exactly those pages.
-EXACT_PAGE_SOURCES = {"seed", "text-audit"}
+EXACT_PAGE_SOURCES = {"seed", "text-audit", "link-audit"}
 IMPRESSION_WEIGHT = 0.01  # ~1% CTR: 100 impressions count like one click
 TRAFFIC_SCALE = 20  # score points per decade of click-equivalents
 LOST_WEIGHT = 0.5
