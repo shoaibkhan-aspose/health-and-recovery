@@ -8,9 +8,11 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 **Keep this file current:** when a decision is made, a fact is confirmed or a build step finishes, update the relevant section (Status, Seed findings, Open items) in the same session. New issues found by hand go into `tenants/aspose.app.seed-findings.yaml`, never only into prose.
 
-## Start here (session handoff, 2026-10-20, end of day)
+## Start here (session handoff, 2026-10-22, end of day)
 
-**State:** Phase 1 (audit only). Two tenants: **aspose.app** (11 hosts, 29 product families) and **conholdate.cloud** (only blog.conholdate.cloud for now; more hosts later). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor, text check (LLM), findings store, Prioritizer, family and host scorecards (health A-F), the reports with archives, host pages, a shared fix guide page and a landing page. Everything is committed and pushed to `github`; working tree clean.
+**State:** Phase 1 (audit only). Four tenants: **aspose.app** (11 hosts, 29 product families), **conholdate.cloud**, **aspose.cloud** and **groupdocs.cloud** (the three .cloud tenants have only their blog for now; more hosts later). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor, text check (LLM), **link check** (repo-based, 6 checks, new 2026-10-22), findings store, Prioritizer, family and host scorecards (health A-F), the reports with archives, host pages, a shared fix guide page and a landing page. Everything is committed and pushed to `github` and `origin` (GitLab); working tree clean.
+
+**Commit identity:** always `Shoaib Khan <shoaib.khan@aspose.com>`, set in this repo's `.git/config` (something on the Mac switches the global `~/.gitconfig` to SK's personal gmail). Check `git log -1 --format='%ae %ce'` after every commit. History was rewritten on 2026-10-22 so all commits carry this address (see Working rules); every commit id from before that day changed.
 
 **Site layout (Pages, https://shoaibkhan-aspose.github.io/health-and-recovery/):**
 - `/` landing page: each property with its open findings, archive link and host links.
@@ -19,7 +21,17 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 - `/fix-guide/` one shared fix guide (all checks, anchors `#g-<check>`, open findings per report). Published reports have no Fix guide section; every "How to fix" link goes there. Local builds keep the full table.
 - Header: Property and Host dropdowns (switching keeps the #section), "All reports" link. Local pages and snapshots have no switches.
 - Old links (`/aspose-app-health-and-recovery/...`, before the repo rename) work through the redirect repo `shoaibkhan-aspose/aspose-app-health-and-recovery` (local clone `/Users/Apple/Work/Aspose/GitHub/aspose-app-health-and-recovery-redirect`, `index.html` = `404.html`, JS keeps path, query and #anchor; old root and `/archive/` go to `/aspose.app/`; Pages: Deploy from a branch, main).
-- Both reports move to a private domain soon (SK, 2026-10-20); until then they are public (noindex).
+- All reports move to a private domain soon (SK, 2026-10-20); until then they are public (noindex).
+
+**What changed on 2026-10-22 (details under Open discussions, "Tenants 3 and 4"):**
+- Tenants 3 and 4: `aspose.cloud` (blog.aspose.cloud, GA4 252280807) and `groupdocs.cloud` (blog.groupdocs.cloud, GA4 252358764); GSC blog properties readable; sample option A (20 pages per template); `tag` URL template in all three .cloud tenants; `translation_languages` (SK's supported list) in each .cloud tenant.
+- **Link check** (`core/audit/links.py`, `scripts/audit_links.py`): every internal link of every post read from the blog's local repo, checked on the live site. Found SK's known bug (English link although the translation exists: 64 / 72 links) and a bigger one: the translation agent prefixes every internal link with the language, also when the target was never translated (old posts deliberately stay English), so 1,389 links on aspose.cloud return 404 (798 written by the current agent in 2026, still ongoing). Root cause: link localization is an LLM prompt rule in `conholdate/blog-translation-agent` (`translator.py` rule 5) with no existence check. Fix lists for SK's agent: `reports/<tenant>/link-audit-<date>-run<id>-issues.csv`.
+- **SK is the translation team** (owns the translation agent for blog.aspose.cloud, blog.groupdocs.cloud, blog.conholdate.cloud, blog.aspose.com, blog.conholdate.com; no longer blog.groupdocs.com, whose issues still go in reports). Phase 1 only identifies; his agent fixes.
+- First full cycle for both new tenants; reports and "First run" snapshots live.
+- Text check found `seoTitle` copied from other posts (632 of 1,240 aspose.cloud English posts share their search title; one title 81 times).
+- Bug fixed (SK spotted): the Sections table showed the homepages row as `//`; now `/ (homepages)`.
+- No person names in anything committed or published (the link check records commit id, date and message, never the author).
+- Commit email history rewrite (see Commit identity).
 
 **What changed on 2026-10-20 (details in the bullets below and in Status):**
 - Text check built and run (first LLM use); typo severity agreed; a soft-404 gap fixed in code.
@@ -30,35 +42,40 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 - api.products.aspose.app dropped from the aspose.app tenant (API/backend host, not a website).
 - Bug fixed: the Host health section reused `id="hosts"` and emptied three Reference tables; a test now rejects duplicate ids.
 
-**Scores today:** aspose.app hosts: about A 90, forum A 92, blog B 86, metrics B 85, www B 75, status C 67, dashboard C 62, releases C 60, products D 56 (families 72 by clicks − 16 host-wide; lowest /drawing/ F 19), websites D 48, purchase D 46. blog.conholdate.cloud B 86.
+**Scores today:** aspose.app hosts: about A 90, forum A 92, blog B 86, metrics B 85, www B 75, status C 67, dashboard C 62, releases C 60, products D 56 (families 72 by clicks − 16 host-wide; lowest /drawing/ F 19), websites D 48, purchase D 46. blog.conholdate.cloud B 86 (before the link check; not run there yet). blog.aspose.cloud C 66, blog.groupdocs.cloud C 73.
 
 **Next session, start with:**
-1. **Priority 4** (`findings`, then `crawl` MCP servers). The functional auditor is **postponed** (SK, 2026-10-20).
-2. **Soft 404 fix (code only, 2026-10-20):** takes effect at the next crawl run; then count how many psd (and other) sitemap URLs end at `page404` (see Status, "Text check").
-3. **Remind SK to get a dedicated LLM key** (see Open items) until he says it is in place; and to delete the old service account after a restart.
-4. Watch: **ocr is intermittently failing** (crawl audit run 15: 1 of 18 sampled pages HTTP 502; 2026-10-15 most failed). Re-check in the next run; if it keeps flapping, raise it with SK.
-5. Offered, not decided: read submitted sitemaps live from the GSC API instead of the pasted `gsc_sitemaps_snapshot` (fills "Submitted sitemaps" for every tenant); a per-host share fix in the scorecard (a homepage-only problem counts as the whole host); per-family pages `/products.aspose.app/<family>/` (SK: later); Total's format pages share one generic description (e.g. /total/compress/tga): not wrong (Aspose.Total = all products) but weak per page, a job for the crawl audit's duplicate-description check.
-6. Open questions for SK are under "Open discussions" below (shared problems severity, Aspose.ai comparison, sample transparency, a "Speed" pill on family cards), plus: whether short status incident pages should count in "almost no text without JavaScript".
+1. **Architecture diagram:** add the blog source repos (read-only input) and the link check (`docs/architecture/site-health-architecture.html`, PNG, republish to the same artifact URL).
+2. **Run the link check on conholdate.cloud** (repo scan found 4 wrong-language links in 3 files, no 404s); then its report gets the "Link check" source.
+3. **Priority 4** (`findings`, then `crawl` MCP servers). The functional auditor is **postponed** (SK, 2026-10-20).
+4. **Soft 404 fix (code only, 2026-10-20):** takes effect at the next aspose.app crawl run; then count how many psd (and other) sitemap URLs end at `page404` (see Status, "Text check").
+5. **Remind SK** to get a dedicated LLM key (the text check still borrows the translation agent's), to delete the old service account after a restart, and to turn GitLab's "Allowed to force push" on `master` off again if not done.
+6. Watch: **ocr is intermittently failing** (crawl audit run 15: 1 of 18 sampled pages HTTP 502). Re-check in the next aspose.app run.
+7. Later (SK): the .com blogs (blog.aspose.com, blog.groupdocs.com, blog.conholdate.com; language lists and GA4 ids noted under Open discussions); per-product or per-platform grouping of blog posts (decide after looking at the first run).
+8. Offered, not decided: read submitted sitemaps live from the GSC API instead of the pasted `gsc_sitemaps_snapshot`; a per-host share fix in the scorecard; per-family pages `/products.aspose.app/<family>/` (SK: later); Total's format pages share one generic description. Open questions for SK are under "Open discussions" (shared problems severity, Aspose.ai comparison, sample transparency, a "Speed" pill on family cards), plus whether short status incident pages should count in "almost no text without JavaScript".
 
 **Live:**
-- Landing page https://shoaibkhan-aspose.github.io/health-and-recovery/; aspose.app https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/archive/); conholdate.cloud https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/archive/); fix guide https://shoaibkhan-aspose.github.io/health-and-recovery/fix-guide/; host pages https://shoaibkhan-aspose.github.io/health-and-recovery/<host>/. Rebuilt by GitHub Actions (`scripts/build_site.py`) on every push to `master`.
-- Architecture page (private, version 9 = host pages and fix guide in the publish step, 2026-10-20; PNG 1280x1130): https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm, source `docs/architecture/site-health-architecture.html`.
+- Landing page https://shoaibkhan-aspose.github.io/health-and-recovery/; aspose.app https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.app/archive/); conholdate.cloud https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/conholdate.cloud/archive/); aspose.cloud https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.cloud/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/aspose.cloud/archive/); groupdocs.cloud https://shoaibkhan-aspose.github.io/health-and-recovery/groupdocs.cloud/ (archive https://shoaibkhan-aspose.github.io/health-and-recovery/groupdocs.cloud/archive/); fix guide https://shoaibkhan-aspose.github.io/health-and-recovery/fix-guide/; host pages https://shoaibkhan-aspose.github.io/health-and-recovery/<host>/. Rebuilt by GitHub Actions (`scripts/build_site.py`) on every push to `master`.
+- Architecture page (private, version 9 = host pages and fix guide in the publish step, 2026-10-20; PNG 1280x1130): https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm, source `docs/architecture/site-health-architecture.html`. Not yet updated for the link check.
 - Archive aspose.app (`reports/aspose.app/archive/`): 2026-10-12 (before the restructure), 2026-10-15 (before the speed audit), 2026-10-15-2 (after the speed audit), 2026-10-16 (before the AI audit), 2026-10-16-2 (after the AI audit and crawl audit run 15), 2026-10-20 (after the text check), -2 (text check run 23, before the per-tenant layout), -3 (host cards and shared fix guide), -4 (host table), -5 (products row), -6 (without api.products, before fixing the empty Reference tables).
 - Archive conholdate.cloud (`reports/conholdate.cloud/archive/`): 2026-10-20 (first run), -2 (after the text check, host health), -3 (host table; rebuilt from commit c63dbbf), -4 (before fixing the empty Reference tables).
+- Archive aspose.cloud and groupdocs.cloud: 2026-10-22 (first run).
 - Older shared discovery report (private, not updated since run 7): https://claude.ai/artifact/MUUTzbXEymKq4tw5mmmPA5
 
 **Latest data:**
 - aspose.app: discovery run 8 (2026-10-09), full crawl audit run 15 (2026-10-16, 652 pages), speed audit run 12 (2026-10-15, 353 pages), AI audit run 16 (2026-10-16), text check run 23 (2026-10-20, 605 pages), traffic window 2026-09-16..10-13 (+ previous 28 days and six months ago). 367 findings in the store after dropping api.products, all scored.
 - conholdate.cloud: discovery run 1, crawl audit run 1 (15 pages), AI audit run 2, speed audit run 3 (8 pages), text check run 4 (no findings), all 2026-10-20; traffic window 2026-09-20..10-17; GSC `https://blog.conholdate.cloud/` and GA4 253119926 (one property for all conholdate.cloud hosts). 6 open findings.
+- aspose.cloud: discovery run 1, crawl audit run 3 (40 pages), AI audit run 4, speed audit run 6 (12 pages), text check run 7, link check run 8, all 2026-10-22; traffic window 2026-09-22..10-19 (710 clicks; 961 six months ago; 89% on translated pages). Local repo `/Users/Apple/Work/Aspose/GitHub/blog.aspose.cloud-PROD/aspose-cloud-blog`.
+- groupdocs.cloud: discovery run 1, crawl audit run 2 (32 pages), AI audit run 3, speed audit run 5 (8 pages), text check run 6, link check run 7, all 2026-10-22; traffic window 2026-09-22..10-19 (577 clicks; 1,483 six months ago; 85% on translated pages). Local repo `/Users/Apple/Work/Aspose/GitHub/blog.groupdocs.cloud-PROD/groupdocs-cloud-blog`.
 
-**Full cycle** (on the Mac, from the repo, `.venv` active; per tenant: `export TENANT=aspose.app` or `conholdate.cloud`, files go to `data/$TENANT/` and `reports/$TENANT/`):
+**Full cycle** (on the Mac, from the repo, `.venv` active; per tenant: `export TENANT=aspose.app`, `conholdate.cloud`, `aspose.cloud` or `groupdocs.cloud`, files go to `data/$TENANT/` and `reports/$TENANT/`):
 ```bash
 set -a; source .env; set +a
 export TENANT=aspose.app
 python scripts/discover.py --quiet           # 15 min; inventory + sitemap findings
 python scripts/audit_crawl.py --quiet        # 25 min; all hosts + families (or --sections a,b); incl. AI page checks
 python scripts/audit_ai.py --quiet           # 5 min; AI crawler access (robots.txt, firewall), llms.txt per host + family
-python scripts/audit_perf.py --quiet         # ~40 min; speed (PageSpeed Insights), 2 top-traffic pages per template
+python scripts/audit_perf.py --quiet         # new tenant: run prioritize.py once first (picks top-traffic pages); ~40 min; speed (PageSpeed Insights), 2 top-traffic pages per template
 python scripts/audit_text.py --quiet         # ~5 min (seconds when cached); LLM text check of the crawl audit's pages
 python scripts/audit_links.py --quiet        # blogs with a local_path repo only; ~20 min for blog.aspose.cloud; pull the clone first
 python scripts/prioritize.py                 # traffic, scores, reports/$TENANT/findings.json, traffic-summary.json
@@ -144,7 +161,7 @@ core/         deterministic logic: crawl, parse, validate, score, findings store
 mcp_servers/  MCP servers, thin wrappers over core (agent-facing). Not `mcp/`: that name would shadow the `mcp` SDK package
 api/          REST, thin wrapper over core (dashboard, CI), later
 agents/       LLM agents; they call MCP tools only
-tenants/      one YAML per property (aspose.app.yaml, conholdate.cloud.yaml); `property` must equal the file name
+tenants/      one YAML per property (aspose.app, conholdate.cloud, aspose.cloud, groupdocs.cloud); `property` must equal the file name
 scripts/      one-off CLIs (e.g. check_access.py)
 reports/      reports/<tenant>/: generated reports, committed (run JSON, report HTML, notes, findings.json, archive/)
 data/         data/<tenant>/: SQLite stores and caches, gitignored
@@ -306,7 +323,7 @@ Conventions:
 
 ## Multi-tenant rule
 
-Nothing in `core/`, `mcp_servers/` or `agents/` may name aspose.app. Everything domain-specific goes in `tenants/<property>.yaml` (`property` must equal the file name): `tenants/aspose.app.yaml` and `tenants/conholdate.cloud.yaml` (blog.conholdate.cloud, GSC `https://blog.conholdate.cloud/`, GA4 `253119926`, 23 languages, URL templates home/listing/post/category). Keys, with aspose.app's values:
+Nothing in `core/`, `mcp_servers/` or `agents/` may name aspose.app. Everything domain-specific goes in `tenants/<property>.yaml` (`property` must equal the file name): `tenants/aspose.app.yaml`, `tenants/aspose.cloud.yaml`, `tenants/groupdocs.cloud.yaml` and `tenants/conholdate.cloud.yaml` (blog.conholdate.cloud, GSC `https://blog.conholdate.cloud/`, GA4 `253119926`, 23 languages, URL templates home/listing/post/category). Keys, with aspose.app's values:
 
 | Key | Meaning |
 |---|---|
