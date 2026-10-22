@@ -1,0 +1,200 @@
+{
+  "tenant": "groupdocs.cloud",
+  "run_date": "2026-10-22",
+  "identity": "sk-serv-acc@health-and-recovery.iam.gserviceaccount.com",
+  "gsc": {
+    "window": [
+      "2026-09-22",
+      "2026-10-19"
+    ],
+    "properties": {
+      "https://blog.groupdocs.cloud/": {
+        "permission": "siteRestrictedUser",
+        "clicks": 575,
+        "impressions": 52398,
+        "top_pages": [
+          {
+            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+            "clicks": 35,
+            "impressions": 1683
+          },
+          {
+            "page": "https://blog.groupdocs.cloud/editor/edit-word-documents-online-using-a-free-word-editor/",
+            "clicks": 26,
+            "impressions": 2510
+          },
+          {
+            "page": "https://blog.groupdocs.cloud/vi/merger/online-bank-statement-password-remover/",
+            "clicks": 18,
+            "impressions": 73
+          },
+          {
+            "page": "https://blog.groupdocs.cloud/fa/editor/edit-word-documents-online-using-a-free-word-editor/",
+            "clicks": 16,
+            "impressions": 101
+          },
+          {
+            "page": "https://blog.groupdocs.cloud/fr/conversion/zip-to-jpg-online/",
+            "clicks": 15,
+            "impressions": 507
+          }
+        ],
+        "sitemaps": {
+          "count": 1,
+          "with_errors": [],
+          "pending": []
+        }
+      }
+    },
+    "ok": true,
+    "visible_to_identity": {
+      "https://blog.aspose.com/": "siteRestrictedUser",
+      "https://about.aspose.app/": "siteRestrictedUser",
+      "https://blog.aspose.cloud/": "siteRestrictedUser",
+      "https://blog.groupdocs.com/": "siteRestrictedUser",
+      "https://blog.groupdocs.cloud/": "siteRestrictedUser",
+      "https://blog.aspose.app/": "siteRestrictedUser",
+      "https://blog.conholdate.com/": "siteRestrictedUser",
+      "https://blog.conholdate.cloud/": "siteRestrictedUser",
+      "https://products.aspose.app/": "siteRestrictedUser",
+      "https://websites.aspose.app/": "siteRestrictedUser",
+      "https://releases.aspose.app/": "siteRestrictedUser"
+    }
+  },
+  "ga4": {
+    "ok": true,
+    "property_id": "252358764",
+    "window": [
+      "28daysAgo",
+      "yesterday"
+    ],
+    "hosts": {
+      "products.groupdocs.cloud": {
+        "sessions": 186633.0,
+        "organic_sessions": 2190.0
+      },
+      "blog.groupdocs.cloud": {
+        "sessions": 14207.0,
+        "organic_sessions": 490.0
+      },
+      "products-qa.groupdocs.cloud": {
+        "sessions": 12629.0,
+        "organic_sessions": 12.0
+      },
+      "kb.groupdocs.cloud": {
+        "sessions": 2190.0,
+        "organic_sessions": 519.0
+      },
+      "blog-qa.groupdocs.cloud": {
+        "sessions": 2088.0,
+        "organic_sessions": 0.0
+      },
+      "docs.groupdocs.cloud": {
+        "sessions": 1963.0,
+        "organic_sessions": 958.0
+      },
+      "www.groupdocs.cloud": {
+        "sessions": 1132.0,
+        "organic_sessions": 58.0
+      },
+      "releases.groupdocs.cloud": {
+        "sessions": 951.0,
+        "organic_sessions": 21.0
+      },
+      "forum.groupdocs.cloud": {
+        "sessions": 863.0,
+        "organic_sessions": 39.0
+      },
+      "websites.groupdocs.cloud": {
+        "sessions": 555.0,
+        "organic_sessions": 314.0
+      },
+      "tutorials.groupdocs.cloud": {
+        "sessions": 375.0,
+        "organic_sessions": 13.0
+      },
+      "reference.groupdocs.cloud": {
+        "sessions": 370.0,
+        "organic_sessions": 53.0
+      },
+      "search.groupdocs.cloud": {
+        "sessions": 360.0,
+        "organic_sessions": 18.0
+      },
+      "dashboard.groupdocs.cloud": {
+        "sessions": 355.0,
+        "organic_sessions": 137.0
+      },
+      "purchase.groupdocs.cloud": {
+        "sessions": 105.0,
+        "organic_sessions": 15.0
+      },
+      "status.groupdocs.cloud": {
+        "sessions": 80.0,
+        "organic_sessions": 0.0
+      },
+      "metrics.groupdocs.cloud": {
+        "sessions": 55.0,
+        "organic_sessions": 0.0
+      },
+      "about.groupdocs.cloud": {
+        "sessions": 54.0,
+        "organic_sessions": 14.0
+      },
+      "blog2.groupdocs.cloud": {
+        "sessions": 28.0,
+        "organic_sessions": 0.0
+      },
+      "localhost": {
+        "sessions": 19.0,
+        "organic_sessions": 0.0
+      },
+      "groupdocscloud.github.io": {
+        "sessions": 15.0,
+        "organic_sessions": 1.0
+      },
+      "kb-qa.groupdocs.cloud": {
+        "sessions": 10.0,
+        "organic_sessions": 0.0
+      },
+      "products-groupdocs-cloud.b-cdn.net": {
+        "sessions": 4.0,
+        "organic_sessions": 4.0
+      },
+      "purchase.sheetize.cloud": {
+        "sessions": 3.0,
+        "organic_sessions": 0.0
+      },
+      "blog-qa-groupdocs-cloud.b-cdn.net": {
+        "sessions": 2.0,
+        "organic_sessions": 2.0
+      },
+      "kb-qa-groupdocs-cloud.b-cdn.net": {
+        "sessions": 2.0,
+        "organic_sessions": 0.0
+      },
+      "metrics-groupdocs-cloud.b-cdn.net": {
+        "sessions": 2.0,
+        "organic_sessions": 1.0
+      },
+      "apireference.groupdocs.cloud": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      },
+      "reference-groupdocs-cloud.b-cdn.net": {
+        "sessions": 1.0,
+        "organic_sessions": 1.0
+      },
+      "www-groupdocs-cloud.s3-website.dynabic.com": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      }
+    },
+    "tenant_hosts_not_seen": [],
+    "excluded_hosts_seen": [
+      "kb-qa.groupdocs.cloud",
+      "products-qa.groupdocs.cloud",
+      "blog-qa.groupdocs.cloud"
+    ]
+  }
+}

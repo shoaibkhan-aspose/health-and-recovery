@@ -1,0 +1,210 @@
+{
+  "tenant": "aspose.cloud",
+  "run_date": "2026-10-22",
+  "identity": "sk-serv-acc@health-and-recovery.iam.gserviceaccount.com",
+  "gsc": {
+    "window": [
+      "2026-09-22",
+      "2026-10-19"
+    ],
+    "properties": {
+      "https://blog.aspose.cloud/": {
+        "permission": "siteRestrictedUser",
+        "clicks": 703,
+        "impressions": 53052,
+        "top_pages": [
+          {
+            "page": "https://blog.aspose.cloud/tr/ocr/find-font-from-image-in-csharp/",
+            "clicks": 89,
+            "impressions": 1247
+          },
+          {
+            "page": "https://blog.aspose.cloud/fa/cells/convert-excel-to-txt-in-csharp/",
+            "clicks": 55,
+            "impressions": 439
+          },
+          {
+            "page": "https://blog.aspose.cloud/it/ocr/find-font-from-image-in-csharp/",
+            "clicks": 50,
+            "impressions": 3374
+          },
+          {
+            "page": "https://blog.aspose.cloud/fa/cells/set-excel-watermark-csharp/",
+            "clicks": 25,
+            "impressions": 321
+          },
+          {
+            "page": "https://blog.aspose.cloud/ar/cells/unprotect-excel-using-csharp/",
+            "clicks": 11,
+            "impressions": 172
+          }
+        ],
+        "sitemaps": {
+          "count": 1,
+          "with_errors": [],
+          "pending": []
+        }
+      }
+    },
+    "ok": true,
+    "visible_to_identity": {
+      "https://blog.conholdate.com/": "siteRestrictedUser",
+      "https://blog.aspose.app/": "siteRestrictedUser",
+      "https://blog.groupdocs.com/": "siteRestrictedUser",
+      "https://blog.aspose.com/": "siteRestrictedUser",
+      "https://blog.aspose.cloud/": "siteRestrictedUser",
+      "https://blog.conholdate.cloud/": "siteRestrictedUser",
+      "https://about.aspose.app/": "siteRestrictedUser",
+      "https://products.aspose.app/": "siteRestrictedUser",
+      "https://websites.aspose.app/": "siteRestrictedUser",
+      "https://releases.aspose.app/": "siteRestrictedUser",
+      "https://blog.groupdocs.cloud/": "siteRestrictedUser"
+    }
+  },
+  "ga4": {
+    "ok": true,
+    "property_id": "252280807",
+    "window": [
+      "28daysAgo",
+      "yesterday"
+    ],
+    "hosts": {
+      "products.aspose.cloud": {
+        "sessions": 188387.0,
+        "organic_sessions": 4782.0
+      },
+      "blog.aspose.cloud": {
+        "sessions": 14771.0,
+        "organic_sessions": 423.0
+      },
+      "forum.aspose.cloud": {
+        "sessions": 5868.0,
+        "organic_sessions": 305.0
+      },
+      "docs.aspose.cloud": {
+        "sessions": 5466.0,
+        "organic_sessions": 192.0
+      },
+      "releases.aspose.cloud": {
+        "sessions": 3177.0,
+        "organic_sessions": 105.0
+      },
+      "www.aspose.cloud": {
+        "sessions": 3151.0,
+        "organic_sessions": 172.0
+      },
+      "search.aspose.cloud": {
+        "sessions": 2870.0,
+        "organic_sessions": 16.0
+      },
+      "kb.aspose.cloud": {
+        "sessions": 2430.0,
+        "organic_sessions": 148.0
+      },
+      "(not set)": {
+        "sessions": 2094.0,
+        "organic_sessions": 681.0
+      },
+      "tutorials.aspose.cloud": {
+        "sessions": 929.0,
+        "organic_sessions": 35.0
+      },
+      "dashboard.aspose.cloud": {
+        "sessions": 922.0,
+        "organic_sessions": 142.0
+      },
+      "status.aspose.cloud": {
+        "sessions": 697.0,
+        "organic_sessions": 51.0
+      },
+      "purchase.aspose.cloud": {
+        "sessions": 328.0,
+        "organic_sessions": 50.0
+      },
+      "reference.aspose.cloud": {
+        "sessions": 303.0,
+        "organic_sessions": 51.0
+      },
+      "websites.aspose.cloud": {
+        "sessions": 276.0,
+        "organic_sessions": 26.0
+      },
+      "helpdesk.aspose.cloud": {
+        "sessions": 110.0,
+        "organic_sessions": 16.0
+      },
+      "metrics.aspose.cloud": {
+        "sessions": 99.0,
+        "organic_sessions": 4.0
+      },
+      "about.aspose.cloud": {
+        "sessions": 99.0,
+        "organic_sessions": 28.0
+      },
+      "blog2.aspose.cloud": {
+        "sessions": 45.0,
+        "organic_sessions": 0.0
+      },
+      "": {
+        "sessions": 41.0,
+        "organic_sessions": 10.0
+      },
+      "www-aspose-cloud.b-cdn.net": {
+        "sessions": 6.0,
+        "organic_sessions": 4.0
+      },
+      "metrics-aspose-cloud.b-cdn.net": {
+        "sessions": 4.0,
+        "organic_sessions": 4.0
+      },
+      "products-aspose-cloud.b-cdn.net": {
+        "sessions": 4.0,
+        "organic_sessions": 4.0
+      },
+      "dashboard-qa.aspose.cloud": {
+        "sessions": 4.0,
+        "organic_sessions": 0.0
+      },
+      "localhost": {
+        "sessions": 3.0,
+        "organic_sessions": 0.0
+      },
+      "purchase.sheetize.cloud": {
+        "sessions": 3.0,
+        "organic_sessions": 0.0
+      },
+      "reference2.aspose.cloud": {
+        "sessions": 3.0,
+        "organic_sessions": 0.0
+      },
+      "products-aspose-cloud.s3-website.dynabic.com": {
+        "sessions": 2.0,
+        "organic_sessions": 0.0
+      },
+      "aspose.cloud": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      },
+      "forum-aspose-cloud.translate.goog": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      },
+      "kb-aspose-cloud.b-cdn.net": {
+        "sessions": 1.0,
+        "organic_sessions": 1.0
+      },
+      "purchasepolicies.aspose.cloud.s3-website.dynabic.com": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      },
+      "www.googleadservices.com": {
+        "sessions": 1.0,
+        "organic_sessions": 0.0
+      }
+    },
+    "tenant_hosts_not_seen": [],
+    "excluded_hosts_seen": [
+      "dashboard-qa.aspose.cloud"
+    ]
+  }
+}

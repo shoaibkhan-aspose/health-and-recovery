@@ -1,0 +1,2240 @@
+[
+  {
+    "id": "ai-0001",
+    "key": "ai/content_needs_js/blog.groupdocs.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "ai",
+    "type": "incorrect",
+    "title": "Pages show almost no text without JavaScript",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/search/"
+      ],
+      "observed": "1 of 32 sampled pages (by template: listing 1/4). e.g. https://blog.groupdocs.cloud/search/: 119 characters of main text in the HTML",
+      "expected": "the main text in the HTML itself (at least 250 characters); AI crawlers do not run JavaScript",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/search/",
+          "note": "119 characters of main text in the HTML"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.groupdocs.cloud/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "listing": [
+          1,
+          4
+        ]
+      }
+    },
+    "affected_pages": 10,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 8,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 12,
+      "lost_clicks": 0,
+      "lost_impressions": 4,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "M",
+    "fix_tier": 2,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "crawl-audit-run2",
+    "last_seen_run": "crawl-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "content_needs_js",
+    "notes": []
+  },
+  {
+    "id": "ai-0002",
+    "key": "ai/llms_txt_missing/blog.groupdocs.cloud/llms.txt",
+    "source": "ai-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "llms.txt",
+    "dimension": "ai",
+    "type": "improvable",
+    "title": "No llms.txt for AI assistants",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/llms.txt"
+      ],
+      "observed": "https://blog.groupdocs.cloud/llms.txt: HTTP 404",
+      "expected": "/llms.txt as plain text or Markdown: an H1 with the site name, a short summary and links to the key pages",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/llms.txt",
+          "note": "HTTP 404"
+        }
+      ]
+    },
+    "affected_pages": 0,
+    "impact": {
+      "clicks_28d": 577,
+      "impressions_28d": 56362,
+      "source": "gsc-host",
+      "share": 1.0,
+      "past_clicks": 1483,
+      "past_impressions": 89790,
+      "lost_clicks": 906,
+      "lost_impressions": 33428,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 12,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "ai-audit-run3",
+    "last_seen_run": "ai-audit-run3",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "llms_txt_missing",
+    "notes": []
+  },
+  {
+    "id": "crawl-0001",
+    "key": "crawl/dup_in_file/blog.groupdocs.cloud/sitemap",
+    "source": "discovery",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "sitemap",
+    "dimension": "crawl",
+    "type": "not_optimized",
+    "title": "Sitemap lists the same URL more than once",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/en/sitemap.xml",
+        "https://blog.groupdocs.cloud/ja/sitemap.xml",
+        "https://blog.groupdocs.cloud/ko/sitemap.xml",
+        "https://blog.groupdocs.cloud/es/sitemap.xml",
+        "https://blog.groupdocs.cloud/de/sitemap.xml",
+        "https://blog.groupdocs.cloud/ru/sitemap.xml",
+        "https://blog.groupdocs.cloud/fr/sitemap.xml",
+        "https://blog.groupdocs.cloud/zh/sitemap.xml",
+        "https://blog.groupdocs.cloud/it/sitemap.xml",
+        "https://blog.groupdocs.cloud/pt/sitemap.xml"
+      ],
+      "observed": "https://blog.groupdocs.cloud/en/sitemap.xml: 2 URLs, e.g. https://blog.groupdocs.cloud/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/parser/extract-text-from-pdf-in-nodejs/; https://blog.groupdocs.cloud/ja/sitemap.xml: 2 URLs, e.g. https://blog.groupdocs.cloud/ja/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/ja/parser/extract-text-from-pdf-in-nodejs/; https://blog.groupdocs.cloud/ko/sitemap.xml: 2 URLs, e.g. https://blog.groupdocs.cloud/ko/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/ko/parser/extract-text-from-pdf-in-nodejs/; https://blog.groupdocs.cloud/es/sitemap.xml: 2 URLs, e.g. https://blog.groupdocs.cloud/es/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/es/parser/extract-text-from-pdf-in-nodejs/; https://blog.groupdocs.cloud/de/sitemap.xml: 2 URLs, e.g. https://blog.groupdocs.cloud/de/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/de/parser/extract-text-from-pdf-in-nodejs/; and 14 more sitemaps",
+      "expected": "each URL listed once",
+      "locations": [
+        {
+          "role": "sitemap",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml",
+          "note": "2 URLs, e.g. https://blog.groupdocs.cloud/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/parser/extract-text-from-pdf-in-nodejs/"
+        },
+        {
+          "role": "sitemap",
+          "url": "https://blog.groupdocs.cloud/ja/sitemap.xml",
+          "note": "2 URLs, e.g. https://blog.groupdocs.cloud/ja/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/ja/parser/extract-text-from-pdf-in-nodejs/"
+        },
+        {
+          "role": "sitemap",
+          "url": "https://blog.groupdocs.cloud/ko/sitemap.xml",
+          "note": "2 URLs, e.g. https://blog.groupdocs.cloud/ko/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/ko/parser/extract-text-from-pdf-in-nodejs/"
+        },
+        {
+          "role": "sitemap",
+          "url": "https://blog.groupdocs.cloud/es/sitemap.xml",
+          "note": "2 URLs, e.g. https://blog.groupdocs.cloud/es/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/es/parser/extract-text-from-pdf-in-nodejs/"
+        },
+        {
+          "role": "sitemap",
+          "url": "https://blog.groupdocs.cloud/de/sitemap.xml",
+          "note": "2 URLs, e.g. https://blog.groupdocs.cloud/de/comparison/compare-excel-files-via-rest-in-csharp/, https://blog.groupdocs.cloud/de/parser/extract-text-from-pdf-in-nodejs/"
+        }
+      ]
+    },
+    "affected_pages": 38,
+    "impact": {
+      "clicks_28d": 2,
+      "impressions_28d": 194,
+      "source": "gsc-host",
+      "share": 0.003,
+      "past_clicks": 5,
+      "past_impressions": 309,
+      "lost_clicks": 3,
+      "lost_impressions": 115,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 6,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "discovery-run1",
+    "last_seen_run": "discovery-run1",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "dup_in_file",
+    "notes": []
+  },
+  {
+    "id": "crawl-0002",
+    "key": "crawl/link_broken/blog.groupdocs.cloud/post",
+    "source": "link-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "post",
+    "dimension": "crawl",
+    "type": "broken",
+    "title": "Posts link to blog pages that do not exist",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/ar/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/ar/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/de/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/de/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/es/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/es/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/fa/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/fr/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/id/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/id/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/it/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/it/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-excel-to-json-in-csharp/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/ko/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/generate-html-from-md-online/",
+        "https://blog.groupdocs.cloud/pl/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/pl/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/pl/merger/document-merging-cloud-apis/",
+        "https://blog.groupdocs.cloud/pl/merger/online-bank-statement-password-remover/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/pt/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ru/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/ru/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/ru/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/ru/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/th/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/th/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/tr/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/uk/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/generate-html-from-md-online/",
+        "https://blog.groupdocs.cloud/vi/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/vi/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-csv-to-json-and-json-to-csv-in-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-html-to-markdown-with-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-html-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-markdown-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-to-html-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-to-word-document-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-text-to-html-and-html-to-text-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-document-to-pdf-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-to-pdf-programmatically-in-csharp/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-to-png-and-png-to-word-document-in-java/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/how-to-convert-excel-to-pdf-using-java-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/",
+        "https://blog.groupdocs.cloud/zh/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/"
+      ],
+      "observed": "511 links on 509 pages (42 distinct targets); by language: pl 32, vi 30, ko 29, ar 28, de 28, fa 28, fr 28, id 28, ...; 0 written by translation commits; 476 copied from the original post",
+      "expected": "Every internal link points at a live page",
+      "locations": [
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-csv-to-json-and-json-to-csv-in-java/ (content/GroupDocs.Cloud/conversion/2022-11-21-convert-csv-to-json-and-json-to-csv-in-java/index.ar.md:371); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/ (content/GroupDocs.Cloud/conversion/2022-11-05-convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/index.ar.md:331); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-21-convert-excel-file-to-json-file-in-java-using-rest-api/index.ar.md:276); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2023/02/10/convert-html-to-markdown-with-java-using-rest-api/#How-to-Convert-HTML-to-Markdown-via-Java-using-REST-API",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-markdown-with-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2023-02-10-convert-html-to-markdown-with-java-using-rest-api/index.ar.md:276); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.ar.md:375); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-18-convert-html-to-pdf-in-java-using-rest-api/index.ar.md:389); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/ (content/GroupDocs.Cloud/conversion/2022-12-22-convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/index.ar.md:388); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-markdown-to-html-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-20-convert-markdown-to-html-in-java-using-rest-api/index.ar.md:341); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/ (content/GroupDocs.Cloud/conversion/2022-11-07-convert-markdown-to-pdf-and-pdf-to-markdown-in-python/index.ar.md:302); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/ (content/GroupDocs.Cloud/conversion/2022-12-01-convert-pdf-file-to-png-and-png-to-pdf-format-using-java/index.ar.md:448); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-03-convert-pdf-to-excel-using-rest-api-in-node.js/index.ar.md:312); 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-html-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-19-convert-pdf-to-html-in-java-using-rest-api/index.ar.md:341); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-09-02-convert-pdf-to-jpg-image-in-node.js-using-rest-api/index.ar.md:437); 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-word-document-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-26-convert-pdf-to-word-document-in-java-using-rest-api/index.ar.md:423); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-17-convert-pdf-to-word-in-csharp-net-using-rest-api/index.ar.md:487); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-powerpoint-to-pdf-using-rest-api-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-22-convert-powerpoint-to-pdf-using-rest-api-in-node.js/index.ar.md:414); 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/ (content/GroupDocs.Cloud/conversion/2022-12-06-convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/index.ar.md:463); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-text-to-html-and-html-to-text-in-python/ (content/GroupDocs.Cloud/conversion/2022-11-15-convert-text-to-html-and-html-to-text-in-python/index.ar.md:320); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-document-to-pdf-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-28-convert-word-document-to-pdf-in-java-using-rest-api/index.ar.md:520); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/ (content/GroupDocs.Cloud/conversion/2022-11-24-convert-word-to-jpg-and-jpg-to-word-programmatically-in-java/index.ar.md:457); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-to-markdown-and-markdown-to-word-in-python/ (content/GroupDocs.Cloud/conversion/2022-11-11-convert-word-to-markdown-and-markdown-to-word-in-python/index.ar.md:273); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-to-pdf-programmatically-in-csharp/ (content/GroupDocs.Cloud/conversion/2022-11-03-convert-word-to-pdf-programmatically-in-csharp/index.ar.md:504); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-to-png-and-png-to-word-document-in-java/ (content/GroupDocs.Cloud/conversion/2022-11-30-convert-word-to-png-and-png-to-word-document-in-java/index.ar.md:443); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-xml-to-csv-and-csv-to-xml-in-python/ (content/GroupDocs.Cloud/conversion/2022-11-01-convert-xml-to-csv-and-csv-to-xml-in-python/index.ar.md:222); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-xml-to-excel-and-excel-to-xml-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-28-convert-xml-to-excel-and-excel-to-xml-in-python/index.ar.md:257); 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/how-to-convert-excel-to-pdf-using-java-api/ (content/GroupDocs.Cloud/conversion/2022-11-22-how-to-convert-excel-to-pdf-using-java-api/index.ar.md:367); 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-10-how-to-convert-powerpoint-to-jpg-and-jpg-to-powerpoint-in-node.js/index.ar.md:445); 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/how-to-convert-text-file-to-pdf-online-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-13-how-to-convert-text-file-to-pdf-online-in-node.js/index.ar.md:244); 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-csv-to-json-and-json-to-csv-in-java/ (content/GroupDocs.Cloud/conversion/2022-11-21-convert-csv-to-json-and-json-to-csv-in-java/index.md:230); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/ (content/GroupDocs.Cloud/conversion/2022-11-05-convert-csv-to-json-or-json-to-csv-programmatically-in-csharp/index.md:172); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-21-convert-excel-file-to-json-file-in-java-using-rest-api/index.md:179); a172b692 2023-06-05: Append refrences and URLs at the end of the file 21-12-2022 to 21-04-2023"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/2023/02/10/convert-html-to-markdown-with-java-using-rest-api/#How-to-Convert-HTML-to-Markdown-via-Java-using-REST-API",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-html-to-markdown-with-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2023-02-10-convert-html-to-markdown-with-java-using-rest-api/index.md:173); a172b692 2023-06-05: Append refrences and URLs at the end of the file 21-12-2022 to 21-04-2023"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.md:197); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-18-convert-html-to-pdf-in-java-using-rest-api/index.md:226); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/ (content/GroupDocs.Cloud/conversion/2022-12-22-convert-jpg-to-powerpoint-and-powerpoint-to-jpg-in-java/index.md:237); a172b692 2023-06-05: Append refrences and URLs at the end of the file 21-12-2022 to 21-04-2023"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-markdown-to-html-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-20-convert-markdown-to-html-in-java-using-rest-api/index.md:194); 3fd95b85 2022-12-21: Convert Markdown to HTML in Java using REST API."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-markdown-to-pdf-and-pdf-to-markdown-in-python/ (content/GroupDocs.Cloud/conversion/2022-11-07-convert-markdown-to-pdf-and-pdf-to-markdown-in-python/index.md:210); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-pdf-file-to-png-and-png-to-pdf-format-using-java/ (content/GroupDocs.Cloud/conversion/2022-12-01-convert-pdf-file-to-png-and-png-to-pdf-format-using-java/index.md:263); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-pdf-to-excel-using-rest-api-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-03-convert-pdf-to-excel-using-rest-api-in-node.js/index.md:202); 4cce9d5a 2022-12-10: Added Hugo Blog"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/category/conversion/",
+          "note": "on https://blog.groupdocs.cloud/conversion/convert-pdf-to-html-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-19-convert-pdf-to-html-in-java-using-rest-api/index.md:194); 40cf6793 2022-12-20: Convert PDF to HTML in Java using REST API"
+        }
+      ]
+    },
+    "affected_pages": 509,
+    "impact": {
+      "clicks_28d": 22,
+      "impressions_28d": 2806,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 40,
+      "past_impressions": 4194,
+      "lost_clicks": 18,
+      "lost_impressions": 1388,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 23,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "M",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "link-audit-run1",
+    "last_seen_run": "link-audit-run7",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "link_broken",
+    "notes": []
+  },
+  {
+    "id": "intl-0001",
+    "key": "intl/link_missing_translation/blog.groupdocs.cloud/post",
+    "source": "link-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "post",
+    "dimension": "intl",
+    "type": "broken",
+    "title": "Translated posts link to translations that do not exist",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/ar/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-html-to-word-in-csharp/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/ar/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/de/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/de/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/es/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/es/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/fa/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/fa/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/fa/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/fr/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/fr/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/fr/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/fr/watermark/add-text-watermark-to-pdf-using-csharp/",
+        "https://blog.groupdocs.cloud/id/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/id/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/id/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/it/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/it/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/it/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/ja/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/ja/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/ja/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/ko/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/ko/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/pl/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/pl/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/pl/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/pt/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/pt/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/pt/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/ru/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/ru/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/th/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/th/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/th/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/tr/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/tr/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/uk/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/uk/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/vi/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/vi/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/vi/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/zh-hant/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/zh-hant/parser/java-dom-parser-extract-text-from-xml-documents-using-java/",
+        "https://blog.groupdocs.cloud/zh/annotation/extract-or-remove-annotations-from-word-files-using-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-html-to-pdf-in-csharp-using-rest-api/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-svg-to-png-high-quality-in-python/",
+        "https://blog.groupdocs.cloud/zh/conversion/convert-word-to-tiff-file-in-python/",
+        "https://blog.groupdocs.cloud/zh/parser/java-dom-parser-extract-text-from-xml-documents-using-java/"
+      ],
+      "observed": "187 links on 122 pages (137 distinct targets); by language: ar 14, fr 12, de 11, es 11, id 11, it 11, pl 11, pt 11, ...; 0 written by translation commits",
+      "expected": "Links to the default-language post when the target has no translation",
+      "locations": [
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/annotation/extract-or-remove-annotations-from-word-files-using-python/ (content/GroupDocs.Cloud/annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.ar.md:172); use https://blog.groupdocs.cloud/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/; 241725f4 2023-06-27: Worked on blog translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.ar.md:351); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/ar/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-word-in-csharp/ (content/GroupDocs.Cloud/conversion/2024-08-13-convert-html-to-word-in-csharp/index.ar.md:188); use https://blog.groupdocs.cloud/ar/merger/password-protect-excel-using-password-protection-service/; 3b62aa15 2024-08-20: html to doc conversion"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/ar/conversion/convert-csv-to-json-with-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-word-in-csharp/ (content/GroupDocs.Cloud/conversion/2024-08-13-convert-html-to-word-in-csharp/index.ar.md:199); use https://blog.groupdocs.cloud/ar/conversion/convert-csv-to-json-with-csharp/; 3b62aa15 2024-08-20: html to doc conversion"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/ar/conversion/convert-pdf-to-xls-in-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-word-in-csharp/ (content/GroupDocs.Cloud/conversion/2024-08-13-convert-html-to-word-in-csharp/index.ar.md:200); use https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-xls-in-csharp/; 3b62aa15 2024-08-20: html to doc conversion"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/ar/comparison/compare-pdf-files-in-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-html-to-word-in-csharp/ (content/GroupDocs.Cloud/conversion/2024-08-13-convert-html-to-word-in-csharp/index.ar.md:203); use https://blog.groupdocs.cloud/ar/comparison/compare-pdf-files-in-csharp/; 3b62aa15 2024-08-20: html to doc conversion"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-27-convert-svg-to-jpg-and-jpg-to-svg-in-python/index.ar.md:210); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-svg-to-png-high-quality-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-19-convert-svg-to-png-high-quality-in-python/index.ar.md:228); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/conversion/convert-word-to-tiff-file-in-python/ (content/GroupDocs.Cloud/conversion/2022-07-30-convert-word-to-tiff-file-in-python/index.ar.md:229); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 02d380dc 2023-06-18: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.ar.md:201); use https://blog.groupdocs.cloud/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/11/29/parse-word-documents-using-rest-api-in-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.ar.md:202); use https://blog.groupdocs.cloud/2021/11/29/parse-word-documents-using-rest-api-in-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/04/28/extract-specific-data-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.ar.md:203); use https://blog.groupdocs.cloud/2021/04/28/extract-specific-data-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/03/19/extract-images-from-pdf-documents-using-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.ar.md:204); use https://blog.groupdocs.cloud/2021/03/19/extract-images-from-pdf-documents-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ar/2021/03/17/extract-text-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.ar.md:205); use https://blog.groupdocs.cloud/2021/03/17/extract-text-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/",
+          "note": "on https://blog.groupdocs.cloud/de/annotation/extract-or-remove-annotations-from-word-files-using-python/ (content/GroupDocs.Cloud/annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.de.md:172); use https://blog.groupdocs.cloud/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/; 241725f4 2023-06-27: Worked on blog translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/de/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-21-convert-excel-file-to-json-file-in-java-using-rest-api/index.de.md:278); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/de/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.de.md:351); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/de/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-27-convert-svg-to-jpg-and-jpg-to-svg-in-python/index.de.md:210); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/de/conversion/convert-svg-to-png-high-quality-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-19-convert-svg-to-png-high-quality-in-python/index.de.md:228); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/de/conversion/convert-word-to-tiff-file-in-python/ (content/GroupDocs.Cloud/conversion/2022-07-30-convert-word-to-tiff-file-in-python/index.de.md:229); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 02d380dc 2023-06-18: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.de.md:201); use https://blog.groupdocs.cloud/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/11/29/parse-word-documents-using-rest-api-in-python/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.de.md:202); use https://blog.groupdocs.cloud/2021/11/29/parse-word-documents-using-rest-api-in-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/04/28/extract-specific-data-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.de.md:203); use https://blog.groupdocs.cloud/2021/04/28/extract-specific-data-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/03/19/extract-images-from-pdf-documents-using-python/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.de.md:204); use https://blog.groupdocs.cloud/2021/03/19/extract-images-from-pdf-documents-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/de/2021/03/17/extract-text-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.de.md:205); use https://blog.groupdocs.cloud/2021/03/17/extract-text-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/",
+          "note": "on https://blog.groupdocs.cloud/es/annotation/extract-or-remove-annotations-from-word-files-using-python/ (content/GroupDocs.Cloud/annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.es.md:172); use https://blog.groupdocs.cloud/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/; 241725f4 2023-06-27: Worked on blog translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/es/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-21-convert-excel-file-to-json-file-in-java-using-rest-api/index.es.md:278); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/es/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.es.md:351); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/es/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-27-convert-svg-to-jpg-and-jpg-to-svg-in-python/index.es.md:210); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/es/conversion/convert-svg-to-png-high-quality-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-19-convert-svg-to-png-high-quality-in-python/index.es.md:228); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/es/conversion/convert-word-to-tiff-file-in-python/ (content/GroupDocs.Cloud/conversion/2022-07-30-convert-word-to-tiff-file-in-python/index.es.md:229); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 02d380dc 2023-06-18: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.es.md:201); use https://blog.groupdocs.cloud/2021/12/21/extract-data-from-pdf-using-rest-api-in-node-js/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/11/29/parse-word-documents-using-rest-api-in-python/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.es.md:202); use https://blog.groupdocs.cloud/2021/11/29/parse-word-documents-using-rest-api-in-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/04/28/extract-specific-data-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.es.md:203); use https://blog.groupdocs.cloud/2021/04/28/extract-specific-data-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/03/19/extract-images-from-pdf-documents-using-python/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.es.md:204); use https://blog.groupdocs.cloud/2021/03/19/extract-images-from-pdf-documents-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/es/2021/03/17/extract-text-from-pdf-using-python/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/java-dom-parser-extract-text-from-xml-documents-using-java/ (content/GroupDocs.Cloud/parser/2023-06-17-java-dom-parser-extract-text-from-xml-documents-using-java/index.es.md:205); use https://blog.groupdocs.cloud/2021/03/17/extract-text-from-pdf-using-python/; 79df8a6a 2023-06-18: Added translations for Java DOM Parser - Extract Text from XML Documents using Java"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/fa/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/",
+          "note": "on https://blog.groupdocs.cloud/fa/annotation/extract-or-remove-annotations-from-word-files-using-python/ (content/GroupDocs.Cloud/annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.fa.md:172); use https://blog.groupdocs.cloud/2021/02/18/render-project-data-from-mpp-to-pdf-in-python/; 241725f4 2023-06-27: Worked on blog translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/fa/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/fa/conversion/convert-excel-file-to-json-file-in-java-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-12-21-convert-excel-file-to-json-file-in-java-using-rest-api/index.fa.md:278); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/fa/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/",
+          "note": "on https://blog.groupdocs.cloud/fa/conversion/convert-html-to-pdf-in-csharp-using-rest-api/ (content/GroupDocs.Cloud/conversion/2022-11-04-convert-html-to-pdf-in-csharp-using-rest-api/index.fa.md:351); use https://blog.groupdocs.cloud/conversion/convert-excel-xlsx-or-xls-to-json-file-in-java-using-rest-api/; 90a4f407 2023-06-12: Added translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/fa/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/",
+          "note": "on https://blog.groupdocs.cloud/fa/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/ (content/GroupDocs.Cloud/conversion/2022-10-27-convert-svg-to-jpg-and-jpg-to-svg-in-python/index.fa.md:210); use https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpeg-png-and-gif-images-in-python/; 1220331b 2023-06-13: Added translations."
+        }
+      ]
+    },
+    "affected_pages": 122,
+    "impact": {
+      "clicks_28d": 4,
+      "impressions_28d": 820,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 7,
+      "past_impressions": 816,
+      "lost_clicks": 3,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 22,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "link-audit-run1",
+    "last_seen_run": "link-audit-run7",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "link_missing_translation",
+    "notes": []
+  },
+  {
+    "id": "intl-0002",
+    "key": "intl/link_damaged/blog.groupdocs.cloud/post",
+    "source": "link-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "post",
+    "dimension": "intl",
+    "type": "broken",
+    "title": "Translated posts contain damaged internal links",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/ja/conversion/convert-word-to-pdf-online-for-free/",
+        "https://blog.groupdocs.cloud/ko/conversion/convert-word-to-pdf-online-for-free/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-csv-to-excel-using-rest-api-in-node.js/",
+        "https://blog.groupdocs.cloud/tr/conversion/convert-word-to-pdf-online-for-free/",
+        "https://blog.groupdocs.cloud/uk/conversion/convert-word-to-pdf-online-for-free/"
+      ],
+      "observed": "9 links on 5 pages (9 distinct targets); by language: tr 3, ja 2, ko 2, uk 2; 0 written by translation commits",
+      "expected": "Each internal link exactly as in the original post, in the page's language when that translation exists",
+      "locations": [
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ja/conversion/convert-word-document-to-pdf-in-java-using-rest",
+          "note": "on https://blog.groupdocs.cloud/ja/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.ja.md:61); use https://blog.groupdocs.cloud/ja/conversion/convert-word-document-to-pdf-in-java-using-rest-api/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ja/conversion/convert-word-documents-to-pdf-using-rest-api-in",
+          "note": "on https://blog.groupdocs.cloud/ja/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.ja.md:88); use https://blog.groupdocs.cloud/ja/conversion/convert-word-documents-to-pdf-using-rest-api-in-python/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ko/conversion/convert-word-document-to-pdf-in-java-using-rest",
+          "note": "on https://blog.groupdocs.cloud/ko/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.ko.md:61); use https://blog.groupdocs.cloud/ko/conversion/convert-word-document-to-pdf-in-java-using-rest-api/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/ko/conversion/convert-word-documents-to-pdf-using-rest-api-in",
+          "note": "on https://blog.groupdocs.cloud/ko/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.ko.md:88); use https://blog.groupdocs.cloud/ko/conversion/convert-word-documents-to-pdf-using-rest-api-in-python/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/tr/conversion/convert-excel-to-csv-format-using-",
+          "note": "on https://blog.groupdocs.cloud/tr/conversion/convert-csv-to-excel-using-rest-api-in-node.js/ (content/GroupDocs.Cloud/conversion/2022-09-09-convert-csv-to-excel-using-rest-api-in-node.js/index.tr.md:19); use https://blog.groupdocs.cloud/tr/conversion/convert-excel-to-csv-format-using-rest-api-in-node.js/; 4f0719b3 2023-06-13: Added translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/tr/conversion/convert-word-document-to-pdf-in-java-using-rest",
+          "note": "on https://blog.groupdocs.cloud/tr/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.tr.md:61); use https://blog.groupdocs.cloud/tr/conversion/convert-word-document-to-pdf-in-java-using-rest-api/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/tr/conversion/convert-word-documents-to-pdf-using-rest-api-in",
+          "note": "on https://blog.groupdocs.cloud/tr/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.tr.md:88); use https://blog.groupdocs.cloud/tr/conversion/convert-word-documents-to-pdf-using-rest-api-in-python/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/uk/conversion/convert-word-document-to-pdf-in-java-using-rest",
+          "note": "on https://blog.groupdocs.cloud/uk/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.uk.md:61); use https://blog.groupdocs.cloud/uk/conversion/convert-word-document-to-pdf-in-java-using-rest-api/; 7ff40cee 2023-06-11: Added and tested translations."
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/uk/conversion/convert-word-documents-to-pdf-using-rest-api-in",
+          "note": "on https://blog.groupdocs.cloud/uk/conversion/convert-word-to-pdf-online-for-free/ (content/GroupDocs.Cloud/conversion/2023-03-24-convert-word-to-pdf-online-for-free/index.uk.md:88); use https://blog.groupdocs.cloud/uk/conversion/convert-word-documents-to-pdf-using-rest-api-in-python/; 7ff40cee 2023-06-11: Added and tested translations."
+        }
+      ]
+    },
+    "affected_pages": 5,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 20,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 7,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 2,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "link-audit-run1",
+    "last_seen_run": "link-audit-run7",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "link_damaged",
+    "notes": []
+  },
+  {
+    "id": "intl-0003",
+    "key": "intl/link_wrong_language/blog.groupdocs.cloud/post",
+    "source": "link-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "post",
+    "dimension": "intl",
+    "type": "incorrect",
+    "title": "Posts link to another language although a translation exists",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/ar/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/de/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/es/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/fa/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/fr/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/id/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/it/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/ja/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/ko/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/pl/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/pt/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/ru/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/th/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/tr/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/uk/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/vi/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/zh-hant/parser/extract-images-from-word-using-csharp/",
+        "https://blog.groupdocs.cloud/zh/parser/extract-images-from-word-using-csharp/"
+      ],
+      "observed": "72 links on 18 pages (4 distinct targets); by language: ar 4, de 4, es 4, fa 4, fr 4, id 4, it 4, ja 4, ...; 0 written by translation commits",
+      "expected": "Internal links point at the post in the page's own language",
+      "locations": [
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ar.md:201); use https://blog.groupdocs.cloud/ar/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ar.md:210); use https://blog.groupdocs.cloud/ar/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ar.md:211); use https://blog.groupdocs.cloud/ar/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ar/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ar.md:212); use https://blog.groupdocs.cloud/ar/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/de/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.de.md:201); use https://blog.groupdocs.cloud/de/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.de.md:210); use https://blog.groupdocs.cloud/de/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.de.md:211); use https://blog.groupdocs.cloud/de/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/de/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.de.md:212); use https://blog.groupdocs.cloud/de/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/es/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.es.md:201); use https://blog.groupdocs.cloud/es/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.es.md:210); use https://blog.groupdocs.cloud/es/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.es.md:211); use https://blog.groupdocs.cloud/es/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/es/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.es.md:212); use https://blog.groupdocs.cloud/es/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/fa/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fa.md:201); use https://blog.groupdocs.cloud/fa/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fa/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fa.md:210); use https://blog.groupdocs.cloud/fa/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fa/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fa.md:211); use https://blog.groupdocs.cloud/fa/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fa/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fa.md:212); use https://blog.groupdocs.cloud/fa/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/fr/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fr.md:201); use https://blog.groupdocs.cloud/fr/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fr/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fr.md:210); use https://blog.groupdocs.cloud/fr/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fr/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fr.md:211); use https://blog.groupdocs.cloud/fr/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/fr/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.fr.md:212); use https://blog.groupdocs.cloud/fr/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/id/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.id.md:201); use https://blog.groupdocs.cloud/id/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/id/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.id.md:210); use https://blog.groupdocs.cloud/id/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/id/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.id.md:211); use https://blog.groupdocs.cloud/id/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/id/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.id.md:212); use https://blog.groupdocs.cloud/id/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/it/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.it.md:201); use https://blog.groupdocs.cloud/it/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/it/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.it.md:210); use https://blog.groupdocs.cloud/it/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/it/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.it.md:211); use https://blog.groupdocs.cloud/it/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/it/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.it.md:212); use https://blog.groupdocs.cloud/it/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/ja/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ja.md:201); use https://blog.groupdocs.cloud/ja/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ja/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ja.md:210); use https://blog.groupdocs.cloud/ja/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ja/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ja.md:211); use https://blog.groupdocs.cloud/ja/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ja/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ja.md:212); use https://blog.groupdocs.cloud/ja/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/ko/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ko.md:201); use https://blog.groupdocs.cloud/ko/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ko/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ko.md:210); use https://blog.groupdocs.cloud/ko/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ko/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ko.md:211); use https://blog.groupdocs.cloud/ko/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/ko/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.ko.md:212); use https://blog.groupdocs.cloud/ko/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-using-password-protection-service/#how-to-obtain-api-credentials-to-use-groupdocs-merger-cloud-sdk",
+          "note": "on https://blog.groupdocs.cloud/pl/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.pl.md:201); use https://blog.groupdocs.cloud/pl/merger/password-protect-excel-using-password-protection-service/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/pl/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.pl.md:210); use https://blog.groupdocs.cloud/pl/comparison/compare-excel-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-csharp/",
+          "note": "on https://blog.groupdocs.cloud/pl/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.pl.md:211); use https://blog.groupdocs.cloud/pl/merger/merge-pdf-files-using-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-csharp/",
+          "note": "on https://blog.groupdocs.cloud/pl/parser/extract-images-from-word-using-csharp/ (content/GroupDocs.Cloud/parser/2025-09-30-extract-images-from-word-using-csharp/index.pl.md:212); use https://blog.groupdocs.cloud/pl/conversion/pdf-to-html-online-csharp/; dcb98415 2025-10-20: Translations for Extract images from Word document"
+        }
+      ]
+    },
+    "affected_pages": 18,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 90,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 1,
+      "past_impressions": 30,
+      "lost_clicks": 1,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 4,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "link-audit-run1",
+    "last_seen_run": "link-audit-run7",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "link_wrong_language",
+    "notes": []
+  },
+  {
+    "id": "intl-0004",
+    "key": "intl/hreflang_no_xdefault/blog.groupdocs.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "intl",
+    "type": "improvable",
+    "title": "hreflang set has no x-default",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/search/",
+        "https://blog.groupdocs.cloud/parser/extract-images-from-word-in-nodejs-image-extractor/",
+        "https://blog.groupdocs.cloud/de/groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/pt/",
+        "https://blog.groupdocs.cloud/archives/",
+        "https://blog.groupdocs.cloud/viewer/render-excel-data-to-html-using-python/",
+        "https://blog.groupdocs.cloud/id/groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/it/"
+      ],
+      "observed": "32 of 32 sampled pages (by template: category 3/3, home 3/3, listing 4/4, post 22/22). e.g. https://blog.groupdocs.cloud/groupdocs.cloud/: 1 entries: en; https://blog.groupdocs.cloud/: 19 entries: en, ja, ko, es, de, ru; https://blog.groupdocs.cloud/search/: 19 entries: en, ja, ko, es, de, ru; https://blog.groupdocs.cloud/parser/extract-images-from-word-in-nodejs-image-extractor/: 19 entries: en, ja, ko, es, de, ru; https://blog.groupdocs.cloud/de/groupdocs.cloud/: 18 entries: ja, ko, es, de, ru, fr",
+      "expected": "an x-default entry",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/groupdocs.cloud/",
+          "note": "1 entries: en"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/",
+          "note": "19 entries: en, ja, ko, es, de, ru"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/search/",
+          "note": "19 entries: en, ja, ko, es, de, ru"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/parser/extract-images-from-word-in-nodejs-image-extractor/",
+          "note": "19 entries: en, ja, ko, es, de, ru"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/de/groupdocs.cloud/",
+          "note": "18 entries: ja, ko, es, de, ru, fr"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.groupdocs.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/de/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "category": [
+          3,
+          3
+        ],
+        "home": [
+          3,
+          3
+        ],
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          22,
+          22
+        ]
+      }
+    },
+    "affected_pages": 11039,
+    "impact": {
+      "clicks_28d": 556,
+      "impressions_28d": 53700,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 1430,
+      "past_impressions": 85611,
+      "lost_clicks": 874,
+      "lost_impressions": 31911,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 12,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 2,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "crawl-audit-run2",
+    "last_seen_run": "crawl-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "hreflang_no_xdefault",
+    "notes": []
+  },
+  {
+    "id": "onpage-0001",
+    "key": "onpage/description_length/blog.groupdocs.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Meta descriptions are too long or too short",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/search/",
+        "https://blog.groupdocs.cloud/pt/",
+        "https://blog.groupdocs.cloud/archives/",
+        "https://blog.groupdocs.cloud/it/",
+        "https://blog.groupdocs.cloud/fa/archives/",
+        "https://blog.groupdocs.cloud/ar/archives/",
+        "https://blog.groupdocs.cloud/conversion/convert-latex-to-html-in-python-using-rest-api/"
+      ],
+      "observed": "8 of 32 sampled pages (by template: home 3/3, listing 4/4, post 1/22). e.g. https://blog.groupdocs.cloud/: width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '; https://blog.groupdocs.cloud/search/: width 6: 'search'; https://blog.groupdocs.cloud/pt/: width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '; https://blog.groupdocs.cloud/archives/: width 8: 'archives'; https://blog.groupdocs.cloud/it/: width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '",
+      "expected": "50-170 characters (CJK count double)",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/",
+          "note": "width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/search/",
+          "note": "width 6: 'search'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/pt/",
+          "note": "width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/archives/",
+          "note": "width 8: 'archives'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/it/",
+          "note": "width 331: 'Document Automation APIs along with open-source SDKs to enhance Java, Python, Node.js, C# '"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.groupdocs.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/pt/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/it/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "home": [
+          3,
+          3
+        ],
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          1,
+          22
+        ]
+      }
+    },
+    "affected_pages": 555,
+    "impact": {
+      "clicks_28d": 25,
+      "impressions_28d": 2481,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 65,
+      "past_impressions": 3980,
+      "lost_clicks": 40,
+      "lost_impressions": 1499,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 7,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "crawl-audit-run2",
+    "last_seen_run": "crawl-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "description_length",
+    "notes": []
+  },
+  {
+    "id": "onpage-0002",
+    "key": "onpage/h1_missing/blog.groupdocs.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Pages have no H1",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/",
+        "https://blog.groupdocs.cloud/pt/",
+        "https://blog.groupdocs.cloud/it/"
+      ],
+      "observed": "3 of 32 sampled pages (by template: home 3/3). e.g. https://blog.groupdocs.cloud/: no non-empty <h1>; https://blog.groupdocs.cloud/pt/: no non-empty <h1>; https://blog.groupdocs.cloud/it/: no non-empty <h1>",
+      "expected": "one H1 that states the page topic",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/pt/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/it/",
+          "note": "no non-empty <h1>"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.groupdocs.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/pt/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/it/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "home": [
+          3,
+          3
+        ]
+      }
+    },
+    "affected_pages": 19,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 10,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 45,
+      "lost_clicks": 0,
+      "lost_impressions": 35,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "lost",
+      "score": 0,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "crawl-audit-run2",
+    "last_seen_run": "crawl-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "h1_missing",
+    "notes": []
+  },
+  {
+    "id": "onpage-0003",
+    "key": "onpage/title_length/blog.groupdocs.cloud/page",
+    "source": "crawl-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "improvable",
+    "title": "Titles are too long or too short",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/search/",
+        "https://blog.groupdocs.cloud/archives/",
+        "https://blog.groupdocs.cloud/fa/archives/",
+        "https://blog.groupdocs.cloud/ar/archives/",
+        "https://blog.groupdocs.cloud/merger/password-protect-excel-files-using-rest-api-in-python/"
+      ],
+      "observed": "5 of 32 sampled pages (by template: listing 4/4, post 1/22). e.g. https://blog.groupdocs.cloud/search/: width 6: 'Search'; https://blog.groupdocs.cloud/archives/: width 7: 'Archive'; https://blog.groupdocs.cloud/fa/archives/: width 7: 'آرشیوها'; https://blog.groupdocs.cloud/ar/archives/: width 5: 'أرشيف'; https://blog.groupdocs.cloud/merger/password-protect-excel-files-using-rest-api-in-python/: width 76: 'Python Password Protect an Excel File | XLS/XLSX Password Protector REST API'",
+      "expected": "10-70 characters (CJK count double)",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/search/",
+          "note": "width 6: 'Search'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/archives/",
+          "note": "width 7: 'Archive'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/fa/archives/",
+          "note": "width 7: 'آرشیوها'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/ar/archives/",
+          "note": "width 5: 'أرشيف'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-files-using-rest-api-in-python/",
+          "note": "width 76: 'Python Password Protect an Excel File | XLS/XLSX Password Protector REST API'"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/en/sitemap.xml"
+        },
+        {
+          "role": "sitemap index",
+          "url": "https://blog.groupdocs.cloud/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/fa/sitemap.xml"
+        },
+        {
+          "role": "listed in",
+          "url": "https://blog.groupdocs.cloud/ar/sitemap.xml"
+        }
+      ],
+      "sample": {
+        "listing": [
+          4,
+          4
+        ],
+        "post": [
+          1,
+          22
+        ]
+      }
+    },
+    "affected_pages": 536,
+    "impact": {
+      "clicks_28d": 25,
+      "impressions_28d": 2471,
+      "source": "gsc-template",
+      "share": null,
+      "past_clicks": 65,
+      "past_impressions": 3935,
+      "lost_clicks": 40,
+      "lost_impressions": 1464,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 7,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "crawl-audit-run2",
+    "last_seen_run": "crawl-audit-run2",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "title_length",
+    "notes": []
+  },
+  {
+    "id": "onpage-0004",
+    "key": "onpage/text_topic_mismatch/blog.groupdocs.cloud/page",
+    "source": "text-audit",
+    "tenant": "groupdocs.cloud",
+    "subdomain": "blog.groupdocs.cloud",
+    "template": "page",
+    "dimension": "onpage",
+    "type": "incorrect",
+    "title": "Title or description is about a different product",
+    "evidence": {
+      "urls": [
+        "https://blog.groupdocs.cloud/merger/rearrange-pdf-pages-using-rest-api-in-node-js/",
+        "https://blog.groupdocs.cloud/conversion/september-newsletter/",
+        "https://blog.groupdocs.cloud/viewer/groupdocs-scheduled-maintenance-2nd-august-2015-sunday/"
+      ],
+      "observed": "3 of 32 checked pages: /merger/rearrange-pdf-pages-using-rest-api-in-node-js/ title: 'Edit Documents using REST API in PHP | Edit DOCX or XLSX Files in PHP' → 'Rearrange PDF Pages using REST API in Node.js'; /conversion/september-newsletter/ title: 'Get Documents Completed and Signed through Online Forms | GroupDocs' → 'Spotlight on GroupDocs.Conversion for .NET – September 2014 Newsletter'; /viewer/groupdocs-scheduled-maintenance-2nd-august-2015-sunday/ title: 'Display PDF and Microsoft Office Documents on Your Concrete5 Website' → 'GroupDocs Scheduled Maintenance – 2nd August, 2015'",
+      "expected": "Title and meta description describe the page's own product, like its H1",
+      "locations": [
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/merger/rearrange-pdf-pages-using-rest-api-in-node-js/",
+          "note": "title: 'Edit Documents using REST API in PHP | Edit DOCX or XLSX Files in PHP' → 'Rearrange PDF Pages using REST API in Node.js'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/conversion/september-newsletter/",
+          "note": "title: 'Get Documents Completed and Signed through Online Forms | GroupDocs' → 'Spotlight on GroupDocs.Conversion for .NET – September 2014 Newsletter'"
+        },
+        {
+          "role": "page",
+          "url": "https://blog.groupdocs.cloud/viewer/groupdocs-scheduled-maintenance-2nd-august-2015-sunday/",
+          "note": "title: 'Display PDF and Microsoft Office Documents on Your Concrete5 Website' → 'GroupDocs Scheduled Maintenance – 2nd August, 2015'"
+        }
+      ]
+    },
+    "affected_pages": 3,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 25,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 37,
+      "lost_clicks": 0,
+      "lost_impressions": 12,
+      "past_window": [
+        "2026-03-24",
+        "2026-04-20"
+      ],
+      "scored_on": "at stake",
+      "score": 1,
+      "window": [
+        "2026-09-22",
+        "2026-10-19"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-22",
+    "first_seen_run": "text-audit-run6",
+    "last_seen_run": "text-audit-run6",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "text_topic_mismatch",
+    "notes": []
+  }
+]
