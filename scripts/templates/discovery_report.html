@@ -973,7 +973,7 @@ footer a { color: var(--accent) }
         const cls = !s.urls ? "" : p >= 0.9 ? "ok" : p > 0 ? "warn" : "bad";
         // hreflang only matters where a section has more than one language
         const st = !s.urls ? "bad" : langs > 1 && p < 0.9 ? "warn" : "ok";
-        return { st, w: s.urls || gscBySec[k] || 0, html: `<tr><td class="mono">${mk(st)}/${esc(k)}/</td><td class="n ${s.urls ? "" : "bad"}">${fmt(s.urls)}</td><td><span class="bar" style="width:${Math.round(120 * s.urls / max)}px"></span></td><td class="n">${langs || "–"}</td><td class="n ${cls}">${s.urls ? pct(s.hreflang_urls, s.urls) : "–"}</td><td class="n dim">${gscBySec[k] != null ? fmt(gscBySec[k]) : "–"}</td></tr>` };
+        return { st, w: s.urls || gscBySec[k] || 0, html: `<tr><td class="mono">${mk(st)}${k ? `/${esc(k)}/` : `/ <span class="dim">(homepages)</span>`}</td><td class="n ${s.urls ? "" : "bad"}">${fmt(s.urls)}</td><td><span class="bar" style="width:${Math.round(120 * s.urls / max)}px"></span></td><td class="n">${langs || "–"}</td><td class="n ${cls}">${s.urls ? pct(s.hreflang_urls, s.urls) : "–"}</td><td class="n dim">${gscBySec[k] != null ? fmt(gscBySec[k]) : "–"}</td></tr>` };
       }), "sections-st", "sections");
   }
 
