@@ -158,3 +158,35 @@ def test_site_hosts_must_not_clash(monkeypatch):
     monkeypatch.setattr(build_site, "load_tenant", lambda t: SimpleNamespace(host_names=["fix-guide"]))
     with pytest.raises(SystemExit, match="clashes"):
         build_site.site_hosts(["a.org"])
+
+
+def test_area_scores_and_speed_without_real_user_data():
+    """Opted-in tenants get health by area on each host card; speed with no field data and no findings is not 100."""
+    from scripts.build_report import add_hosts
+
+    finding = {"id": "intl-0001", "status": "open", "type": "broken", "check": "link_missing_translation",
+               "dimension": "intl", "subdomain": "blog.example.org", "template": "post", "title": "Links",
+               "evidence": {"urls": ["https://blog.example.org/"]}, "affected_pages": 10}
+    report = {"hosts": {"blog.example.org": {"urls": 40}}, "findings": [finding], "_area_scores": True,
+              "_audit": {}, "_links": {"run_id": 1},
+              "_perf": {"summary": {"blog.example.org": {"pages": 12, "field": 0, "median_score": 74}}}}
+    add_hosts(report, Path("missing.json"))
+    areas = {a["dimension"]: a for a in report["_hosts"][0]["areas"]}
+    assert areas["intl"]["state"] == "scored" and areas["intl"]["health"] == 90  # 40 x share 10/40
+    assert areas["onpage"]["state"] == "not checked"  # no crawl audit in this report
+    assert areas["perf"]["state"] == "no data" and areas["perf"]["lab_median"] == 74
+    report.pop("_area_scores")
+    add_hosts(report, Path("missing.json"))
+    assert "areas" not in report["_hosts"][0]
+
+
+def test_gsc_comparison_from_the_run_sitemap_list():
+    from scripts.build_report import gsc_comparison
+
+    report = {"sitemaps": {"blog.example.org": {"": [
+        {"url": "https://blog.example.org/sitemap.xml", "status": 200, "error": None, "kind": "index", "urls": 90}]}}}
+    snap = {"property": "https://blog.example.org/", "sitemaps": [
+        {"path": "/sitemap.xml", "status": "Success", "discovered": 95}, {"path": "/gone.xml", "status": "Success"}]}
+    assert gsc_comparison(report, snap) == [{"path": "/sitemap.xml", "url": "https://blog.example.org/sitemap.xml",
+                                             "gsc_status": "Success", "gsc_discovered": 95, "live_status": 200,
+                                             "live_kind": "index", "live_urls": 90}]

@@ -50,6 +50,10 @@ GROUPS = {
 }
 # the one-glance status line on a card: label -> groups it summarizes
 STATUS = {"Sitemap": ("sitemap",), "Pages": ("page errors",), "Canonical": ("canonical",), "hreflang": ("hreflang",)}
+# health by area at the top of a host's report (SK, 2026-10-26; tenant opt-in report.area_scores): finding
+# dimension -> area name. Always shown in this order; other dimensions follow when they have findings.
+AREAS = {"crawl": "Crawl & indexing", "onpage": "On-page content", "intl": "Languages", "ai": "AI readiness",
+         "perf": "Speed"}
 
 
 def grade(health: float) -> str:
@@ -140,6 +144,18 @@ def scorecard(family: str, findings: list[dict], family_urls: int) -> dict:
                  "blocker": effective_type(f) == "broken"} for f in top[:3]],
         "status": status,
     }
+
+
+def area_scores(findings: list[dict], urls: int) -> list[dict]:
+    """Health per area: the scorecard formula over one dimension's findings only. The overall health spends the
+    points of every area (and the cosmetic cap across all of them), so it is never above an area's score."""
+    dims = list(AREAS) + sorted({f["dimension"] for f in findings if f["status"] == "open"} - set(AREAS))
+    areas = []
+    for dim in dims:
+        c = scorecard(dim, [f for f in findings if f.get("dimension") == dim], urls)
+        areas.append({"dimension": dim, "name": AREAS.get(dim, dim), "health": c["health"], "grade": c["grade"],
+                      "penalties": c["penalties"], "counts": c["counts"]})
+    return areas
 
 
 def family_scorecards(findings: list[dict], host: str, families: list[str], section_stats: dict,

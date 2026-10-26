@@ -188,6 +188,16 @@ section { scroll-margin-top: 56px }
 .nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px }
 .nums div { display: grid } .nums b { font: 600 20px var(--display); font-variant-numeric: tabular-nums } .nums span { font-size: 12px; color: var(--muted) }
 .nums .broken b { color: var(--broken) } .nums .incorrect b { color: var(--incorrect) }
+/* health by area: the overall score first, then one tile per area; a tile opens that area's findings */
+.areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px }
+.area { all: unset; box-sizing: border-box; display: grid; gap: 2px; align-content: start; min-width: 0; padding: 10px 12px;
+  border: 1px solid var(--line); border-top: 4px solid var(--gc, var(--line)); border-radius: 8px; background: var(--surface) }
+button.area { cursor: pointer } button.area:hover { border-color: var(--accent) }
+button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.area b { font: 600 28px/1.1 var(--display); font-variant-numeric: tabular-nums; color: var(--gc, var(--muted)) }
+.area .an { font-weight: 600; font-size: 14px }
+.area small { font-size: 12px; color: var(--muted); overflow-wrap: anywhere }
+.area.overall { background: var(--tint) }
 .risks { background: var(--tint); border-radius: 8px; padding: 14px 18px; display: grid; gap: 8px }
 .risks ol { margin: 0; padding-left: 20px; display: grid; gap: 6px }
 .risks li span { color: var(--muted) }
@@ -250,6 +260,7 @@ footer a { color: var(--accent) }
 
   <section aria-labelledby="s-sum" id="summary">
     <h2 id="s-sum">Summary</h2>
+    <div class="sumcard" id="sum-areas" hidden></div>
     <div class="sumgrid">
       <div class="sumcard" id="sum-grades"></div>
       <div class="sumcard" id="sum-numbers"></div>
@@ -351,7 +362,7 @@ footer a { color: var(--accent) }
     <h2 id="s-method">How this audit works</h2>
     <div class="method">
       <div><h3>What runs</h3><p><b>Discovery</b> reads every host's robots.txt and every sitemap file (all of them, no sampling). The <b>crawl audit</b> then fetches a sample of pages per URL pattern (template): 2 English pages and 1 page in each of 2 other languages, plus every homepage and family hub, and runs 33 checks on each (2 of them for AI readiness: text visible without JavaScript, structured data). Both only read: GET requests, robots.txt respected, one request per host per second. The <b>speed audit</b> asks Google PageSpeed Insights about the 2 most-visited pages of each template (mobile): Core Web Vitals from real Chrome users over 28 days (75th percentile), plus a Lighthouse lab run that names the biggest savings. Google loads each page once; pages with too few visits have no real-user data and count neither way. The <b>AI audit</b> checks per host whether robots.txt or the firewall blocks AI search crawlers, and whether hosts and product families offer an llms.txt. The <b>text check</b> has an LLM proofread the title, H1 and meta description of every crawl-audit page in its own language, for misspellings, words typed twice, leftover words and a title about a different product; it fetches nothing, and a finding is kept only when the wrong words really appear on the page. On blogs with a source repo, the <b>link check</b> reads every internal link of every post from the repo and checks it on the live site (a target is missing only when the live site answers 404): links into translations that do not exist, damaged links, links to another language although a translation exists, and broken links; it also lists posts missing a supported language. The <b>prioritizer</b> adds Search Console traffic. Manual review findings come from people and are marked until a check confirms them.</p></div>
-      <div id="method-health"><h3>Family and host health (A–F)</h3><p>Scored per product family and per host. A host with families gets its families' health weighted by search clicks, minus the points of host-wide problems that belong to no family. Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family or host it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.</p></div>
+      <div id="method-health"><h3>Family and host health (A–F)</h3><p>Scored per product family and per host. A host with families gets its families' health weighted by search clicks, minus the points of host-wide problems that belong to no family. Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family or host it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.<span id="method-areas" hidden> Health by area scores each area the same way on its own findings only; speed without real-user data shows no score.</span></p></div>
       <div id="method-score"><h3>Priority score (0–100)</h3><p>Search Console clicks on the affected pages over 28 days (impressions count 1% of a click), on a log scale, × severity (broken 1, incorrect 0.7, not optimized 0.4, improvable 0.2) ÷ effort (S 1, M 1.5, L 2.5). If the same pages lost traffic since six months ago, half of that loss counts when it is larger than today's traffic. Hosts without Search Console use GA4 organic sessions.</p></div>
       <div><h3>Samples and estimates</h3><p>"~N pages affected" applies each template's failing share of the sample to its number of URLs in the sitemaps. Confidence labels say how solid that is; findings marked <b>to confirm</b> rest on one page.</p></div>
       <div><h3>More</h3><p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>. Earlier reports: <a href="archive/" id="more-archive">archive</a>.</p></div>
@@ -520,8 +531,37 @@ footer a { color: var(--accent) }
     $("host-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value || R.tenant)}/${location.hash}`; });
   }
 
-  // host health cards (hosts without family cards)
+  // health by area (tenant opt-in): shown when the page covers one host, so the overall equals its Host health row
   const HOSTS = R._hosts || [];
+  const AH = HOSTS.length === 1 && HOSTS[0].areas ? HOSTS[0] : null;
+  if (AH) {
+    const byId = Object.fromEntries(R.findings.map(f => [f.id, f]));
+    const named = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
+    const loss = a => a.penalties.filter(x => x.points >= 1).slice(0, 2).map(x => `${named(x)} −${Math.round(x.points)}`).join(" · ");
+    const tile = a => {
+      if (a.state === "not checked") return `<div class="area"><b>–</b><span class="an">${esc(a.name)}</span><small>not checked in this run</small></div>`;
+      if (a.state === "no data") return `<button type="button" class="area" data-dim="${esc(a.dimension)}"><b>–</b><span class="an">${esc(a.name)}</span><small>no real-user data · ${a.pages} pages, lab median ${a.lab_median ?? "–"}</small></button>`;
+      const n = Object.values(a.counts).reduce((s, x) => s + x, 0);
+      const sub = loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
+      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health}/100 (${a.grade}), ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span><small>${esc(sub)}</small></button>`;
+    };
+    $("sum-areas").hidden = false;
+    $("method-areas").hidden = false;
+    $("sum-areas").innerHTML = `<span class="dim">Health by area · <code>${esc(AH.host)}</code></span>
+      <div class="areas"><div class="area overall g-${AH.grade}"><b>${AH.health}</b><span class="an">Overall · ${AH.grade}</span><small>all areas together</small></div>${AH.areas.map(tile).join("")}</div>
+      <div class="why">Each area is scored like the overall health (100 minus points for open problems), on that area's findings only. The overall spends the points of every area, so it is never higher than an area. Select an area to see its findings.</div>`;
+    $("sum-areas").addEventListener("click", e => {
+      const b = e.target.closest("button[data-dim]");
+      if (!b) return;
+      for (const k of ["f-src", "f-type", "f-host", "f-fam"]) $(k).value = "";
+      $("f-dim").value = b.dataset.dim;
+      for (const t of ORDER) expanded.add(t);
+      renderFindings();
+      $("s-find").scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // host health cards (hosts without family cards)
   if (!HOSTS.length) $("toc-host").hidden = true;
   else {
     $("host-health").hidden = false;

@@ -38,7 +38,7 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
-from core.scorecard import family_of, family_scorecards, grade, scorecard  # noqa: E402
+from core.scorecard import area_scores, family_of, family_scorecards, grade, scorecard  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
@@ -199,9 +199,28 @@ def add_hosts(report: dict, summary_path: Path) -> None:
         if family_cards.get(host):
             card.update(family_rollup(host, family_cards[host], mine, stats.get("urls") or 0))
         card.update(host=card.pop("family"), urls=stats.get("urls") or 0, traffic=totals.get(host) or {})
+        if report.get("_area_scores"):
+            card["areas"] = host_areas(report, host, mine, stats.get("urls") or 0)
         cards.append(card)
     if cards:
         report["_hosts"] = cards
+
+
+def host_areas(report: dict, host: str, findings: list[dict], urls: int) -> list[dict]:
+    """Health by area for one host, each marked as checked or not by the runs in this report. Speed without
+    real-user data and without findings says so instead of scoring 100 from lab runs alone."""
+    ran = {"crawl": True, "onpage": bool(report.get("_audit")),
+           "intl": bool(report.get("_audit") or report.get("_links")),
+           "ai": bool(report.get("_ai") or report.get("_audit")), "perf": bool(report.get("_perf"))}
+    perf = ((report.get("_perf") or {}).get("summary") or {}).get(host) or {}
+    areas = area_scores(findings, urls)
+    for a in areas:
+        a["state"] = "scored" if ran.get(a["dimension"], True) else "not checked"
+        if a["dimension"] == "perf" and a["state"] == "scored":
+            a["pages"], a["lab_median"] = perf.get("pages") or 0, perf.get("median_score")
+            if not perf.get("field") and not a["penalties"]:
+                a["state"] = "no data"
+    return areas
 
 
 def focus_host(report: dict, host: str, all_rows: list[dict] | None, tenant) -> None:
@@ -226,6 +245,22 @@ def focus_host(report: dict, host: str, all_rows: list[dict] | None, tenant) -> 
         ids = {f["id"] for f in report["findings"]}
         changes["new"] = [i for i in changes.get("new") or [] if i in ids]
         changes["resolved"] = [f for f in changes.get("resolved") or [] if f.get("subdomain") == host]
+
+
+def gsc_comparison(report: dict, snap: dict) -> list[dict]:
+    """Submitted sitemaps (tenant gsc_sitemaps_snapshot) next to the live ones from the run's sitemap list, for
+    runs made before the snapshot was added (discovery writes the same rows itself when it has one)."""
+    base = (snap.get("property") or "").rstrip("/")
+    live = {s["url"]: s for sections in (report.get("sitemaps") or {}).values() for rows in sections.values()
+            for s in rows}
+    rows = []
+    for s in snap.get("sitemaps") or []:
+        r = live.get(base + s["path"])
+        if r is not None:
+            rows.append({"path": s["path"], "url": r["url"], "gsc_status": s.get("status"),
+                         "gsc_discovered": s.get("discovered"), "live_status": r["status"] or r["error"],
+                         "live_kind": r["kind"], "live_urls": r["urls"]})
+    return rows
 
 
 def drop_hosts(report: dict, keep: set) -> list[str]:
@@ -474,11 +509,14 @@ def main(argv: list[str] | None = None) -> int:
     dropped = drop_hosts(report, set(tenant.host_names)) if tenant else []
     if dropped:
         print(f"Left out hosts no longer in tenants/{args.tenant}.yaml: {', '.join(dropped)}", file=sys.stderr)
+    if tenant and not report.get("gsc_comparison") and tenant.raw.get("gsc_sitemaps_snapshot"):
+        report["gsc_comparison"] = gsc_comparison(report, tenant.raw["gsc_sitemaps_snapshot"])
     if args.host:
         if not tenant or args.host not in tenant.host_names:
             print(f"{args.host} is not a host of tenant {args.tenant}", file=sys.stderr)
             return 2
         focus_host(report, args.host, all_rows, tenant)
+    report["_area_scores"] = bool(tenant and (tenant.raw.get("report") or {}).get("area_scores"))
     add_families(report, paths.traffic_summary)
     add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)

@@ -5,7 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from core.scorecard import family_scorecards, grade  # noqa: E402
+from core.scorecard import area_scores, family_scorecards, grade, scorecard  # noqa: E402
 
 HOST = "app.example.com"
 
@@ -67,3 +67,16 @@ def test_cards_sorted_worst_first_and_top_issues_blockers_first():
                               HOST, ["pdf", "omr"], {}, {})
     assert [c["family"] for c in cards] == ["pdf", "omr"]
     assert [t["id"] for t in cards[0]["top"]] == ["b", "a"]
+
+
+def test_area_scores_split_by_dimension_and_never_above_the_overall():
+    found = [{**f("a", "link_broken", "broken"), "dimension": "crawl"},
+             {**f("b", "hreflang_no_self", "incorrect"), "dimension": "intl"},
+             *[{**f(f"t{i}", f"cosmetic_{i}", "not_optimized"), "dimension": "onpage"} for i in range(5)],
+             {**f("u", "ux_thing", "improvable"), "dimension": "ux"}]
+    areas = {a["dimension"]: a for a in area_scores(found, 100)}
+    assert list(areas)[:5] == ["crawl", "onpage", "intl", "ai", "perf"] and "ux" in areas
+    assert areas["crawl"]["health"] == 60 and areas["intl"]["health"] == 80 and areas["ai"]["health"] == 100
+    assert areas["onpage"]["health"] == 80  # 5 x 6, capped at 20 within the area
+    overall = scorecard("host", found, 100)["health"]
+    assert overall == 20 and all(overall <= a["health"] for a in areas.values())

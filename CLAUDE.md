@@ -8,7 +8,7 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 **Keep this file current:** when a decision is made, a fact is confirmed or a build step finishes, update the relevant section (Status, Seed findings, Open items) in the same session. New issues found by hand go into `tenants/aspose.app.seed-findings.yaml`, never only into prose.
 
-## Start here (session handoff, 2026-10-22, end of day)
+## Start here (session handoff, 2026-10-26)
 
 **State:** Phase 1 (audit only). Four tenants: **aspose.app** (11 hosts, 29 product families), **conholdate.cloud**, **aspose.cloud** and **groupdocs.cloud** (the three .cloud tenants have only their blog for now; more hosts later). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor, text check (LLM), **link check** (repo-based, 6 checks, new 2026-10-22), findings store, Prioritizer, family and host scorecards (health A-F), the reports with archives, host pages, a shared fix guide page and a landing page. Everything is committed and pushed to `github` and `origin` (GitLab); working tree clean.
 
@@ -22,6 +22,12 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 - Header: Property and Host dropdowns (switching keeps the #section), "All reports" link. Local pages and snapshots have no switches.
 - Old links (`/aspose-app-health-and-recovery/...`, before the repo rename) work through the redirect repo `shoaibkhan-aspose/aspose-app-health-and-recovery` (local clone `/Users/Apple/Work/Aspose/GitHub/aspose-app-health-and-recovery-redirect`, `index.html` = `404.html`, JS keeps path, query and #anchor; old root and `/archive/` go to `/aspose.app/`; Pages: Deploy from a branch, main).
 - All reports move to a private domain soon (SK, 2026-10-20); until then they are public (noindex).
+
+**What changed on 2026-10-26:**
+- Architecture diagram version 10 (blog source repos, link check as step 6); link check on conholdate.cloud (run 5).
+- **Health by area (SK, 2026-10-26; trial on aspose.cloud only, tenant YAML `report: area_scores: true`):** a row at the top of the Summary: Overall plus one score per area = finding `dimension` (`core/scorecard.AREAS`: crawl "Crawl & indexing", onpage "On-page content", intl "Languages", ai "AI readiness", perf "Speed"; other dimensions follow when present). Each area is the scorecard formula on its own findings only, so the overall is never above an area (note under the row). Tiles name their two biggest losses by fix-guide plain name and open that dimension's findings. Speed with no real-user data and no findings shows "–" ("no real-user data · N pages, lab median M"), not 100 (aspose.cloud: 0 of 12 pages have field data, lab median 74). An area whose audit did not run shows "not checked". Shown only when the page covers one host (overall = its Host health row). SK chose numbers over status pills after hearing the caveats (weights are unvalidated; points ignore traffic; target gaming). **Family cards unchanged (SK: may decide later).** aspose.cloud today: Overall 66 C, Crawl 88, On-page 90, Languages 83, AI 95, Speed –.
+- **Submitted sitemaps table** was empty on the three .cloud reports (no `gsc_sitemaps_snapshot`). Snapshots added from the GSC API (gsc MCP `list_sitemaps`, 2026-10-26: one root index each, Success, 13,525 / 11,070 / 172 discovered). `build_report.gsc_comparison` builds the table from the run's sitemap list when the discovery run predates the snapshot (no rerun needed). prioritize.py also reads the snapshot (discovered counts size sitemap findings) at its next run.
+- **Known, not fixed:** at phone width (390px) every report scrolls sideways: the header's Property/Host switch does not wrap, and something further down is wider still (page scrollWidth ~1,100px). Pre-existing, all tenants.
 
 **What changed on 2026-10-22 (details under Open discussions, "Tenants 3 and 4"):**
 - Tenants 3 and 4: `aspose.cloud` (blog.aspose.cloud, GA4 252280807) and `groupdocs.cloud` (blog.groupdocs.cloud, GA4 252358764); GSC blog properties readable; sample option A (20 pages per template); `tag` URL template in all three .cloud tenants; `translation_languages` (SK's supported list) in each .cloud tenant.
@@ -59,7 +65,7 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 - Architecture page (private, version 10 = blog source repos and the link check as step 6, four tenants, 2026-10-26; PNG 1280x1200, headless Chrome `--window-size=1280,1200`): https://claude.ai/artifact/3zrEcbrV1WxN9nfjvS7Kxm, source `docs/architecture/site-health-architecture.html`.
 - Archive aspose.app (`reports/aspose.app/archive/`): 2026-10-12 (before the restructure), 2026-10-15 (before the speed audit), 2026-10-15-2 (after the speed audit), 2026-10-16 (before the AI audit), 2026-10-16-2 (after the AI audit and crawl audit run 15), 2026-10-20 (after the text check), -2 (text check run 23, before the per-tenant layout), -3 (host cards and shared fix guide), -4 (host table), -5 (products row), -6 (without api.products, before fixing the empty Reference tables).
 - Archive conholdate.cloud (`reports/conholdate.cloud/archive/`): 2026-10-20 (first run), -2 (after the text check, host health), -3 (host table; rebuilt from commit c63dbbf), -4 (before fixing the empty Reference tables); 2026-10-26 (with the logo, before the link check; downloaded), -2 (after the link check).
-- Archive aspose.cloud and groupdocs.cloud: 2026-10-22 (first run).
+- Archive aspose.cloud and groupdocs.cloud: 2026-10-22 (first run). aspose.cloud also: 2026-10-26 (with the logo, before health by area; downloaded), -2 (health by area, submitted sitemaps).
 - Older shared discovery report (private, not updated since run 7): https://claude.ai/artifact/MUUTzbXEymKq4tw5mmmPA5
 
 **Latest data:**
