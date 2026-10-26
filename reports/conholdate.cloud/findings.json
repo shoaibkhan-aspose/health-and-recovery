@@ -68,14 +68,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "M",
@@ -119,22 +119,22 @@
     "affected_pages": 0,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 133,
+      "impressions_28d": 146,
       "source": "gsc-host",
       "share": 1.0,
       "past_clicks": 0,
-      "past_impressions": 83,
+      "past_impressions": 85,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "S",
@@ -237,18 +237,18 @@
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 83,
+      "past_impressions": 82,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "S",
@@ -263,6 +263,82 @@
     "resolved_run": null,
     "resolved_at": null,
     "check": "hreflang_no_xdefault",
+    "notes": []
+  },
+  {
+    "id": "intl-0002",
+    "key": "intl/link_wrong_language/blog.conholdate.cloud/post",
+    "source": "link-audit",
+    "tenant": "conholdate.cloud",
+    "subdomain": "blog.conholdate.cloud",
+    "template": "post",
+    "dimension": "intl",
+    "type": "incorrect",
+    "title": "Posts link to another language although a translation exists",
+    "evidence": {
+      "urls": [
+        "https://blog.conholdate.cloud/ar/total/convert-html-files/",
+        "https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/",
+        "https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/"
+      ],
+      "observed": "4 links on 3 pages (2 distinct targets); by language: ar 4; 0 written by translation commits",
+      "expected": "Internal links point at the post in the page's own language",
+      "locations": [
+        {
+          "role": "link",
+          "url": "https://blog.conholdate.cloud/total/manipulate-pdf-documents/",
+          "note": "on https://blog.conholdate.cloud/ar/total/convert-html-files/ (content/Conholdate.Cloud/total/2025-07-09-convert-html-files/index.ar.md:77); use https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/; 4fd3dc9d 2025-08-12: configured and published translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.conholdate.cloud/total/convert-html-files/",
+          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/ (content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md:69); use https://blog.conholdate.cloud/ar/total/convert-html-files/; 4fd3dc9d 2025-08-12: configured and published translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.conholdate.cloud/total/manipulate-pdf-documents/",
+          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/ (content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md:70); use https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/; 4fd3dc9d 2025-08-12: configured and published translations"
+        },
+        {
+          "role": "link",
+          "url": "https://blog.conholdate.cloud/total/convert-html-files/",
+          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/ (content/Conholdate.Cloud/total/2025-07-08-manipulate-pdf-documents/index.ar.md:82); use https://blog.conholdate.cloud/ar/total/convert-html-files/; 4fd3dc9d 2025-08-12: configured and published translations"
+        }
+      ]
+    },
+    "affected_pages": 3,
+    "impact": {
+      "clicks_28d": 0,
+      "impressions_28d": 1,
+      "source": "gsc-pages",
+      "share": null,
+      "past_clicks": 0,
+      "past_impressions": 0,
+      "lost_clicks": 0,
+      "lost_impressions": 0,
+      "past_window": [
+        "2026-03-28",
+        "2026-04-24"
+      ],
+      "scored_on": "at stake",
+      "score": 0,
+      "window": [
+        "2026-09-26",
+        "2026-10-23"
+      ]
+    },
+    "effort": "S",
+    "fix_tier": 1,
+    "fix_channel": "git-pr",
+    "status": "open",
+    "verification": null,
+    "superseded_by": null,
+    "detected_at": "2026-10-26",
+    "first_seen_run": "link-audit-run5",
+    "last_seen_run": "link-audit-run5",
+    "resolved_run": null,
+    "resolved_at": null,
+    "check": "link_wrong_language",
     "notes": []
   },
   {
@@ -342,7 +418,7 @@
     "affected_pages": 64,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 14,
+      "impressions_28d": 11,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
@@ -350,14 +426,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "S",
@@ -435,22 +511,22 @@
     "affected_pages": 23,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 100,
+      "impressions_28d": 110,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 55,
+      "past_impressions": 58,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "S",
@@ -548,7 +624,7 @@
     "affected_pages": 64,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 14,
+      "impressions_28d": 11,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
@@ -556,14 +632,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-03-22",
-        "2026-04-18"
+        "2026-03-28",
+        "2026-04-24"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-20",
-        "2026-10-17"
+        "2026-09-26",
+        "2026-10-23"
       ]
     },
     "effort": "S",

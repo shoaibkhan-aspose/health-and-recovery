@@ -22,5 +22,17 @@
     "date": "2026-10-20 (4)",
     "label": "Host health rollup wording, before fixing the empty Reference tables",
     "runs": "discovery run 1, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4"
+  },
+  {
+    "file": "2026-10-26.html",
+    "date": "2026-10-26",
+    "label": "With the logo, before the link check (downloaded from Pages)",
+    "runs": "discovery run 1, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4"
+  },
+  {
+    "file": "2026-10-26-2.html",
+    "date": "2026-10-26 (2)",
+    "label": "After the link check",
+    "runs": "discovery run 1, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 5"
   }
 ]

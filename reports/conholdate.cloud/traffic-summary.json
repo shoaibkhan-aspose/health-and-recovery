@@ -1,16 +1,16 @@
 {
  "windows": {
   "current": [
-   "2026-09-20",
-   "2026-10-17"
+   "2026-09-26",
+   "2026-10-23"
   ],
   "previous": [
-   "2026-08-23",
-   "2026-09-19"
+   "2026-08-29",
+   "2026-09-25"
   ],
   "six_months_ago": [
-   "2026-03-22",
-   "2026-04-18"
+   "2026-03-28",
+   "2026-04-24"
   ]
  },
  "hosts": {},
@@ -19,18 +19,18 @@
    "source": "gsc",
    "current": {
     "clicks": 1,
-    "impressions": 133,
-    "pages": 45
+    "impressions": 146,
+    "pages": 47
    },
    "previous": {
     "clicks": 2,
-    "impressions": 310,
-    "pages": 54
+    "impressions": 307,
+    "pages": 52
    },
    "six_months_ago": {
     "clicks": 0,
-    "impressions": 83,
-    "pages": 19
+    "impressions": 85,
+    "pages": 26
    }
   }
  }
