@@ -42,6 +42,7 @@ from core.scorecard import area_scores, family_of, family_scorecards, grade, sco
 from core.tenant import load_tenant  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
+METHOD = REPO_ROOT / "scripts" / "templates" / "method.html"  # "How this audit works", shared with build_site
 
 
 # For hosting the file on its own (GitHub Pages): the artifact host adds this skeleton itself.
@@ -52,20 +53,27 @@ STANDALONE_HEAD = (
 )
 
 
-# The Pages site has one shared fix guide page (scripts/build_site.py); a snapshot is served three levels below
-# the site root (/<tenant>/archive/<date>/).
+# The Pages site has one shared fix guide page and one method page (scripts/build_site.py); a snapshot is served
+# three levels below the site root (/<tenant>/archive/<date>/).
 SNAPSHOT_GUIDE_URL = "../../../fix-guide/"
+SNAPSHOT_METHOD_URL = "../../../method/"
+
+
+def method_section() -> str:
+    return ('  <section aria-labelledby="s-method" id="method">\n    <h2 id="s-method">How this audit works</h2>\n'
+            + METHOD.read_text(encoding="utf-8") + "  </section>\n")
 
 
 def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
           guide_url: str | None = None, site_tenants: list[str] | None = None,
-          site_hosts: list[str] | None = None) -> str:
+          site_hosts: list[str] | None = None, method_url: str | None = None) -> str:
     """The report page. With guide_url, "How to fix" links go to that shared fix guide page instead of a full
-    guide table inside the report (the table stays for local pages). With site_tenants (the published site),
+    guide table inside the report (the table stays for local pages); with method_url, "How this audit works"
+    links go to that shared page instead of a section at the end. With site_tenants (the published site),
     the header offers a switch to the other tenants' reports, and with site_hosts to the tenant's host pages
     (published at the site root next to the tenant reports)."""
     data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url, _tenants=site_tenants or [],
-                _site_hosts=site_hosts or [])
+                _site_hosts=site_hosts or [], _method_url=method_url)
     if guide_url and report.get("_guide"):  # only the rows this report's findings link to
         used = {f.get("_guide") for f in report["findings"]}
         data["_guide"] = dict(report["_guide"], rows={k: v for k, v in report["_guide"]["rows"].items() if k in used})
@@ -73,7 +81,8 @@ def build(report: dict, notes: list[str], run_date: str | None, standalone: bool
     template = TEMPLATE.read_text(encoding="utf-8")
     title = f"{report.get('_page_host') or report['tenant']} Site Health"
     page = (template.replace("__TITLE__", title).replace("__FAVICON__", brand.FAVICON_LINK)
-            .replace("__LOGO__", brand.logo(22)).replace("__DATA__", payload))
+            .replace("__LOGO__", brand.logo(22)).replace("__METHOD__\n", "" if method_url else method_section())
+            .replace("__DATA__", payload))
     return STANDALONE_HEAD + page if standalone else page
 
 
@@ -419,6 +428,8 @@ def main(argv: list[str] | None = None) -> int:
                     "switch to the header (build_site.py passes it)")
     ap.add_argument("--guide-url", help="link to the shared fix guide page instead of including the guide table "
                     "(build_site.py passes ../fix-guide/)")
+    ap.add_argument("--method-url", help="link to the shared method page instead of including the section "
+                    "(build_site.py passes ../method/)")
     ap.add_argument("--standalone", action="store_true",
                     help="add doctype, charset, viewport and noindex (for GitHub Pages: --out docs/index.html)")
     ap.add_argument("--store", help="findings store (default: data/<tenant>/findings.sqlite)")
@@ -526,10 +537,11 @@ def main(argv: list[str] | None = None) -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     site_tenants = args.site_tenants.split(",") if args.site_tenants else None
     site_hosts = args.site_hosts.split(",") if args.site_hosts else None
-    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants, site_hosts),
-                   encoding="utf-8")
+    out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants, site_hosts,
+                         args.method_url), encoding="utf-8")
     if args.snapshot:
-        page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL)
+        page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL,
+                     method_url=SNAPSHOT_METHOD_URL)
         print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")
         record_health(report, paths.health_history)
     print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {src.name}"

@@ -94,6 +94,21 @@ def test_fix_guide_page(tmp_path, monkeypatch):
     assert '"_guide_url": "../fix-guide/"' in html and "h1_missing" not in html  # only rows the report uses
 
 
+def test_method_page(tmp_path):
+    """"How this audit works" is one shared page; published reports link to it, local pages keep the section."""
+    from scripts import build_site
+    from scripts.build_report import build
+
+    page = build_site.method_page()
+    assert 'id="method-health"' in page and 'id="method-score"' in page and "Glossary" in page
+    assert 'id="method-areas" hidden' not in page and "__METHOD__" not in page
+    report = {"tenant": "a.org", "findings": []}
+    published = build(report, [], None, method_url="../method/")
+    assert 'id="method-health"' not in published and '"_method_url": "../method/"' in published
+    local = build(report, [], None)
+    assert 'id="method-health"' in local and "__METHOD__" not in local
+
+
 def test_family_host_rollup():
     """A host with families: click-weighted family health minus host-wide findings; the lowest family is named."""
     from scripts.build_report import family_rollup
@@ -114,7 +129,8 @@ def test_report_template_ids_are_unique():
     import re
     from collections import Counter
 
-    html = (ROOT / "scripts" / "templates" / "discovery_report.html").read_text(encoding="utf-8")
+    html = "".join((ROOT / "scripts" / "templates" / name).read_text(encoding="utf-8")
+                   for name in ("discovery_report.html", "method.html"))  # the method section is inlined locally
     ids = Counter(re.findall(r'\bid="([^"$]+)"', html))
     assert [k for k, n in ids.items() if n > 1] == []
 

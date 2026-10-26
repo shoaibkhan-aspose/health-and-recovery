@@ -4,5 +4,17 @@
     "date": "2026-10-22",
     "label": "First run",
     "runs": "discovery run 1, crawl audit run 2, speed audit run 5, AI audit run 3, text check run 6, link check run 7"
+  },
+  {
+    "file": "2026-10-26.html",
+    "date": "2026-10-26",
+    "label": "With the logo and submitted sitemaps, before the method page (downloaded from Pages)",
+    "runs": "discovery run 1, crawl audit run 2, speed audit run 5, AI audit run 3, text check run 6, link check run 7"
+  },
+  {
+    "file": "2026-10-26-2.html",
+    "date": "2026-10-26 (2)",
+    "label": "How this audit works on its own page",
+    "runs": "discovery run 1, crawl audit run 2, speed audit run 5, AI audit run 3, text check run 6, link check run 7"
   }
 ]

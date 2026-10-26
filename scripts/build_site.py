@@ -5,7 +5,8 @@
 Every tenant with a committed findings export (reports/<tenant>/findings.json) gets its latest report at
 <out>/<tenant>/ and its archive at <out>/<tenant>/archive/; each of its hosts a page at <out>/<host>/ (the
 tenant report filtered to that host). The fix guide (every check: what it means, impact,
-fix, verify) is one shared page at <out>/fix-guide/ that the reports link to. Renders only committed files:
+fix, verify) is one shared page at <out>/fix-guide/ that the reports link to, and so is the method ("How this
+audit works") at <out>/method/. Renders only committed files:
 no store, no Google calls.
 The site once served the first tenant's report at the root; LEGACY_TENANT keeps those links working
 (/#<anchor> and /archive/<date>/ redirect into its subfolder).
@@ -60,7 +61,8 @@ if (location.hash.length > 1) location.replace("__LEGACY__/" + location.hash);
 <main>
   <h1>""" + brand.logo(36) + """Site health reports</h1>
   <p>One report per property. Read-only audits: nothing on any site is changed.
-  How to fix each kind of problem: <a href="fix-guide/">fix guide</a>.</p>
+  How to fix each kind of problem: <a href="fix-guide/">fix guide</a>. How the audits and scores work:
+  <a href="method/">method</a>.</p>
   <ol>
 __ITEMS__
   </ol>
@@ -170,6 +172,47 @@ def guide_page(tenants: list[str]) -> str:
     return GUIDE_PAGE.replace("__OPTIONS__", options).replace("__COUNT__", count).replace("__BODY__", "\n".join(body))
 
 
+METHOD_URL = "../method/"  # from a tenant report at <out>/<tenant>/
+
+METHOD_PAGE = HEAD + """<title>How this audit works</title>
+<style>
+:root { --bg: #f6f7f9; --surface: #fff; --fg: #18202b; --muted: #5b6676; --line: #dde2e9; --accent: #1f5f8b;
+  --hit: #fff4d6 }
+@media (prefers-color-scheme: dark) { :root { --bg: #11161d; --surface: #182029; --fg: #e4e9f0; --muted: #98a3b3;
+  --line: #2a3542; --accent: #6fb0dc; --hit: #3a3218; color-scheme: dark } }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
+main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 18px }
+h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px }
+h3 { margin: 0 0 4px; font-size: 16px }
+p { margin: 0; color: var(--muted); max-width: 80ch }
+a { color: var(--accent) }
+.method { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start }
+.method > div:first-child { grid-column: 1 / -1 }
+.method > div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
+  scroll-margin-top: 16px }
+.method > div:target { background: var(--hit) }
+.method p { font-size: 14px; max-width: none }
+.gloss { margin: 0; display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 6px 16px; font-size: 14px }
+.gloss dt { font-weight: 600 } .gloss dd { margin: 0; color: var(--muted) }
+@media (max-width: 560px) { .gloss { grid-template-columns: 1fr } .gloss dd { margin-bottom: 6px } }
+</style>
+<main id="method">
+  <h1>""" + brand.logo(36) + """How this audit works</h1>
+  <p>What each audit checks, how health and the priority score are calculated, and the terms the reports use.
+  Every site health report links here. <a href="../">All reports</a> · <a href="../fix-guide/">Fix guide</a></p>
+__METHOD__</main>
+</html>
+"""
+
+
+def method_page() -> str:
+    """The shared "How this audit works" page; the area-scores note is shown here because a report uses it."""
+    body = build_report.METHOD.read_text(encoding="utf-8").replace(' id="method-areas" hidden', "")
+    return METHOD_PAGE.replace("__METHOD__", body)
+
+
 def redirect_page(target: str) -> str:
     """A page that forwards to `target` (relative), keeping the #anchor."""
     t = html.escape(target, quote=True)
@@ -188,7 +231,7 @@ def tenant_item(tenant: str) -> str:
             f'<a href="{name}/archive/">previous versions</a></span><span>Hosts: {links}</span></li>')
 
 
-RESERVED = {"fix-guide", "archive"}  # site folders that are neither tenants nor hosts
+RESERVED = {"fix-guide", "method", "archive"}  # site folders that are neither tenants nor hosts
 
 
 def site_hosts(tenants: list[str]) -> dict[str, list[str]]:
@@ -210,7 +253,7 @@ def build(out: Path, tenants: list[str]) -> None:
     for t in tenants:
         paths = tenant_paths(t)
         common = ["--tenant", t, "--findings", str(paths.findings_export), "--standalone", "--guide-url", GUIDE_URL,
-                  "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
+                  "--method-url", METHOD_URL, "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
         if build_report.main(common + ["--out", str(out / t / "index.html")]):
             raise SystemExit(f"Report for {t} failed")
         for h in hosts[t]:  # one page per host: the tenant report filtered to that host
@@ -220,6 +263,8 @@ def build(out: Path, tenants: list[str]) -> None:
         print(f"Archive: {n} snapshots for {t}")
     (out / "fix-guide").mkdir(exist_ok=True)
     (out / "fix-guide" / "index.html").write_text(guide_page(tenants), encoding="utf-8")
+    (out / "method").mkdir(exist_ok=True)
+    (out / "method" / "index.html").write_text(method_page(), encoding="utf-8")
     legacy = LEGACY_TENANT if LEGACY_TENANT in tenants else (tenants[0] if tenants else "")
     items = "\n".join(tenant_item(t) for t in tenants)
     (out / "index.html").write_text(LANDING.replace("__LEGACY__", legacy).replace("__ITEMS__", items),
