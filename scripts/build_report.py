@@ -175,12 +175,17 @@ def add_families(report: dict, summary_path: Path) -> None:
         if report.get("_page_host") and host != report["_page_host"]:
             continue
         families = list(traffic)
-        report["_families"]["hosts"][host] = family_scorecards(
+        cards = report["_families"]["hosts"][host] = family_scorecards(
             report["findings"], host, families, (report.get("sections") or {}).get(host) or {}, traffic)
         for f in report["findings"]:
             fam = family_of(f, host, set(families))
             if fam:
                 f["_family"] = fam
+        if report.get("_area_scores"):  # family rows show health by area like subdomain rows (SK, 2026-10-27)
+            for c in cards:
+                c["areas"] = [{**a, "state": "scored"} for a in area_scores(
+                    [f for f in report["findings"] if f.get("_family") == c["family"] and f["subdomain"] == host],
+                    c["urls"] or ((c["traffic"].get("current") or {}).get("pages") or 0))]
     if not report["_families"]["hosts"]:  # a tenant without sectioned hosts has no family cards
         del report["_families"]
 

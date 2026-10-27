@@ -148,6 +148,12 @@ gsc_sitemaps_snapshot:
     - {path: "/gis/static/sitemap/map.xml", type: "Sitemap", submitted: "2021-09-07", last_read: "2026-10-04", status: "Success", discovered: 397}
     - {path: "/tex/sitemap.xml", type: "Sitemap", submitted: "2021-07-26", last_read: "2026-09-27", status: "Success", discovered: 858}
 
+# Report options (SK, 2026-10-27): the Overview layout as on the .cloud domains; no overall aspose.app number,
+# products.aspose.app families as rows with numbers and area scores instead of letters.
+report:
+  area_scores: true
+  manager_view: true
+
 # Cross-domain pages this tenant's hosts appear on (SK, 2026-10-27: /blogs/ lists every blog).
 collections:
   blogs: [blog.aspose.app]
