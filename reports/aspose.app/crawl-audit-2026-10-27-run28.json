@@ -1,0 +1,1218 @@
+{
+  "tenant": "aspose.app",
+  "auditor": "crawl-audit",
+  "run_id": 28,
+  "params": {
+    "hosts": [
+      "status.aspose.app"
+    ],
+    "sections": null,
+    "inventory_run": 9,
+    "per_template": 2,
+    "other_langs": 2,
+    "max_per_host": null,
+    "max_pages": null
+  },
+  "canonical_targets": {},
+  "requests": 7,
+  "duration_s": 9.7,
+  "pages_planned": 6,
+  "stopped_early": false,
+  "summary": {
+    "status.aspose.app": {
+      "pages": 6,
+      "ok_html": 6,
+      "errors": 0,
+      "redirected": 1,
+      "blocked": 0,
+      "ignored": 0,
+      "issues": {
+        "canonical_missing": 6,
+        "content_needs_js": 2,
+        "description_duplicate": 5,
+        "h1_missing": 1,
+        "html_lang_missing": 6,
+        "no_structured_data": 6,
+        "redirect_chain": 1,
+        "redirect_temporary": 1,
+        "redirected": 1,
+        "title_duplicate": 5,
+        "title_length": 1,
+        "viewport_no_zoom": 5
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "crawl-0001",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "crawl",
+      "check": "canonical_missing",
+      "type": "improvable",
+      "title": "Pages have no canonical tag",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/dashboard",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "6 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section} 1/1, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: no <link rel=canonical> and no Link header; https://status.aspose.app/dashboard: no <link rel=canonical> and no Link header; https://status.aspose.app/incidents/58: no <link rel=canonical> and no Link header; https://status.aspose.app?start_date=2019-12-03: no <link rel=canonical> and no Link header; https://status.aspose.app/incidents/68: no <link rel=canonical> and no Link header",
+        "expected": "a self-referencing absolute canonical",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "no <link rel=canonical> and no Link header"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "no <link rel=canonical> and no Link header"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "no <link rel=canonical> and no Link header"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "no <link rel=canonical> and no Link header"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "no <link rel=canonical> and no Link header"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}": [
+            1,
+            1
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 150,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 2,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "ai-0001",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "ai",
+      "check": "content_needs_js",
+      "type": "incorrect",
+      "title": "Pages show almost no text without JavaScript",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard",
+          "https://status.aspose.app/incidents/58"
+        ],
+        "observed": "2 of 6 sampled pages (by template: generic:/{section} 1/1, generic:/{section}/* 1/2). e.g. https://status.aspose.app/dashboard: 215 characters of main text in the HTML; https://status.aspose.app/incidents/58: 194 characters of main text in the HTML",
+        "expected": "the main text in the HTML itself (at least 250 characters); AI crawlers do not run JavaScript",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "215 characters of main text in the HTML"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "194 characters of main text in the HTML"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ],
+          "generic:/{section}/*": [
+            1,
+            2
+          ]
+        }
+      },
+      "affected_pages": 41,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "M",
+      "fix_tier": 2,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "onpage-0001",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "description_duplicate",
+      "type": "not_optimized",
+      "title": "Different pages share the same meta description",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "5 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: 'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app/incidents/58, https://status.aspose.app?start_date=2019-12-03; https://status.aspose.app/incidents/58: 'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03; https://status.aspose.app?start_date=2019-12-03: 'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58; https://status.aspose.app/incidents/68: 'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58; https://status.aspose.app/: 'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58",
+        "expected": "a unique meta description per page and language",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app/incidents/58, https://status.aspose.app?start_date=2019-12-03"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/",
+            "note": "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 149,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "M",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "onpage-0002",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "h1_missing",
+      "type": "improvable",
+      "title": "Pages have no H1",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard"
+        ],
+        "observed": "1 of 6 sampled pages (by template: generic:/{section} 1/1). e.g. https://status.aspose.app/dashboard: no non-empty <h1>",
+        "expected": "one H1 that states the page topic",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "no non-empty <h1>"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ]
+        }
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "intl-0001",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "intl",
+      "check": "html_lang_missing",
+      "type": "improvable",
+      "title": "Pages have no <html lang> attribute",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/dashboard",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "6 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section} 1/1, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: no lang attribute on <html>; https://status.aspose.app/dashboard: no lang attribute on <html>; https://status.aspose.app/incidents/58: no lang attribute on <html>; https://status.aspose.app?start_date=2019-12-03: no lang attribute on <html>; https://status.aspose.app/incidents/68: no lang attribute on <html>",
+        "expected": "<html lang> matching the page language",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "no lang attribute on <html>"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "no lang attribute on <html>"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "no lang attribute on <html>"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "no lang attribute on <html>"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "no lang attribute on <html>"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}": [
+            1,
+            1
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 150,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "ai-0002",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "ai",
+      "check": "no_structured_data",
+      "type": "improvable",
+      "title": "Pages have no structured data (JSON-LD)",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/dashboard",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "6 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section} 1/1, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: no JSON-LD; https://status.aspose.app/dashboard: no JSON-LD; https://status.aspose.app/incidents/58: no JSON-LD; https://status.aspose.app?start_date=2019-12-03: no JSON-LD; https://status.aspose.app/incidents/68: no JSON-LD",
+        "expected": "JSON-LD naming what the page is (e.g. WebApplication, Article, FAQPage) and who publishes it",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "no JSON-LD"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "no JSON-LD"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "no JSON-LD"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "no JSON-LD"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "no JSON-LD"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}": [
+            1,
+            1
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 150,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 2,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "crawl-0002",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "crawl",
+      "check": "redirect_chain",
+      "type": "not_optimized",
+      "title": "Redirect chains (2+ hops)",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard"
+        ],
+        "observed": "1 of 6 sampled pages (by template: generic:/{section} 1/1). e.g. https://status.aspose.app/dashboard: 3 hops: 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d",
+        "expected": "a single redirect hop",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "3 hops: 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ]
+        }
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 2,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "crawl-0003",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "crawl",
+      "check": "redirect_temporary",
+      "type": "not_optimized",
+      "title": "Pages redirect with a temporary status (302/307)",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard"
+        ],
+        "observed": "1 of 6 sampled pages (by template: generic:/{section} 1/1). e.g. https://status.aspose.app/dashboard: HTTP 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d",
+        "expected": "permanent redirects (301/308) for moved URLs",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "HTTP 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ]
+        }
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 2,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "crawl-0004",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "crawl",
+      "check": "redirected",
+      "type": "not_optimized",
+      "title": "Sitemaps list URLs that redirect",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard"
+        ],
+        "observed": "1 of 6 sampled pages (by template: generic:/{section} 1/1). e.g. https://status.aspose.app/dashboard: redirects 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d",
+        "expected": "sitemaps list final URLs that answer HTTP 200",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "redirects 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ]
+        }
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "onpage-0003",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "title_duplicate",
+      "type": "not_optimized",
+      "title": "Different pages share the same title",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "5 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: 'Status - aspose.app' also on https://status.aspose.app?start_date=2019-12-03, https://status.aspose.app/; https://status.aspose.app/incidents/58: 'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/68; https://status.aspose.app?start_date=2019-12-03: 'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/; https://status.aspose.app/incidents/68: 'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/58; https://status.aspose.app/: 'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03",
+        "expected": "a unique title per page and language",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-12-03, https://status.aspose.app/"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/68"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/58"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/",
+            "note": "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 149,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "M",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "onpage-0004",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "onpage",
+      "check": "title_length",
+      "type": "improvable",
+      "title": "Titles are too long or too short",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app/dashboard"
+        ],
+        "observed": "1 of 6 sampled pages (by template: generic:/{section} 1/1). e.g. https://status.aspose.app/dashboard: width 103: 'Containerize.IdentityServer - Single sign-on to access all applications and services of As'",
+        "expected": "10-70 characters (CJK count double)",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/dashboard",
+            "note": "width 103: 'Containerize.IdentityServer - Single sign-on to access all applications and services of As'"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/{section}": [
+            1,
+            1
+          ]
+        }
+      },
+      "affected_pages": 1,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    },
+    {
+      "id": "ux-0001",
+      "tenant": "aspose.app",
+      "subdomain": "status.aspose.app",
+      "template": "page",
+      "dimension": "ux",
+      "check": "viewport_no_zoom",
+      "type": "not_optimized",
+      "title": "Viewport disables zoom (user-scalable=no or maximum-scale=1)",
+      "evidence": {
+        "urls": [
+          "https://status.aspose.app?start_date=2019-06-24",
+          "https://status.aspose.app/incidents/58",
+          "https://status.aspose.app?start_date=2019-12-03",
+          "https://status.aspose.app/incidents/68",
+          "https://status.aspose.app/"
+        ],
+        "observed": "5 of 6 sampled pages (by template: generic:/ 3/3, generic:/{section}/* 2/2). e.g. https://status.aspose.app?start_date=2019-06-24: width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0; https://status.aspose.app/incidents/58: width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0; https://status.aspose.app?start_date=2019-12-03: width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0; https://status.aspose.app/incidents/68: width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0; https://status.aspose.app/: width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "expected": "zoom allowed (WCAG 1.4.4)",
+        "locations": [
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-06-24",
+            "note": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/58",
+            "note": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app?start_date=2019-12-03",
+            "note": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/incidents/68",
+            "note": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          },
+          {
+            "role": "page",
+            "url": "https://status.aspose.app/",
+            "note": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          },
+          {
+            "role": "listed in",
+            "url": "https://status.aspose.app/sitemap.xml"
+          }
+        ],
+        "sample": {
+          "generic:/": [
+            3,
+            3
+          ],
+          "generic:/{section}/*": [
+            2,
+            2
+          ]
+        }
+      },
+      "affected_pages": 149,
+      "impact": {
+        "clicks_28d": 0,
+        "impressions_28d": 0,
+        "score": 0
+      },
+      "effort": "S",
+      "fix_tier": 1,
+      "fix_channel": null,
+      "status": "open",
+      "detected_at": "2026-10-27"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://status.aspose.app?start_date=2019-06-24",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/",
+      "source": "sitemap",
+      "group_urls": 70,
+      "listed_in": "https://status.aspose.app/sitemap.xml",
+      "status": 200,
+      "final_url": "https://status.aspose.app?start_date=2019-06-24",
+      "redirects": [],
+      "redirect_statuses": [],
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 15675,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 676,
+      "facts": {
+        "titles": [
+          "Status - aspose.app"
+        ],
+        "descriptions": [
+          "Stay up to date with the latest service updates from Status - aspose.app."
+        ],
+        "h1": [
+          "Past Incidents"
+        ],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 627,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "viewport_no_zoom",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ],
+        [
+          "title_duplicate",
+          "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-12-03, https://status.aspose.app/"
+        ],
+        [
+          "description_duplicate",
+          "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app/incidents/58, https://status.aspose.app?start_date=2019-12-03"
+        ]
+      ]
+    },
+    {
+      "url": "https://status.aspose.app/dashboard",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/{section}",
+      "source": "sitemap",
+      "group_urls": 1,
+      "listed_in": "https://status.aspose.app/sitemap.xml",
+      "status": 200,
+      "final_url": "https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d",
+      "redirects": [
+        "https://status.aspose.app/dashboard",
+        "https://status.aspose.app/auth/login",
+        "https://id.containerize.com/connect/authorize?response_type=id_token+token&response_mode=form_post&redirect_uri=https%3A%2F%2Fstatus.aspose.app%2Fauth%2Flogin%2Fcallback&client_id=status.aspose.app&nonce=910fc6e3df69c5d21b517c68d821edaa&state=e8cf6a1d5e64e027f5d29fb06c67f4f8&scope=openid+profile+roles"
+      ],
+      "redirect_statuses": [
+        302,
+        302,
+        302
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 13200,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 3339,
+      "facts": {
+        "titles": [
+          "Containerize.IdentityServer - Single sign-on to access all applications and services of Aspose Pty Ltd."
+        ],
+        "descriptions": [
+          "Containerize.IdentityServer - Single sign-on to access all applications and services of Aspose Pty Ltd."
+        ],
+        "h1": [],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 215,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "redirected",
+          "redirects 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+        ],
+        [
+          "redirect_chain",
+          "3 hops: 302 -> 302 -> 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+        ],
+        [
+          "redirect_temporary",
+          "HTTP 302 -> https://id.containerize.com/login?signin=186156921f642ab345600e235c4ba78d"
+        ],
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "title_length",
+          "width 103: 'Containerize.IdentityServer - Single sign-on to access all applications and services of As'"
+        ],
+        [
+          "h1_missing",
+          "no non-empty <h1>"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "content_needs_js",
+          "215 characters of main text in the HTML"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ]
+      ]
+    },
+    {
+      "url": "https://status.aspose.app/incidents/58",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/{section}/*",
+      "source": "sitemap",
+      "group_urls": 79,
+      "listed_in": "https://status.aspose.app/sitemap.xml",
+      "status": 200,
+      "final_url": "https://status.aspose.app/incidents/58",
+      "redirects": [],
+      "redirect_statuses": [],
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 7727,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 491,
+      "facts": {
+        "titles": [
+          "I HAVE BEEN FIXED | Status - aspose.app"
+        ],
+        "descriptions": [
+          "Stay up to date with the latest service updates from Status - aspose.app."
+        ],
+        "h1": [
+          "I HAVE BEEN FIXED Thursday 30th January 2020 20:00:00"
+        ],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 194,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "viewport_no_zoom",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+        ],
+        [
+          "content_needs_js",
+          "194 characters of main text in the HTML"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ],
+        [
+          "title_duplicate",
+          "'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/68"
+        ],
+        [
+          "description_duplicate",
+          "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03"
+        ]
+      ]
+    },
+    {
+      "url": "https://status.aspose.app?start_date=2019-12-03",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/",
+      "source": "sitemap",
+      "group_urls": 70,
+      "listed_in": "https://status.aspose.app/sitemap.xml",
+      "status": 200,
+      "final_url": "https://status.aspose.app?start_date=2019-12-03",
+      "redirects": [],
+      "redirect_statuses": [],
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 15700,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 669,
+      "facts": {
+        "titles": [
+          "Status - aspose.app"
+        ],
+        "descriptions": [
+          "Stay up to date with the latest service updates from Status - aspose.app."
+        ],
+        "h1": [
+          "Past Incidents"
+        ],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 652,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "viewport_no_zoom",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ],
+        [
+          "title_duplicate",
+          "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/"
+        ],
+        [
+          "description_duplicate",
+          "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+        ]
+      ]
+    },
+    {
+      "url": "https://status.aspose.app/incidents/68",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/{section}/*",
+      "source": "sitemap",
+      "group_urls": 79,
+      "listed_in": "https://status.aspose.app/sitemap.xml",
+      "status": 200,
+      "final_url": "https://status.aspose.app/incidents/68",
+      "redirects": [],
+      "redirect_statuses": [],
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 7792,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 498,
+      "facts": {
+        "titles": [
+          "I HAVE BEEN FIXED | Status - aspose.app"
+        ],
+        "descriptions": [
+          "Stay up to date with the latest service updates from Status - aspose.app."
+        ],
+        "h1": [
+          "I HAVE BEEN FIXED Wednesday 5th February 2020 06:01:09"
+        ],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 256,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "viewport_no_zoom",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ],
+        [
+          "title_duplicate",
+          "'I HAVE BEEN FIXED | Status - aspose.app' also on https://status.aspose.app/incidents/58"
+        ],
+        [
+          "description_duplicate",
+          "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+        ]
+      ]
+    },
+    {
+      "url": "https://status.aspose.app/",
+      "host": "status.aspose.app",
+      "section": "",
+      "lang": null,
+      "template": "generic:/",
+      "source": "homepage",
+      "group_urls": 1,
+      "listed_in": null,
+      "status": 200,
+      "final_url": "https://status.aspose.app/",
+      "redirects": [],
+      "redirect_statuses": [],
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 16820,
+      "truncated": 0,
+      "blocked": 0,
+      "error": null,
+      "elapsed_ms": 646,
+      "facts": {
+        "titles": [
+          "Status - aspose.app"
+        ],
+        "descriptions": [
+          "Stay up to date with the latest service updates from Status - aspose.app."
+        ],
+        "h1": [
+          "Past Incidents"
+        ],
+        "canonicals": [],
+        "head_canonicals": 0,
+        "robots": [],
+        "hreflang": [],
+        "html_lang": null,
+        "viewport": "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0",
+        "generator": null,
+        "refresh": null,
+        "text_chars": 705,
+        "jsonld_types": [],
+        "jsonld_invalid": 0
+      },
+      "ignored": null,
+      "issues": [
+        [
+          "canonical_missing",
+          "no <link rel=canonical> and no Link header"
+        ],
+        [
+          "html_lang_missing",
+          "no lang attribute on <html>"
+        ],
+        [
+          "viewport_no_zoom",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+        ],
+        [
+          "no_structured_data",
+          "no JSON-LD"
+        ],
+        [
+          "title_duplicate",
+          "'Status - aspose.app' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app?start_date=2019-12-03"
+        ],
+        [
+          "description_duplicate",
+          "'Stay up to date with the latest service updates from Status ' also on https://status.aspose.app?start_date=2019-06-24, https://status.aspose.app/incidents/58"
+        ]
+      ]
+    }
+  ]
+}

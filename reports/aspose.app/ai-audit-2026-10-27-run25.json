@@ -1,7 +1,7 @@
 {
   "tenant": "aspose.app",
   "auditor": "ai-audit",
-  "run_id": 16,
+  "run_id": 25,
   "params": {
     "hosts": [
       "www.aspose.app",
@@ -14,12 +14,11 @@
       "purchase.aspose.app",
       "dashboard.aspose.app",
       "metrics.aspose.app",
-      "status.aspose.app",
-      "api.products.aspose.app"
+      "status.aspose.app"
     ]
   },
-  "requests": 188,
-  "duration_s": 286.7,
+  "requests": 186,
+  "duration_s": 288.2,
   "stopped_early": false,
   "summary": {
     "www.aspose.app": {
@@ -188,21 +187,6 @@
       "sections": 0,
       "sections_covered": 0,
       "section_files": []
-    },
-    "api.products.aspose.app": {
-      "robots": 404,
-      "answer_blocked": [],
-      "training_blocked": [],
-      "firewall_blocked": {},
-      "firewall_training": {},
-      "llms": {
-        "state": "skipped",
-        "note": "not expected on this host (tenant audit.ai)",
-        "url": null
-      },
-      "sections": 0,
-      "sections_covered": 0,
-      "section_files": []
     }
   },
   "findings": [
@@ -239,7 +223,7 @@
       "fix_tier": 1,
       "fix_channel": "wordpress-api",
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0002",
@@ -274,7 +258,7 @@
       "fix_tier": 1,
       "fix_channel": "discourse-admin",
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0003",
@@ -309,7 +293,7 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0004",
@@ -349,7 +333,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0005",
@@ -384,7 +368,7 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0006",
@@ -419,7 +403,7 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0007",
@@ -454,7 +438,7 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0008",
@@ -489,7 +473,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "ai-0009",
@@ -524,7 +508,7 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-16"
+      "detected_at": "2026-10-27"
     }
   ],
   "hosts": {
@@ -538,7 +522,7 @@
       "firewall": {
         "url": "https://www.aspose.app/",
         "baseline": 200,
-        "bytes": 52041,
+        "bytes": 52039,
         "blocked": {}
       },
       "llms": {
@@ -1002,7 +986,7 @@
       "firewall": {
         "url": "https://status.aspose.app/",
         "baseline": 200,
-        "bytes": 15486,
+        "bytes": 16820,
         "blocked": {}
       },
       "llms": {
@@ -1010,25 +994,6 @@
         "state": "missing",
         "note": "HTTP 404",
         "links": []
-      }
-    },
-    "api.products.aspose.app": {
-      "robots": {
-        "status": 404,
-        "error": null,
-        "answer_blocked": {},
-        "training_blocked": {},
-        "note": "HTTP 404"
-      },
-      "firewall": {
-        "url": "https://api.products.aspose.app/",
-        "baseline": 404,
-        "bytes": 386,
-        "blocked": {}
-      },
-      "llms": {
-        "state": "skipped",
-        "note": "not expected on this host (tenant audit.ai)"
       }
     }
   }

@@ -173,5 +173,75 @@
    "video": 84,
    "barcode": 85
   }
+ },
+ {
+  "date": "2026-10-27",
+  "runs": "discovery run 9, crawl audit run 28, speed audit run 26, AI audit run 25, text check run 27",
+  "families": {
+   "drawing": 19,
+   "ocr": 43,
+   "omr": 46,
+   "slides": 48,
+   "cad": 48,
+   "total": 56,
+   "svg": 57,
+   "words": 58,
+   "gis": 58,
+   "psd": 59,
+   "tasks": 65,
+   "font": 67,
+   "finance": 68,
+   "3d": 69,
+   "html": 70,
+   "note": 70,
+   "zip": 71,
+   "email": 71,
+   "pub": 72,
+   "tex": 72,
+   "cells": 73,
+   "page": 73,
+   "pdf": 74,
+   "diagram": 78,
+   "audio": 79,
+   "ebook": 80,
+   "imaging": 83,
+   "barcode": 85,
+   "video": 85
+  },
+  "hosts": {
+   "about.aspose.app": {
+    "health": 91
+   },
+   "blog.aspose.app": {
+    "health": 86
+   },
+   "dashboard.aspose.app": {
+    "health": 62
+   },
+   "forum.aspose.app": {
+    "health": 93
+   },
+   "metrics.aspose.app": {
+    "health": 85
+   },
+   "products.aspose.app": {
+    "health": 55
+   },
+   "purchase.aspose.app": {
+    "health": 46
+   },
+   "releases.aspose.app": {
+    "health": 60
+   },
+   "status.aspose.app": {
+    "health": 67
+   },
+   "websites.aspose.app": {
+    "health": 48
+   },
+   "www.aspose.app": {
+    "health": 75
+   }
+  }
  }
 ]

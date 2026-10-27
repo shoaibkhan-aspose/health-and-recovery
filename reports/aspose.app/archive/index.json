@@ -88,5 +88,17 @@
     "date": "2026-10-27 (2)",
     "label": "Short check names with terms explained, scores round halves up",
     "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 23"
+  },
+  {
+    "file": "2026-10-27-3.html",
+    "date": "2026-10-27 (3)",
+    "label": "Blogs page link and fix tracking, before the full run of 27 Oct (downloaded from Pages)",
+    "runs": "discovery run 8, crawl audit run 15, speed audit run 12, AI audit run 16, text check run 23"
+  },
+  {
+    "file": "2026-10-27-4.html",
+    "date": "2026-10-27 (4)",
+    "label": "Full run 27 Oct",
+    "runs": "discovery run 9, crawl audit run 28, speed audit run 26, AI audit run 25, text check run 27"
   }
 ]

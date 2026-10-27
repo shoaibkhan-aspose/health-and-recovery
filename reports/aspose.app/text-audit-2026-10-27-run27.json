@@ -1,7 +1,7 @@
 {
   "tenant": "aspose.app",
   "auditor": "text-audit",
-  "run_id": 23,
+  "run_id": 27,
   "params": {
     "hosts": [
       "about.aspose.app",
@@ -18,23 +18,24 @@
       "www.aspose.app"
     ],
     "crawl_runs": [
-      15
+      15,
+      24
     ],
     "model": "gpt-oss",
     "prompt_version": 2
   },
-  "duration_s": 0.0,
+  "duration_s": 30.6,
   "stopped_early": false,
-  "pages_checked": 605,
+  "pages_checked": 618,
   "unchecked": [],
   "incomplete": false,
   "llm": {
-    "calls": 0,
-    "prompt_tokens": 0,
-    "completion_tokens": 0,
-    "cache_hits": 605
+    "calls": 3,
+    "prompt_tokens": 6141,
+    "completion_tokens": 3634,
+    "cache_hits": 574
   },
-  "ignored": 15,
+  "ignored": 11,
   "summary": {
     "about.aspose.app": {
       "checked": 11,
@@ -62,10 +63,10 @@
       "issues": {}
     },
     "products.aspose.app": {
-      "checked": 544,
-      "pages_with_issues": 31,
+      "checked": 558,
+      "pages_with_issues": 29,
       "issues": {
-        "text_leftover": 15,
+        "text_leftover": 12,
         "text_typo": 17,
         "text_topic_mismatch": 10
       }
@@ -83,7 +84,7 @@
       }
     },
     "status.aspose.app": {
-      "checked": 6,
+      "checked": 5,
       "pages_with_issues": 0,
       "issues": {}
     },
@@ -160,7 +161,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "onpage-0002",
@@ -195,7 +196,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "onpage-0003",
@@ -230,7 +231,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "onpage-0004",
@@ -265,85 +266,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
       "id": "onpage-0005",
-      "tenant": "aspose.app",
-      "subdomain": "products.aspose.app",
-      "template": "page:pdf",
-      "dimension": "onpage",
-      "check": "text_leftover",
-      "type": "incorrect",
-      "title": "Placeholder or garbled words in titles, headings or descriptions (/pdf/)",
-      "evidence": {
-        "urls": [
-          "https://products.aspose.app/pdf/"
-        ],
-        "observed": "1 of 24 checked pages: /pdf/ title: remove 'test'; /pdf/ H1: remove 'test'",
-        "expected": "Finished text in the page's language, without template keys or test words",
-        "locations": [
-          {
-            "role": "page",
-            "url": "https://products.aspose.app/pdf/",
-            "note": "title: remove 'test'"
-          },
-          {
-            "role": "page",
-            "url": "https://products.aspose.app/pdf/",
-            "note": "H1: remove 'test'"
-          }
-        ]
-      },
-      "affected_pages": 1,
-      "impact": {
-        "clicks_28d": 0,
-        "impressions_28d": 0,
-        "score": 0
-      },
-      "effort": "S",
-      "fix_tier": 1,
-      "fix_channel": "git-pr",
-      "status": "open",
-      "detected_at": "2026-10-20"
-    },
-    {
-      "id": "onpage-0006",
-      "tenant": "aspose.app",
-      "subdomain": "products.aspose.app",
-      "template": "page:psd",
-      "dimension": "onpage",
-      "check": "text_leftover",
-      "type": "incorrect",
-      "title": "Placeholder or garbled words in titles, headings or descriptions (/psd/)",
-      "evidence": {
-        "urls": [
-          "https://products.aspose.app/psd/conversion/ai-to-pdf"
-        ],
-        "observed": "1 of 24 checked pages: /psd/conversion/ai-to-pdf H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'",
-        "expected": "Finished text in the page's language, without template keys or test words",
-        "locations": [
-          {
-            "role": "page",
-            "url": "https://products.aspose.app/psd/conversion/ai-to-pdf",
-            "note": "H1: remove 'There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf'"
-          }
-        ]
-      },
-      "affected_pages": 1,
-      "impact": {
-        "clicks_28d": 0,
-        "impressions_28d": 0,
-        "score": 0
-      },
-      "effort": "S",
-      "fix_tier": 1,
-      "fix_channel": "git-pr",
-      "status": "open",
-      "detected_at": "2026-10-20"
-    },
-    {
-      "id": "onpage-0007",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:tasks",
@@ -380,10 +306,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0008",
+      "id": "onpage-0006",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:words",
@@ -395,7 +321,7 @@
         "urls": [
           "https://products.aspose.app/words/th/conversion/mht-to-excel"
         ],
-        "observed": "1 of 24 checked pages: /words/th/conversion/mht-to-excel meta description: remove 'ต'",
+        "observed": "1 of 22 checked pages: /words/th/conversion/mht-to-excel meta description: remove 'ต'",
         "expected": "Finished text in the page's language, without template keys or test words",
         "locations": [
           {
@@ -415,10 +341,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0009",
+      "id": "onpage-0007",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:audio",
@@ -456,10 +382,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0010",
+      "id": "onpage-0008",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:svg",
@@ -507,10 +433,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0011",
+      "id": "onpage-0009",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:tasks",
@@ -560,10 +486,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0012",
+      "id": "onpage-0010",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:audio",
@@ -595,10 +521,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0013",
+      "id": "onpage-0011",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:drawing",
@@ -630,10 +556,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0014",
+      "id": "onpage-0012",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:finance",
@@ -665,10 +591,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0015",
+      "id": "onpage-0013",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:font",
@@ -712,10 +638,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0016",
+      "id": "onpage-0014",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:ocr",
@@ -727,7 +653,7 @@
         "urls": [
           "https://products.aspose.app/ocr/image-to-speech"
         ],
-        "observed": "1 of 17 checked pages: /ocr/image-to-speech meta description: 'Image image' → 'Image'",
+        "observed": "1 of 14 checked pages: /ocr/image-to-speech meta description: 'Image image' → 'Image'",
         "expected": "Correctly spelled titles, H1s and meta descriptions",
         "locations": [
           {
@@ -747,10 +673,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0017",
+      "id": "onpage-0015",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:omr",
@@ -762,7 +688,7 @@
         "urls": [
           "https://products.aspose.app/omr/family/"
         ],
-        "observed": "1 of 9 checked pages: /omr/family/ title: 'Recoginze' → 'Recognize'",
+        "observed": "1 of 11 checked pages: /omr/family/ title: 'Recoginze' → 'Recognize'",
         "expected": "Correctly spelled titles, H1s and meta descriptions",
         "locations": [
           {
@@ -782,10 +708,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0018",
+      "id": "onpage-0016",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:page",
@@ -823,10 +749,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0019",
+      "id": "onpage-0017",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:pdf",
@@ -838,7 +764,7 @@
         "urls": [
           "https://products.aspose.app/pdf/el/conversion/excel-to-word"
         ],
-        "observed": "1 of 24 checked pages: /pdf/el/conversion/excel-to-word title: 'Μετατροπη' → 'Μετατροπή'; /pdf/el/conversion/excel-to-word H1: 'Μετατροπη' → 'Μετατροπή'",
+        "observed": "1 of 28 checked pages: /pdf/el/conversion/excel-to-word title: 'Μετατροπη' → 'Μετατροπή'; /pdf/el/conversion/excel-to-word H1: 'Μετατροπη' → 'Μετατροπή'",
         "expected": "Correctly spelled titles, H1s and meta descriptions",
         "locations": [
           {
@@ -863,10 +789,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0020",
+      "id": "onpage-0018",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:psd",
@@ -879,7 +805,7 @@
           "https://products.aspose.app/psd/font-replace/font-similar-to-futura",
           "https://products.aspose.app/psd/font-replace/font-similar-to-arial"
         ],
-        "observed": "2 of 24 checked pages: /psd/font-replace/font-similar-to-futura meta description: 'simular' → 'similar'; /psd/font-replace/font-similar-to-arial meta description: 'simular' → 'similar'",
+        "observed": "2 of 23 checked pages: /psd/font-replace/font-similar-to-futura meta description: 'simular' → 'similar'; /psd/font-replace/font-similar-to-arial meta description: 'simular' → 'similar'",
         "expected": "Correctly spelled titles, H1s and meta descriptions",
         "locations": [
           {
@@ -904,10 +830,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0021",
+      "id": "onpage-0019",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:pub",
@@ -945,10 +871,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0022",
+      "id": "onpage-0020",
       "tenant": "aspose.app",
       "subdomain": "products.aspose.app",
       "template": "page:tex",
@@ -980,10 +906,10 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0023",
+      "id": "onpage-0021",
       "tenant": "aspose.app",
       "subdomain": "releases.aspose.app",
       "template": "page",
@@ -1015,10 +941,10 @@
       "fix_tier": 1,
       "fix_channel": null,
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     },
     {
-      "id": "onpage-0024",
+      "id": "onpage-0022",
       "tenant": "aspose.app",
       "subdomain": "websites.aspose.app",
       "template": "page",
@@ -1050,7 +976,7 @@
       "fix_tier": 1,
       "fix_channel": "git-pr",
       "status": "open",
-      "detected_at": "2026-10-20"
+      "detected_at": "2026-10-27"
     }
   ],
   "pages": [
@@ -1322,28 +1248,6 @@
       ]
     },
     {
-      "url": "https://products.aspose.app/pdf/",
-      "host": "products.aspose.app",
-      "section": "pdf",
-      "lang": null,
-      "issues": [
-        {
-          "field": "title",
-          "kind": "stray_word",
-          "wrong": "test",
-          "fix": "",
-          "why": "placeholder word"
-        },
-        {
-          "field": "h1",
-          "kind": "stray_word",
-          "wrong": "test",
-          "fix": "",
-          "why": "placeholder word"
-        }
-      ]
-    },
-    {
       "url": "https://products.aspose.app/pdf/el/conversion/excel-to-word",
       "host": "products.aspose.app",
       "section": "pdf",
@@ -1362,21 +1266,6 @@
           "wrong": "Μετατροπη",
           "fix": "Μετατροπή",
           "why": "missing accent on Greek word"
-        }
-      ]
-    },
-    {
-      "url": "https://products.aspose.app/psd/conversion/ai-to-pdf",
-      "host": "products.aspose.app",
-      "section": "psd",
-      "lang": null,
-      "issues": [
-        {
-          "field": "h1",
-          "kind": "stray_word",
-          "wrong": "There is an error on this page or it does not exist: /psd/conversion/ai-to-pdf",
-          "fix": "",
-          "why": "error placeholder left in heading"
         }
       ]
     },

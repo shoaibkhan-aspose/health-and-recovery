@@ -1,511 +1,511 @@
 {
  "windows": {
   "current": [
-   "2026-09-16",
-   "2026-10-13"
+   "2026-09-27",
+   "2026-10-24"
   ],
   "previous": [
-   "2026-08-19",
-   "2026-09-15"
+   "2026-08-30",
+   "2026-09-26"
   ],
   "six_months_ago": [
-   "2026-03-18",
-   "2026-04-14"
+   "2026-03-29",
+   "2026-04-25"
   ]
  },
  "hosts": {
   "products.aspose.app": {
    "total": {
     "current": {
-     "clicks": 19767,
-     "impressions": 247560,
-     "pages": 558
+     "clicks": 18635,
+     "impressions": 239622,
+     "pages": 548
     },
     "previous": {
-     "clicks": 17519,
-     "impressions": 223039,
-     "pages": 507
+     "clicks": 19654,
+     "impressions": 240522,
+     "pages": 556
     },
     "six_months_ago": {
-     "clicks": 13915,
-     "impressions": 142841,
-     "pages": 424
+     "clicks": 16567,
+     "impressions": 195027,
+     "pages": 417
     }
    },
    "words": {
     "current": {
-     "clicks": 390206,
-     "impressions": 4572561,
-     "pages": 3475
+     "clicks": 380766,
+     "impressions": 4434705,
+     "pages": 3416
     },
     "previous": {
-     "clicks": 390428,
-     "impressions": 4688348,
-     "pages": 3360
+     "clicks": 396464,
+     "impressions": 4672100,
+     "pages": 3436
     },
     "six_months_ago": {
-     "clicks": 397570,
-     "impressions": 4957828,
-     "pages": 3352
+     "clicks": 464847,
+     "impressions": 5488405,
+     "pages": 3194
     }
    },
    "pdf": {
     "current": {
-     "clicks": 189972,
-     "impressions": 2695691,
-     "pages": 2415
+     "clicks": 185214,
+     "impressions": 2625272,
+     "pages": 2403
     },
     "previous": {
-     "clicks": 192154,
-     "impressions": 2816276,
-     "pages": 2373
+     "clicks": 196182,
+     "impressions": 2786673,
+     "pages": 2370
     },
     "six_months_ago": {
-     "clicks": 193840,
-     "impressions": 2506810,
-     "pages": 2367
+     "clicks": 228295,
+     "impressions": 2939695,
+     "pages": 2287
     }
    },
    "cells": {
     "current": {
-     "clicks": 201716,
-     "impressions": 2132649,
-     "pages": 2462
+     "clicks": 195397,
+     "impressions": 2137809,
+     "pages": 2458
     },
     "previous": {
-     "clicks": 208734,
-     "impressions": 2120166,
-     "pages": 2408
+     "clicks": 207379,
+     "impressions": 2104250,
+     "pages": 2470
     },
     "six_months_ago": {
-     "clicks": 220975,
-     "impressions": 1917313,
-     "pages": 2523
+     "clicks": 242577,
+     "impressions": 2049151,
+     "pages": 2389
     }
    },
    "email": {
     "current": {
-     "clicks": 33845,
-     "impressions": 397733,
-     "pages": 384
+     "clicks": 32762,
+     "impressions": 396287,
+     "pages": 365
     },
     "previous": {
-     "clicks": 34526,
-     "impressions": 428909,
-     "pages": 381
+     "clicks": 34911,
+     "impressions": 413081,
+     "pages": 402
     },
     "six_months_ago": {
-     "clicks": 26881,
-     "impressions": 358259,
-     "pages": 407
+     "clicks": 29877,
+     "impressions": 379140,
+     "pages": 365
     }
    },
    "slides": {
     "current": {
-     "clicks": 12192,
-     "impressions": 169844,
-     "pages": 572
+     "clicks": 12044,
+     "impressions": 166402,
+     "pages": 540
     },
     "previous": {
-     "clicks": 10754,
-     "impressions": 187733,
-     "pages": 549
+     "clicks": 11742,
+     "impressions": 185061,
+     "pages": 568
     },
     "six_months_ago": {
-     "clicks": 13541,
-     "impressions": 235793,
-     "pages": 566
+     "clicks": 18802,
+     "impressions": 310507,
+     "pages": 593
     }
    },
    "imaging": {
     "current": {
-     "clicks": 69894,
-     "impressions": 744418,
-     "pages": 2109
+     "clicks": 66925,
+     "impressions": 720809,
+     "pages": 2071
     },
     "previous": {
-     "clicks": 72487,
-     "impressions": 801831,
-     "pages": 2171
+     "clicks": 71806,
+     "impressions": 764266,
+     "pages": 2181
     },
     "six_months_ago": {
-     "clicks": 75304,
-     "impressions": 870286,
-     "pages": 2115
+     "clicks": 87508,
+     "impressions": 928080,
+     "pages": 1962
     }
    },
    "barcode": {
     "current": {
-     "clicks": 309813,
-     "impressions": 2444799,
-     "pages": 557
+     "clicks": 312441,
+     "impressions": 2519771,
+     "pages": 555
     },
     "previous": {
-     "clicks": 302232,
-     "impressions": 2438972,
-     "pages": 515
+     "clicks": 301613,
+     "impressions": 2407690,
+     "pages": 533
     },
     "six_months_ago": {
-     "clicks": 233530,
-     "impressions": 2302419,
-     "pages": 476
+     "clicks": 302743,
+     "impressions": 2611665,
+     "pages": 456
     }
    },
    "diagram": {
     "current": {
-     "clicks": 11690,
-     "impressions": 85687,
-     "pages": 415
+     "clicks": 11481,
+     "impressions": 86181,
+     "pages": 420
     },
     "previous": {
-     "clicks": 9522,
-     "impressions": 81248,
-     "pages": 402
+     "clicks": 10679,
+     "impressions": 86058,
+     "pages": 417
     },
     "six_months_ago": {
-     "clicks": 13612,
-     "impressions": 135328,
-     "pages": 387
+     "clicks": 16138,
+     "impressions": 144781,
+     "pages": 360
     }
    },
    "tasks": {
     "current": {
-     "clicks": 3561,
-     "impressions": 19141,
-     "pages": 124
+     "clicks": 3656,
+     "impressions": 19842,
+     "pages": 137
     },
     "previous": {
-     "clicks": 3298,
-     "impressions": 20103,
-     "pages": 119
+     "clicks": 3479,
+     "impressions": 19187,
+     "pages": 116
     },
     "six_months_ago": {
-     "clicks": 2842,
-     "impressions": 21256,
-     "pages": 86
+     "clicks": 2940,
+     "impressions": 20208,
+     "pages": 81
     }
    },
    "ocr": {
     "current": {
-     "clicks": 8070,
-     "impressions": 150288,
-     "pages": 178
+     "clicks": 7225,
+     "impressions": 145088,
+     "pages": 169
     },
     "previous": {
-     "clicks": 6837,
-     "impressions": 144201,
-     "pages": 170
+     "clicks": 7515,
+     "impressions": 145403,
+     "pages": 175
     },
     "six_months_ago": {
-     "clicks": 18658,
-     "impressions": 334017,
-     "pages": 248
+     "clicks": 19656,
+     "impressions": 340732,
+     "pages": 252
     }
    },
    "note": {
     "current": {
-     "clicks": 460,
-     "impressions": 3829,
-     "pages": 39
+     "clicks": 483,
+     "impressions": 4231,
+     "pages": 36
     },
     "previous": {
-     "clicks": 525,
-     "impressions": 5506,
-     "pages": 38
+     "clicks": 515,
+     "impressions": 4972,
+     "pages": 41
     },
     "six_months_ago": {
-     "clicks": 382,
-     "impressions": 3959,
-     "pages": 22
+     "clicks": 397,
+     "impressions": 4095,
+     "pages": 23
     }
    },
    "cad": {
     "current": {
-     "clicks": 5095,
-     "impressions": 37186,
-     "pages": 368
+     "clicks": 4925,
+     "impressions": 36417,
+     "pages": 367
     },
     "previous": {
-     "clicks": 5636,
-     "impressions": 47092,
-     "pages": 404
+     "clicks": 5621,
+     "impressions": 41173,
+     "pages": 400
     },
     "six_months_ago": {
-     "clicks": 11134,
-     "impressions": 125225,
-     "pages": 545
+     "clicks": 10530,
+     "impressions": 106704,
+     "pages": 469
     }
    },
    "3d": {
     "current": {
-     "clicks": 37224,
-     "impressions": 336158,
-     "pages": 1306
+     "clicks": 35989,
+     "impressions": 335781,
+     "pages": 1280
     },
     "previous": {
-     "clicks": 36780,
-     "impressions": 385089,
-     "pages": 1284
+     "clicks": 37998,
+     "impressions": 362712,
+     "pages": 1323
     },
     "six_months_ago": {
-     "clicks": 47473,
-     "impressions": 565534,
-     "pages": 1335
+     "clicks": 50576,
+     "impressions": 586504,
+     "pages": 1268
     }
    },
    "html": {
     "current": {
-     "clicks": 23555,
-     "impressions": 689266,
-     "pages": 361
+     "clicks": 22468,
+     "impressions": 733663,
+     "pages": 350
     },
     "previous": {
-     "clicks": 24419,
-     "impressions": 585574,
-     "pages": 352
+     "clicks": 25349,
+     "impressions": 597797,
+     "pages": 355
     },
     "six_months_ago": {
-     "clicks": 28564,
-     "impressions": 412671,
-     "pages": 325
+     "clicks": 30716,
+     "impressions": 469117,
+     "pages": 322
     }
    },
    "gis": {
     "current": {
-     "clicks": 29739,
-     "impressions": 229192,
-     "pages": 684
+     "clicks": 28947,
+     "impressions": 218861,
+     "pages": 665
     },
     "previous": {
-     "clicks": 29889,
-     "impressions": 240933,
-     "pages": 671
+     "clicks": 30951,
+     "impressions": 238398,
+     "pages": 677
     },
     "six_months_ago": {
-     "clicks": 28712,
-     "impressions": 278653,
-     "pages": 665
+     "clicks": 36506,
+     "impressions": 333173,
+     "pages": 646
     }
    },
    "zip": {
     "current": {
-     "clicks": 35788,
-     "impressions": 439325,
-     "pages": 285
+     "clicks": 34264,
+     "impressions": 440631,
+     "pages": 286
     },
     "previous": {
-     "clicks": 35582,
-     "impressions": 495888,
-     "pages": 284
+     "clicks": 35885,
+     "impressions": 470926,
+     "pages": 282
     },
     "six_months_ago": {
-     "clicks": 35518,
-     "impressions": 490166,
-     "pages": 263
+     "clicks": 40668,
+     "impressions": 547334,
+     "pages": 264
     }
    },
    "page": {
     "current": {
-     "clicks": 3801,
-     "impressions": 40380,
-     "pages": 83
+     "clicks": 3483,
+     "impressions": 38705,
+     "pages": 86
     },
     "previous": {
-     "clicks": 3652,
-     "impressions": 46174,
-     "pages": 106
+     "clicks": 3751,
+     "impressions": 44320,
+     "pages": 102
     },
     "six_months_ago": {
-     "clicks": 3420,
-     "impressions": 51514,
-     "pages": 79
+     "clicks": 3458,
+     "impressions": 57675,
+     "pages": 84
     }
    },
    "psd": {
     "current": {
-     "clicks": 6619,
-     "impressions": 65141,
-     "pages": 179
+     "clicks": 6144,
+     "impressions": 65264,
+     "pages": 166
     },
     "previous": {
-     "clicks": 7058,
-     "impressions": 76054,
-     "pages": 177
+     "clicks": 7107,
+     "impressions": 70538,
+     "pages": 172
     },
     "six_months_ago": {
-     "clicks": 5298,
-     "impressions": 55736,
-     "pages": 126
+     "clicks": 6070,
+     "impressions": 62247,
+     "pages": 131
     }
    },
    "omr": {
     "current": {
-     "clicks": 14295,
-     "impressions": 1913280,
-     "pages": 59
+     "clicks": 17387,
+     "impressions": 2431043,
+     "pages": 69
     },
     "previous": {
-     "clicks": 9238,
-     "impressions": 776204,
-     "pages": 60
+     "clicks": 10830,
+     "impressions": 1124422,
+     "pages": 58
     },
     "six_months_ago": {
-     "clicks": 23197,
-     "impressions": 1766669,
+     "clicks": 22126,
+     "impressions": 2032759,
      "pages": 61
     }
    },
    "svg": {
     "current": {
-     "clicks": 8008,
-     "impressions": 84383,
-     "pages": 320
+     "clicks": 8252,
+     "impressions": 90002,
+     "pages": 331
     },
     "previous": {
-     "clicks": 7978,
-     "impressions": 98089,
-     "pages": 322
+     "clicks": 7862,
+     "impressions": 89490,
+     "pages": 320
     },
     "six_months_ago": {
-     "clicks": 11539,
-     "impressions": 133538,
-     "pages": 358
+     "clicks": 12813,
+     "impressions": 148603,
+     "pages": 333
     }
    },
    "finance": {
     "current": {
-     "clicks": 1083,
-     "impressions": 7069,
-     "pages": 34
+     "clicks": 1040,
+     "impressions": 7732,
+     "pages": 31
     },
     "previous": {
-     "clicks": 1025,
-     "impressions": 7660,
-     "pages": 30
+     "clicks": 1090,
+     "impressions": 7703,
+     "pages": 35
     },
     "six_months_ago": {
-     "clicks": 1168,
-     "impressions": 9109,
-     "pages": 26
+     "clicks": 1269,
+     "impressions": 9773,
+     "pages": 20
     }
    },
    "font": {
     "current": {
-     "clicks": 5497,
-     "impressions": 93692,
-     "pages": 188
+     "clicks": 5473,
+     "impressions": 85236,
+     "pages": 194
     },
     "previous": {
-     "clicks": 5974,
-     "impressions": 118481,
-     "pages": 228
+     "clicks": 5836,
+     "impressions": 112031,
+     "pages": 216
     },
     "six_months_ago": {
-     "clicks": 5321,
-     "impressions": 121107,
-     "pages": 209
+     "clicks": 7148,
+     "impressions": 151002,
+     "pages": 206
     }
    },
    "tex": {
     "current": {
-     "clicks": 2038,
-     "impressions": 25634,
-     "pages": 91
+     "clicks": 2044,
+     "impressions": 26341,
+     "pages": 94
     },
     "previous": {
-     "clicks": 1559,
-     "impressions": 22362,
-     "pages": 83
+     "clicks": 1769,
+     "impressions": 22446,
+     "pages": 86
     },
     "six_months_ago": {
-     "clicks": 1876,
-     "impressions": 32034,
-     "pages": 81
+     "clicks": 2229,
+     "impressions": 35031,
+     "pages": 77
     }
    },
    "pub": {
     "current": {
-     "clicks": 3358,
-     "impressions": 37489,
-     "pages": 56
+     "clicks": 3580,
+     "impressions": 46009,
+     "pages": 59
     },
     "previous": {
-     "clicks": 3216,
-     "impressions": 37998,
-     "pages": 54
+     "clicks": 3362,
+     "impressions": 39543,
+     "pages": 57
     },
     "six_months_ago": {
-     "clicks": 2877,
-     "impressions": 29954,
-     "pages": 41
+     "clicks": 2758,
+     "impressions": 28082,
+     "pages": 42
     }
    },
    "drawing": {
     "current": {
-     "clicks": 11,
-     "impressions": 1385,
+     "clicks": 13,
+     "impressions": 1864,
      "pages": 2
     },
     "previous": {
-     "clicks": 16,
-     "impressions": 4780,
-     "pages": 2
+     "clicks": 12,
+     "impressions": 3299,
+     "pages": 1
     },
     "six_months_ago": {
-     "clicks": 665,
-     "impressions": 68895,
-     "pages": 8
+     "clicks": 794,
+     "impressions": 74580,
+     "pages": 6
     }
    },
    "audio": {
     "current": {
-     "clicks": 36775,
-     "impressions": 447866,
-     "pages": 850
+     "clicks": 39011,
+     "impressions": 495050,
+     "pages": 893
     },
     "previous": {
-     "clicks": 33501,
-     "impressions": 429328,
-     "pages": 836
+     "clicks": 33892,
+     "impressions": 428215,
+     "pages": 838
     },
     "six_months_ago": {
-     "clicks": 36713,
-     "impressions": 407029,
-     "pages": 791
+     "clicks": 55698,
+     "impressions": 548937,
+     "pages": 783
     }
    },
    "video": {
     "current": {
-     "clicks": 21858,
-     "impressions": 334391,
-     "pages": 705
+     "clicks": 21424,
+     "impressions": 324955,
+     "pages": 709
     },
     "previous": {
-     "clicks": 22089,
-     "impressions": 338766,
-     "pages": 664
+     "clicks": 22067,
+     "impressions": 338038,
+     "pages": 678
     },
     "six_months_ago": {
-     "clicks": 21519,
-     "impressions": 369133,
-     "pages": 681
+     "clicks": 28890,
+     "impressions": 423107,
+     "pages": 648
     }
    },
    "ebook": {
     "current": {
-     "clicks": 8211,
-     "impressions": 139380,
-     "pages": 222
+     "clicks": 8063,
+     "impressions": 130149,
+     "pages": 220
     },
     "previous": {
-     "clicks": 8228,
-     "impressions": 138857,
-     "pages": 227
+     "clicks": 8191,
+     "impressions": 142200,
+     "pages": 230
     },
     "six_months_ago": {
-     "clicks": 8019,
-     "impressions": 127987,
-     "pages": 219
+     "clicks": 9442,
+     "impressions": 143233,
+     "pages": 205
     }
    }
   }
@@ -514,127 +514,127 @@
   "www.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 4295
+    "sessions": 4283
    }
   },
   "products.aspose.app": {
    "source": "gsc",
    "current": {
-    "clicks": 1497310,
-    "impressions": 18618051,
-    "pages": 19145
+    "clicks": 1472462,
+    "impressions": 19035939,
+    "pages": 18972
    },
    "previous": {
-    "clicks": 1487984,
-    "impressions": 17839293,
-    "pages": 18828
+    "clicks": 1506740,
+    "impressions": 17995298,
+    "pages": 19161
    },
    "six_months_ago": {
-    "clicks": 1487943,
-    "impressions": 18871787,
-    "pages": 18837
+    "clicks": 1756543,
+    "impressions": 21216055,
+    "pages": 17993
    }
   },
   "about.aspose.app": {
    "source": "gsc",
    "current": {
-    "clicks": 17,
-    "impressions": 2455,
-    "pages": 75
+    "clicks": 16,
+    "impressions": 2070,
+    "pages": 83
    },
    "previous": {
     "clicks": 10,
-    "impressions": 2494,
-    "pages": 72
+    "impressions": 2737,
+    "pages": 70
    },
    "six_months_ago": {
-    "clicks": 15,
-    "impressions": 4641,
-    "pages": 93
+    "clicks": 18,
+    "impressions": 4332,
+    "pages": 90
    }
   },
   "blog.aspose.app": {
    "source": "gsc",
    "current": {
-    "clicks": 166,
-    "impressions": 64722,
-    "pages": 311
+    "clicks": 161,
+    "impressions": 66297,
+    "pages": 294
    },
    "previous": {
-    "clicks": 132,
-    "impressions": 60924,
-    "pages": 332
+    "clicks": 147,
+    "impressions": 58110,
+    "pages": 347
    },
    "six_months_ago": {
-    "clicks": 283,
-    "impressions": 79574,
-    "pages": 389
+    "clicks": 242,
+    "impressions": 80747,
+    "pages": 403
    }
   },
   "forum.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 394
+    "sessions": 378
    }
   },
   "websites.aspose.app": {
    "source": "gsc",
    "current": {
     "clicks": 2,
-    "impressions": 791,
-    "pages": 37
+    "impressions": 728,
+    "pages": 26
    },
    "previous": {
     "clicks": 3,
-    "impressions": 918,
-    "pages": 32
+    "impressions": 657,
+    "pages": 38
    },
    "six_months_ago": {
-    "clicks": 17,
-    "impressions": 1847,
-    "pages": 28
+    "clicks": 15,
+    "impressions": 1704,
+    "pages": 25
    }
   },
   "releases.aspose.app": {
    "source": "gsc",
    "current": {
-    "clicks": 5,
-    "impressions": 882,
-    "pages": 85
+    "clicks": 4,
+    "impressions": 804,
+    "pages": 88
    },
    "previous": {
-    "clicks": 4,
-    "impressions": 1521,
-    "pages": 86
+    "clicks": 7,
+    "impressions": 991,
+    "pages": 64
    },
    "six_months_ago": {
-    "clicks": 13,
-    "impressions": 1560,
-    "pages": 60
+    "clicks": 16,
+    "impressions": 1344,
+    "pages": 55
    }
   },
   "purchase.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 7647
+    "sessions": 7525
    }
   },
   "dashboard.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 3585
+    "sessions": 3435
    }
   },
   "metrics.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 60
+    "sessions": 55
    }
   },
   "status.aspose.app": {
    "source": "ga4",
    "current": {
-    "sessions": 28
+    "sessions": 23
    }
   }
  }
