@@ -40,7 +40,8 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
-from core.scorecard import area_scores, family_of, family_scorecards, grade, half_up, scorecard  # noqa: E402
+from core.scorecard import (SCORE_METHOD, area_scores, family_of, family_scorecards, grade, half_up,  # noqa: E402
+                            scorecard)
 from core.tenant import load_tenant  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
@@ -382,7 +383,8 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
 
 def record_health(report: dict, history_path: Path) -> None:
     """Append this run's family, host and area health to reports/<tenant>/health-history.json (once per set of
-    runs). Hosts are recorded from 2026-10-26 on; older entries have families only."""
+    runs and score method). Hosts are recorded from 2026-10-26 on; older entries have families only. The entry of
+    the same runs scored by an older method is rescored, keeping its old scores."""
     from datetime import date
 
     fam = report.get("_families")
@@ -391,9 +393,16 @@ def record_health(report: dict, history_path: Path) -> None:
         return
     history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.is_file() else []
     runs = runs_label(report)
-    if any(h["runs"] == runs for h in history):
+    same = [h for h in history if h["runs"] == runs]
+    if any(h.get("method", 1) == SCORE_METHOD for h in same):
         return
-    entry: dict = {"date": date.today().isoformat(), "runs": runs}
+    entry: dict = {"date": date.today().isoformat(), "runs": runs, "method": SCORE_METHOD}
+    if same:
+        old = same[-1]
+        history.remove(old)
+        entry["date"] = old["date"]
+        entry["rescored"] = {"on": date.today().isoformat(), "method": old.get("method", 1),
+                             **{k: old[k] for k in ("families", "hosts", "note") if k in old}}
     if fam:
         entry["families"] = {c["family"]: c["health"] for c in fam["hosts"][next(iter(fam["hosts"]))]}
     entry["hosts"] = {c["host"]: {"health": c["health"], **({"areas": {a["dimension"]: a["health"] for a in c["areas"]
@@ -411,7 +420,7 @@ def host_trends(report: dict, history_path: Path) -> dict[str, list[dict]]:
     for card in report.get("_hosts") or []:
         host = card["host"]
         points = [{"date": h["date"], "runs": h["runs"], "health": h["hosts"][host]["health"]}
-                  for h in history if host in (h.get("hosts") or {})]
+                  for h in history if host in (h.get("hosts") or {}) and h.get("method", 1) == SCORE_METHOD]
         if not points or points[-1]["runs"] != runs:
             points.append({"date": None, "runs": runs, "health": card["health"]})
         trends[host] = points

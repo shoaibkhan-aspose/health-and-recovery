@@ -14,6 +14,7 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
+from core.scorecard import SCORE_METHOD  # noqa: E402
 
 HOST = "app.example.com"
 FAMS = {"pdf", "omr", "cells", "words"}
@@ -64,9 +65,10 @@ def test_grade_summary_and_trend():
     assert s["distribution"] == {"A": 0, "B": 1, "C": 0, "D": 1, "F": 1}
     assert s["click_share"]["B"] == 70 and s["weak_with_traffic"] == [{"family": "cells", "grade": "D", "share": 25},
                                                                       {"family": "omr", "grade": "F", "share": 5}]
-    history = [{"date": "2026-10-01", "runs": "r1", "families": {"pdf": 70}}]
+    history = [{"date": "2026-10-01", "runs": "r1", "families": {"pdf": 70}, "method": SCORE_METHOD}]
     assert health_trend(cards, history, "r2")["families"]["pdf"] == 70
     assert health_trend(cards, history, "r1") == {}
+    assert health_trend(cards, [{**history[0], "method": 1}], "r2") == {}  # scored another way: no trend
 
 
 def test_run_changes_skip_a_sources_first_run():

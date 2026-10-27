@@ -225,6 +225,21 @@ def test_history_records_hosts_and_the_trend_ends_with_this_report(tmp_path):
     assert [p["health"] for p in host_trends(later, history)["blog.example.org"]] == [66, 70]
 
 
+def test_a_new_score_method_rescores_the_same_runs_and_restarts_the_trend(tmp_path):
+    from scripts.build_report import host_trends, record_health
+
+    history = tmp_path / "health-history.json"
+    old = [{"date": "2026-10-20", "runs": "discovery run 1", "hosts": {"blog.example.org": {"health": 50}}},
+           {"date": "2026-10-27", "runs": "discovery run 2", "hosts": {"blog.example.org": {"health": 55}}}]
+    history.write_text(json.dumps(old))
+    report = {"run_id": 2, "_hosts": [{"host": "blog.example.org", "health": 63}]}
+    record_health(report, history)
+    saved = json.loads(history.read_text())
+    assert len(saved) == 2 and saved[-1]["date"] == "2026-10-27" and saved[-1]["hosts"]["blog.example.org"]["health"] == 63
+    assert saved[-1]["rescored"]["method"] == 1 and saved[-1]["rescored"]["hosts"]["blog.example.org"]["health"] == 55
+    assert [p["health"] for p in host_trends(report, history)["blog.example.org"]] == [63]  # not 50 -> 63
+
+
 
 def test_blogs_page_members_and_ids():
     """/blogs/ lists the hosts the tenants tag, each prepared as on its own page; ids are prefixed by host because

@@ -7,7 +7,7 @@ from collections import Counter, defaultdict
 
 from core.findings import template_section
 from core.fix_guide import GUIDE, guide_key
-from core.scorecard import TYPE_ORDER, effective_type, family_of, group_of
+from core.scorecard import SCORE_METHOD, TYPE_ORDER, effective_type, family_of, group_of
 
 MERGE_GROUPS = {"sitemap"}  # root causes whose findings are one fix (sitemap down, double-slash children, ...)
 SYSTEMIC_MIN_FAMILIES = 3
@@ -134,7 +134,7 @@ def run_changes(findings: list[dict], run_refs: list[str]) -> dict:
 
 def health_trend(cards: list[dict], history: list[dict], runs: str) -> dict:
     """family -> previous health from the latest history entry of an earlier run."""
-    earlier = [h for h in history if h.get("runs") != runs]
+    earlier = [h for h in history if h.get("runs") != runs and h.get("method", 1) == SCORE_METHOD]
     if not earlier:
         return {}
     prev = earlier[-1]

@@ -2,7 +2,7 @@
 broken its own pages are, next to the traffic numbers that say how much it matters to the business.
 
 health = 100 - severe - min(COSMETIC_CAP, cosmetic), floored at 0, where each open finding costs
-WEIGHT[type] x share of the family it affects (at least MIN_SHARE). Findings that share a root cause
+WEIGHT[type] x share of the family's pages it affects (at least MIN_SHARE). Findings that share a root cause
 (GROUPS) count once: only the worst in a group. A canonical that points at a 4xx/5xx page counts as broken.
 Grades: A >= 90, B >= 75, C >= 60, D >= 40, F below.
 """
@@ -18,6 +18,9 @@ WEIGHT = {"broken": 40.0, "incorrect": 20.0, "not_optimized": 6.0, "improvable":
 SEVERE = ("broken", "incorrect")
 COSMETIC_CAP = 20.0
 MIN_SHARE = 0.25
+# raised whenever the formula changes, so trends compare only scores computed the same way (health-history.json
+# entries without "method" are 1; 2 = sampled findings weigh their estimated pages, 2026-10-27)
+SCORE_METHOD = 2
 GRADES = ((90, "A"), (75, "B"), (60, "C"), (40, "D"), (0, "F"))
 TYPE_ORDER = ("broken", "incorrect", "not_optimized", "improvable")
 
@@ -105,10 +108,14 @@ def group_of(f: dict) -> str:
 
 
 def share_of(f: dict, family_urls: int) -> float:
-    """How much of the family a finding covers: the failing share of the crawl-audit sample, the
+    """How much of the family a finding covers. A sampled finding: its estimated pages (each failing template's
+    share x that template's URLs) / the family's URLs, so a one-page template weighs as one page, not as the
+    whole family (SK, 2026-10-27); the failing share of the sample when the URL counts are missing. Else the
     Prioritizer's share for discovery findings, else affected pages / family URLs."""
     sample = (f["evidence"] or {}).get("sample")
-    if sample:
+    if sample and f.get("affected_pages") and family_urls:
+        share = f["affected_pages"] / family_urls
+    elif sample:
         failed, sampled = sum(v[0] for v in sample.values()), sum(v[1] for v in sample.values())
         share = failed / sampled if sampled else 1.0
     elif (f.get("impact") or {}).get("share") is not None:

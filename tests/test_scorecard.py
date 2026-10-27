@@ -82,6 +82,15 @@ def test_area_scores_split_by_dimension_and_never_above_the_overall():
     assert overall == 20 and all(overall <= a["health"] for a in areas.values())
 
 
+def test_one_page_template_weighs_as_its_pages_not_the_whole_family():
+    """status.aspose.app, 2026-10-27: 1 of 1 sampled page of a one-page template cost 40 points."""
+    lone = {**f("a", "http_error", "broken", sample={"generic:/{section}": [1, 1]}), "affected_pages": 1}
+    assert card([lone])["pdf"]["health"] == 90  # 1 of 100 pages: 40 x MIN_SHARE 0.25
+    wide = {**f("b", "http_error", "broken", sample={"tool": [1, 4]}), "affected_pages": 60}
+    assert card([wide])["pdf"]["health"] == 76  # 60 of 100 pages: 40 x 0.6, not 40 x 1/4
+    assert card([{**lone, "affected_pages": 0}])["pdf"]["health"] == 60  # no page estimate: the sample's share
+
+
 def test_scores_round_halves_up():
     from core.scorecard import half_up
 

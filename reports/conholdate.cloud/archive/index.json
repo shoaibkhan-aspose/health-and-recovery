@@ -64,5 +64,17 @@
     "date": "2026-10-27 (3)",
     "label": "Quick run: discovery, link check, fix tracking (fixed / new / still open)",
     "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6"
+  },
+  {
+    "file": "2026-10-27-4.html",
+    "date": "2026-10-27 (4)",
+    "label": "Link-check issues as issues, fixed, open; before the score counts affected pages (downloaded from Pages)",
+    "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6"
+  },
+  {
+    "file": "2026-10-27-5.html",
+    "date": "2026-10-27 (5)",
+    "label": "Score counts affected pages",
+    "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6"
   }
 ]
