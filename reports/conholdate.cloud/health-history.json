@@ -13,5 +13,20 @@
     }
    }
   }
+ },
+ {
+  "date": "2026-10-27",
+  "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6",
+  "hosts": {
+   "blog.conholdate.cloud": {
+    "health": 81,
+    "areas": {
+     "crawl": 100,
+     "onpage": 96,
+     "intl": 93,
+     "ai": 93
+    }
+   }
+  }
  }
 ]

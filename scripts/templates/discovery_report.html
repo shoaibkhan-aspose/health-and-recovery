@@ -204,7 +204,7 @@ button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .area.overall { background: var(--tint) }
 .area .ac { font-size: 13px; font-variant-numeric: tabular-nums } .area .down { color: var(--broken); font-weight: 600 }
 /* Overview for managers (tenant opt-in report.manager_view): numbers first, one tile per question */
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px }
 .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; min-width: 0 }
 .kpi .kl { font: 600 12px var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--muted) }
 .kpi .kv { font: 600 30px/1.1 var(--display); font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap }
@@ -222,7 +222,7 @@ table.acts a { color: var(--fg); text-decoration-color: var(--line); text-underl
 .shead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted) }
 .srows { display: grid; gap: 10px }
 .srow { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--gc); border-radius: 8px; padding: 14px 16px;
-  display: grid; grid-template-columns: minmax(200px, 1.3fr) repeat(4, minmax(120px, 1fr)); gap: 12px 16px; align-items: start; min-width: 0 }
+  display: grid; grid-template-columns: minmax(190px, 1.2fr) repeat(5, minmax(110px, 1fr)); gap: 12px 16px; align-items: start; min-width: 0 }
 .sname { display: grid; gap: 6px; min-width: 0 } .sname code { font-size: 16px; font-weight: 600; overflow-wrap: anywhere }
 .sscore { display: flex; align-items: baseline; gap: 6px } .sscore > b { font: 600 32px/1 var(--display); color: var(--gc); font-variant-numeric: tabular-nums }
 .sscore > span { font-size: 12px; color: var(--muted) }
@@ -1182,6 +1182,12 @@ __METHOD__
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
     // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
     const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
+    // fixes of the exact checks (link check): fixed % with fixed, new and still open next to it (SK, 2026-10-27)
+    // before a second run nothing is measured: show the baseline, not "0%"
+    const fixedPct = I => I.runs < 2 ? fmt(I.baseline) : I.fixed_pct == null ? "–" : I.fixed_pct + "%";
+    const fixedLine = I => I.runs < 2 ? `items at baseline (${day(I.since)})` : `${fmt(I.fixed)} fixed · ${fmt(I.new)} new · ${fmt(I.open)} still open`;
+    const fixedLabel = I => I.runs < 2 ? "Link-check issues" : "Fixed · link check";
+    const fixedNote = I => I.runs < 2 ? "fixes are counted from the next link check" : `link-check items since ${day(I.since)}`;
     // how old the data is: managers must not read a two-week-old crawl as today's state
     const dates = (R._dates || [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date]).filter(Boolean).sort();
     if (dates.length) {
@@ -1211,9 +1217,15 @@ __METHOD__
         `<div class="kpi"><span class="kl">Since last run</span>` + (before
           ? `<span class="kv">${(CH.new || []).length} <small>new</small> ${(CH.resolved || []).length} <small>resolved</small></span><span class="ks"><a href="#changes">See what changed</a></span>`
           : `<span class="kv">–</span><span class="ks">first audit of this subdomain</span>`) + `</div>`,
+        H.items ? `<div class="kpi"><span class="kl">${fixedLabel(H.items)}</span><span class="kv">${fixedPct(H.items)}</span><span class="ks">${fixedLine(H.items)}</span><span class="ks">${esc(fixedNote(H.items))}</span></div>` : "",
       ].join("");
       $("kpis").hidden = false;
       $("part-dev").hidden = false;
+      if (H.items) {  // per check: where the fixed % comes from
+        const rows = Object.entries(H.items.by_check).map(([k, c]) => `<tr><td>${termify(esc(GUIDE[k] ? GUIDE[k].name : k))}</td><td class="n">${fmt(c.baseline)}</td><td class="n">${fmt(c.new)}</td><td class="n">${fmt(c.fixed)}</td><td class="n">${fmt(c.removed)}</td><td class="n">${fmt(c.open)}</td><td class="n">${fixedPct(c)}</td></tr>`).join("");
+        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Fixes of the link check since ${esc(day(H.items.since))} · each link and each missing language is one item; a deleted post counts as removed, not fixed · fixed % = fixed ÷ (fixed + still open)</span>
+          <div class="tablewrap"><table><thead><tr><th>Check</th><th class="n">At baseline</th><th class="n">New</th><th class="n">Fixed</th><th class="n">Removed</th><th class="n">Still open</th><th class="n">Fixed %</th></tr></thead><tbody>${rows}<tr><td><b>All</b></td><td class="n"><b>${fmt(H.items.baseline)}</b></td><td class="n"><b>${fmt(H.items.new)}</b></td><td class="n"><b>${fmt(H.items.fixed)}</b></td><td class="n"><b>${fmt(H.items.removed)}</b></td><td class="n"><b>${fmt(H.items.open)}</b></td><td class="n"><b>${fixedPct(H.items)}</b></td></tr></tbody></table></div></section>`);
+      }
     } else {  // domain page: one full-width row per subdomain, columns aligned for comparison
       const published = SITE_HOSTS.length > 0;
       const cell = (label, body) => `<div class="sc"><span class="sl">${label}</span>${body}</div>`;
@@ -1243,6 +1255,7 @@ __METHOD__
           ${traffic}
           ${cell("Open issues", `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small>`)}
           ${cell("Since last run", before ? `<b>${signed(H.health - before.health)}</b><small>${spark(TR)}${ch.add} new · ${ch.gone} resolved</small>` : `<b>–</b><small>first audit</small>`)}
+          ${cell(H.items ? fixedLabel(H.items) : "Fixed · link check", H.items ? `<b>${fixedPct(H.items)}</b><small>${fixedLine(H.items)}<br>${esc(fixedNote(H.items))}</small>` : `<b>–</b><small>no exact checks yet</small>`)}
           ${areas ? `<div class="sareas">${areas}</div>` : ""}${open}</article>`;
       };
       const SORTS = { name: (a, b) => a.host.localeCompare(b.host), score: (a, b) => a.health - b.health || a.host.localeCompare(b.host),

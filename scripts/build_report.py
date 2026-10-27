@@ -29,6 +29,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from core import brand  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
 from core.fix_guide import AREAS, GUIDE, TERMS, guide_key  # noqa: E402
+from core.items import counts as item_counts  # noqa: E402
 from core.paths import TenantPaths, tenant_paths  # noqa: E402
 from core.report_view import (  # noqa: E402
     confidence,
@@ -209,6 +210,8 @@ def add_hosts(report: dict, summary_path: Path) -> None:
     totals = {}
     if summary_path.is_file():
         totals = json.loads(summary_path.read_text(encoding="utf-8")).get("host_totals") or {}
+    items_path = summary_path.parent / "items.json"
+    ledger = json.loads(items_path.read_text(encoding="utf-8")) if items_path.is_file() else None
     cards = []
     for host, stats in sorted((report.get("hosts") or {}).items()):
         mine = [f for f in report["findings"] if f["subdomain"] == host]
@@ -218,6 +221,8 @@ def add_hosts(report: dict, summary_path: Path) -> None:
         card.update(host=card.pop("family"), urls=stats.get("urls") or 0, traffic=totals.get(host) or {})
         if report.get("_area_scores"):
             card["areas"] = host_areas(report, host, mine, stats.get("urls") or 0)
+        if ledger and host in (ledger.get("baseline") or {}):  # fixed / new / still open of the exact checks
+            card["items"] = item_counts(ledger, host)
         cards.append(card)
     if cards:
         report["_hosts"] = cards
