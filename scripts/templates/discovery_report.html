@@ -214,10 +214,6 @@ button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .kpi.g-A, .kpi.g-B, .kpi.g-C, .kpi.g-D, .kpi.g-F { border-top: 4px solid var(--gc) } .kpi.g-A .kv, .kpi.g-B .kv, .kpi.g-C .kv, .kpi.g-D .kv, .kpi.g-F .kv { color: var(--gc) }
 .kpi svg { display: block; width: 100%; height: 28px }
 .age.old { color: var(--incorrect); font-weight: 600 }
-.fx { display: flex; gap: 14px; flex-wrap: wrap } .fx > span { display: grid; font-size: 12px; color: var(--muted) }
-.fx b { font: 600 22px var(--display); font-variant-numeric: tabular-nums; color: var(--fg) }
-.fx b.up { color: var(--good) } .fx b.down { color: var(--broken) }
-.kpi .fx { gap: 8px } .kpi .fx b { font-size: 19px }
 table.acts td { white-space: normal } table.acts td.n { white-space: nowrap }
 table.acts a { color: var(--fg); text-decoration-color: var(--line); text-underline-offset: 2px } table.acts a:hover { color: var(--accent) }
 /* domain page: one full-width row per subdomain; the same columns in every row so subdomains compare at a glance.
@@ -897,7 +893,9 @@ __METHOD__
   const opts = (id, values, all) => { $(id).innerHTML = `<option value="">${all}</option>` + values.map(v => `<option value="${esc(v)}">${esc(LABEL[v] || v)}</option>`).join(""); };
   opts("f-src", [...new Set(findings.map(f => f.source || "discovery"))].sort(), "All sources");
   opts("f-type", ORDER.filter(t => byType[t]), "All types");
-  opts("f-host", [...new Set(findings.map(f => f.subdomain))].sort(), "All subdomains");
+  const SUBS = [...new Set(findings.map(f => f.subdomain))].sort();
+  opts("f-host", SUBS, "All subdomains");
+  if (SUBS.length < 2) $("f-host").hidden = document.querySelector('label[for="f-host"]').hidden = true;  // one choice filters nothing (SK)
   opts("f-dim", [...new Set(findings.map(f => f.dimension))].sort(), "All dimensions");
   const FAMS = [...new Set(findings.map(f => f._family).filter(Boolean))].sort();
   if (FAMS.length) { $("f-fam").hidden = $("f-fam-label").hidden = false; $("f-fam").innerHTML = `<option value="">All families</option>` + FAMS.map(v => `<option value="${esc(v)}">/${esc(v)}/</option>`).join(""); }
@@ -1186,10 +1184,16 @@ __METHOD__
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
     // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
     const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
-    // link-check issues: issues (= fixed + open), fixed, open and the scan date (SK, 2026-10-27)
-    const fixedLabel = I => `Link-check issues · scanned ${day(I.scanned)}`;
-    const fixedNums = I => `<span class="fx"><span><b>${fmt(I.issues)}</b>issues</span><span><b class="${I.fixed ? "up" : ""}">${fmt(I.fixed)}</b>fixed</span><span><b class="${I.open ? "down" : ""}">${fmt(I.open)}</b>open</span></span>`;
-    const fixedPct = I => I.fixed_pct == null ? "" : `${I.fixed_pct}% fixed`;
+    // link-check items as "Open issues: open of issues, fixed and %"; findings are "Issue types" next to it, with
+    // what changed since the last run (SK, 2026-10-27). The scan date is in the age line.
+    const note = (title, text) => { EXPLAIN.push(`<b class="xt">${esc(title)}</b><p>${esc(text)}</p>`); return EXPLAIN.length - 1; };
+    const ITEMS_NOTE = note("Open issues", "Each broken link, and each missing or unsupported language of a post, counted one by one by reading the blog's repo. Issues = fixed + open; a fix counts when the item is gone from a post that still exists.");
+    const TYPES_NOTE = note("Issue types", "Findings of the page checks (crawl, speed, AI readiness, text): one finding is one kind of problem, however many pages it affects.");
+    const ask = i => `<button type="button" class="info" aria-label="What is counted" data-x="${i}">?</button>`;
+    const itemsLabel = `Open issues ${ask(ITEMS_NOTE)}`, typesLabel = `Issue types ${ask(TYPES_NOTE)}`;
+    const itemsNum = I => `${fmt(I.open)} <small>of ${fmt(I.issues)}</small>`;
+    const itemsSub = I => `<span class="${I.fixed ? "up" : ""}">${fmt(I.fixed)} fixed</span>${I.fixed_pct == null ? "" : ` · ${I.fixed_pct}%`}`;
+    const changesSub = (ch, before) => before ? `${ch.gone} resolved · ${ch.add} new since ${esc(day(before.date))}` : "no earlier run to compare";
     // how old the data is: managers must not read a two-week-old crawl as today's state
     const dates = (R._dates || [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date]).filter(Boolean).sort();
     if (dates.length) {
@@ -1208,24 +1212,22 @@ __METHOD__
       const TR = trendOf(H.host), before = TR.length > 1 ? TR[TR.length - 2] : null;
       $("kpis").innerHTML = [
         `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info("Health score", H)}</span><span class="kv">${H.health} <small>out of 100</small></span>${sbar(H.health, H.grade, "big")}`
-          + (before ? `${spark(TR)}<span class="ks">${signed(H.health - before.health)} since ${esc(day(before.date))}</span>` : `<span class="ks">first audit · trend from the next run</span>`) + `</div>`,
+          + (before ? `${spark(TR)}<span class="ks">${signed(H.health - before.health)} since ${esc(day(before.date))}</span>` : `<span class="ks">trend from the next run</span>`)+ `</div>`,
         t.source === "gsc"
           ? `<div class="kpi"><span class="kl">Search clicks</span><span class="kv">${fmt(cur.clicks)} <small>28 days</small></span><span class="ks">${delta(cur.clicks, prev.clicks, "previous 28 days")}</span><span class="ks">${delta(cur.clicks, six.clicks, "six months ago")}</span></div>
              <div class="kpi"><span class="kl">Search impressions</span><span class="kv">${compact(cur.impressions)} <small>28 days</small></span><span class="ks">${delta(cur.impressions, prev.impressions, "previous 28 days")}</span><span class="ks">${delta(cur.impressions, six.impressions, "six months ago")}</span></div>`
           : t.source === "ga4"
           ? `<div class="kpi"><span class="kl">Organic sessions</span><span class="kv">${fmt(cur.sessions)} <small>28 days, GA4</small></span><span class="ks">${delta(cur.sessions, prev.sessions, "previous 28 days")}</span></div>`
           : `<div class="kpi"><span class="kl">Search traffic</span><span class="kv">–</span><span class="ks">no Search Console or GA4 data</span></div>`,
-        `<div class="kpi"><span class="kl">Open issues</span><span class="kv">${findings.length}</span><span class="ks"><span class="down">${byType.broken} broken</span> · ${byType.incorrect} incorrect</span><span class="ks">${byType.not_optimized} not optimized · ${byType.improvable} improvable</span></div>`,
-        `<div class="kpi"><span class="kl">Since last run</span>` + (before
-          ? `<span class="kv">${(CH.new || []).length} <small>new</small> ${(CH.resolved || []).length} <small>resolved</small></span><span class="ks"><a href="#changes">See what changed</a></span>`
-          : `<span class="kv">–</span><span class="ks">first audit of this subdomain</span>`) + `</div>`,
-        H.items ? `<div class="kpi kpi-fx"><span class="kl">${esc(fixedLabel(H.items))}</span>${fixedNums(H.items)}<span class="ks">${fixedPct(H.items)}</span></div>` : "",
+        `<div class="kpi"><span class="kl">${typesLabel}</span><span class="kv">${findings.length}</span><span class="ks"><span class="down">${byType.broken} broken</span> · ${byType.incorrect} incorrect · ${byType.not_optimized + byType.improvable} minor</span>`
+          + `<span class="ks">${before ? `<a href="#changes">${changesSub({ add: (CH.new || []).length, gone: (CH.resolved || []).length }, before)}</a>` : "no earlier run to compare"}</span></div>`,
+        H.items ? `<div class="kpi"><span class="kl">${itemsLabel}</span><span class="kv">${itemsNum(H.items)}</span><span class="ks">${itemsSub(H.items)}</span></div>` : "",
       ].join("");
       $("kpis").hidden = false;
       $("part-dev").hidden = false;
       if (H.items) {  // per check: where the numbers come from
         const I = H.items, row = (name, c, b) => `<tr><td>${b ? "<b>" + name + "</b>" : name}</td><td class="n">${fmt(c.issues)}</td><td class="n">${fmt(c.fixed)}</td><td class="n">${fmt(c.open)}</td><td class="n">${c.fixed_pct == null ? "–" : c.fixed_pct + "%"}</td></tr>`;
-        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Link-check issues, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, or one missing language of a post · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
+        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, or one missing language of a post · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
           <div class="tablewrap"><table><thead><tr><th>Check</th><th class="n">Issues</th><th class="n">Fixed</th><th class="n">Open</th><th class="n">Fixed %</th></tr></thead><tbody>${Object.entries(I.by_check).map(([k, c]) => row(termify(esc(GUIDE[k] ? GUIDE[k].name : k)), c)).join("")}${row("All", I, true)}</tbody></table></div></section>`);
       }
     } else {  // domain page: one full-width row per subdomain, columns aligned for comparison
@@ -1253,11 +1255,10 @@ __METHOD__
           ? `<a class="sopen" href="../${esc(H.host)}/">Open subdomain page →</a>`
           : `<button type="button" class="sopen" data-host="${esc(H.host)}">See its ${mine.length} findings →</button>`;
         return `<article class="srow g-${H.grade}">
-          <div class="sname"><code>${esc(H.host)}</code>${R._collection ? `<small class="dim">${esc(H.domain)}</small>` : ""}<span class="sscore"><b>${H.health}</b><span>score ${info("Score", H)}</span></span>${sbar(H.health, H.grade, "big")}</div>
+          <div class="sname"><code>${esc(H.host)}</code>${R._collection ? `<small class="dim">${esc(H.domain)}</small>` : ""}<span class="sscore"><b>${H.health}</b><span>score ${info("Score", H)}</span></span>${sbar(H.health, H.grade, "big")}${before ? `<small class="dim">${signed(H.health - before.health)} since ${esc(day(before.date))}</small>` : ""}</div>
           ${traffic}
-          ${cell("Open issues", `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small>`)}
-          ${cell("Since last run", before ? `<b>${signed(H.health - before.health)}</b><small>${spark(TR)}${ch.add} new · ${ch.gone} resolved</small>` : `<b>–</b><small>first audit</small>`)}
-          ${cell(H.items ? esc(fixedLabel(H.items)) : "Link-check issues", H.items ? `${fixedNums(H.items)}<small>${fixedPct(H.items)}</small>` : `<b>–</b><small>no link check (no blog repo configured)</small>`)}
+          ${cell(typesLabel, `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect<br>${changesSub(ch, before)}</small>`)}
+          ${cell(itemsLabel, H.items ? `<b>${itemsNum(H.items)}</b><small>${itemsSub(H.items)}</small>` : `<b>–</b><small>no link check (no blog repo configured)</small>`)}
           ${areas ? `<div class="sareas">${areas}</div>` : ""}${open}</article>`;
       };
       const SORTS = { name: (a, b) => a.host.localeCompare(b.host), score: (a, b) => a.health - b.health || a.host.localeCompare(b.host),
