@@ -8,7 +8,8 @@ repo, and as removed when the file is gone (a deleted post is not a fix).
 
 Ledger (reports/<tenant>/items.json): {"runs": [run refs], "baseline": {host: {"run", "date"}},
 "items": {key: {"check", "host", "page", "file", "link", "first_seen", "last_seen", "fixed", "removed"}}}.
-Fixed % = fixed / (fixed + still open): new items lower it, removed ones do not count either way.
+Shown as issues = fixed + open, fixed, open and the latest scan date (SK, 2026-10-27: no "new", no baseline on
+the pages; new issues show as a growing issue count). Fixed % = fixed / issues; removed items count neither way.
 """
 
 from __future__ import annotations
@@ -72,14 +73,16 @@ def counts(ledger: dict, host: str) -> dict:
     def tally(recs: list[dict]) -> dict:
         fixed = sum(1 for r in recs if r["fixed"])
         still = sum(1 for r in recs if not r["fixed"] and not r["removed"])
-        return {"baseline": sum(1 for r in recs if r["first_seen"] == base["date"]),
-                "new": sum(1 for r in recs if r["first_seen"] > base["date"]), "fixed": fixed,
-                "removed": sum(1 for r in recs if r["removed"]), "open": still,
+        return {"issues": fixed + still, "fixed": fixed, "open": still,
+                "removed": sum(1 for r in recs if r["removed"]),
+                "baseline": sum(1 for r in recs if r["first_seen"] == base["date"]),
+                "new": sum(1 for r in recs if r["first_seen"] > base["date"]),
                 "fixed_pct": round(100 * fixed / (fixed + still)) if fixed + still else None}
 
     mine = [r for r in (ledger.get("items") or {}).values() if r["host"] == host]
     by_check: dict = {}
     for r in mine:
         by_check.setdefault(r["check"], []).append(r)
-    return {**tally(mine), "since": base["date"], "runs": len(ledger.get("runs") or []),
+    scanned = max((d for r in mine for d in (r["last_seen"], r["fixed"], r["removed"]) if d), default=base["date"])
+    return {**tally(mine), "since": base["date"], "scanned": scanned, "runs": len(ledger.get("runs") or []),
             "by_check": {c: tally(rs) for c, rs in sorted(by_check.items())}}

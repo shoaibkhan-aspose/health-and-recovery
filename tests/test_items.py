@@ -31,6 +31,7 @@ def test_sk_example_fixed_share_falls_when_new_issues_arrive(tmp_path):
     ledger = update(ledger, "link-audit-run3", "2026-11-05", run_items(run(more)), repos)
     c = counts(ledger, HOST)
     assert (c["new"], c["fixed"], c["open"], c["fixed_pct"]) == (1000, 200, 1800, 10)
+    assert (c["issues"], c["scanned"], c["since"]) == (2000, "2026-11-05", "2026-10-22")  # what the pages show
     assert update(ledger, "link-audit-run3", "2026-11-05", {}, repos) is ledger  # a run counts once
 
 
