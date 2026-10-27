@@ -40,6 +40,10 @@ header { display: grid; gap: 10px }
 #host-sw-wrap { display: inline-flex; align-items: center; gap: 8px }
 #host-sw-wrap[hidden] { display: none }
 .partof { margin: -4px 0 0; color: var(--muted) } .partof a { color: var(--accent) }
+.crumbs { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; font-size: 14px; color: var(--muted) }
+.crumbs a { color: var(--accent) } .crumbs b { color: var(--fg); font-weight: 600; overflow-wrap: anywhere }
+/* phones: the domain and subdomain switches wrap under the logo instead of widening the page */
+.switch { flex-wrap: wrap } .switch select { max-width: 100% } #host-sw-wrap { flex-wrap: wrap; max-width: 100% }
 section { display: grid; gap: 16px; min-width: 0 }
 .lede { max-width: 68ch; color: var(--muted) }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px }
@@ -212,21 +216,32 @@ button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .age.old { color: var(--incorrect); font-weight: 600 }
 table.acts td { white-space: normal } table.acts td.n { white-space: nowrap }
 table.acts a { color: var(--fg); text-decoration-color: var(--line); text-underline-offset: 2px } table.acts a:hover { color: var(--accent) }
-/* host cards on the property page: one per host, the numbers that answer "which host needs attention" */
-.hcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 12px }
-.hcard { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--gc); border-radius: 8px; padding: 14px 16px; display: grid; gap: 12px; min-width: 0 }
-.hhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 17px; font-weight: 600 }
-.hnums { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px }
-.hareas { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px }
-.hareas > div:not([class*="g-"]) { --gc: var(--muted) }
-.hnums > div, .hareas > div { display: grid; align-content: start; gap: 1px; min-width: 0 }
-.hnums b { font: 600 22px var(--display); font-variant-numeric: tabular-nums } .hnums span, .hareas span { font-size: 12px; color: var(--muted) }
-.hnums small, .hareas small { font-size: 12px; color: var(--muted) } .hnums svg { display: block; width: 100%; height: 22px; color: var(--accent) }
-.hareas { border-top: 1px solid var(--line); padding-top: 10px }
-.hareas b { font: 600 20px var(--display); font-variant-numeric: tabular-nums; color: var(--gc, var(--muted)) } .hareas span { color: var(--fg); font-weight: 500 }
-.hcard .down { color: var(--broken); font-weight: 600; font-style: normal } .hcard .up { color: var(--good); font-weight: 600 }
-.hopen { justify-self: start; font: 600 14px var(--body); color: var(--accent) }
-button.hopen { background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline }
+/* domain page: one full-width row per subdomain; the same columns in every row so subdomains compare at a glance.
+   Every cell carries its own small label, so on a phone a row stacks into a block that still reads on its own. */
+.hcards { display: grid; gap: 8px; min-width: 0 }
+.shead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted) }
+.srows { display: grid; gap: 10px }
+.srow { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--gc); border-radius: 8px; padding: 14px 16px;
+  display: grid; grid-template-columns: minmax(200px, 1.3fr) repeat(4, minmax(120px, 1fr)); gap: 12px 16px; align-items: start; min-width: 0 }
+.sname { display: grid; gap: 6px; min-width: 0 } .sname code { font-size: 16px; font-weight: 600; overflow-wrap: anywhere }
+.sscore { display: flex; align-items: baseline; gap: 6px } .sscore > b { font: 600 32px/1 var(--display); color: var(--gc); font-variant-numeric: tabular-nums }
+.sscore > span { font-size: 12px; color: var(--muted) }
+.sc { display: grid; gap: 1px; align-content: start; min-width: 0 } .sl { font: 600 11px var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--muted) }
+.sc b { font: 600 22px var(--display); font-variant-numeric: tabular-nums } .sc small { font-size: 12px; color: var(--muted) }
+.sc svg { display: block; width: 100%; height: 22px; color: var(--accent) }
+.sareas { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; border-top: 1px solid var(--line); padding-top: 10px }
+.sareas > div { display: grid; gap: 1px; align-content: start; min-width: 0; cursor: help } .sareas > div:not([class*="g-"]) { --gc: var(--muted) }
+.sareas b { font: 600 20px var(--display); font-variant-numeric: tabular-nums; color: var(--gc) } .sareas span { font-size: 12px; font-weight: 500 }
+.sareas small { font-size: 12px; color: var(--muted) }
+.srow .down { color: var(--broken); font-weight: 600; font-style: normal } .srow .up { color: var(--good); font-weight: 600 }
+.sopen { grid-column: 1; grid-row: 2; align-self: end; justify-self: start; font: 600 14px var(--body); color: var(--accent) }
+button.sopen { background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline }
+.info { background: none; border: 0; padding: 0 2px; font: inherit; color: var(--accent); cursor: help; text-transform: none }
+.infotext { display: block; margin-top: 4px; padding: 6px 8px; background: var(--tint); border-radius: 6px; font: 400 12px/1.4 var(--body); color: var(--fg); text-transform: none; letter-spacing: 0 }
+@media (max-width: 760px) {
+  .srow { grid-template-columns: 1fr 1fr } .sname { grid-column: 1 / -1 } .sareas { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .sopen { grid-column: 1 / -1; grid-row: auto }
+}
 .part { border-top: 3px solid var(--accent); padding-top: 14px; display: grid; gap: 4px }
 .part span { font: 700 26px var(--display) } .part p { color: var(--muted); max-width: 80ch; margin: 0 }
 .risks { background: var(--tint); border-radius: 8px; padding: 14px 18px; display: grid; gap: 8px }
@@ -235,7 +250,8 @@ button.hopen { background: none; border: 0; padding: 0; cursor: pointer; text-de
 .risks a { color: var(--fg) }
 .ref { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px }
 .ref > summary { cursor: pointer; font: 600 15px var(--body) } .ref > summary small { font-weight: 400; color: var(--muted) }
-.ref[open] { display: grid; gap: 12px }
+.ref[open] { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr) }
+.ref { min-width: 0 }  /* an open table panel must not widen the page on phones */
 .ref .more { justify-self: start }
 .ref > summary small.need { color: var(--incorrect); font-weight: 600 } .ref > summary small.fine { color: var(--good); font-weight: 600 }
 .htab .gradebox { padding: 1px 8px } .htab .gradebox b { font-size: 16px }
@@ -273,7 +289,8 @@ footer a { color: var(--accent) }
 <div class="wrap">
   <header>
     <div class="topbar"><div class="eyebrow">__LOGO__Site health · Phase 1 audit</div>
-      <div class="switch" id="switch" hidden><label for="tenant-sw">Property</label><select id="tenant-sw"></select><span id="host-sw-wrap" hidden><label for="host-sw">Host</label><select id="host-sw"></select></span><a href="../">All reports</a></div></div>
+      <div class="switch" id="switch" hidden><label for="tenant-sw">Domain</label><select id="tenant-sw"></select><span id="host-sw-wrap" hidden><label for="host-sw">Subdomain</label><select id="host-sw"></select></span></div></div>
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb" hidden></nav>
     <h1 id="h1"></h1>
     <p class="partof" id="partof" hidden></p>
     <p class="verdict" id="verdict"></p>
@@ -281,7 +298,7 @@ footer a { color: var(--accent) }
   </header>
 
   <nav class="toc" aria-label="Contents">
-    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Hosts</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
+    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Subdomains</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
   </nav>
 
   <section aria-labelledby="s-sum" id="summary">
@@ -316,7 +333,7 @@ footer a { color: var(--accent) }
   </section>
 
   <section aria-labelledby="s-host" id="host-health" hidden>
-    <h2 id="s-host">Host health <small id="host-meta"></small></h2>
+    <h2 id="s-host">Subdomain health <small id="host-meta"></small></h2>
     <p class="lede">One row per host, scored like a family: 100 minus points for each open problem, weighted by severity and by how much of the host it affects. A host with product families shows its families' health weighted by search clicks, minus host-wide problems (see Product families for each one). Hover a grade for the points lost. A to Z. <a href="#method-health">How health is scored</a>.</p>
     <div class="tablewrap"><table class="htab" id="host-table"></table></div>
   </section>
@@ -368,15 +385,15 @@ footer a { color: var(--accent) }
       <div class="scope" id="audit-scope"></div>
       <div class="tablewrap"><table id="audit-hosts"></table></div>
     </details>
-    <details class="ref" id="speed" hidden open><summary>Speed per host <small id="speed-st"></small> <small id="speed-meta"></small></summary>
+    <details class="ref" id="speed" hidden open><summary>Speed per subdomain <small id="speed-st"></small> <small id="speed-meta"></small></summary>
       <p class="lede">Whole host: real Chrome users over 28 days, 75th percentile, mobile (good: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1). Pages: the most-visited pages per template; "real-user data" counts pages with enough visits for their own numbers. The lab score (Lighthouse, 0-100) varies by up to ~20 points between runs, so it is shown here only, never as a finding.</p>
       <div class="tablewrap"><table id="speed-hosts"></table></div>
     </details>
-    <details class="ref" id="ai" hidden open><summary>AI access per host <small id="ai-st"></small> <small id="ai-meta"></small></summary>
+    <details class="ref" id="ai" hidden open><summary>AI access per subdomain <small id="ai-st"></small> <small id="ai-meta"></small></summary>
       <p class="lede">Can AI search and answer engines (ChatGPT search, Perplexity, Claude, Google AI Overviews, Copilot) reach each host? "robots.txt" and "Firewall" test their crawlers; a block there is a finding. Blocks on AI <i>training</i> crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended) are a business choice, shown here only. llms.txt is a proposed convention (llmstxt.org) that some AI tools read: on products, a family counts as covered by its own file or a link from the host's file.</p>
       <div class="tablewrap"><table id="ai-hosts"></table></div>
     </details>
-    <details class="ref" open><summary>Hosts: robots.txt and sitemaps <small id="hosts-st"></small></summary>
+    <details class="ref" open><summary>Subdomains: robots.txt and sitemaps <small id="hosts-st"></small></summary>
       <div class="tablewrap"><table id="hosts"></table></div>
     </details>
     <details class="ref" open><summary>Sections <small id="sections-st"></small> <small id="sec-host"></small></summary>
@@ -466,7 +483,12 @@ __METHOD__
 
   // header
   $("h1").textContent = (R._page_host || R.tenant) + " site health";
-  if (R._page_host) {
+  if ((R._tenants || []).length || (R._site_hosts || []).length) {  // published: All domains › domain › subdomain
+    $("crumbs").hidden = false;
+    $("crumbs").innerHTML = `<a href="../">All domains</a><span>›</span>` + (R._page_host
+      ? `<a href="../${esc(R.tenant)}/">${esc(R.tenant)}</a><span>›</span><b aria-current="page">${esc(R._page_host)}</b>`
+      : `<b aria-current="page">${esc(R.tenant)}</b>`);
+  } else if (R._page_host) {
     $("partof").hidden = false;
     $("partof").innerHTML = `One host of the <a href="../${esc(R.tenant)}/">${esc(R.tenant)}</a> report: its own grade, findings and reference rows, scored as on the full report.`;
   }
@@ -532,7 +554,7 @@ __METHOD__
   }
   if (SITE_HOSTS.length) {  // host pages sit next to the tenant reports: ../<host>/
     $("host-sw-wrap").hidden = false;
-    $("host-sw").innerHTML = `<option value="">All hosts</option>` + SITE_HOSTS.map(h => `<option value="${esc(h)}"${h === R._page_host ? " selected" : ""}>${esc(h)}</option>`).join("");
+    $("host-sw").innerHTML = `<option value="">All subdomains</option>` + SITE_HOSTS.map(h => `<option value="${esc(h)}"${h === R._page_host ? " selected" : ""}>${esc(h)}</option>`).join("");
     $("host-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value || R.tenant)}/${location.hash}`; });
   }
 
@@ -551,7 +573,7 @@ __METHOD__
       const b = a.counts.broken || 0, o = n - b;
       const issues = !n ? "no issues" : (b ? `<span class="down">${b} broken</span>${o ? " · " : ""}` : "") + (o ? `${o} ${b ? "other " : ""}issue${o === 1 ? "" : "s"}` : "");
       const sub = R._manager_view ? loss1(a) : loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
-      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health}/100 (${a.grade}), ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${esc(sub)}</small>` : ""}</button>`;
+      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health} out of 100, ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${esc(sub)}</small>` : ""}</button>`;
     };
     $("sum-areas").hidden = false;
     if ($("method-areas")) $("method-areas").hidden = false;
@@ -579,7 +601,7 @@ __METHOD__
       : `<b>${compact(t.current.clicks)}</b> clicks · ${compact(t.current.impressions)} impr.${t.previous ? ` <span class="dim">(prev. ${compact(t.previous.clicks)})</span>` : ""}`;
     const why = c => c.penalties.filter(x => x.points >= 1).map(x => `${x.group.startsWith("manual:") ? "manual review" : x.group} −${Math.round(x.points)}`).join(" · ");
     const total = c => Object.values(c.counts).reduce((a, b) => a + b, 0);
-    $("host-table").innerHTML = `<thead><tr><th>Host</th><th>Health</th><th>Open findings</th><th>Search traffic (28 days)</th><th class="n">URLs</th><th>Biggest issue</th></tr></thead><tbody>${HOSTS.map(c => {
+    $("host-table").innerHTML = `<thead><tr><th>Subdomain</th><th>Health</th><th>Open findings</th><th>Search traffic (28 days)</th><th class="n">URLs</th><th>Biggest issue</th></tr></thead><tbody>${HOSTS.map(c => {
       const chips = [["broken", "broken"], ["incorrect", "incorrect"], ["not_optimized", "not optimized"], ["improvable", "improvable"]]
         .filter(([k]) => c.counts[k]).map(([k, l]) => `<span class="chip ${k}">${c.counts[k]} ${l}</span>`).join("");
       const top = c.top[0];
@@ -938,7 +960,7 @@ __METHOD__
     ].join("");
     const CHECK = c => c.replace(/_/g, " ");
     const auditFindings = findings.filter(f => f.source === "crawl-audit");
-    semi("audit-hosts", `<thead><tr><th>Host</th><th class="n">Pages</th><th class="n">HTML 200</th><th class="n">Errors</th><th class="n">Redirected</th><th class="n">Findings</th><th>Most frequent issues (pages)</th></tr></thead>`,
+    semi("audit-hosts", `<thead><tr><th>Subdomain</th><th class="n">Pages</th><th class="n">HTML 200</th><th class="n">Errors</th><th class="n">Redirected</th><th class="n">Findings</th><th>Most frequent issues (pages)</th></tr></thead>`,
       Object.entries(A.summary).map(([h, s]) => {
         const st = s.errors ? "bad" : (s.redirected || s.blocked || s.ignored) ? "warn" : "ok";
         const top = Object.entries(s.issues).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([c, n]) => `<b>${esc(CHECK(c))}</b> ${n}`).join(" · ");
@@ -955,7 +977,7 @@ __METHOD__
     const rate = (k, v) => v <= TH[k][0] ? "ok" : v > TH[k][1] ? "bad" : "warn";
     const val = (k, v) => k === "cls" ? v.toFixed(2) : v >= 1000 ? (v / 1000).toFixed(1) + " s" : Math.round(v) + " ms";
     const perfFindings = findings.filter(f => f.source === "perf-audit");
-    semi("speed-hosts", `<thead><tr><th>Host</th><th>Whole host, real users (LCP · INP · CLS)</th><th class="n">Pages</th><th class="n">Real-user data</th><th class="n">Not loaded</th><th class="n">Median lab score</th><th class="n">Findings</th></tr></thead>`,
+    semi("speed-hosts", `<thead><tr><th>Subdomain</th><th>Whole subdomain, real users (LCP · INP · CLS)</th><th class="n">Pages</th><th class="n">Real-user data</th><th class="n">Not loaded</th><th class="n">Median lab score</th><th class="n">Findings</th></tr></thead>`,
       Object.entries(P.summary).map(([h, s]) => {
         const m = ((P.origins || {})[h] || {}).metrics || {};
         const rates = ["lcp", "inp", "cls"].filter(k => m[k] != null).map(k => rate(k, m[k]));
@@ -972,7 +994,7 @@ __METHOD__
     $("ai-meta").textContent = `run ${AI.run_id}${AI.date ? " · " + day(AI.date) : ""}`;
     const aiFindings = findings.filter(f => f.source === "ai-audit");
     const list = xs => xs.length > 3 ? `${xs.slice(0, 3).map(esc).join(", ")} +${xs.length - 3}` : xs.map(esc).join(", ");
-    semi("ai-hosts", `<thead><tr><th>Host</th><th>robots.txt (AI search)</th><th>Firewall (AI search)</th><th>Training crawlers blocked</th><th>llms.txt</th><th class="n">Families covered</th><th class="n">Findings</th></tr></thead>`,
+    semi("ai-hosts", `<thead><tr><th>Subdomain</th><th>robots.txt (AI search)</th><th>Firewall (AI search)</th><th>Training crawlers blocked</th><th>llms.txt</th><th class="n">Families covered</th><th class="n">Findings</th></tr></thead>`,
       Object.entries(AI.summary).map(([h, s]) => {
         const fwAnswer = Object.keys(s.firewall_blocked || {}), fwTraining = Object.keys(s.firewall_training || {});
         const l = s.llms || {};
@@ -992,7 +1014,7 @@ __METHOD__
     : `<span class="warn">${r.status} (missing)</span>`;
   const sectionsOf = h => Object.values((R.sections || {})[h] || {});
   const pct = (a, b) => b ? Math.round(100 * a / b) + "%" : "–";
-  semi("hosts", `<thead><tr><th>Host</th><th>robots.txt</th><th class="n">Sitemaps OK</th><th class="n">Failed</th><th class="n">URLs</th><th class="n">With hreflang</th><th class="n">Findings</th></tr></thead>`,
+  semi("hosts", `<thead><tr><th>Subdomain</th><th>robots.txt</th><th class="n">Sitemaps OK</th><th class="n">Failed</th><th class="n">URLs</th><th class="n">With hreflang</th><th class="n">Findings</th></tr></thead>`,
     hosts.map(([name, h]) => {
       const s = sectionsOf(name), hl = s.reduce((x, v) => x + v.hreflang_urls, 0);
       const nf = findings.filter(f => f.subdomain === name).length;
@@ -1040,8 +1062,9 @@ __METHOD__
     $("gsc-st").textContent = "· no snapshot";
   }
 
-  // Overview (tenant opt-in report.manager_view): numbers first, details after. A host page shows a scoreboard of
-  // its own numbers; the property page shows one card per host (SK, 2026-10-27) and leaves details to the host pages
+  // Overview (tenant opt-in report.manager_view): numbers first, details after; scores without letters (SK). A
+  // subdomain page shows a scoreboard of its own numbers; the domain page shows one row per subdomain (SK, 2026-10-27)
+  // and leaves the details to the subdomain pages
   if (R._manager_view && HOSTS.length) {
     const delta = (a, b, what) => {
       if (!b || a == null) return "";
@@ -1050,13 +1073,29 @@ __METHOD__
     };
     const signed = n => `<span class="${n > 0 ? "up" : n < 0 ? "down" : ""}">${n > 0 ? "+" : n < 0 ? "−" : "±"}${Math.abs(n)}</span>`;
     const trendOf = h => (R._host_trends || {})[h] || [];
-    const spark = pts => {  // health on a fixed 0-100 scale, so small moves look small
+    const spark = pts => {  // score on a fixed 0-100 scale, so small moves look small
       const w = 160, h = 28, x = i => 4 + i * (w - 8) / (pts.length - 1), y = v => h - 3 - v / 100 * (h - 6);
       return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="2" points="${pts.map((p, i) => `${x(i)},${y(p.health)}`).join(" ")}"/></svg>`;
     };
     const count = (list, t) => list.filter(f => f.type === t).length;
     const changesOf = h => ({ add: (CH.new || []).filter(id => (byId[id] || {}).subdomain === h).length,
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
+    // how a score is made: shown on hover (title) and, for touch screens, behind a tap on ⓘ
+    const lossName = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
+    const pts = n => String(Math.round(n * 10) / 10);  // exact to one decimal, so the items add up
+    const lostOf = list => { const severe = list.filter(x => x.type === "broken" || x.type === "incorrect").reduce((s, x) => s + x.points, 0);
+                             return severe + Math.min(20, list.reduce((s, x) => s + x.points, 0) - severe); };
+    const calcOf = (name, score, list, capped) => `${name} ${score} = 100 − ${pts(lostOf(list))} points, rounded`
+      + (list.length ? `: ${list.map(x => `${lossName(x)} −${pts(x.points)}`).join(", ")}` : "")
+      + (capped ? " (not optimized and improvable issues count at most 20 together)" : "") + ". Points = severity weight × share of the subdomain affected; one root cause counts once.";
+    const calc = H => calcOf("Score", H.health, H.penalties, H.cosmetic_capped);
+    const info = text => `<button type="button" class="info" aria-label="How this score is calculated" title="${esc(text)}" data-info="${esc(text)}">ⓘ</button>`;
+    document.addEventListener("click", e => {
+      const b = e.target.closest("button.info"); if (!b) return;
+      const open = b.nextElementSibling && b.nextElementSibling.classList.contains("infotext");
+      document.querySelectorAll(".infotext").forEach(x => x.remove());
+      if (!open) b.insertAdjacentHTML("afterend", `<span class="infotext" role="note">${esc(b.dataset.info)}</span>`);
+    });
     // how old the data is: managers must not read a two-week-old crawl as today's state
     const dates = [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date].filter(Boolean).sort();
     if (dates.length) {
@@ -1066,15 +1105,15 @@ __METHOD__
     } else $("s-sum").textContent = "Overview";
     document.querySelector('.toc a[href="#summary"]').textContent = "Overview";
     document.querySelector('.toc a[href="#priorities"]').textContent = "Top actions required";
-    $("host-health").hidden = true; $("toc-host").hidden = true;  // the scoreboard or the host cards say it all
+    $("host-health").hidden = true; $("toc-host").hidden = true;  // the scoreboard or the subdomain rows say it all
     $("sum-grades").closest(".sumgrid").hidden = true;
     $("part-dev").after($("sum-numbers"));  // coverage numbers belong with the details
 
-    if (R._page_host) {  // host page: a scoreboard of this host's numbers
+    if (R._page_host) {  // subdomain page: a scoreboard of its own numbers
       const H = HOSTS[0], t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
       const TR = trendOf(H.host), before = TR.length > 1 ? TR[TR.length - 2] : null;
       $("kpis").innerHTML = [
-        `<div class="kpi g-${H.grade}"><span class="kl">Health</span><span class="kv">${H.health} <small>${H.grade} · out of 100</small></span>`
+        `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info(calc(H))}</span><span class="kv">${H.health} <small>out of 100</small></span>`
           + (before ? `${spark(TR)}<span class="ks">${signed(H.health - before.health)} since ${esc(day(before.date))}</span>` : `<span class="ks">first audit · trend from the next run</span>`) + `</div>`,
         t.source === "gsc"
           ? `<div class="kpi"><span class="kl">Search clicks</span><span class="kv">${fmt(cur.clicks)} <small>28 days</small></span><span class="ks">${delta(cur.clicks, prev.clicks, "previous 28 days")}</span><span class="ks">${delta(cur.clicks, six.clicks, "six months ago")}</span></div>
@@ -1085,38 +1124,48 @@ __METHOD__
         `<div class="kpi"><span class="kl">Open issues</span><span class="kv">${findings.length}</span><span class="ks"><span class="down">${byType.broken} broken</span> · ${byType.incorrect} incorrect</span><span class="ks">${byType.not_optimized} not optimized · ${byType.improvable} improvable</span></div>`,
         `<div class="kpi"><span class="kl">Since last run</span>` + (before
           ? `<span class="kv">${(CH.new || []).length} <small>new</small> ${(CH.resolved || []).length} <small>resolved</small></span><span class="ks"><a href="#changes">See what changed</a></span>`
-          : `<span class="kv">–</span><span class="ks">first audit of this host</span>`) + `</div>`,
+          : `<span class="kv">–</span><span class="ks">first audit of this subdomain</span>`) + `</div>`,
       ].join("");
       $("kpis").hidden = false;
       $("part-dev").hidden = false;
-    } else {  // property page: one card per host, lowest health first
+    } else {  // domain page: one full-width row per subdomain, columns aligned for comparison
       const published = SITE_HOSTS.length > 0;
-      const card = H => {
+      const cell = (label, body) => `<div class="sc"><span class="sl">${label}</span>${body}</div>`;
+      const row = H => {
         const t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
         const mine = findings.filter(f => f.subdomain === H.host), b = count(mine, "broken"), inc = count(mine, "incorrect");
         const TR = trendOf(H.host), before = TR.length > 1 ? TR[TR.length - 2] : null, ch = changesOf(H.host);
         const traffic = t.source === "gsc"
-          ? `<div><b>${compact(cur.clicks)}</b><span>clicks · 28 days</span><small>${delta(cur.clicks, prev.clicks, "prev.")}<br>${delta(cur.clicks, six.clicks, "6 months")}</small></div>
-             <div><b>${compact(cur.impressions)}</b><span>impressions</span><small>${delta(cur.impressions, prev.impressions, "prev.")}<br>${delta(cur.impressions, six.impressions, "6 months")}</small></div>`
-          : t.source === "ga4" ? `<div><b>${compact(cur.sessions)}</b><span>organic sessions (GA4)</span><small>${delta(cur.sessions, prev.sessions, "prev.")}</small></div>`
-          : `<div><b>–</b><span>no traffic data</span></div>`;
+          ? cell("Search clicks · 28 days", `<b>${fmt(cur.clicks)}</b><small>${delta(cur.clicks, prev.clicks, "previous")}<br>${delta(cur.clicks, six.clicks, "six months ago")}</small>`)
+            + cell("Impressions · 28 days", `<b>${compact(cur.impressions)}</b><small>${delta(cur.impressions, prev.impressions, "previous")}<br>${delta(cur.impressions, six.impressions, "six months ago")}</small>`)
+          : t.source === "ga4"
+          ? cell("Organic sessions (GA4) · 28 days", `<b>${fmt(cur.sessions)}</b><small>${delta(cur.sessions, prev.sessions, "previous")}<br>no Search Console data</small>`) + cell("Impressions", `<b>–</b><small>no Search Console data</small>`)
+          : cell("Search traffic", `<b>–</b><small>no data</small>`) + cell("Impressions", `<b>–</b>`);
         const areas = (H.areas || []).map(a => {
           const n = Object.values(a.counts).reduce((s, x) => s + x, 0), ab = a.counts.broken || 0;
           const v = a.state === "scored" ? a.health : "–";
           const sub = a.state === "not checked" ? "not checked" : a.state === "no data" ? "no real-user data"
             : !n ? "no issues" : ab ? `<em class="down">${ab} broken</em>${n - ab ? ` · ${n - ab} more` : ""}` : `${n} issue${n === 1 ? "" : "s"}`;
-          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}"><b>${v}</b><span>${esc(a.name)}</span><small>${sub}</small></div>`;
+          const tip = a.state === "scored" ? calcOf(a.name + ":", a.health, a.penalties, false) : a.name;
+          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}" title="${esc(tip)}"><b>${v}</b><span>${esc(a.name)}</span><small>${sub}</small></div>`;
         }).join("");
         const open = published && SITE_HOSTS.includes(H.host)
-          ? `<a class="hopen" href="../${esc(H.host)}/">Open host page →</a>`
-          : `<button type="button" class="link hopen" data-host="${esc(H.host)}">See its ${mine.length} findings →</button>`;
-        return `<article class="hcard g-${H.grade}">
-          <div class="hhead"><code>${esc(H.host)}</code><span class="gradebox"><b>${H.grade}</b><span>${H.health}</span></span></div>
-          <div class="hnums">${traffic}<div><b>${mine.length}</b><span>open issues</span><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small></div>
-            <div><b>${before ? signed(H.health - before.health) : "–"}</b><span>health since last run</span><small>${before ? `${spark(TR)}+${ch.add} new · ${ch.gone} resolved` : "first audit"}</small></div></div>
-          ${areas ? `<div class="hareas">${areas}</div>` : ""}${open}</article>`;
+          ? `<a class="sopen" href="../${esc(H.host)}/">Open subdomain page →</a>`
+          : `<button type="button" class="sopen" data-host="${esc(H.host)}">See its ${mine.length} findings →</button>`;
+        return `<article class="srow g-${H.grade}">
+          <div class="sname"><code>${esc(H.host)}</code><span class="sscore"><b>${H.health}</b><span>score ${info(calc(H))}</span></span></div>
+          ${traffic}
+          ${cell("Open issues", `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small>`)}
+          ${cell("Since last run", before ? `<b>${signed(H.health - before.health)}</b><small>${spark(TR)}${ch.add} new · ${ch.gone} resolved</small>` : `<b>–</b><small>first audit</small>`)}
+          ${areas ? `<div class="sareas">${areas}</div>` : ""}${open}</article>`;
       };
-      $("hcards").innerHTML = HOSTS.slice().sort((a, b) => a.health - b.health || a.host.localeCompare(b.host)).map(card).join("");
+      const SORTS = { name: (a, b) => a.host.localeCompare(b.host), score: (a, b) => a.health - b.health || a.host.localeCompare(b.host),
+                      clicks: (a, b) => (((b.traffic || {}).current || {}).clicks || 0) - (((a.traffic || {}).current || {}).clicks || 0) };
+      const render = by => { $("srows").innerHTML = HOSTS.slice().sort(SORTS[by]).map(row).join(""); };
+      $("hcards").innerHTML = `<div class="shead"><span>${HOSTS.length} subdomain${HOSTS.length === 1 ? "" : "s"}</span>${HOSTS.length > 1
+        ? `<label class="dim">Sort <select id="s-sort"><option value="name">A to Z</option><option value="score">Lowest score first</option><option value="clicks">Most clicks first</option></select></label>` : ""}</div><div class="srows" id="srows"></div>`;
+      render("name");
+      if ($("s-sort")) $("s-sort").addEventListener("change", e => render(e.target.value));
       $("hcards").hidden = false;
       $("hcards").addEventListener("click", e => {
         const b = e.target.closest("button[data-host]"); if (!b) return;
@@ -1126,21 +1175,21 @@ __METHOD__
         renderFindings();
         $("s-find").scrollIntoView({ behavior: "smooth" });
       });
-      if (published) {  // the details live on the host pages; snapshots keep them here
+      if (published) {  // the details live on the subdomain pages; snapshots keep them here
         for (const id of ["findings", "changes", "reference", "fix-guide"]) if ($(id)) $(id).hidden = true;
         for (const a of document.querySelectorAll('.toc a[href="#findings"], .toc a[href="#changes"], .toc a[href="#reference"], #toc-guide')) a.hidden = true;
         $("sum-numbers").hidden = true;
       } else $("part-dev").hidden = false;
     }
 
-    // top actions as a table of numbers; on the property page the top 5 across hosts, linking to the host pages
+    // top actions as a table of numbers; on the domain page the top 5 across subdomains, linking to their pages
     if (scored) {
       const prop = !R._page_host, n = prop ? 5 : 10, multi = prop && HOSTS.length > 1;
       const top = findings.slice().sort((a, b) => sc(b) - sc(a)).slice(0, n);
       const href = f => prop && SITE_HOSTS.includes(f.subdomain) ? `../${esc(f.subdomain)}/#f-${esc(f.id)}` : `#f-${esc(f.id)}`;
       $("s-top").firstChild.textContent = "Top actions required ";
-      $("priorities").querySelector(".lede").innerHTML = `The ${n === 5 ? "five" : "ten"} findings to fix first${multi ? " across all hosts" : ""}: search traffic at stake × severity ÷ effort. Pages: pages affected (sitewide = the whole host). Clicks: Search Console clicks on those pages in 28 days. <a href="#method-score">How the score works</a>.`;
-      $("top").outerHTML = `<div class="tablewrap"><table class="acts" id="acts"><thead><tr><th class="n">Score</th><th>Issue</th>${multi ? "<th>Host</th>" : ""}<th>Severity</th><th class="n">Pages</th><th class="n">Clicks</th><th>Effort</th></tr></thead><tbody>${top.map(f => `<tr class="sev-${f.type}"><td class="n">${scoreBadge(f)}</td><td><a href="${href(f)}"${href(f).startsWith("#") ? ` data-open="${esc(f.id)}"` : ""}>${esc(plain(f))}</a></td>${multi ? `<td><code>${esc(f.subdomain)}</code></td>` : ""}<td style="color:var(--sev);font-weight:600">${esc(LABEL[f.type])}</td><td class="n">${f.affected_pages ? fmt(f.affected_pages) : "sitewide"}</td><td class="n">${fmt((f.impact || {}).clicks_28d)}</td><td>${esc(f.effort || "S")}</td></tr>`).join("")}</tbody></table></div>`;
+      $("priorities").querySelector(".lede").innerHTML = `The ${n === 5 ? "five" : "ten"} findings to fix first${multi ? " across all subdomains" : ""}: search traffic at stake × severity ÷ effort. Pages: pages affected (sitewide = the whole subdomain). Clicks: Search Console clicks on those pages in 28 days. <a href="#method-score">How the score works</a>.`;
+      $("top").outerHTML = `<div class="tablewrap"><table class="acts" id="acts"><thead><tr><th class="n">Score</th><th>Issue</th>${multi ? "<th>Subdomain</th>" : ""}<th>Severity</th><th class="n">Pages</th><th class="n">Clicks</th><th>Effort</th></tr></thead><tbody>${top.map(f => `<tr class="sev-${f.type}"><td class="n">${scoreBadge(f)}</td><td><a href="${href(f)}"${href(f).startsWith("#") ? ` data-open="${esc(f.id)}"` : ""}>${esc(plain(f))}</a></td>${multi ? `<td><code>${esc(f.subdomain)}</code></td>` : ""}<td style="color:var(--sev);font-weight:600">${esc(LABEL[f.type])}</td><td class="n">${f.affected_pages ? fmt(f.affected_pages) : "sitewide"}</td><td class="n">${fmt((f.impact || {}).clicks_28d)}</td><td>${esc(f.effort || "S")}</td></tr>`).join("")}</tbody></table></div>`;
       $("acts").addEventListener("click", openFinding);
     }
   }

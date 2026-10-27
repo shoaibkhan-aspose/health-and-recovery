@@ -1,6 +1,7 @@
     <style>
     /* method: pipeline diagram, tables and formula cards; uses the host page's colour tokens */
     .mth { display: grid; gap: 22px; min-width: 0 }
+    .mth > * { min-width: 0 }  /* the diagram and tables scroll inside their boxes, not the page */
     .mth h3 { margin: 0 0 6px; font-size: 17px }
     .mth p { margin: 0; color: var(--muted); font-size: 14px; max-width: 80ch }
     .mth .flow { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px }
@@ -43,9 +44,9 @@
       <div class="tw"><table>
         <thead><tr><th>#</th><th>Audit</th><th>Reads</th><th>Finds</th><th>Sample</th><th>Time</th></tr></thead>
         <tbody>
-          <tr><td class="n">1</td><td><b>Discovery</b></td><td>robots.txt and every sitemap of every host</td><td>broken or missing sitemaps, duplicate URLs, missing dates</td><td class="n">100%</td><td class="n">15 min</td></tr>
-          <tr><td class="n">2</td><td><b>Crawl audit</b></td><td>live pages (GET, robots.txt respected, 1 request/s per host)</td><td>errors, redirects, canonicals, hreflang, titles, descriptions, H1, structured data, text without JavaScript</td><td class="n">2 English + 2 translated pages per template, every homepage and hub</td><td class="n">25 min</td></tr>
-          <tr><td class="n">3</td><td><b>AI audit</b></td><td>robots.txt rules and the homepage as each AI crawler, /llms.txt</td><td>AI search crawlers blocked, missing or broken llms.txt</td><td class="n">every host and family</td><td class="n">5 min</td></tr>
+          <tr><td class="n">1</td><td><b>Discovery</b></td><td>robots.txt and every sitemap of every subdomain</td><td>broken or missing sitemaps, duplicate URLs, missing dates</td><td class="n">100%</td><td class="n">15 min</td></tr>
+          <tr><td class="n">2</td><td><b>Crawl audit</b></td><td>live pages (GET, robots.txt respected, 1 request/s per subdomain)</td><td>errors, redirects, canonicals, hreflang, titles, descriptions, H1, structured data, text without JavaScript</td><td class="n">2 English + 2 translated pages per template, every homepage and hub</td><td class="n">25 min</td></tr>
+          <tr><td class="n">3</td><td><b>AI audit</b></td><td>robots.txt rules and the homepage as each AI crawler, /llms.txt</td><td>AI search crawlers blocked, missing or broken llms.txt</td><td class="n">every subdomain and family</td><td class="n">5 min</td></tr>
           <tr><td class="n">4</td><td><b>Speed audit</b></td><td>Google PageSpeed Insights (mobile)</td><td>slow LCP, INP, CLS, TTFB from real Chrome users; pages that do not load</td><td class="n">2 most-visited pages per template</td><td class="n">40 min</td></tr>
           <tr><td class="n">5</td><td><b>Text check</b></td><td>title, H1, description of the crawl-audit pages (no new requests)</td><td>typos, leftover words, a title about a different product; kept only if the words are on the page</td><td class="n">every crawl-audit page</td><td class="n">5 min</td></tr>
           <tr><td class="n">6</td><td><b>Link check</b></td><td>every post in the blog's source repo; targets checked live</td><td>links to translations that do not exist, damaged, broken or wrong-language links, incomplete translations</td><td class="n">100% of posts</td><td class="n">≤ 20 min</td></tr>
@@ -55,22 +56,23 @@
 
       <div class="cards">
         <div class="card" id="method-health">
-          <h3>Health (0–100, A–F)</h3>
+          <h3>Health score (0–100)</h3>
           <div class="formula">health = 100 − Σ weight × share</div>
           <table class="mini"><thead><tr><th>Severity</th><th>Weight</th></tr></thead><tbody>
             <tr><td>Broken</td><td class="n">40</td></tr><tr><td>Incorrect</td><td class="n">20</td></tr>
             <tr><td>Not optimized</td><td class="n">6</td></tr><tr><td>Improvable</td><td class="n">2</td></tr></tbody></table>
           <ul>
-            <li><b>share</b> = part of the family or host affected, at least 25%</li>
+            <li><b>share</b> = part of the family or subdomain affected, at least 25%</li>
             <li>one root cause counts once; not optimized + improvable cost <b>at most 20</b> together</li>
-            <li>a host with families: their health weighted by clicks, minus host-wide problems</li>
+            <li>a subdomain with product families: their scores weighted by clicks, minus subdomain-wide problems</li>
             <li><b>traffic is not part of health</b>: a small family's broken pages count as much as a big one's</li>
             <li id="method-areas" hidden>health by area: the same formula on one area's findings, so the overall is never higher than an area; speed without real-user data shows no score</li>
           </ul>
-          <div class="bands" role="img" aria-label="Grades: F below 40, D 40 to 59, C 60 to 74, B 75 to 89, A 90 and above">
-            <span style="flex:1;background:#b42318">F &lt; 40</span><span style="flex:1;background:#c2410c">D 40–59</span><span style="flex:1;background:#a16207">C 60–74</span><span style="flex:1;background:#15803d">B 75–89</span><span style="flex:1;background:#15803d">A 90+</span>
+          <div class="bands" role="img" aria-label="Colours: red below 40, orange 40 to 59, amber 60 to 74, green 75 and above">
+            <span style="flex:1;background:#b42318">below 40</span><span style="flex:1;background:#c2410c">40–59</span><span style="flex:1;background:#a16207">60–74</span><span style="flex:1;background:#15803d">75–89</span><span style="flex:1;background:#15803d">90+</span>
           </div>
-          <p><b>Example:</b> a broken finding on 25% of a host costs 40 × 0.25 = <b>10 points</b>: health 90 (A).</p>
+          <p><b>Example:</b> a broken finding on 25% of a subdomain costs 40 × 0.25 = <b>10 points</b>: score 90.</p>
+          <p>Reports not yet on the new layout also show a letter: A 90+, B 75–89, C 60–74, D 40–59, F below 40.</p>
         </div>
         <div class="card" id="method-score">
           <h3>Priority score (0–100)</h3>

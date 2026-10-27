@@ -60,7 +60,7 @@ if (location.hash.length > 1) location.replace("__LEGACY__/" + location.hash);
 </script>
 <main>
   <h1>""" + brand.logo(36) + """Site health reports</h1>
-  <p>One report per property. Read-only audits: nothing on any site is changed.
+  <p>One report per domain. Read-only audits: nothing on any site is changed.
   How to fix each kind of problem: <a href="fix-guide/">fix guide</a>. How the audits and scores work:
   <a href="method/">method</a>.</p>
   <ol>
@@ -105,12 +105,13 @@ td.sev { white-space: nowrap; font-weight: 600; color: var(--sev) }
 td.open { font-size: 13px; color: var(--muted); min-width: 120px }
 tr:target td { background: var(--hit) }
 tr[id] { scroll-margin-top: 80px }
+.crumbs { font-size: 14px; color: var(--muted) } .crumbs b { color: var(--fg) }
 </style>
 <main>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../">All domains</a> › <b>Fix guide</b></nav>
   <h1>""" + brand.logo(36) + """Fix guide</h1>
   <p>One row per check the audits run: what a finding means, why it matters, how to fix it and how to verify the
   fix. Every site health report links here. "Open findings" counts the open findings per report today.</p>
-  <p><a href="../">All reports</a></p>
   <div class="filters"><label for="area">Area</label>
     <select id="area"><option value="">All areas</option>__OPTIONS__</select>
     <span>__COUNT__</span></div>
@@ -187,11 +188,13 @@ main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; display: grid
 h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px }
 p { margin: 0; color: var(--muted); max-width: 80ch }
 a { color: var(--accent) }
+.crumbs { font-size: 14px; color: var(--muted) } .crumbs b { color: var(--fg) }
 </style>
 <main id="method">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../">All domains</a> › <b>How this audit works</b></nav>
   <h1>""" + brand.logo(36) + """How this audit works</h1>
   <p>What each audit checks, how health and the priority score are calculated, and the terms the reports use.
-  Every site health report links here. <a href="../">All reports</a> · <a href="../fix-guide/">Fix guide</a></p>
+  Every site health report links here. See also the <a href="../fix-guide/">fix guide</a>.</p>
 __METHOD__</main>
 </html>
 """
@@ -218,7 +221,7 @@ def tenant_item(tenant: str) -> str:
     name = html.escape(tenant)
     links = " · ".join(f'<a href="{html.escape(h)}/">{html.escape(h)}</a>' for h in hosts)
     return (f'    <li><a href="{name}/"><b>{name}</b></a><span>{open_n:,} open findings · '
-            f'<a href="{name}/archive/">previous versions</a></span><span>Hosts: {links}</span></li>')
+            f'<a href="{name}/archive/">previous versions</a></span><span>Subdomains: {links}</span></li>')
 
 
 RESERVED = {"fix-guide", "method", "archive"}  # site folders that are neither tenants nor hosts
