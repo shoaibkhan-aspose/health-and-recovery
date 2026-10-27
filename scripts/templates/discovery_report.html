@@ -237,7 +237,19 @@ table.acts a { color: var(--fg); text-decoration-color: var(--line); text-underl
 .sopen { grid-column: 1; grid-row: 2; align-self: end; justify-self: start; font: 600 14px var(--body); color: var(--accent) }
 button.sopen { background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline }
 .info { background: none; border: 0; padding: 0 2px; font: inherit; color: var(--accent); cursor: help; text-transform: none }
-.infotext { display: block; margin-top: 4px; padding: 6px 8px; background: var(--tint); border-radius: 6px; font: 400 12px/1.4 var(--body); color: var(--fg); text-transform: none; letter-spacing: 0 }
+/* the score explanation panel: a list of points lost with the numbers aligned, and the total */
+abbr.term { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help }
+abbr.term::after { content: "?"; font-size: .65em; vertical-align: super; margin-left: 1px; color: var(--accent); font-weight: 600 }
+abbr.term:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 2px }
+.xpop { position: absolute; z-index: 20; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.18);
+  padding: 10px 12px; font: 13px/1.45 var(--body); color: var(--fg) }
+.xpop .xt { display: block; font-size: 15px; margin-bottom: 6px } .xpop .xt small { color: var(--muted); font-weight: 400 }
+.xpop table { width: 100%; border-collapse: collapse; font-size: 13px }
+.xpop td { padding: 3px 0; border-bottom: 1px solid var(--line); white-space: normal; vertical-align: top }
+.xpop td.n { text-align: right; padding-left: 12px; font-family: var(--mono); white-space: nowrap; color: var(--broken) }
+.xpop tr.xsum td { font-weight: 600; border-bottom: 0; border-top: 2px solid var(--line); padding-top: 5px }
+.xpop p { margin: 6px 0 0; font-size: 12px; color: var(--muted) } .xpop p:first-of-type { color: var(--fg) }
+.sareas > div[data-x]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px }
 @media (max-width: 760px) {
   .srow { grid-template-columns: 1fr 1fr } .sname { grid-column: 1 / -1 } .sareas { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)) }
   .sopen { grid-column: 1 / -1; grid-row: auto }
@@ -423,6 +435,36 @@ __METHOD__
   const GUIDE = (R._guide && R._guide.rows) || {};
   // the published site keeps the full fix guide on one shared page; "How to fix" links go there
   const GURL = R._guide_url || "";
+  // terms in check names (LCP, hreflang, ...) are marked and explained in place: hover, keyboard focus or tap
+  const TERMS = (R._guide && R._guide.terms) || {};
+  const TERM_KEY = Object.fromEntries(Object.keys(TERMS).map(k => [k.toLowerCase(), k]));
+  const TERM_RE = Object.keys(TERMS).length ? new RegExp(`(?<![\\w-])(${Object.keys(TERMS).sort((a, b) => b.length - a.length).map(k => k.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&")).join("|")})(s?)(?![\\w-])`, "gi") : null;
+  const termify = html => TERM_RE ? html.replace(TERM_RE, (m, k, s) => `<abbr class="term" tabindex="0" data-t="${TERM_KEY[k.toLowerCase()]}">${k}${s}</abbr>`) : html;
+  // one small panel for every explanation: terms (data-t) and score calculations (data-x, see EXPLAIN)
+  const EXPLAIN = [];
+  const pop = document.createElement("div");
+  pop.className = "xpop"; pop.setAttribute("role", "tooltip"); pop.hidden = true; document.body.appendChild(pop);
+  let pinned = null;
+  const showPop = el => {
+    pop.innerHTML = el.dataset.t ? `<b class="xt">${esc(el.dataset.t)}</b><p>${esc(TERMS[el.dataset.t] || "")}</p>` : EXPLAIN[el.dataset.x];
+    pop.hidden = false;
+    const r = el.getBoundingClientRect(), w = Math.min(el.dataset.t ? 320 : 380, innerWidth - 32);
+    pop.style.width = w + "px";
+    pop.style.left = Math.max(scrollX + 16, Math.min(r.left + scrollX, scrollX + innerWidth - w - 16)) + "px";
+    pop.style.top = (r.bottom + scrollY + 6) + "px";
+  };
+  const hidePop = () => { if (!pinned) pop.hidden = true; };
+  const popEl = e => e.target.closest && e.target.closest("[data-x], [data-t]");
+  document.addEventListener("mouseover", e => { const el = popEl(e); if (el && !pinned) showPop(el); });
+  document.addEventListener("mouseout", e => { const el = popEl(e); if (el && !el.contains(e.relatedTarget)) hidePop(); });
+  document.addEventListener("focusin", e => { const el = popEl(e); if (el) showPop(el); });
+  document.addEventListener("focusout", e => { if (popEl(e)) hidePop(); });
+  document.addEventListener("click", e => {  // capture: a term inside a link explains itself instead of following the link
+    const el = popEl(e);
+    if (el) { e.preventDefault(); e.stopPropagation(); pinned = pinned === el ? null : el; if (pinned) showPop(el); else pop.hidden = true; return; }
+    if (!e.target.closest(".xpop")) { pinned = null; pop.hidden = true; }
+  }, true);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { pinned = null; pop.hidden = true; } });
   const gHref = k => `${GURL}#g-${esc(k)}`;
   const fmt = n => (n == null ? "–" : Number(n).toLocaleString("en-US"));
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -514,7 +556,7 @@ __METHOD__
   } else { $("sum-grades").hidden = true; }
   $("sum-numbers").innerHTML = `<span class="dim">Open findings and coverage</span><div class="nums">
       ${ORDER.map(t => `<div class="${t}"><b>${byType[t]}</b><span>${esc(LABEL[t].toLowerCase())}</span></div>`).join("")}
-      <div><b>${fmt(hosts.length)}</b><span>hosts</span></div>
+      <div><b>${fmt(hosts.length)}</b><span>subdomain${hosts.length === 1 ? "" : "s"}</span></div>
       <div><b>${fmt(totalUrls)}</b><span>URLs in sitemaps</span></div>
       ${A ? `<div><b>${fmt(A.pages)}</b><span>pages audited</span></div>` : ""}
       <div><b>${findings.filter(f => f._confidence === "to confirm").length}</b><span>to confirm</span></div></div>`;
@@ -535,7 +577,7 @@ __METHOD__
   const riskTraffic = r => r.clicks ? `${compact(r.clicks)} clicks at stake` : r.lost_clicks ? `${compact(r.lost_clicks)} clicks lost since six months ago` : "";
   if (RISKS.length) {
     $("risks-wrap").hidden = false;
-    $("risks").innerHTML = RISKS.map(r => `<li><a href="#f-${esc(r.id)}" data-open="${esc(r.id)}">${esc(r.name)}</a> <span>· ${esc(riskPlaces(r))}${riskTraffic(r) ? " · " + esc(riskTraffic(r)) : ""}</span></li>`).join("");
+    $("risks").innerHTML = RISKS.map(r => `<li><a href="#f-${esc(r.id)}" data-open="${esc(r.id)}">${termify(esc(r.name))}</a> <span>· ${esc(riskPlaces(r))}${riskTraffic(r) ? " · " + esc(riskTraffic(r)) : ""}</span></li>`).join("");
   }
   if (S) {
     const fs = S.distribution.F, ds = S.distribution.D;
@@ -573,7 +615,7 @@ __METHOD__
       const b = a.counts.broken || 0, o = n - b;
       const issues = !n ? "no issues" : (b ? `<span class="down">${b} broken</span>${o ? " · " : ""}` : "") + (o ? `${o} ${b ? "other " : ""}issue${o === 1 ? "" : "s"}` : "");
       const sub = R._manager_view ? loss1(a) : loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
-      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health} out of 100, ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${esc(sub)}</small>` : ""}</button>`;
+      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health} out of 100, ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${termify(esc(sub))}</small>` : ""}</button>`;
     };
     $("sum-areas").hidden = false;
     if ($("method-areas")) $("method-areas").hidden = false;
@@ -774,7 +816,7 @@ __METHOD__
     $("priorities").hidden = false;
     $("top-meta").textContent = w ? `Search Console ${span(w)}` : "";
     $("top").innerHTML = top.map(f => `
-      <li class="sev-${f.type}">${scoreBadge(f)}<span class="ftitle"><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${esc(plain(f))}</a> · ${esc(where(f))}</span>
+      <li class="sev-${f.type}">${scoreBadge(f)}<span class="ftitle"><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${termify(esc(plain(f)))}</a> · ${esc(where(f))}</span>
         <span class="fsub">${esc(LABEL[f.type])} · effort ${esc(f.effort || "S")} · <span class="traffic">${esc(riskImpact(f.impact))}</span> · ${fixLink(f)}</span></li>`).join("");
     $("top").addEventListener("click", openFinding);
   }
@@ -809,7 +851,7 @@ __METHOD__
       <details class="f sev-${f.type}" id="f-${esc(f.id)}">
         <summary>
           ${scored ? scoreBadge(f) : `<span class="pill">${LABEL[f.type]}</span>`}
-          <span class="ftitle">${esc(plain(f))} · ${esc(where(f))} ${NEW.has(f.id) ? '<span class="tag new">new</span>' : ""} ${f._confidence === "to confirm" || f._confidence === "partial" ? `<span class="conf">${esc(f._confidence)}</span>` : ""}</span>
+          <span class="ftitle">${termify(esc(plain(f)))} · ${esc(where(f))} ${NEW.has(f.id) ? '<span class="tag new">new</span>' : ""} ${f._confidence === "to confirm" || f._confidence === "partial" ? `<span class="conf">${esc(f._confidence)}</span>` : ""}</span>
           <span class="fpages">${f.affected_pages ? (["crawl-audit", "perf-audit"].includes(f.source) ? "~" : "") + fmt(f.affected_pages) + " pages affected" : ""}</span>
           <span class="fsub">${esc(f.subdomain)} · ${esc(f.dimension)} · ${esc(LABEL[f.source || "discovery"])} · confidence: ${esc(f._confidence || "–")} · <span class="mono">${esc(f.id)}</span>${trafficText(f.impact) ? ` · <span class="traffic">${esc(trafficText(f.impact))}</span>` : ""}</span>
         </summary>
@@ -862,7 +904,7 @@ __METHOD__
       return card && before != null && card.health !== before ? [fam, before, card.health] : null; }).filter(Boolean)
       .sort((a, b) => (a[2] - a[1]) - (b[2] - b[1])) : [];
     $("chg-body").innerHTML = `<div class="chg">
-      <div><b>${newF.length}</b> new finding${newF.length === 1 ? "" : "s"}${newF.length ? `:<ul>${newF.map(f => `<li><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${esc(plain(f))}</a> · ${esc(where(f))}</li>`).join("")}</ul>` : "."}</div>
+      <div><b>${newF.length}</b> new finding${newF.length === 1 ? "" : "s"}${newF.length ? `:<ul>${newF.map(f => `<li><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${termify(esc(plain(f)))}</a> · ${esc(where(f))}</li>`).join("")}</ul>` : "."}</div>
       <div><b>${(CH.resolved || []).length}</b> resolved${(CH.resolved || []).length ? `:<ul>${CH.resolved.map(f => `<li>${esc(f.title)} <span class="dim">(${esc(f.subdomain)}, ${esc(f.id)})</span></li>`).join("")}</ul>` : "."}</div>
       <div>${T.families ? (moved.length ? `Family health since ${esc(day(T.date))}:<ul>${moved.map(([fam, b, a]) => `<li>/${esc(fam)}/ ${b} → <b>${a}</b> <span class="${a > b ? "ok" : "bad"}">${a > b ? "+" : "−"}${Math.abs(a - b)}</span></li>`).join("")}</ul>` : `No family's health changed since ${esc(day(T.date))}.`)
         : `<span class="dim">Family health is recorded from this run on; changes show after the next full run.</span>`}</div>
@@ -879,7 +921,7 @@ __METHOD__
     const renderSys = () => {
       const rows = sysAll ? SYS : SYS.slice(0, 8);
       $("sys-table").innerHTML = `<thead><tr><th>Problem</th><th>Severity</th><th class="n">Families</th><th>Where</th><th class="n">Clicks at stake</th><th></th></tr></thead><tbody>${rows.map(r =>
-        `<tr><td>${esc(r.name)}</td><td class="sev-${r.type}" style="color:var(--sev)">${esc(LABEL[r.type])}</td><td class="n">${r.families.length}</td><td class="issues">${r.families.map(x => `/${esc(x)}/`).join(" ")}</td><td class="n">${compact(r.clicks)}</td><td><a href="${gHref(r.check)}" data-guide="${esc(r.check)}">How to fix →</a></td></tr>`).join("")}</tbody>`;
+        `<tr><td>${termify(esc(r.name))}</td><td class="sev-${r.type}" style="color:var(--sev)">${esc(LABEL[r.type])}</td><td class="n">${r.families.length}</td><td class="issues">${r.families.map(x => `/${esc(x)}/`).join(" ")}</td><td class="n">${compact(r.clicks)}</td><td><a href="${gHref(r.check)}" data-guide="${esc(r.check)}">How to fix →</a></td></tr>`).join("")}</tbody>`;
       $("sys-more").hidden = SYS.length <= 8;
       $("sys-more").textContent = sysAll ? "Show fewer" : `Show all ${SYS.length}`;
     };
@@ -907,7 +949,7 @@ __METHOD__
         const inArea = rows.filter(([, x]) => x.area === g.area);
         const head = g.area !== lastArea ? `<tr class="area"><th colspan="6" scope="colgroup">${esc(g.area)}<small>${inArea.length} check${inArea.length === 1 ? "" : "s"}${inArea.some(([kk]) => used.has(kk)) ? ` · ${inArea.filter(([kk]) => used.has(kk)).length} with open findings` : ""}</small></th></tr>` : "";
         lastArea = g.area;
-        return head + `<tr id="g-${esc(k)}"><td>${esc(g.name)}${used.has(k) ? '<br><span class="dim">has open findings</span>' : ""}</td><td class="sev sev-${esc(g.severity)}"><span class="sevdot"></span>${esc(LABEL[g.severity] || g.severity)}</td><td>${esc(g.means)}</td><td>${esc(g.impact)}</td><td>${esc(g.fix)}</td><td>${esc(g.verify)}</td></tr>`;
+        return head + `<tr id="g-${esc(k)}"><td>${termify(esc(g.name))}${used.has(k) ? '<br><span class="dim">has open findings</span>' : ""}</td><td class="sev sev-${esc(g.severity)}"><span class="sevdot"></span>${esc(LABEL[g.severity] || g.severity)}</td><td>${esc(g.means)}</td><td>${esc(g.impact)}</td><td>${esc(g.fix)}</td><td>${esc(g.verify)}</td></tr>`;
       }).join("")}</tbody>`;
     };
     $("g-area").addEventListener("change", renderGuide);
@@ -1080,22 +1122,21 @@ __METHOD__
     const count = (list, t) => list.filter(f => f.type === t).length;
     const changesOf = h => ({ add: (CH.new || []).filter(id => (byId[id] || {}).subdomain === h).length,
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
-    // how a score is made: shown on hover (title) and, for touch screens, behind a tap on ⓘ
+    // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
     const lossName = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
     const pts = n => String(Math.round(n * 10) / 10);  // exact to one decimal, so the items add up
     const lostOf = list => { const severe = list.filter(x => x.type === "broken" || x.type === "incorrect").reduce((s, x) => s + x.points, 0);
                              return severe + Math.min(20, list.reduce((s, x) => s + x.points, 0) - severe); };
-    const calcOf = (name, score, list, capped) => `${name} ${score} = 100 − ${pts(lostOf(list))} points, rounded`
-      + (list.length ? `: ${list.map(x => `${lossName(x)} −${pts(x.points)}`).join(", ")}` : "")
-      + (capped ? " (not optimized and improvable issues count at most 20 together)" : "") + ". Points = severity weight × share of the subdomain affected; one root cause counts once.";
-    const calc = H => calcOf("Score", H.health, H.penalties, H.cosmetic_capped);
-    const info = text => `<button type="button" class="info" aria-label="How this score is calculated" title="${esc(text)}" data-info="${esc(text)}">ⓘ</button>`;
-    document.addEventListener("click", e => {
-      const b = e.target.closest("button.info"); if (!b) return;
-      const open = b.nextElementSibling && b.nextElementSibling.classList.contains("infotext");
-      document.querySelectorAll(".infotext").forEach(x => x.remove());
-      if (!open) b.insertAdjacentHTML("afterend", `<span class="infotext" role="note">${esc(b.dataset.info)}</span>`);
-    });
+    const explain = (title, score, list, capped) => {
+      const lost = lostOf(list);
+      EXPLAIN.push(`<b class="xt">${esc(title)} ${score} <small>out of 100</small></b>`
+        + (list.length ? `<table>${list.map(x => `<tr><td>${termify(esc(lossName(x)))}</td><td class="n">−${pts(x.points)}</td></tr>`).join("")}`
+          + `<tr class="xsum"><td>Points lost${capped ? " (minor issues capped at 20)" : ""}</td><td class="n">−${pts(lost)}</td></tr></table>` : `<p>No points lost.</p>`)
+        + `<p>100 − ${pts(lost)} = ${pts(100 - lost)}${pts(100 - lost) === String(score) ? "" : `, shown as ${score}`}</p>`
+        + `<p class="xn">Points = severity weight × share of the subdomain affected. One root cause counts once.</p>`);
+      return EXPLAIN.length - 1;
+    };
+    const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
     // how old the data is: managers must not read a two-week-old crawl as today's state
     const dates = [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date].filter(Boolean).sort();
     if (dates.length) {
@@ -1113,7 +1154,7 @@ __METHOD__
       const H = HOSTS[0], t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
       const TR = trendOf(H.host), before = TR.length > 1 ? TR[TR.length - 2] : null;
       $("kpis").innerHTML = [
-        `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info(calc(H))}</span><span class="kv">${H.health} <small>out of 100</small></span>`
+        `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info("Health score", H)}</span><span class="kv">${H.health} <small>out of 100</small></span>`
           + (before ? `${spark(TR)}<span class="ks">${signed(H.health - before.health)} since ${esc(day(before.date))}</span>` : `<span class="ks">first audit · trend from the next run</span>`) + `</div>`,
         t.source === "gsc"
           ? `<div class="kpi"><span class="kl">Search clicks</span><span class="kv">${fmt(cur.clicks)} <small>28 days</small></span><span class="ks">${delta(cur.clicks, prev.clicks, "previous 28 days")}</span><span class="ks">${delta(cur.clicks, six.clicks, "six months ago")}</span></div>
@@ -1146,14 +1187,14 @@ __METHOD__
           const v = a.state === "scored" ? a.health : "–";
           const sub = a.state === "not checked" ? "not checked" : a.state === "no data" ? "no real-user data"
             : !n ? "no issues" : ab ? `<em class="down">${ab} broken</em>${n - ab ? ` · ${n - ab} more` : ""}` : `${n} issue${n === 1 ? "" : "s"}`;
-          const tip = a.state === "scored" ? calcOf(a.name + ":", a.health, a.penalties, false) : a.name;
-          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}" title="${esc(tip)}"><b>${v}</b><span>${esc(a.name)}</span><small>${sub}</small></div>`;
+          const x = a.state === "scored" ? ` tabindex="0" data-x="${explain(a.name, a.health, a.penalties, false)}"` : "";
+          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}"${x}><b>${v}</b><span>${esc(a.name)}</span><small>${sub}</small></div>`;
         }).join("");
         const open = published && SITE_HOSTS.includes(H.host)
           ? `<a class="sopen" href="../${esc(H.host)}/">Open subdomain page →</a>`
           : `<button type="button" class="sopen" data-host="${esc(H.host)}">See its ${mine.length} findings →</button>`;
         return `<article class="srow g-${H.grade}">
-          <div class="sname"><code>${esc(H.host)}</code><span class="sscore"><b>${H.health}</b><span>score ${info(calc(H))}</span></span></div>
+          <div class="sname"><code>${esc(H.host)}</code><span class="sscore"><b>${H.health}</b><span>score ${info("Score", H)}</span></span></div>
           ${traffic}
           ${cell("Open issues", `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small>`)}
           ${cell("Since last run", before ? `<b>${signed(H.health - before.health)}</b><small>${spark(TR)}${ch.add} new · ${ch.gone} resolved</small>` : `<b>–</b><small>first audit</small>`)}
@@ -1189,7 +1230,7 @@ __METHOD__
       const href = f => prop && SITE_HOSTS.includes(f.subdomain) ? `../${esc(f.subdomain)}/#f-${esc(f.id)}` : `#f-${esc(f.id)}`;
       $("s-top").firstChild.textContent = "Top actions required ";
       $("priorities").querySelector(".lede").innerHTML = `The ${n === 5 ? "five" : "ten"} findings to fix first${multi ? " across all subdomains" : ""}: search traffic at stake × severity ÷ effort. Pages: pages affected (sitewide = the whole subdomain). Clicks: Search Console clicks on those pages in 28 days. <a href="#method-score">How the score works</a>.`;
-      $("top").outerHTML = `<div class="tablewrap"><table class="acts" id="acts"><thead><tr><th class="n">Score</th><th>Issue</th>${multi ? "<th>Subdomain</th>" : ""}<th>Severity</th><th class="n">Pages</th><th class="n">Clicks</th><th>Effort</th></tr></thead><tbody>${top.map(f => `<tr class="sev-${f.type}"><td class="n">${scoreBadge(f)}</td><td><a href="${href(f)}"${href(f).startsWith("#") ? ` data-open="${esc(f.id)}"` : ""}>${esc(plain(f))}</a></td>${multi ? `<td><code>${esc(f.subdomain)}</code></td>` : ""}<td style="color:var(--sev);font-weight:600">${esc(LABEL[f.type])}</td><td class="n">${f.affected_pages ? fmt(f.affected_pages) : "sitewide"}</td><td class="n">${fmt((f.impact || {}).clicks_28d)}</td><td>${esc(f.effort || "S")}</td></tr>`).join("")}</tbody></table></div>`;
+      $("top").outerHTML = `<div class="tablewrap"><table class="acts" id="acts"><thead><tr><th class="n">Score</th><th>Issue</th>${multi ? "<th>Subdomain</th>" : ""}<th>Severity</th><th class="n">Pages</th><th class="n">Clicks</th><th>Effort</th></tr></thead><tbody>${top.map(f => `<tr class="sev-${f.type}"><td class="n">${scoreBadge(f)}</td><td><a href="${href(f)}"${href(f).startsWith("#") ? ` data-open="${esc(f.id)}"` : ""}>${termify(esc(plain(f)))}</a></td>${multi ? `<td><code>${esc(f.subdomain)}</code></td>` : ""}<td style="color:var(--sev);font-weight:600">${esc(LABEL[f.type])}</td><td class="n">${f.affected_pages ? fmt(f.affected_pages) : "sitewide"}</td><td class="n">${fmt((f.impact || {}).clicks_28d)}</td><td>${esc(f.effort || "S")}</td></tr>`).join("")}</tbody></table></div>`;
       $("acts").addEventListener("click", openFinding);
     }
   }

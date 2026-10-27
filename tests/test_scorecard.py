@@ -80,3 +80,9 @@ def test_area_scores_split_by_dimension_and_never_above_the_overall():
     assert areas["onpage"]["health"] == 80  # 5 x 6, capped at 20 within the area
     overall = scorecard("host", found, 100)["health"]
     assert overall == 20 and all(overall <= a["health"] for a in areas.values())
+
+
+def test_scores_round_halves_up():
+    from core.scorecard import half_up
+
+    assert half_up(65.5) == 66 and half_up(65.4) == 65 and half_up(66.5) == 67 and half_up(0.5) == 1

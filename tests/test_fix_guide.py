@@ -37,3 +37,15 @@ def test_rows_are_complete_and_short():
         assert all(row[k].strip() for k in ("area", "name", "means", "impact", "fix", "verify")), key
         assert row["severity"] in ("broken", "incorrect", "not_optimized", "improvable"), key
         assert len(row["name"]) <= 60, key
+
+
+def test_terms_are_marked_and_listed_in_the_method_glossary():
+    """Short technical names keep every term explainable: marked in place, defined once (SK, 2026-10-27)."""
+    from core.fix_guide import TERMS, mark_terms
+    from scripts.build_report import method_html
+
+    marked = mark_terms("LCP needs improvement · Multiple canonicals · No x-default hreflang · CLSX")
+    assert marked.count('<abbr class="term"') == 4 and ">canonicals</abbr>" in marked and "CLSX" in marked
+    glossary = method_html()
+    assert "__TERMS__" not in glossary and all(f"<b>{k}</b>" in glossary for k in ("LCP", "TTFB", "x-default"))
+    assert set(TERMS) >= {"LCP", "INP", "CLS", "TTFB", "hreflang", "canonical"}

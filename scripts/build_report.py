@@ -15,6 +15,7 @@ Output: reports/<tenant>/<input name>.html, or --out. GitHub Pages serves site/<
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import os
 import re
@@ -27,7 +28,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from core import brand  # noqa: E402
 from core.findings import FindingsStore  # noqa: E402
-from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
+from core.fix_guide import AREAS, GUIDE, TERMS, guide_key  # noqa: E402
 from core.paths import TenantPaths, tenant_paths  # noqa: E402
 from core.report_view import (  # noqa: E402
     confidence,
@@ -38,7 +39,7 @@ from core.report_view import (  # noqa: E402
     systemic_issues,
     top_risks,
 )
-from core.scorecard import area_scores, family_of, family_scorecards, grade, scorecard  # noqa: E402
+from core.scorecard import area_scores, family_of, family_scorecards, grade, half_up, scorecard  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
 
 TEMPLATE = REPO_ROOT / "scripts" / "templates" / "discovery_report.html"
@@ -59,9 +60,15 @@ SNAPSHOT_GUIDE_URL = "../../../fix-guide/"
 SNAPSHOT_METHOD_URL = "../../../method/"
 
 
+def method_html() -> str:
+    """The method fragment with its glossary rows for the terms marked in check names (core.fix_guide.TERMS)."""
+    rows = "".join(f"\n          <tr><td><b>{html.escape(k)}</b></td><td>{html.escape(v)}</td></tr>" for k, v in TERMS.items())
+    return METHOD.read_text(encoding="utf-8").replace("__TERMS__", rows)
+
+
 def method_section() -> str:
     return ('  <section aria-labelledby="s-method" id="method">\n    <h2 id="s-method">How this audit works</h2>\n'
-            + METHOD.read_text(encoding="utf-8") + "  </section>\n")
+            + method_html() + "  </section>\n")
 
 
 def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
@@ -185,11 +192,11 @@ def family_rollup(host: str, cards: list[dict], findings: list[dict], urls: int)
                 else sum(c["health"] for c in cards) / len(cards))
     families = {c["family"] for c in cards}
     host_wide = scorecard(host, [f for f in findings if not family_of(f, host, families)], urls)
-    health = max(0, round(weighted - (100 - host_wide["health"])))
+    health = max(0, half_up(weighted - (100 - host_wide["health"])))
     low = min(cards, key=lambda c: c["health"])
     return {"health": health, "grade": grade(health), "penalties": host_wide["penalties"],
             "cosmetic_capped": host_wide["cosmetic_capped"],
-            "rollup": {"families": len(cards), "weighted": round(weighted), "host_wide": 100 - host_wide["health"],
+            "rollup": {"families": len(cards), "weighted": half_up(weighted), "host_wide": 100 - host_wide["health"],
                        "by_clicks": bool(total), "lowest": {"family": low["family"], "grade": low["grade"],
                                                            "health": low["health"]}}}
 
@@ -333,7 +340,7 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
     """Fix guide, confidence, merged root causes, systemic issues, top risks, grade summary, changes since the
     last run and the family health trend (see core/report_view.py)."""
     findings = report["findings"]
-    report["_guide"] = {"areas": AREAS, "rows": GUIDE}
+    report["_guide"] = {"areas": AREAS, "rows": GUIDE, "terms": TERMS}
     for f in findings:
         f["_guide"] = guide_key(f.get("check"), f.get("source"))
         f["_confidence"] = confidence(f)

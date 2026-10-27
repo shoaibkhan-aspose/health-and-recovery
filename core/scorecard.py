@@ -9,6 +9,7 @@ Grades: A >= 90, B >= 75, C >= 60, D >= 40, F below.
 
 from __future__ import annotations
 
+import math
 from urllib.parse import urlsplit
 
 from core.findings import template_section
@@ -54,6 +55,11 @@ STATUS = {"Sitemap": ("sitemap",), "Pages": ("page errors",), "Canonical": ("can
 # dimension -> area name. Always shown in this order; other dimensions follow when they have findings.
 AREAS = {"crawl": "Crawl & indexing", "onpage": "On-page content", "intl": "Languages", "ai": "AI readiness",
          "perf": "Speed"}
+
+
+def half_up(x: float) -> int:
+    """Round halves up (65.5 -> 66, 65.4 -> 65), as people expect (SK, 2026-10-27); round() sends halves to even."""
+    return math.floor(x + 0.5 + 1e-9)
 
 
 def grade(health: float) -> str:
@@ -122,7 +128,7 @@ def scorecard(family: str, findings: list[dict], family_urls: int) -> dict:
             groups[g] = (penalty, t, f["id"])
     severe = sum(p for p, t, _ in groups.values() if t in SEVERE)
     cosmetic = sum(p for p, t, _ in groups.values() if t not in SEVERE)
-    health = max(0, round(100 - severe - min(COSMETIC_CAP, cosmetic)))
+    health = max(0, half_up(100 - severe - min(COSMETIC_CAP, cosmetic)))
 
     open_f = [f for f in findings if f["status"] == "open"]
     top = sorted(open_f, key=lambda f: (TYPE_ORDER.index(effective_type(f)),

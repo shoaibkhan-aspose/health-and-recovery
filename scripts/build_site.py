@@ -24,7 +24,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from core import brand  # noqa: E402
-from core.fix_guide import AREAS, GUIDE, guide_key  # noqa: E402
+from core.fix_guide import AREAS, GUIDE, guide_key, mark_terms  # noqa: E402
 from core.paths import published_tenants, tenant_paths  # noqa: E402
 from core.tenant import load_tenant  # noqa: E402
 from scripts import build_archive, build_report  # noqa: E402
@@ -106,6 +106,7 @@ td.open { font-size: 13px; color: var(--muted); min-width: 120px }
 tr:target td { background: var(--hit) }
 tr[id] { scroll-margin-top: 80px }
 .crumbs { font-size: 14px; color: var(--muted) } .crumbs b { color: var(--fg) }
+abbr.term { text-decoration: underline dotted; cursor: help }
 </style>
 <main>
   <nav class="crumbs" aria-label="Breadcrumb"><a href="../">All domains</a> › <b>Fix guide</b></nav>
@@ -163,7 +164,7 @@ def guide_page(tenants: list[str]) -> str:
             sev = g["severity"]
             opened = ", ".join(f'<a href="../{html.escape(t)}/">{html.escape(t)}</a> {n}'
                                for t, n in sorted(used.get(k, {}).items()))
-            trs.append(f'<tr id="g-{html.escape(k)}"><td class="name">{html.escape(g["name"])}</td>'
+            trs.append(f'<tr id="g-{html.escape(k)}"><td class="name">{mark_terms(html.escape(g["name"]))}</td>'
                        f'<td class="sev sev-{html.escape(sev)}"><span class="dot"></span>{SEVERITY.get(sev, sev)}</td>'
                        + "".join(f"<td>{html.escape(g[c])}</td>" for c in ("means", "impact", "fix", "verify"))
                        + f'<td class="open">{opened or "–"}</td></tr>')
@@ -202,7 +203,7 @@ __METHOD__</main>
 
 def method_page() -> str:
     """The shared "How this audit works" page; the area-scores note is shown here because a report uses it."""
-    body = build_report.METHOD.read_text(encoding="utf-8").replace(' id="method-areas" hidden', "")
+    body = build_report.method_html().replace(' id="method-areas" hidden', "")
     return METHOD_PAGE.replace("__METHOD__", body)
 
 
