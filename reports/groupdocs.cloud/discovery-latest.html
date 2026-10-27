@@ -241,6 +241,27 @@ button.sopen { background: none; border: 0; padding: 0; cursor: pointer; text-de
 abbr.term { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help }
 abbr.term::after { content: "?"; font-size: .65em; vertical-align: super; margin-left: 1px; color: var(--accent); font-weight: 600 }
 abbr.term:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 2px }
+/* score bars: track 0-100, fill in the band colour with a rounded data end, 2px gaps at 40/60/75/90 */
+.sbar { position: relative; display: block; height: 8px; border-radius: 4px; background: var(--tint); min-width: 60px }
+.sbar.big { height: 10px; margin-top: 4px }
+.sbar i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--v); background: var(--gc); border-radius: 4px }
+.sbar s { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--surface) }
+.sbar.none { background: repeating-linear-gradient(135deg, var(--line) 0 2px, transparent 2px 6px) }
+.arows { display: grid }
+.arow { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: 3em minmax(130px, 170px) minmax(160px, 1fr) minmax(200px, 1.1fr);
+  gap: 4px 14px; align-items: center; padding: 9px 6px; border-bottom: 1px solid var(--line) }
+button.arow { cursor: pointer } button.arow:hover { background: var(--tint) } button.arow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px }
+.arow:not([class*="g-"]) { --gc: var(--muted) }
+.arow > b { font: 600 22px var(--display); font-variant-numeric: tabular-nums; color: var(--gc); cursor: help }
+.arow .an { font-weight: 600; font-size: 14px } .arow .ai { font-size: 13px; display: grid } .arow .ai small { color: var(--muted); font-size: 12px }
+.arow .down { color: var(--broken); font-weight: 600 }
+.ascale { border-bottom: 0; padding-top: 2px } .sticks { position: relative; height: 14px }
+.sticks em { position: absolute; transform: translateX(-50%); font: 11px var(--mono); font-style: normal; color: var(--muted) }
+.sticks em:first-child { transform: none } .sticks em:last-child { transform: translateX(-100%) }
+@media (max-width: 640px) {
+  .arow { grid-template-columns: 2.6em 1fr } .arow .sbar, .arow .sticks { grid-column: 2 } .arow .ai { grid-column: 2 }
+  .ascale > span:empty { display: none }
+}
 .xpop { position: absolute; z-index: 20; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.18);
   padding: 10px 12px; font: 13px/1.45 var(--body); color: var(--fg) }
 .xpop .xt { display: block; font-size: 15px; margin-bottom: 6px } .xpop .xt small { color: var(--muted); font-weight: 400 }
@@ -736,6 +757,25 @@ footer a { color: var(--accent) }
     $("host-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value || R.tenant)}/${location.hash}`; });
   }
 
+  // how a score is made, for the explanation panel (data-x)
+  const lossName = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
+  const pts = n => String(Math.round(n * 10) / 10);  // exact to one decimal, so the items add up
+  const lostOf = list => { const severe = list.filter(x => x.type === "broken" || x.type === "incorrect").reduce((s, x) => s + x.points, 0);
+                           return severe + Math.min(20, list.reduce((s, x) => s + x.points, 0) - severe); };
+  const explain = (title, score, list, capped) => {
+    const lost = lostOf(list);
+    EXPLAIN.push(`<b class="xt">${esc(title)} ${score} <small>out of 100</small></b>`
+      + (list.length ? `<table>${list.map(x => `<tr><td>${termify(esc(lossName(x)))}</td><td class="n">−${pts(x.points)}</td></tr>`).join("")}`
+        + `<tr class="xsum"><td>Points lost${capped ? " (minor issues capped at 20)" : ""}</td><td class="n">−${pts(lost)}</td></tr></table>` : `<p>No points lost.</p>`)
+      + `<p>100 − ${pts(lost)} = ${pts(100 - lost)}${pts(100 - lost) === String(score) ? "" : `, shown as ${score}`}</p>`
+      + `<p class="xn">Points = severity weight × share of the subdomain affected. One root cause counts once.</p>`);
+    return EXPLAIN.length - 1;
+  };
+  // score bars (SK, 2026-10-27): always 0 to 100, filled in the score's colour band, ticks at the band cut-offs
+  const sbar = (v, g, cls = "") => v == null
+    ? `<span class="sbar none ${cls}" aria-hidden="true"></span>`
+    : `<span class="sbar g-${g} ${cls}" style="--v:${v}%" aria-hidden="true"><i></i>${[40, 60, 75, 90].map(x => `<s style="left:${x}%"></s>`).join("")}</span>`;
+
   // health by area (tenant opt-in): shown when the page covers one host, so the overall equals its Host health row
   const HOSTS = R._hosts || [];
   const AH = HOSTS.length === 1 && HOSTS[0].areas ? HOSTS[0] : null;
@@ -753,10 +793,22 @@ footer a { color: var(--accent) }
       const sub = R._manager_view ? loss1(a) : loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
       return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health} out of 100, ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${termify(esc(sub))}</small>` : ""}</button>`;
     };
+    const arow = a => {  // one line per area: score, name, bar, issues; the row opens the area's findings
+      const n = Object.values(a.counts).reduce((s, x) => s + x, 0), b = a.counts.broken || 0, o = n - b;
+      const scored = a.state === "scored";
+      const issues = a.state === "not checked" ? "not checked in this run" : a.state === "no data" ? `no real-user data · ${a.pages} pages, lab median ${a.lab_median ?? "–"}`
+        : !n ? "no issues" : (b ? `<span class="down">${b} broken</span>${o ? " · " : ""}` : "") + (o ? `${o} ${b ? "other " : ""}issue${o === 1 ? "" : "s"}` : "");
+      const big = scored ? loss1(a) : "";
+      const num = scored ? `<b tabindex="0" data-x="${explain(a.name, a.health, a.penalties, false)}">${a.health}</b>` : `<b>–</b>`;
+      return `<${a.state === "not checked" ? "div" : "button type=\"button\""} class="arow${scored ? " g-" + a.grade : ""}" data-dim="${esc(a.dimension)}">${num}<span class="an">${esc(a.name)}</span>`
+        + `${sbar(scored ? a.health : null, a.grade)}<span class="ai"><span>${issues}</span>${big ? `<small>${termify(esc(big))}</small>` : ""}</span></${a.state === "not checked" ? "div" : "button"}>`;
+    };
+    const scale = `<div class="arow ascale" aria-hidden="true"><span></span><span></span><span class="sticks">${[0, 40, 60, 75, 90, 100].map(x => `<em style="left:${x}%">${x}</em>`).join("")}</span><span></span></div>`;
     $("sum-areas").hidden = false;
     if ($("method-areas")) $("method-areas").hidden = false;
     $("sum-areas").innerHTML = `<span class="dim">Health by area · <code>${esc(AH.host)}</code></span>
-      <div class="areas">${R._manager_view ? "" : `<div class="area overall g-${AH.grade}"><b>${AH.health}</b><span class="an">Overall · ${AH.grade}</span><small>all areas together</small></div>`}${AH.areas.map(tile).join("")}</div>
+      ${R._manager_view ? `<div class="arows">${AH.areas.map(arow).join("")}${scale}</div>`
+        : `<div class="areas"><div class="area overall g-${AH.grade}"><b>${AH.health}</b><span class="an">Overall · ${AH.grade}</span><small>all areas together</small></div>${AH.areas.map(tile).join("")}</div>`}
       <div class="why">Each area is scored like the overall health (100 minus points for open problems), on that area's findings only. The overall spends the points of every area, so it is never higher than an area. Select an area to see its findings.</div>`;
     $("sum-areas").addEventListener("click", e => {
       const b = e.target.closest("button[data-dim]");
@@ -1259,19 +1311,6 @@ footer a { color: var(--accent) }
     const changesOf = h => ({ add: (CH.new || []).filter(id => (byId[id] || {}).subdomain === h).length,
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
     // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
-    const lossName = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
-    const pts = n => String(Math.round(n * 10) / 10);  // exact to one decimal, so the items add up
-    const lostOf = list => { const severe = list.filter(x => x.type === "broken" || x.type === "incorrect").reduce((s, x) => s + x.points, 0);
-                             return severe + Math.min(20, list.reduce((s, x) => s + x.points, 0) - severe); };
-    const explain = (title, score, list, capped) => {
-      const lost = lostOf(list);
-      EXPLAIN.push(`<b class="xt">${esc(title)} ${score} <small>out of 100</small></b>`
-        + (list.length ? `<table>${list.map(x => `<tr><td>${termify(esc(lossName(x)))}</td><td class="n">−${pts(x.points)}</td></tr>`).join("")}`
-          + `<tr class="xsum"><td>Points lost${capped ? " (minor issues capped at 20)" : ""}</td><td class="n">−${pts(lost)}</td></tr></table>` : `<p>No points lost.</p>`)
-        + `<p>100 − ${pts(lost)} = ${pts(100 - lost)}${pts(100 - lost) === String(score) ? "" : `, shown as ${score}`}</p>`
-        + `<p class="xn">Points = severity weight × share of the subdomain affected. One root cause counts once.</p>`);
-      return EXPLAIN.length - 1;
-    };
     const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
     // how old the data is: managers must not read a two-week-old crawl as today's state
     const dates = [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date].filter(Boolean).sort();
@@ -1290,7 +1329,7 @@ footer a { color: var(--accent) }
       const H = HOSTS[0], t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
       const TR = trendOf(H.host), before = TR.length > 1 ? TR[TR.length - 2] : null;
       $("kpis").innerHTML = [
-        `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info("Health score", H)}</span><span class="kv">${H.health} <small>out of 100</small></span>`
+        `<div class="kpi g-${H.grade}"><span class="kl">Health score ${info("Health score", H)}</span><span class="kv">${H.health} <small>out of 100</small></span>${sbar(H.health, H.grade, "big")}`
           + (before ? `${spark(TR)}<span class="ks">${signed(H.health - before.health)} since ${esc(day(before.date))}</span>` : `<span class="ks">first audit · trend from the next run</span>`) + `</div>`,
         t.source === "gsc"
           ? `<div class="kpi"><span class="kl">Search clicks</span><span class="kv">${fmt(cur.clicks)} <small>28 days</small></span><span class="ks">${delta(cur.clicks, prev.clicks, "previous 28 days")}</span><span class="ks">${delta(cur.clicks, six.clicks, "six months ago")}</span></div>
@@ -1324,13 +1363,13 @@ footer a { color: var(--accent) }
           const sub = a.state === "not checked" ? "not checked" : a.state === "no data" ? "no real-user data"
             : !n ? "no issues" : ab ? `<em class="down">${ab} broken</em>${n - ab ? ` · ${n - ab} more` : ""}` : `${n} issue${n === 1 ? "" : "s"}`;
           const x = a.state === "scored" ? ` tabindex="0" data-x="${explain(a.name, a.health, a.penalties, false)}"` : "";
-          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}"${x}><b>${v}</b><span>${esc(a.name)}</span><small>${sub}</small></div>`;
+          return `<div class="${a.state === "scored" ? "g-" + a.grade : ""}"${x}><b>${v}</b>${sbar(a.state === "scored" ? a.health : null, a.grade)}<span>${esc(a.name)}</span><small>${sub}</small></div>`;
         }).join("");
         const open = published && SITE_HOSTS.includes(H.host)
           ? `<a class="sopen" href="../${esc(H.host)}/">Open subdomain page →</a>`
           : `<button type="button" class="sopen" data-host="${esc(H.host)}">See its ${mine.length} findings →</button>`;
         return `<article class="srow g-${H.grade}">
-          <div class="sname"><code>${esc(H.host)}</code><span class="sscore"><b>${H.health}</b><span>score ${info("Score", H)}</span></span></div>
+          <div class="sname"><code>${esc(H.host)}</code><span class="sscore"><b>${H.health}</b><span>score ${info("Score", H)}</span></span>${sbar(H.health, H.grade, "big")}</div>
           ${traffic}
           ${cell("Open issues", `<b>${mine.length}</b><small>${b ? `<em class="down">${b} broken</em> · ` : ""}${inc} incorrect</small>`)}
           ${cell("Since last run", before ? `<b>${signed(H.health - before.health)}</b><small>${spark(TR)}${ch.add} new · ${ch.gone} resolved</small>` : `<b>–</b><small>first audit</small>`)}
