@@ -49,3 +49,9 @@ gsc_sitemaps_snapshot:
   taken: "2026-10-26"
   sitemaps:
     - {path: "/sitemap.xml", type: "Sitemap index", submitted: "2025-08-07", last_read: "2026-10-17", status: "Success", discovered: 172}
+
+# Report options (SK, 2026-10-27): the Overview layout as on aspose.cloud: health by area, Overview first
+# (score tiles, subdomain rows, top actions required), details after.
+report:
+  area_scores: true
+  manager_view: true
