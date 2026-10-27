@@ -224,3 +224,20 @@ def test_history_records_hosts_and_the_trend_ends_with_this_report(tmp_path):
     later = {"run_id": 2, "_hosts": [dict(card, health=70)]}
     assert [p["health"] for p in host_trends(later, history)["blog.example.org"]] == [66, 70]
 
+
+
+def test_blogs_page_members_and_ids():
+    """/blogs/ lists the hosts the tenants tag, each prepared as on its own page; ids are prefixed by host because
+    they repeat across tenants, and the original id is kept for links to the subdomain page."""
+    from scripts import build_site
+    from scripts.build_report import collection_report, parse_collections
+
+    assert parse_collections("blogs:Blogs,x") == [{"slug": "blogs", "name": "Blogs"}]
+    members = build_site.collection_members(["aspose.cloud", "groupdocs.cloud"])
+    assert members["blogs"] == [("aspose.cloud", "blog.aspose.cloud"), ("groupdocs.cloud", "blog.groupdocs.cloud")]
+    R = collection_report("Blogs", "blogs", members["blogs"])
+    ids = [f["id"] for f in R["findings"]]
+    assert len(ids) == len(set(ids)) and all("/" in i and f["_orig_id"] == i.split("/", 1)[1]
+                                              for i, f in zip(ids, R["findings"]))
+    assert [c["host"] for c in R["_hosts"]] == ["blog.aspose.cloud", "blog.groupdocs.cloud"]
+    assert all(c["areas"] and c["domain"] for c in R["_hosts"]) and "overall" not in R

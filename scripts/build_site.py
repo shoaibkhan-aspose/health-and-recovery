@@ -225,7 +225,30 @@ def tenant_item(tenant: str) -> str:
             f'<a href="{name}/archive/">previous versions</a></span><span>Subdomains: {links}</span></li>')
 
 
-RESERVED = {"fix-guide", "method", "archive"}  # site folders that are neither tenants nor hosts
+# pages across domains: slug -> name; members come from each tenant's YAML `collections` (SK, 2026-10-27)
+COLLECTIONS = {"blogs": "Blogs"}
+RESERVED = {"fix-guide", "method", "archive", *COLLECTIONS}  # site folders that are neither tenants nor hosts
+
+
+def collection_members(tenants: list[str]) -> dict[str, list[tuple[str, str]]]:
+    """slug -> [(tenant, host)] from the tenants' `collections`, in site order; a host must belong to its tenant."""
+    out: dict = {slug: [] for slug in COLLECTIONS}
+    for t in tenants:
+        tenant = load_tenant(t)
+        for slug, hosts in (tenant.raw.get("collections") or {}).items():
+            if slug not in COLLECTIONS:
+                raise SystemExit(f"tenants/{t}.yaml: unknown collection {slug!r} (known: {', '.join(COLLECTIONS)})")
+            for h in hosts:
+                if h not in tenant.host_names:
+                    raise SystemExit(f"tenants/{t}.yaml: collection {slug} lists {h}, which is not one of its hosts")
+                out[slug].append((t, h))
+    return {slug: members for slug, members in out.items() if members}
+
+
+def collection_item(slug: str, members: list[tuple[str, str]]) -> str:
+    links = " · ".join(f'<a href="{html.escape(h)}/">{html.escape(h)}</a>' for _, h in members)
+    return (f'    <li><a href="{slug}/"><b>{html.escape(COLLECTIONS[slug])}</b></a><span>{len(members)} subdomains across '
+            f'{len({t for t, _ in members})} domains</span><span>{links}</span></li>')
 
 
 def site_hosts(tenants: list[str]) -> dict[str, list[str]]:
@@ -244,10 +267,13 @@ def site_hosts(tenants: list[str]) -> dict[str, list[str]]:
 def build(out: Path, tenants: list[str]) -> None:
     out.mkdir(parents=True, exist_ok=True)
     hosts = site_hosts(tenants)
+    members = collection_members(tenants)
+    site_collections = ",".join(f"{slug}:{COLLECTIONS[slug]}" for slug in members)
     for t in tenants:
         paths = tenant_paths(t)
         common = ["--tenant", t, "--findings", str(paths.findings_export), "--standalone", "--guide-url", GUIDE_URL,
-                  "--method-url", METHOD_URL, "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
+                  "--method-url", METHOD_URL, "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t]),
+                  "--site-collections", site_collections]
         if build_report.main(common + ["--out", str(out / t / "index.html")]):
             raise SystemExit(f"Report for {t} failed")
         for h in hosts[t]:  # one page per host: the tenant report filtered to that host
@@ -255,12 +281,20 @@ def build(out: Path, tenants: list[str]) -> None:
                 raise SystemExit(f"Host page {h} failed")
         n = build_archive.build(out / t / "archive", paths.archive, t)
         print(f"Archive: {n} snapshots for {t}")
+    for slug, mem in members.items():  # pages across domains, e.g. /blogs/
+        page = build_report.build(build_report.collection_report(COLLECTIONS[slug], slug, mem), [], None,
+                                  standalone=True, guide_url=GUIDE_URL, site_tenants=tenants,
+                                  site_hosts=[h for _, h in mem], method_url=METHOD_URL,
+                                  collections=build_report.parse_collections(site_collections))
+        (out / slug).mkdir(exist_ok=True)
+        (out / slug / "index.html").write_text(page, encoding="utf-8")
+        print(f"{COLLECTIONS[slug]}: {len(mem)} subdomains")
     (out / "fix-guide").mkdir(exist_ok=True)
     (out / "fix-guide" / "index.html").write_text(guide_page(tenants), encoding="utf-8")
     (out / "method").mkdir(exist_ok=True)
     (out / "method" / "index.html").write_text(method_page(), encoding="utf-8")
     legacy = LEGACY_TENANT if LEGACY_TENANT in tenants else (tenants[0] if tenants else "")
-    items = "\n".join(tenant_item(t) for t in tenants)
+    items = "\n".join([tenant_item(t) for t in tenants] + [collection_item(s, m) for s, m in members.items()])
     (out / "index.html").write_text(LANDING.replace("__LEGACY__", legacy).replace("__ITEMS__", items),
                                     encoding="utf-8")
     if legacy:  # /archive/ and /archive/<date>/ from before the subfolders

@@ -55,3 +55,7 @@ gsc_sitemaps_snapshot:
 report:
   area_scores: true
   manager_view: true
+
+# Cross-domain pages this tenant's hosts appear on (SK, 2026-10-27: /blogs/ lists every blog).
+collections:
+  blogs: [blog.conholdate.cloud]

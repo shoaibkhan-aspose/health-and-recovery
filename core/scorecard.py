@@ -62,6 +62,10 @@ def half_up(x: float) -> int:
     return math.floor(x + 0.5 + 1e-9)
 
 
+# names for dimensions that only manual findings use; shown after the five areas when they have findings
+OTHER_AREAS = {"ux": "User experience", "content": "Content", "cross": "Cross-site", "platform": "Platform"}
+
+
 def grade(health: float) -> str:
     return next(g for floor, g in GRADES if health >= floor)
 
@@ -159,8 +163,8 @@ def area_scores(findings: list[dict], urls: int) -> list[dict]:
     areas = []
     for dim in dims:
         c = scorecard(dim, [f for f in findings if f.get("dimension") == dim], urls)
-        areas.append({"dimension": dim, "name": AREAS.get(dim, dim), "health": c["health"], "grade": c["grade"],
-                      "penalties": c["penalties"], "counts": c["counts"]})
+        areas.append({"dimension": dim, "name": AREAS.get(dim) or OTHER_AREAS.get(dim, dim), "health": c["health"],
+                      "grade": c["grade"], "penalties": c["penalties"], "counts": c["counts"]})
     return areas
 
 

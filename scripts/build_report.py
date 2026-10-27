@@ -73,14 +73,15 @@ def method_section() -> str:
 
 def build(report: dict, notes: list[str], run_date: str | None, standalone: bool = False,
           guide_url: str | None = None, site_tenants: list[str] | None = None,
-          site_hosts: list[str] | None = None, method_url: str | None = None) -> str:
+          site_hosts: list[str] | None = None, method_url: str | None = None,
+          collections: list[dict] | None = None) -> str:
     """The report page. With guide_url, "How to fix" links go to that shared fix guide page instead of a full
     guide table inside the report (the table stays for local pages); with method_url, "How this audit works"
     links go to that shared page instead of a section at the end. With site_tenants (the published site),
     the header offers a switch to the other tenants' reports, and with site_hosts to the tenant's host pages
     (published at the site root next to the tenant reports)."""
     data = dict(report, _notes=notes, _run_date=run_date, _guide_url=guide_url, _tenants=site_tenants or [],
-                _site_hosts=site_hosts or [], _method_url=method_url)
+                _site_hosts=site_hosts or [], _method_url=method_url, _collections=collections or [])
     if guide_url and report.get("_guide"):  # only the rows this report's findings link to
         used = {f.get("_guide") for f in report["findings"]}
         data["_guide"] = dict(report["_guide"], rows={k: v for k, v in report["_guide"]["rows"].items() if k in used})
@@ -432,7 +433,7 @@ def snapshot(page: str, label: str, report: dict, archive: Path) -> Path:
     return archive / name
 
 
-def main(argv: list[str] | None = None) -> int:
+def parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("report", nargs="?", help="discovery JSON (default: newest in reports/<tenant>/)")
     ap.add_argument("--tenant", default=os.environ.get("TENANT", "aspose.app"))
@@ -466,11 +467,17 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--snapshot", metavar="LABEL",
                     help="also freeze this report (standalone) into reports/<tenant>/archive/ with this label, and "
                     "record the family health in reports/<tenant>/health-history.json (do this after every full run)")
-    args = ap.parse_args(argv)
+    ap.add_argument("--areas", action="store_true",
+                    help="health by area even when the tenant does not opt in (the Blogs page passes it)")
+    ap.add_argument("--site-collections", help="comma-separated slug:Name of the site's cross-domain pages (e.g. "
+                    "blogs:Blogs): adds them to the domain switch (build_site.py passes it)")
+    return ap
+
+
+def prepare(args: argparse.Namespace) -> tuple[dict, list[str], str | None, str, Path] | int:
+    """The report data for one tenant (or one of its hosts), ready for build(): runs, findings, scores, views.
+    Returns (report, notes, run date, a one-line note of the sources, the discovery run file) or an exit code."""
     paths: TenantPaths = tenant_paths(args.tenant)
-    if args.host and args.snapshot:
-        print("Snapshots are per tenant; build the tenant report with --snapshot, not a host page.", file=sys.stderr)
-        return 2
     folder = paths.reports
 
     if args.report:
@@ -555,30 +562,85 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{args.host} is not a host of tenant {args.tenant}", file=sys.stderr)
             return 2
         focus_host(report, args.host, all_rows, tenant)
-    report["_area_scores"] = bool(tenant and (tenant.raw.get("report") or {}).get("area_scores"))
+    report["_area_scores"] = bool(args.areas or (tenant and (tenant.raw.get("report") or {}).get("area_scores")))
     report["_manager_view"] = bool(tenant and (tenant.raw.get("report") or {}).get("manager_view"))
     add_families(report, paths.traffic_summary)
     add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)
-    if report["_manager_view"]:
+    if report["_manager_view"] or args.areas:
         report["_host_trends"] = host_trends(report, paths.health_history)
     run_date = run_date_of(src, "discovery-")
+    sources = (f"{src.name}" + (f" and {len(audit_srcs)} crawl-audit runs (newest {audit_src.name})" if audit_src else "")
+               + (f" and {perf_src.name}" if perf_src else "") + (f" and {ai_src.name}" if ai_src else "")
+               + (f" and {text_src.name}" if text_src else ""))
+    return report, notes, run_date, sources, src
 
+
+def parse_collections(spec: str | None) -> list[dict]:
+    """'blogs:Blogs,forums:Forums' -> [{'slug': 'blogs', 'name': 'Blogs'}, ...]"""
+    return [dict(zip(("slug", "name"), item.split(":", 1))) for item in (spec or "").split(",") if ":" in item]
+
+
+def collection_report(name: str, slug: str, members: list[tuple[str, str]]) -> dict:
+    """One page across domains (SK, 2026-10-27: Blogs): each member subdomain prepared exactly as its own page, so
+    its numbers match; no overall score. Finding ids repeat across tenants, so they get the host as prefix here
+    (_orig_id keeps the id the subdomain page uses)."""
+    R: dict = {"tenant": name, "run_id": "–", "hosts": {}, "findings": [], "_hosts": [], "_host_trends": {},
+               "_collection": slug, "_manager_view": True, "sections": {}, "sitemaps": {}, "gsc_comparison": [],
+               "requests": 0, "sitemaps_fetched": 0, "duration_s": 0, "_dates": [],
+               "_run_changes": {"new": [], "resolved": [], "runs": []}}
+    for tenant, host in members:
+        prepared = prepare(parser().parse_args(["--tenant", tenant, "--findings",
+                                                str(tenant_paths(tenant).findings_export), "--host", host, "--areas"]))
+        if isinstance(prepared, int):
+            raise SystemExit(f"{name}: {host} of {tenant} could not be prepared")
+        report, _, run_date, _, _ = prepared
+        pid = lambda i: f"{host}/{i}"  # noqa: E731
+        for f in report["findings"]:
+            f["_orig_id"], f["id"] = f["id"], pid(f["id"])
+            if f.get("_merged_into"):
+                f["_merged_into"] = pid(f["_merged_into"])
+            f["_merged"] = [pid(i) for i in f.get("_merged") or []]
+        card = report["_hosts"][0]
+        card["domain"] = tenant
+        for x in card["penalties"] + [p for a in card.get("areas") or [] for p in a["penalties"]] + card["top"]:
+            x["id"] = pid(x["id"])
+        ch = report["_run_changes"]
+        R["_run_changes"]["new"] += [pid(i) for i in ch.get("new") or []]
+        R["_run_changes"]["resolved"] += [dict(r, id=pid(r["id"])) for r in ch.get("resolved") or []]
+        R["hosts"].update(report["hosts"])
+        R["findings"] += report["findings"]
+        R["_hosts"].append(card)
+        R["_host_trends"].update(report.get("_host_trends") or {})
+        R["_guide"] = report["_guide"]
+        R["_dates"] += [d for d in (run_date, *((report.get(k) or {}).get("date") for k in
+                                                ("_audit", "_perf", "_ai", "_text", "_links"))) if d]
+    return R
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parser().parse_args(argv)
+    if args.host and args.snapshot:
+        print("Snapshots are per tenant; build the tenant report with --snapshot, not a host page.", file=sys.stderr)
+        return 2
+    prepared = prepare(args)
+    if isinstance(prepared, int):
+        return prepared
+    report, notes, run_date, sources, src = prepared
+    paths = tenant_paths(args.tenant)
     out = Path(args.out) if args.out else src.with_suffix(".html")
     out.parent.mkdir(parents=True, exist_ok=True)
     site_tenants = args.site_tenants.split(",") if args.site_tenants else None
     site_hosts = args.site_hosts.split(",") if args.site_hosts else None
+    collections = parse_collections(args.site_collections)
     out.write_text(build(report, notes, run_date, args.standalone, args.guide_url, site_tenants, site_hosts,
-                         args.method_url), encoding="utf-8")
+                         args.method_url, collections), encoding="utf-8")
     if args.snapshot:
         page = build(report, notes, run_date, standalone=True, guide_url=SNAPSHOT_GUIDE_URL,
                      method_url=SNAPSHOT_METHOD_URL)
         print(f"Snapshot: {snapshot(page, args.snapshot, report, paths.archive)}")
         record_health(report, paths.health_history)
-    print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {src.name}"
-          + (f" and {len(audit_srcs)} crawl-audit runs (newest {audit_src.name})" if audit_src else "")
-          + (f" and {perf_src.name}" if perf_src else "") + (f" and {ai_src.name}" if ai_src else "")
-          + (f" and {text_src.name}" if text_src else ""))
+    print(f"Wrote {out} ({out.stat().st_size / 1024:.0f} KB) from {sources}")
     return 0
 
 
