@@ -210,28 +210,17 @@ def test_gsc_comparison_from_the_run_sitemap_list():
 
 def test_history_records_hosts_and_the_trend_ends_with_this_report(tmp_path):
     """Hosts and areas are recorded once per set of runs; the Overview trend lists them and ends with this report."""
-    from scripts.build_report import host_trend, record_health
+    from scripts.build_report import host_trends, record_health
 
     history = tmp_path / "health-history.json"
     card = {"host": "blog.example.org", "health": 66, "areas": [{"dimension": "intl", "health": 83, "state": "scored"},
                                                                  {"dimension": "perf", "health": 100, "state": "no data"}]}
     report = {"run_id": 1, "_hosts": [card]}
-    assert host_trend(report, history) == [{"date": None, "runs": "discovery run 1", "health": 66}]
+    assert host_trends(report, history) == {"blog.example.org": [{"date": None, "runs": "discovery run 1", "health": 66}]}
     record_health(report, history)
     record_health(report, history)  # same runs: no second entry
     saved = json.loads(history.read_text())
     assert len(saved) == 1 and saved[0]["hosts"] == {"blog.example.org": {"health": 66, "areas": {"intl": 83}}}
     later = {"run_id": 2, "_hosts": [dict(card, health=70)]}
-    assert [p["health"] for p in host_trend(later, history)] == [66, 70]
+    assert [p["health"] for p in host_trends(later, history)["blog.example.org"]] == [66, 70]
 
-
-def test_single_host_property_is_its_host_page():
-    """With the Overview layout, a property with one host forwards to that host's page; others keep theirs."""
-    from types import SimpleNamespace
-
-    from scripts.build_report import single_host_property
-
-    t = lambda hosts, view: SimpleNamespace(raw={"report": {"manager_view": view}}, host_names=hosts)
-    assert single_host_property(t(["blog.a.cloud"], True))
-    assert not single_host_property(t(["blog.a.cloud"], False))
-    assert not single_host_property(t(["www.a.app", "blog.a.app"], True)) and not single_host_property(None)

@@ -246,8 +246,6 @@ def build(out: Path, tenants: list[str]) -> None:
                   "--method-url", METHOD_URL, "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
         if build_report.main(common + ["--out", str(out / t / "index.html")]):
             raise SystemExit(f"Report for {t} failed")
-        if build_report.single_host_property(load_tenant(t)):  # one host: the property page is that host's page
-            (out / t / "index.html").write_text(redirect_page(f"../{hosts[t][0]}/"), encoding="utf-8")
         for h in hosts[t]:  # one page per host: the tenant report filtered to that host
             if build_report.main(common + ["--host", h, "--out", str(out / h / "index.html")]):
                 raise SystemExit(f"Host page {h} failed")

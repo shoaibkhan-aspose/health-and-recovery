@@ -28,5 +28,11 @@
     "date": "2026-10-27",
     "label": "Overview and details, Top actions required (property page opens the host page)",
     "runs": "discovery run 1, crawl audit run 3, speed audit run 6, AI audit run 4, text check run 7, link check run 8"
+  },
+  {
+    "file": "2026-10-27-2.html",
+    "date": "2026-10-27 (2)",
+    "label": "Property page with host cards (no redirect)",
+    "runs": "discovery run 1, crawl audit run 3, speed audit run 6, AI audit run 4, text check run 7, link check run 8"
   }
 ]
