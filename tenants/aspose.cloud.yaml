@@ -55,6 +55,8 @@ gsc_sitemaps_snapshot:
   sitemaps:
     - {path: "/sitemap.xml", type: "Sitemap index", submitted: "2025-07-17", last_read: "2026-10-25", status: "Success", discovered: 13525}
 
-# Report options (SK, 2026-10-26): health by area at the top of the report; trial on aspose.cloud only.
+# Report options, trial on aspose.cloud only (SK): health by area at the top of the report (2026-10-26);
+# Overview for managers first, details for developers after (2026-10-27).
 report:
   area_scores: true
+  manager_view: true

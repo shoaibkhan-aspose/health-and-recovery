@@ -1,22 +1,120 @@
-    <div class="method">
-      <div><h3>What runs</h3><p><b>Discovery</b> reads every host's robots.txt and every sitemap file (all of them, no sampling). The <b>crawl audit</b> then fetches a sample of pages per URL pattern (template): 2 English pages and 1 page in each of 2 other languages, plus every homepage and family hub, and runs 33 checks on each (2 of them for AI readiness: text visible without JavaScript, structured data). Both only read: GET requests, robots.txt respected, one request per host per second. The <b>speed audit</b> asks Google PageSpeed Insights about the 2 most-visited pages of each template (mobile): Core Web Vitals from real Chrome users over 28 days (75th percentile), plus a Lighthouse lab run that names the biggest savings. Google loads each page once; pages with too few visits have no real-user data and count neither way. The <b>AI audit</b> checks per host whether robots.txt or the firewall blocks AI search crawlers, and whether hosts and product families offer an llms.txt. The <b>text check</b> has an LLM proofread the title, H1 and meta description of every crawl-audit page in its own language, for misspellings, words typed twice, leftover words and a title about a different product; it fetches nothing, and a finding is kept only when the wrong words really appear on the page. On blogs with a source repo, the <b>link check</b> reads every internal link of every post from the repo and checks it on the live site (a target is missing only when the live site answers 404): links into translations that do not exist, damaged links, links to another language although a translation exists, and broken links; it also lists posts missing a supported language. The <b>prioritizer</b> adds Search Console traffic. Manual review findings come from people and are marked until a check confirms them.</p></div>
-      <div id="method-health"><h3>Family and host health (A–F)</h3><p>Scored per product family and per host. A host with families gets its families' health weighted by search clicks, minus the points of host-wide problems that belong to no family. Starts at 100. Each open finding costs broken 40, incorrect 20, not optimized 6 or improvable 2 points, times the share of the family or host it affects (at least a quarter). Findings with one root cause count once, cosmetic issues cost at most 20 in total, and a canonical that points at a missing page counts as broken. A 90+, B 75–89, C 60–74, D 40–59, F below 40. Traffic is not part of health.<span id="method-areas" hidden> Where a report shows health by area, each area is scored the same way on its own findings only, so the overall is never higher than an area; speed without real-user data shows no score.</span></p></div>
-      <div id="method-score"><h3>Priority score (0–100)</h3><p>Search Console clicks on the affected pages over 28 days (impressions count 1% of a click), on a log scale, × severity (broken 1, incorrect 0.7, not optimized 0.4, improvable 0.2) ÷ effort (S 1, M 1.5, L 2.5). If the same pages lost traffic since six months ago, half of that loss counts when it is larger than today's traffic. Hosts without Search Console use GA4 organic sessions.</p></div>
-      <div><h3>Samples and estimates</h3><p>"~N pages affected" applies each template's failing share of the sample to its number of URLs in the sitemaps. Confidence labels say how solid that is; findings marked <b>to confirm</b> rest on one page.</p></div>
-      <div><h3>More</h3><p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>.</p></div>
+    <style>
+    /* method: pipeline diagram, tables and formula cards; uses the host page's colour tokens */
+    .mth { display: grid; gap: 22px; min-width: 0 }
+    .mth h3 { margin: 0 0 6px; font-size: 17px }
+    .mth p { margin: 0; color: var(--muted); font-size: 14px; max-width: 80ch }
+    .mth .flow { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px }
+    .mth .flow svg { display: block; width: 100%; min-width: 900px; height: auto }
+    .mth .fb { fill: var(--surface); stroke: var(--fg); stroke-width: 1.3 } .mth .fb.p { fill: var(--tint); stroke: var(--accent) }
+    .mth .fn { font: 700 13px system-ui, sans-serif; fill: var(--accent) } .mth .ft { font: 600 13px system-ui, sans-serif; fill: var(--fg) }
+    .mth .fs { font: 12px system-ui, sans-serif; fill: var(--muted) } .mth .fa { stroke: var(--muted); stroke-width: 1.4; fill: none }
+    .mth .fh { fill: var(--muted) }
+    .mth .tw { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px }
+    .mth table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 720px }
+    .mth th, .mth td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top }
+    .mth th { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--tint) }
+    .mth tr:last-child td { border-bottom: 0 } .mth td.n { font-variant-numeric: tabular-nums; white-space: nowrap }
+    .mth .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; align-items: start }
+    .mth .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; scroll-margin-top: 60px; min-width: 0 }
+    .mth .card:target { outline: 2px solid var(--accent) }
+    .mth .formula { font: 600 16px ui-monospace, Menlo, monospace; background: var(--tint); border-radius: 6px; padding: 8px 12px; overflow-wrap: anywhere }
+    .mth .mini { min-width: 0; font-size: 13px } .mth .mini td, .mth .mini th { padding: 4px 10px }
+    .mth .bands { display: flex; height: 28px; border-radius: 6px; overflow: hidden; font: 700 12px system-ui, sans-serif; color: #fff }
+    .mth .bands span { display: grid; place-items: center }
+    .mth ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; color: var(--muted); max-width: 90ch }
+    .mth ul b { color: var(--fg) }
+    </style>
+    <div class="mth">
+      <div>
+        <h3>What runs, in order</h3>
+        <div class="flow"><svg viewBox="0 0 1040 132" role="img" aria-label="Seven steps in order: discovery, crawl audit, AI audit, speed audit, text check, link check, prioritize. All read only.">
+          <defs><marker id="mth-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fh"/></marker></defs>
+          <g><rect class="fb" x="2" y="10" width="128" height="112" rx="7"/><text class="fn" x="14" y="32">1</text><text class="ft" x="14" y="52">Discovery</text><text class="fs" x="14" y="76">every sitemap,</text><text class="fs" x="14" y="92">robots.txt</text><text class="fs" x="14" y="108">no sampling</text></g>
+          <g><rect class="fb" x="150" y="10" width="128" height="112" rx="7"/><text class="fn" x="162" y="32">2</text><text class="ft" x="162" y="52">Crawl audit</text><text class="fs" x="162" y="76">33 checks/page</text><text class="fs" x="162" y="92">2 + 2 pages per</text><text class="fs" x="162" y="108">template</text></g>
+          <g><rect class="fb" x="298" y="10" width="128" height="112" rx="7"/><text class="fn" x="310" y="32">3</text><text class="ft" x="310" y="52">AI audit</text><text class="fs" x="310" y="76">AI crawlers:</text><text class="fs" x="310" y="92">robots, firewall</text><text class="fs" x="310" y="108">llms.txt</text></g>
+          <g><rect class="fb" x="446" y="10" width="128" height="112" rx="7"/><text class="fn" x="458" y="32">4</text><text class="ft" x="458" y="52">Speed audit</text><text class="fs" x="458" y="76">2 top pages per</text><text class="fs" x="458" y="92">template · 28 days</text><text class="fs" x="458" y="108">of real users</text></g>
+          <g><rect class="fb" x="594" y="10" width="128" height="112" rx="7"/><text class="fn" x="606" y="32">5</text><text class="ft" x="606" y="52">Text check</text><text class="fs" x="606" y="76">title, H1,</text><text class="fs" x="606" y="92">description · LLM</text><text class="fs" x="606" y="108">in each language</text></g>
+          <g><rect class="fb" x="742" y="10" width="128" height="112" rx="7"/><text class="fn" x="754" y="32">6</text><text class="ft" x="754" y="52">Link check</text><text class="fs" x="754" y="76">every post,</text><text class="fs" x="754" y="92">every link</text><text class="fs" x="754" y="108">blogs with a repo</text></g>
+          <g><rect class="fb p" x="890" y="10" width="148" height="112" rx="7"/><text class="fn" x="902" y="32">7</text><text class="ft" x="902" y="52">Prioritize</text><text class="fs" x="902" y="76">Search Console</text><text class="fs" x="902" y="92">clicks: now, prev.,</text><text class="fs" x="902" y="108">six months ago</text></g>
+          <line class="fa" x1="130" y1="66" x2="148" y2="66" marker-end="url(#mth-ah)"/><line class="fa" x1="278" y1="66" x2="296" y2="66" marker-end="url(#mth-ah)"/><line class="fa" x1="426" y1="66" x2="444" y2="66" marker-end="url(#mth-ah)"/><line class="fa" x1="574" y1="66" x2="592" y2="66" marker-end="url(#mth-ah)"/><line class="fa" x1="722" y1="66" x2="740" y2="66" marker-end="url(#mth-ah)"/><line class="fa" x1="870" y1="66" x2="888" y2="66" marker-end="url(#mth-ah)"/>
+        </svg></div>
+      </div>
+
+      <div class="tw"><table>
+        <thead><tr><th>#</th><th>Audit</th><th>Reads</th><th>Finds</th><th>Sample</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td><b>Discovery</b></td><td>robots.txt and every sitemap of every host</td><td>broken or missing sitemaps, duplicate URLs, missing dates</td><td class="n">100%</td><td class="n">15 min</td></tr>
+          <tr><td class="n">2</td><td><b>Crawl audit</b></td><td>live pages (GET, robots.txt respected, 1 request/s per host)</td><td>errors, redirects, canonicals, hreflang, titles, descriptions, H1, structured data, text without JavaScript</td><td class="n">2 English + 2 translated pages per template, every homepage and hub</td><td class="n">25 min</td></tr>
+          <tr><td class="n">3</td><td><b>AI audit</b></td><td>robots.txt rules and the homepage as each AI crawler, /llms.txt</td><td>AI search crawlers blocked, missing or broken llms.txt</td><td class="n">every host and family</td><td class="n">5 min</td></tr>
+          <tr><td class="n">4</td><td><b>Speed audit</b></td><td>Google PageSpeed Insights (mobile)</td><td>slow LCP, INP, CLS, TTFB from real Chrome users; pages that do not load</td><td class="n">2 most-visited pages per template</td><td class="n">40 min</td></tr>
+          <tr><td class="n">5</td><td><b>Text check</b></td><td>title, H1, description of the crawl-audit pages (no new requests)</td><td>typos, leftover words, a title about a different product; kept only if the words are on the page</td><td class="n">every crawl-audit page</td><td class="n">5 min</td></tr>
+          <tr><td class="n">6</td><td><b>Link check</b></td><td>every post in the blog's source repo; targets checked live</td><td>links to translations that do not exist, damaged, broken or wrong-language links, incomplete translations</td><td class="n">100% of posts</td><td class="n">≤ 20 min</td></tr>
+          <tr><td class="n">7</td><td><b>Prioritize</b></td><td>Search Console clicks (GA4 where there is no Search Console)</td><td>traffic, traffic lost since six months ago and a score for every finding</td><td class="n">28-day windows</td><td class="n">1 min</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="cards">
+        <div class="card" id="method-health">
+          <h3>Health (0–100, A–F)</h3>
+          <div class="formula">health = 100 − Σ weight × share</div>
+          <table class="mini"><thead><tr><th>Severity</th><th>Weight</th></tr></thead><tbody>
+            <tr><td>Broken</td><td class="n">40</td></tr><tr><td>Incorrect</td><td class="n">20</td></tr>
+            <tr><td>Not optimized</td><td class="n">6</td></tr><tr><td>Improvable</td><td class="n">2</td></tr></tbody></table>
+          <ul>
+            <li><b>share</b> = part of the family or host affected, at least 25%</li>
+            <li>one root cause counts once; not optimized + improvable cost <b>at most 20</b> together</li>
+            <li>a host with families: their health weighted by clicks, minus host-wide problems</li>
+            <li><b>traffic is not part of health</b>: a small family's broken pages count as much as a big one's</li>
+            <li id="method-areas" hidden>health by area: the same formula on one area's findings, so the overall is never higher than an area; speed without real-user data shows no score</li>
+          </ul>
+          <div class="bands" role="img" aria-label="Grades: F below 40, D 40 to 59, C 60 to 74, B 75 to 89, A 90 and above">
+            <span style="flex:1;background:#b42318">F &lt; 40</span><span style="flex:1;background:#c2410c">D 40–59</span><span style="flex:1;background:#a16207">C 60–74</span><span style="flex:1;background:#15803d">B 75–89</span><span style="flex:1;background:#15803d">A 90+</span>
+          </div>
+          <p><b>Example:</b> a broken finding on 25% of a host costs 40 × 0.25 = <b>10 points</b>: health 90 (A).</p>
+        </div>
+        <div class="card" id="method-score">
+          <h3>Priority score (0–100)</h3>
+          <div class="formula">score = traffic × severity ÷ effort</div>
+          <ul>
+            <li><b>traffic</b>: Search Console clicks on the affected pages over 28 days, log scale (impressions count 1% of a click)</li>
+            <li>if the same pages <b>lost</b> traffic since six months ago and the loss is larger, half the loss counts</li>
+          </ul>
+          <table class="mini"><thead><tr><th>Severity</th><th>×</th><th>Effort</th><th>÷</th></tr></thead><tbody>
+            <tr><td>Broken</td><td class="n">1</td><td>S: one template or setting</td><td class="n">1</td></tr>
+            <tr><td>Incorrect</td><td class="n">0.7</td><td>M: several templates</td><td class="n">1.5</td></tr>
+            <tr><td>Not optimized</td><td class="n">0.4</td><td>L: rebuild or migration</td><td class="n">2.5</td></tr>
+            <tr><td>Improvable</td><td class="n">0.2</td><td></td><td></td></tr></tbody></table>
+          <p>Health says <b>how broken</b>; the score says <b>what to fix first</b>.</p>
+        </div>
+        <div class="card">
+          <h3>Limits</h3>
+          <ul>
+            <li><b>Samples:</b> page checks run on 4 pages per template; "~N pages affected" scales the failing share up to the template's URLs</li>
+            <li><b>Confidence</b> on each finding: complete, strong, partial or to confirm (one page)</li>
+            <li><b>Weights</b> (40 / 20 / 6 / 2) are set by judgement, not yet checked against traffic changes</li>
+            <li><b>Lab speed</b> scores vary by up to 20 points between runs, so they are never a finding</li>
+            <li><b>LLM findings</b> are reviewed by hand; false positives are removed</li>
+            <li>All audits only read; nothing on any site is changed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h3>Glossary</h3>
+        <div class="tw"><table class="mini"><tbody>
+          <tr><td><b>Sitemap / index</b></td><td>XML list of a site's pages for search engines; an index lists other sitemaps</td></tr>
+          <tr><td><b>Canonical</b></td><td>the address a page names as its preferred one; Google indexes that address</td></tr>
+          <tr><td><b>hreflang</b></td><td>tags linking the language versions of a page; x-default is the fallback</td></tr>
+          <tr><td><b>noindex</b></td><td>asks search engines to keep a page out of results</td></tr>
+          <tr><td><b>llms.txt</b></td><td>a short file at /llms.txt telling AI assistants what a site is; a proposal (llmstxt.org), not a standard</td></tr>
+          <tr><td><b>Structured data</b></td><td>machine-readable facts in a page (JSON-LD) for search and answer engines</td></tr>
+          <tr><td><b>Redirect 301 / 302</b></td><td>a URL forwarding to another; 301 permanent, 302 temporary</td></tr>
+          <tr><td><b>Soft 404</b></td><td>an error page that answers "OK" (HTTP 200) instead of "not found"</td></tr>
+          <tr><td><b>Template</b></td><td>a URL pattern shared by many pages, e.g. /cells/conversion/&lt;a&gt;-to-&lt;b&gt;</td></tr>
+          <tr><td><b>Family</b></td><td>a product section of products.aspose.app, e.g. /words/</td></tr>
+          <tr><td><b>Clicks / impressions</b></td><td>Search Console: how often a page was clicked / shown in Google results</td></tr>
+          <tr><td><b>LCP, INP, CLS</b></td><td>Core Web Vitals: load speed (good ≤ 2.5 s), response to input (≤ 200 ms), layout shift (≤ 0.1)</td></tr>
+        </tbody></table></div>
+      </div>
+      <p>Architecture and code: <a href="https://github.com/shoaibkhan-aspose/health-and-recovery#architecture" target="_blank" rel="noopener">repository and diagram</a>.</p>
     </div>
-    <h3>Glossary</h3>
-    <dl class="gloss">
-      <dt>Sitemap / sitemap index</dt><dd>An XML file that lists a site's pages for search engines; an index lists other sitemap files.</dd>
-      <dt>Canonical</dt><dd>A tag in which a page names its preferred address; Google indexes that address.</dd>
-      <dt>hreflang</dt><dd>Tags that link the language versions of a page so Google shows each user the right one; x-default is the fallback.</dd>
-      <dt>noindex</dt><dd>A signal that asks search engines to keep a page out of results.</dd>
-      <dt>llms.txt</dt><dd>A short Markdown file at /llms.txt that tells AI assistants what a site is and links its key pages; a proposal (llmstxt.org), not a standard.</dd>
-      <dt>Structured data (JSON-LD)</dt><dd>Machine-readable facts in a page (what it is, who publishes it) that search and answer engines read.</dd>
-      <dt>Redirect (301 / 302)</dt><dd>A URL that forwards to another; 301 is permanent, 302 temporary.</dd>
-      <dt>Soft 404</dt><dd>An error page that answers "OK" (HTTP 200) instead of "not found".</dd>
-      <dt>Template</dt><dd>A URL pattern shared by many pages of a family, e.g. /cells/conversion/&lt;a&gt;-to-&lt;b&gt;.</dd>
-      <dt>Family</dt><dd>A product section of products.aspose.app, e.g. /words/ or /cells/.</dd>
-      <dt>Clicks / impressions</dt><dd>Search Console: how often a page was clicked / shown in Google results.</dd>
-      <dt>Effort S / M / L</dt><dd>Small: one template or config change. Medium: several templates or translations. Large: rebuild or migration.</dd>
-    </dl>

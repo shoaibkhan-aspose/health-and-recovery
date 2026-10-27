@@ -8,7 +8,7 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 **Keep this file current:** when a decision is made, a fact is confirmed or a build step finishes, update the relevant section (Status, Seed findings, Open items) in the same session. New issues found by hand go into `tenants/aspose.app.seed-findings.yaml`, never only into prose.
 
-## Start here (session handoff, 2026-10-26)
+## Start here (session handoff, 2026-10-27)
 
 **State:** Phase 1 (audit only). Four tenants: **aspose.app** (11 hosts, 29 product families), **conholdate.cloud**, **aspose.cloud** and **groupdocs.cloud** (the three .cloud tenants have only their blog for now; more hosts later). Built and live: discovery, crawl auditor (33 checks), speed auditor (PageSpeed Insights), AI-readiness auditor, text check (LLM), **link check** (repo-based, 6 checks, new 2026-10-22), findings store, Prioritizer, family and host scorecards (health A-F), the reports with archives, host pages, a shared fix guide page and a landing page. Everything is committed and pushed to `github` and `origin` (GitLab); working tree clean.
 
@@ -16,13 +16,21 @@ Domain-agnostic agents that audit a web property, report what is broken, not opt
 
 **Site layout (Pages, https://shoaibkhan-aspose.github.io/health-and-recovery/):**
 - `/` landing page: each property with its open findings, archive link and host links.
-- `/<tenant>/` property report, `/<tenant>/archive/` its frozen snapshots (snapshots stay per property).
+- `/<tenant>/` property report, `/<tenant>/archive/` its frozen snapshots (snapshots stay per property). A single-host property with the Overview layout (`report.manager_view`; today aspose.cloud) forwards `/<tenant>/` to `/<host>/` (`build_report.single_host_property`; keeps #anchor; archive stays at `/<tenant>/archive/`).
 - `/<host>/` one page per host (flat URLs, SK's choice): the property report filtered to that host, scores identical (`build_report --host`, `focus_host`). `build_site.site_hosts` stops the build if a host name equals a tenant or a site folder (`fix-guide`, `method`, `archive`). Apex domains redirect to www (aspose.app, aspose.com), so no clash today.
 - `/fix-guide/` one shared fix guide (all checks, anchors `#g-<check>`, open findings per report). Published reports have no Fix guide section; every "How to fix" link goes there. Local builds keep the full table.
 - `/method/` one shared "How this audit works" page (SK, 2026-10-26; anchors `#method-health`, `#method-score`). Source `scripts/templates/method.html`, used by `build_site.method_page` and inlined by `build_report` for local builds; published reports and new snapshots (`--method-url`, `SNAPSHOT_METHOD_URL`) have no method section and link there. Older snapshots keep their own section.
 - Header: Property and Host dropdowns (switching keeps the #section), "All reports" link. Local pages and snapshots have no switches.
 - Old links (`/aspose-app-health-and-recovery/...`, before the repo rename) work through the redirect repo `shoaibkhan-aspose/aspose-app-health-and-recovery` (local clone `/Users/Apple/Work/Aspose/GitHub/aspose-app-health-and-recovery-redirect`, `index.html` = `404.html`, JS keeps path, query and #anchor; old root and `/archive/` go to `/aspose.app/`; Pages: Deploy from a branch, main).
 - All reports move to a private domain soon (SK, 2026-10-20); until then they are public (noindex).
+
+**What changed on 2026-10-27 (report redesign, SK: "numbers speak more than text"; pilot on aspose.cloud):**
+- **Overview layout** (tenant YAML `report: manager_view: true`, aspose.cloud only): one page, two parts without audience labels (SK): **Overview** (age line "audit data from <date> · N days old", amber after 14; 5 number tiles: Health with trend, Search clicks and impressions with % vs previous 28 days and six months ago, Open issues by severity, Since last run; Health by area; **Top actions required** as a table: score, issue, severity, pages, clicks, effort) then **Details** (findings, changes, coverage numbers, reference). A single-host page hides the Host health table (it repeats the Health tile).
+- Area tiles: issue counts with broken in red, then the biggest loss. **SK chose the badge over a cap** (a broken issue does not cap its area at 59: a 0-click problem would sink the score like a sitewide one).
+- **Health history** now records host health and area scores per set of runs (`record_health`; older entries have families only); `host_trend` feeds the Health tile (trend from the second run; aspose.cloud's first point 2026-10-27, dated at recording, not at the audit date).
+- **Method page redesigned:** pipeline diagram (7 steps with key numbers), one audits table, health and priority-score formulas with weight tables, grade bar, worked example, limits as bullets, glossary table (`scripts/templates/method.html`, own scoped CSS `.mth`).
+- **Decided for aspose.app (not built):** property number = host health weighted by Search Console clicks (SK agreed); discuss before building, because products.aspose.app has ~1.5M of ~1.5M clicks, so the number is effectively products'. Property page = one card per host (health, clicks, impressions, issues, area scores), host page = Overview + Details; Top actions required (top 5 across hosts) on the property page. **Search Console for www, forum, dashboard, purchase, metrics, status:** SK will try to get access (ideal: `sc-domain:aspose.app` Restricted for the service account); until then those hosts show GA4 sessions. SK prefers GSC (it measures Google search clicks, the same source as findings' clicks at stake).
+- Live/archive: aspose.cloud snapshot 2026-10-27 ("Overview and details…"); the live version before it was 2026-10-26-3.
 
 **What changed on 2026-10-26:**
 - Architecture diagram version 10 (blog source repos, link check as step 6); link check on conholdate.cloud (run 5).

@@ -172,7 +172,7 @@ tr:last-child td { border-bottom: 0 }
 .why { font-size: 12px; color: var(--muted) }
 .card .more { font-size: 13px; padding: 5px 10px }
 .verdict { font-size: 17px; max-width: 75ch; margin: 0 }
-header a, .lede a, .method a, .chg a, #sys-table a, .fixline a, .top .fsub a { color: var(--accent) }
+header a, .lede a, .mth a, .chg a, #sys-table a, .fixline a, .top .fsub a { color: var(--accent) }
 .toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 4px; overflow-x: auto; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 8px; margin-block: -16px }
 .toc a { flex: none; font: 500 13px var(--body); color: var(--muted); text-decoration: none; padding: 4px 10px; border-radius: 6px }
 .toc a:hover, .toc a:focus-visible { color: var(--accent); background: var(--tint); outline: none }
@@ -198,6 +198,22 @@ button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .area .an { font-weight: 600; font-size: 14px }
 .area small { font-size: 12px; color: var(--muted); overflow-wrap: anywhere }
 .area.overall { background: var(--tint) }
+.area .ac { font-size: 13px; font-variant-numeric: tabular-nums } .area .down { color: var(--broken); font-weight: 600 }
+/* Overview for managers (tenant opt-in report.manager_view): numbers first, one tile per question */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; min-width: 0 }
+.kpi .kl { font: 600 12px var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--muted) }
+.kpi .kv { font: 600 30px/1.1 var(--display); font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap }
+.kpi .kv small { font: 500 13px var(--body); color: var(--muted) }
+.kpi .ks { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums }
+.kpi .up { color: var(--good); font-weight: 600 } .kpi .down { color: var(--broken); font-weight: 600 }
+.kpi.g-A, .kpi.g-B, .kpi.g-C, .kpi.g-D, .kpi.g-F { border-top: 4px solid var(--gc) } .kpi.g-A .kv, .kpi.g-B .kv, .kpi.g-C .kv, .kpi.g-D .kv, .kpi.g-F .kv { color: var(--gc) }
+.kpi svg { display: block; width: 100%; height: 28px }
+.age.old { color: var(--incorrect); font-weight: 600 }
+table.acts td { white-space: normal } table.acts td.n { white-space: nowrap }
+table.acts a { color: var(--fg); text-decoration-color: var(--line); text-underline-offset: 2px } table.acts a:hover { color: var(--accent) }
+.part { border-top: 3px solid var(--accent); padding-top: 14px; display: grid; gap: 4px }
+.part span { font: 700 26px var(--display) } .part p { color: var(--muted); max-width: 80ch; margin: 0 }
 .risks { background: var(--tint); border-radius: 8px; padding: 14px 18px; display: grid; gap: 8px }
 .risks ol { margin: 0; padding-left: 20px; display: grid; gap: 6px }
 .risks li span { color: var(--muted) }
@@ -213,11 +229,6 @@ button.area:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .htab .chips { min-width: 215px } .htab td.tr { white-space: normal; min-width: 140px }
 .htab button.link { font-size: 12px; font-family: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; white-space: nowrap }
 .mk { display: inline-block; width: 1.2em; font-weight: 700 } .mk.bad { color: var(--broken) } .mk.warn { color: var(--notopt) } .mk.ok { color: var(--good) }
-.method { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px }
-.method h3 { font-size: 16px; margin-bottom: 4px } .method p { font-size: 14px; color: var(--muted); max-width: none }
-.gloss { margin: 0; display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 6px 16px; font-size: 14px }
-.gloss dt { font-weight: 600 } .gloss dd { margin: 0; color: var(--muted) }
-@media (max-width: 560px) { .gloss { grid-template-columns: 1fr } .gloss dd { margin-bottom: 6px } }
 table.guide { font-size: 13px }
 table.guide td { white-space: normal; vertical-align: top; min-width: 140px }
 table.guide td:first-child { min-width: 180px; font-weight: 600 }
@@ -260,6 +271,7 @@ footer a { color: var(--accent) }
 
   <section aria-labelledby="s-sum" id="summary">
     <h2 id="s-sum">Summary</h2>
+    <div class="kpis" id="kpis" hidden></div>
     <div class="sumcard" id="sum-areas" hidden></div>
     <div class="sumgrid">
       <div class="sumcard" id="sum-grades"></div>
@@ -305,6 +317,8 @@ footer a { color: var(--accent) }
     <div class="tablewrap"><table id="sys-table"></table></div>
     <button type="button" class="more" id="sys-more" hidden></button>
   </section>
+
+  <div class="part" id="part-dev" hidden><span>Details</span><p>Every finding with its evidence and fix, what changed since the last run, and the reference tables.</p></div>
 
   <section aria-labelledby="s-find" id="findings">
     <h2 id="s-find">All findings <small>grouped by severity, ranked by score</small></h2>
@@ -436,7 +450,7 @@ __METHOD__
 
   // header
   $("h1").textContent = (R._page_host || R.tenant) + " site health";
-  if (R._page_host) {
+  if (R._page_host && !R._single_host) {
     $("partof").hidden = false;
     $("partof").innerHTML = `One host of the <a href="../${esc(R.tenant)}/">${esc(R.tenant)}</a> report: its own grade, findings and reference rows, scored as on the full report.`;
   }
@@ -500,7 +514,7 @@ __METHOD__
     $("tenant-sw").innerHTML = TENANTS.map(t => `<option value="${esc(t)}"${t === R.tenant ? " selected" : ""}>${esc(t)}</option>`).join("");
     $("tenant-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value)}/${location.hash}`; });
   }
-  if (SITE_HOSTS.length) {  // host pages sit next to the tenant reports: ../<host>/
+  if (SITE_HOSTS.length && !R._single_host) {  // host pages sit next to the tenant reports: ../<host>/
     $("host-sw-wrap").hidden = false;
     $("host-sw").innerHTML = `<option value="">All hosts</option>` + SITE_HOSTS.map(h => `<option value="${esc(h)}"${h === R._page_host ? " selected" : ""}>${esc(h)}</option>`).join("");
     $("host-sw").addEventListener("change", e => { location.href = `../${encodeURIComponent(e.target.value || R.tenant)}/${location.hash}`; });
@@ -513,17 +527,20 @@ __METHOD__
     const byId = Object.fromEntries(R.findings.map(f => [f.id, f]));
     const named = x => { const f = byId[x.id]; return f && f._guide && GUIDE[f._guide] ? GUIDE[f._guide].name : x.group; };
     const loss = a => a.penalties.filter(x => x.points >= 1).slice(0, 2).map(x => `${named(x)} −${Math.round(x.points)}`).join(" · ");
+    const loss1 = a => a.penalties.filter(x => x.points >= 1).slice(0, 1).map(x => `biggest: ${named(x)} −${Math.round(x.points)}`).join("");
     const tile = a => {
       if (a.state === "not checked") return `<div class="area"><b>–</b><span class="an">${esc(a.name)}</span><small>not checked in this run</small></div>`;
       if (a.state === "no data") return `<button type="button" class="area" data-dim="${esc(a.dimension)}"><b>–</b><span class="an">${esc(a.name)}</span><small>no real-user data · ${a.pages} pages, lab median ${a.lab_median ?? "–"}</small></button>`;
       const n = Object.values(a.counts).reduce((s, x) => s + x, 0);
-      const sub = loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
-      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health}/100 (${a.grade}), ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span><small>${esc(sub)}</small></button>`;
+      const b = a.counts.broken || 0, o = n - b;
+      const issues = !n ? "no issues" : (b ? `<span class="down">${b} broken</span>${o ? " · " : ""}` : "") + (o ? `${o} ${b ? "other " : ""}issue${o === 1 ? "" : "s"}` : "");
+      const sub = R._manager_view ? loss1(a) : loss(a) || (a.dimension === "perf" ? `no problems on ${a.pages} pages` : "no problems found");
+      return `<button type="button" class="area g-${a.grade}" data-dim="${esc(a.dimension)}" title="${esc(`${a.name}: ${a.health}/100 (${a.grade}), ${n} open finding${n === 1 ? "" : "s"}`)}"><b>${a.health}</b><span class="an">${esc(a.name)}</span>${R._manager_view ? `<span class="ac">${issues}</span>` : ""}${sub ? `<small>${esc(sub)}</small>` : ""}</button>`;
     };
     $("sum-areas").hidden = false;
     if ($("method-areas")) $("method-areas").hidden = false;
     $("sum-areas").innerHTML = `<span class="dim">Health by area · <code>${esc(AH.host)}</code></span>
-      <div class="areas"><div class="area overall g-${AH.grade}"><b>${AH.health}</b><span class="an">Overall · ${AH.grade}</span><small>all areas together</small></div>${AH.areas.map(tile).join("")}</div>
+      <div class="areas">${R._manager_view ? "" : `<div class="area overall g-${AH.grade}"><b>${AH.health}</b><span class="an">Overall · ${AH.grade}</span><small>all areas together</small></div>`}${AH.areas.map(tile).join("")}</div>
       <div class="why">Each area is scored like the overall health (100 minus points for open problems), on that area's findings only. The overall spends the points of every area, so it is never higher than an area. Select an area to see its findings.</div>`;
     $("sum-areas").addEventListener("click", e => {
       const b = e.target.closest("button[data-dim]");
@@ -1005,6 +1022,62 @@ __METHOD__
   } else {
     $("gsc").outerHTML = `<p class="lede" style="padding:10px 14px">No Search Console sitemap snapshot for this property yet (tenant YAML <code>gsc_sitemaps_snapshot</code>), so there is nothing to compare with the live sitemaps.</p>`;
     $("gsc-st").textContent = "· no snapshot";
+  }
+
+  // Overview for managers (tenant opt-in report.manager_view, one host): a scoreboard of numbers, health by
+  // area and the top actions first; the developer details follow under their own heading
+  if (R._manager_view && AH) {
+    const t = AH.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
+    const delta = (a, b, what) => {
+      if (!b || a == null) return "";
+      const p = Math.round((a - b) / b * 100);
+      return `<span class="${p < 0 ? "down" : p > 0 ? "up" : ""}">${p > 0 ? "+" : p < 0 ? "−" : "±"}${Math.abs(p)}%</span> vs ${what}`;
+    };
+    const TR = R._host_trend || [], before = TR.length > 1 ? TR[TR.length - 2] : null;
+    const spark = pts => {  // health on a fixed 0-100 scale, so small moves look small
+      const w = 160, h = 28, x = i => 4 + i * (w - 8) / (pts.length - 1), y = v => h - 3 - v / 100 * (h - 6);
+      return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="2" points="${pts.map((p, i) => `${x(i)},${y(p.health)}`).join(" ")}"/></svg>`;
+    };
+    const moved = before ? AH.health - before.health : 0;
+    const tiles = [
+      `<div class="kpi g-${AH.grade}"><span class="kl">Health</span><span class="kv">${AH.health} <small>${AH.grade} · out of 100</small></span>`
+        + (before ? `${spark(TR)}<span class="ks"><span class="${moved > 0 ? "up" : moved < 0 ? "down" : ""}">${moved > 0 ? "+" : moved < 0 ? "−" : "±"}${Math.abs(moved)}</span> since ${esc(day(before.date))}</span>`
+                  : `<span class="ks">first audit · trend from the next run</span>`) + `</div>`,
+      t.source === "gsc"
+        ? `<div class="kpi"><span class="kl">Search clicks</span><span class="kv">${fmt(cur.clicks)} <small>28 days</small></span><span class="ks">${delta(cur.clicks, prev.clicks, "previous 28 days")}</span><span class="ks">${delta(cur.clicks, six.clicks, "six months ago")}</span></div>
+           <div class="kpi"><span class="kl">Search impressions</span><span class="kv">${compact(cur.impressions)} <small>28 days</small></span><span class="ks">${delta(cur.impressions, prev.impressions, "previous 28 days")}</span><span class="ks">${delta(cur.impressions, six.impressions, "six months ago")}</span></div>`
+        : t.source === "ga4"
+        ? `<div class="kpi"><span class="kl">Organic sessions</span><span class="kv">${fmt(cur.sessions)} <small>28 days, GA4</small></span><span class="ks">${delta(cur.sessions, prev.sessions, "previous 28 days")}</span></div>`
+        : `<div class="kpi"><span class="kl">Search traffic</span><span class="kv">–</span><span class="ks">no Search Console or GA4 data</span></div>`,
+      `<div class="kpi"><span class="kl">Open issues</span><span class="kv">${findings.length}</span><span class="ks"><span class="down">${byType.broken} broken</span> · ${byType.incorrect} incorrect</span><span class="ks">${byType.not_optimized} not optimized · ${byType.improvable} improvable</span></div>`,
+      `<div class="kpi"><span class="kl">Since last run</span>` + (before
+        ? `<span class="kv">${(CH.new || []).length} <small>new</small> ${(CH.resolved || []).length} <small>resolved</small></span><span class="ks"><a href="#changes">See what changed</a></span>`
+        : `<span class="kv">–</span><span class="ks">first audit of this property</span>`) + `</div>`,
+    ];
+    $("kpis").innerHTML = tiles.join("");
+    $("kpis").hidden = false;
+    // how old the data is: managers must not read a two-week-old crawl as today's state
+    const dates = [R._run_date, A && A.date, R._perf && R._perf.date, R._ai && R._ai.date, R._text && R._text.date, R._links && R._links.date].filter(Boolean).sort();
+    if (dates.length) {
+      const age = Math.floor((Date.now() - Date.parse(dates[0])) / 864e5);
+      const from = dates[0] === dates[dates.length - 1] ? day(dates[0]) : `${day(dates[0])} to ${day(dates[dates.length - 1])}`;
+      $("s-sum").innerHTML = `Overview <small class="age${age > 14 ? " old" : ""}">audit data from ${esc(from)} · ${age === 0 ? "today" : age === 1 ? "1 day old" : age + " days old"}</small>`;
+    } else $("s-sum").textContent = "Overview";
+    document.querySelector('.toc a[href="#summary"]').textContent = "Overview";
+    document.querySelector('.toc a[href="#priorities"]').textContent = "Top actions required";
+    // one host: its Host health row repeats the scoreboard; coverage numbers move to the developer part
+    if (HOSTS.length === 1) { $("host-health").hidden = true; $("toc-host").hidden = true; }
+    $("part-dev").hidden = false;
+    $("part-dev").after($("sum-numbers"));
+    $("sum-grades").closest(".sumgrid").hidden = true;
+    // top actions as a table of numbers
+    if (scored) {
+      const top = findings.slice().sort((a, b) => sc(b) - sc(a)).slice(0, 10);
+      $("s-top").firstChild.textContent = "Top actions required ";
+      $("priorities").querySelector(".lede").innerHTML = `The ten findings to fix first: search traffic at stake × severity ÷ effort. Pages: pages affected (sitewide = the whole host). Clicks: Search Console clicks on those pages in 28 days. <a href="#method-score">How the score works</a>.`;
+      $("top").outerHTML = `<div class="tablewrap"><table class="acts" id="acts"><thead><tr><th class="n">Score</th><th>Issue</th><th>Severity</th><th class="n">Pages</th><th class="n">Clicks</th><th>Effort</th></tr></thead><tbody>${top.map(f => `<tr class="sev-${f.type}"><td class="n">${scoreBadge(f)}</td><td><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${esc(plain(f))}</a></td><td style="color:var(--sev);font-weight:600">${esc(LABEL[f.type])}</td><td class="n">${f.affected_pages ? fmt(f.affected_pages) : "sitewide"}</td><td class="n">${fmt((f.impact || {}).clicks_28d)}</td><td>${esc(f.effort || "S")}</td></tr>`).join("")}</tbody></table></div>`;
+      $("acts").addEventListener("click", openFinding);
+    }
   }
 
   $("foot").innerHTML = `<a href="#method">How this audit works</a> · <a href="${ARCHIVE}">Previous versions</a><br>` + esc(`Generated from discovery run ${R.run_id}${A ? `, crawl audit run ${A.run_id}` : ""}${R._perf ? `, speed audit run ${R._perf.run_id}` : ""}${R._ai ? `, AI audit run ${R._ai.run_id}` : ""}${R._text ? `, text check run ${R._text.run_id}` : ""}${R._links ? `, link check run ${R._links.run_id}` : ""} and the findings store. Read-only audit: nothing on any site was changed. Each finding lists URLs anyone can open to re-check it. For discovery findings "pages" counts URLs in the affected sitemaps; for crawl audit findings it is an estimate from the sample. Impact from Search Console and GA4 is added in the prioritization step.`);

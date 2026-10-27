@@ -215,6 +215,12 @@ def add_hosts(report: dict, summary_path: Path) -> None:
         report["_hosts"] = cards
 
 
+def single_host_property(tenant) -> bool:
+    """A property with one host and the Overview layout is served as that host's page (SK, 2026-10-27): the
+    published /<tenant>/ forwards to /<host>/ (build_site.py)."""
+    return bool(tenant and (tenant.raw.get("report") or {}).get("manager_view") and len(tenant.host_names) == 1)
+
+
 def host_areas(report: dict, host: str, findings: list[dict], urls: int) -> list[dict]:
     """Health by area for one host, each marked as checked or not by the runs in this report. Speed without
     real-user data and without findings says so instead of scoring 100 from lab runs alone."""
@@ -368,20 +374,40 @@ def add_views(report: dict, all_rows: list[dict] | None = None, history_path: Pa
 
 
 def record_health(report: dict, history_path: Path) -> None:
-    """Append this run's family health to reports/<tenant>/health-history.json (once per set of runs)."""
+    """Append this run's family, host and area health to reports/<tenant>/health-history.json (once per set of
+    runs). Hosts are recorded from 2026-10-26 on; older entries have families only."""
     from datetime import date
 
     fam = report.get("_families")
-    if not fam:
+    hosts = report.get("_hosts") or []
+    if not fam and not hosts:
         return
     history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.is_file() else []
     runs = runs_label(report)
     if any(h["runs"] == runs for h in history):
         return
-    cards = fam["hosts"][next(iter(fam["hosts"]))]
-    history.append({"date": date.today().isoformat(), "runs": runs,
-                    "families": {c["family"]: c["health"] for c in cards}})
+    entry: dict = {"date": date.today().isoformat(), "runs": runs}
+    if fam:
+        entry["families"] = {c["family"]: c["health"] for c in fam["hosts"][next(iter(fam["hosts"]))]}
+    entry["hosts"] = {c["host"]: {"health": c["health"], **({"areas": {a["dimension"]: a["health"] for a in c["areas"]
+                                                                       if a["state"] == "scored"}}
+                                                            if c.get("areas") else {})} for c in hosts}
+    history.append(entry)
     history_path.write_text(json.dumps(history, indent=1) + "\n", encoding="utf-8")
+
+
+def host_trend(report: dict, history_path: Path) -> list[dict]:
+    """Health of the page's one host per recorded set of runs, ending with this report (for the Overview)."""
+    hosts = report.get("_hosts") or []
+    if len(hosts) != 1:
+        return []
+    host = hosts[0]["host"]
+    history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.is_file() else []
+    points = [{"date": h["date"], "runs": h["runs"], "health": h["hosts"][host]["health"]}
+              for h in history if host in (h.get("hosts") or {})]
+    if not points or points[-1]["runs"] != runs_label(report):
+        points.append({"date": None, "runs": runs_label(report), "health": hosts[0]["health"]})
+    return points
 
 
 def snapshot(page: str, label: str, report: dict, archive: Path) -> Path:
@@ -528,9 +554,13 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         focus_host(report, args.host, all_rows, tenant)
     report["_area_scores"] = bool(tenant and (tenant.raw.get("report") or {}).get("area_scores"))
+    report["_manager_view"] = bool(tenant and (tenant.raw.get("report") or {}).get("manager_view"))
+    report["_single_host"] = single_host_property(tenant)
     add_families(report, paths.traffic_summary)
     add_hosts(report, paths.traffic_summary)
     add_views(report, all_rows, paths.health_history)
+    if report["_manager_view"]:
+        report["_host_trend"] = host_trend(report, paths.health_history)
     run_date = run_date_of(src, "discovery-")
 
     out = Path(args.out) if args.out else src.with_suffix(".html")

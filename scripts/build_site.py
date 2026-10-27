@@ -177,26 +177,16 @@ METHOD_URL = "../method/"  # from a tenant report at <out>/<tenant>/
 METHOD_PAGE = HEAD + """<title>How this audit works</title>
 <style>
 :root { --bg: #f6f7f9; --surface: #fff; --fg: #18202b; --muted: #5b6676; --line: #dde2e9; --accent: #1f5f8b;
-  --hit: #fff4d6 }
+  --tint: #eef3f8 }
 @media (prefers-color-scheme: dark) { :root { --bg: #11161d; --surface: #182029; --fg: #e4e9f0; --muted: #98a3b3;
-  --line: #2a3542; --accent: #6fb0dc; --hit: #3a3218; color-scheme: dark } }
+  --line: #2a3542; --accent: #6fb0dc; --tint: #1d2834; color-scheme: dark } }
 * { box-sizing: border-box }
 body { margin: 0; background: var(--bg); color: var(--fg);
   font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif }
 main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; display: grid; gap: 18px }
 h1 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 12px }
-h3 { margin: 0 0 4px; font-size: 16px }
 p { margin: 0; color: var(--muted); max-width: 80ch }
 a { color: var(--accent) }
-.method { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start }
-.method > div:first-child { grid-column: 1 / -1 }
-.method > div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
-  scroll-margin-top: 16px }
-.method > div:target { background: var(--hit) }
-.method p { font-size: 14px; max-width: none }
-.gloss { margin: 0; display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 6px 16px; font-size: 14px }
-.gloss dt { font-weight: 600 } .gloss dd { margin: 0; color: var(--muted) }
-@media (max-width: 560px) { .gloss { grid-template-columns: 1fr } .gloss dd { margin-bottom: 6px } }
 </style>
 <main id="method">
   <h1>""" + brand.logo(36) + """How this audit works</h1>
@@ -256,6 +246,8 @@ def build(out: Path, tenants: list[str]) -> None:
                   "--method-url", METHOD_URL, "--site-tenants", ",".join(tenants), "--site-hosts", ",".join(hosts[t])]
         if build_report.main(common + ["--out", str(out / t / "index.html")]):
             raise SystemExit(f"Report for {t} failed")
+        if build_report.single_host_property(load_tenant(t)):  # one host: the property page is that host's page
+            (out / t / "index.html").write_text(redirect_page(f"../{hosts[t][0]}/"), encoding="utf-8")
         for h in hosts[t]:  # one page per host: the tenant report filtered to that host
             if build_report.main(common + ["--host", h, "--out", str(out / h / "index.html")]):
                 raise SystemExit(f"Host page {h} failed")
