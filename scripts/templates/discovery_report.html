@@ -1219,10 +1219,10 @@ __METHOD__
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
     // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
     const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
-    // link-check items as "Open issues: open of issues, fixed and %"; findings are "Issue types" next to it, with
-    // what changed since the last run (SK, 2026-10-27). The scan date is in the age line.
+    // link-check and blog sitemap items as "Open issues: open of issues, fixed and %"; findings are "Issue types"
+    // next to it, with what changed since the last run (SK, 2026-10-27). The scan date is in the age line.
     const note = (title, text) => { EXPLAIN.push(`<b class="xt">${esc(title)}</b><p>${esc(text)}</p>`); return EXPLAIN.length - 1; };
-    const ITEMS_NOTE = note("Open issues", "Each broken link, and each missing or unsupported language of a post, counted one by one by reading the blog's repo. Issues = fixed + open; a fix counts when the item is gone from a post that still exists.");
+    const ITEMS_NOTE = note("Open issues", "Counted one by one: each broken link and each missing or unsupported language of a post (read from the blog's repo, where one is configured), and each URL or sitemap file affected by a sitemap problem. Issues = fixed + open; a fix counts when the item is gone while its post or URL still exists.");
     const TYPES_NOTE = note("Issue types", "Findings of the page checks (crawl, speed, AI readiness, text): one finding is one kind of problem, however many pages it affects.");
     const ask = i => `<button type="button" class="info" aria-label="What is counted" data-x="${i}">?</button>`;
     const itemsLabel = `Open issues ${ask(ITEMS_NOTE)}`, typesLabel = `Issue types ${ask(TYPES_NOTE)}`;
@@ -1262,7 +1262,7 @@ __METHOD__
       $("part-dev").hidden = false;
       if (H.items) {  // per check: where the numbers come from
         const I = H.items, row = (name, c, b) => `<tr><td>${b ? "<b>" + name + "</b>" : name}</td><td class="n">${fmt(c.issues)}</td><td class="n">${fmt(c.fixed)}</td><td class="n">${fmt(c.open)}</td><td class="n">${c.fixed_pct == null ? "–" : c.fixed_pct + "%"}</td></tr>`;
-        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, or one missing language of a post · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
+        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, one missing language of a post, or one URL or file of a sitemap problem · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
           <div class="tablewrap"><table><thead><tr><th>Check</th><th class="n">Issues</th><th class="n">Fixed</th><th class="n">Open</th><th class="n">Fixed %</th></tr></thead><tbody>${Object.entries(I.by_check).map(([k, c]) => row(termify(esc(GUIDE[k] ? GUIDE[k].name : k)), c)).join("")}${row("All", I, true)}</tbody></table></div></section>`);
       }
     } else {  // domain page: one full-width row per subdomain, columns aligned for comparison

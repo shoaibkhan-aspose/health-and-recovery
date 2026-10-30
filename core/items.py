@@ -1,13 +1,18 @@
 """Item ledger: the individual issues of the exact checks, tracked across runs, so a blog's report can say how many
 were fixed, how many are new and how many are still open (SK, 2026-10-27).
 
-An item is one thing to fix: one link (link check), one missing language of one post, one unsupported language.
+An item is one thing to fix: one link (link check), one missing language of one post, one unsupported language;
+from discovery (blog subdomains, 2026-10-30), one URL a sitemap lists wrongly (twice, in two sitemaps, without
+hreflang, ...) or one sitemap with a file-level problem (no lastmod, cannot be fetched, ...).
 Only exhaustive checks have items; sampled checks (crawl audit, text check, speed) stay at finding level, because a
-page leaving the sample is not a fix. An item that is gone counts as fixed when its file still exists in the blog's
-repo, and as removed when the file is gone (a deleted post is not a fix).
+page leaving the sample is not a fix. An item that is gone counts as fixed when its place still exists, and as
+removed when it is gone (a deleted post is not a fix): link check, the file in the blog's repo; discovery, the URL
+in the run's sitemaps (sitemap-level items always count as fixed: dropping a broken sitemap is a fix). Each run
+closes only items of its own source.
 
 Ledger (reports/<tenant>/items.json): {"runs": [run refs], "baseline": {host: {"run", "date"}},
-"items": {key: {"check", "host", "page", "file", "link", "first_seen", "last_seen", "fixed", "removed"}}}.
+"items": {key: {"source", "check", "host", "page", "file", "link", "first_seen", "last_seen", "fixed", "removed"}}}
+(items without "source" are link-check items).
 Shown as issues = fixed + open, fixed, open and the latest scan date (SK, 2026-10-27: no "new", no baseline on
 the pages; new issues show as a growing issue count). Fixed % = fixed / issues; removed items count neither way.
 """
@@ -39,14 +44,41 @@ def run_items(link_run: dict) -> dict[str, dict]:
     return items
 
 
-def update(ledger: dict, run_ref: str, run_date: str, items: dict[str, dict], repos: dict[str, str]) -> dict:
-    """Add one run (once). New keys open; open keys missing from the run are fixed if their file still exists
-    in the host's repo (repos: host -> local clone, pulled to the run's commit), else removed; a key that comes
-    back reopens."""
+def discovery_items(discovery_run: dict) -> dict[str, dict]:
+    """key -> item for one discovery run's `items` (blog subdomains only). A URL listed three times in one sitemap
+    is two items, as the finding counts it."""
+    items: dict[str, dict] = {}
+    for host, issues in (discovery_run.get("items") or {}).items():
+        seen: Counter = Counter()
+        for i in issues:
+            base = f"{i['check']}|{host}|{i['sitemap'] or ''}|{i['url'] or ''}"
+            seen[base] += 1
+            items[f"{base}|{seen[base]}"] = {"source": "discovery", "check": i["check"], "host": host,
+                                             "page": i["url"], "file": i["sitemap"], "link": None}
+    return items
+
+
+def in_repo(repos: dict[str, str]) -> dict:
+    """Link check: host -> does a gone item's post still exist in the host's clone (pulled to the run's commit)."""
+    return {host: lambda rec, root=Path(path): not rec["file"] or (root / rec["file"]).exists()
+            for host, path in repos.items()}
+
+
+def in_sitemaps(hosts, listed: set[str] | None) -> dict:
+    """Discovery: host -> is a gone item's URL still in the run's sitemaps (listed = every URL of the run; None
+    when the inventory is not at hand, then every gone item counts as fixed)."""
+    return {host: lambda rec: not rec["page"] or listed is None or rec["page"] in listed for host in hosts}
+
+
+def update(ledger: dict, run_ref: str, run_date: str, items: dict[str, dict], exists: dict,
+           source: str = "link-audit") -> dict:
+    """Add one run (once). New keys open; open keys of the same source and a host the run covered (exists: host ->
+    check) that are missing from the run are fixed if exists(item) says their place is still there, else removed;
+    a key that comes back reopens."""
     if run_ref in ledger.setdefault("runs", []):
         return ledger
     known = ledger.setdefault("items", {})
-    for host in {it["host"] for it in items.values()} | set(repos):
+    for host in {it["host"] for it in items.values()} | set(exists):
         ledger.setdefault("baseline", {}).setdefault(host, {"run": run_ref, "date": run_date})
     for key, it in items.items():
         rec = known.get(key)
@@ -55,10 +87,10 @@ def update(ledger: dict, run_ref: str, run_date: str, items: dict[str, dict], re
         else:
             rec.update(last_seen=run_date, fixed=None, removed=None)
     for key, rec in known.items():
-        if key in items or rec["fixed"] or rec["removed"] or rec["host"] not in repos:
+        if (key in items or rec["fixed"] or rec["removed"] or rec["host"] not in exists
+                or rec.get("source", "link-audit") != source):
             continue
-        exists = not rec["file"] or (Path(repos[rec["host"]]) / rec["file"]).exists()
-        rec["fixed" if exists else "removed"] = run_date
+        rec["fixed" if exists[rec["host"]](rec) else "removed"] = run_date
     ledger["runs"].append(run_ref)
     return ledger
 

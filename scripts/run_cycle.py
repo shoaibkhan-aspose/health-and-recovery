@@ -6,7 +6,8 @@
 
 Before the link check, each blog's local clone is fast-forwarded (git pull --ff-only); a clone with local
 changes or a diverged history stops the cycle untouched. Loads .env itself (the same keys `set -a; source .env` would export), runs discover, audit_crawl, audit_ai,
-audit_perf, audit_text, audit_links and track_items (only for tenants with `audit.links` in their YAML) and
+audit_perf, audit_text, audit_links (only for tenants with `audit.links` in their YAML), track_items (also for
+tenants with `collections.blogs`: blog sitemap items) and
 prioritize with
 --tenant, and writes each step's output to data/<tenant>/cycle-<date>.log. Building, snapshotting and pushing the
 report stay manual: the results are reviewed by hand first (LLM findings in particular).
@@ -73,7 +74,9 @@ def main(argv: list[str] | None = None) -> int:
     steps = QUICK if args.quick else STEPS
     steps = steps[steps.index(args.start):] if args.start in steps else steps
     if not (tenant.raw.get("audit") or {}).get("links"):
-        steps = [s for s in steps if s not in ("audit_links", "track_items")]  # blog source repos only
+        steps = [s for s in steps if s != "audit_links"]  # blog source repos only
+    if not (tenant.raw.get("audit") or {}).get("links") and not (tenant.raw.get("collections") or {}).get("blogs"):
+        steps = [s for s in steps if s != "track_items"]  # items come from the link check and blog sitemaps
     env = {**os.environ, **dotenv(REPO_ROOT / ".env"), "TENANT": args.tenant}
     log_path = tenant_paths(args.tenant).data / f"cycle-{date.today().isoformat()}.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)

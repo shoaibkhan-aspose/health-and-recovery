@@ -112,6 +112,8 @@ class Discovery:
         self.lang_codes = frozenset(raw["languages"]) if raw.get("languages") else LANG_CODES
         self.fix_channels = {h["host"]: h.get("fix_channel") for h in tenant.hosts}
         self.known_hosts = {h["host"] for h in tenant.hosts}
+        # blog subdomains: every sitemap issue is also listed one by one, for the item ledger (core/items.py)
+        self.item_hosts = set((raw.get("collections") or {}).get("blogs") or []) & set(self.hosts)
 
         self.origins: dict[str, set] = {}
         self.queue: deque = deque()
@@ -226,11 +228,13 @@ class Discovery:
         seen: set = set()
         counts: Counter = Counter()
         examples: dict = defaultdict(list)
+        listed: dict = defaultdict(list)  # check -> every URL it hit (items for blog subdomains)
         rows = []
         for e in entries:
             loc = e.loc
             if loc in seen:
                 counts["dup_in_file"] += 1
+                listed["dup_in_file"].append(loc)
                 if len(examples["dup_in_file"]) < EXAMPLES:
                     examples["dup_in_file"].append(loc)
                 continue
@@ -244,6 +248,7 @@ class Discovery:
             ):
                 if hit:
                     counts[check] += 1
+                    listed[check].append(loc)
                     if len(examples[check]) < EXAMPLES:
                         examples[check].append(loc)
             if self._in_property(u_host) and u_host not in self.known_hosts:
@@ -259,6 +264,8 @@ class Discovery:
         rec["off_host_urls"] = rec.pop("off_host")
         rec["excluded_host_urls"] = rec.pop("excluded_host")
         rec["examples"] = dict(examples)
+        if rec["host"] in self.item_hosts:
+            rec["listed"] = dict(listed)  # kept in memory only; the store has the counts and examples
 
     def run(self) -> dict:
         started = time.monotonic()
@@ -283,7 +290,9 @@ class Discovery:
         report["duration_s"] = round(time.monotonic() - started, 1)
         report["not_fetched"] = [q[0] for q in self.queue]
         report["findings"] = self.findings()
-        self.store.finish_run(self.run_id, {k: v for k, v in report.items() if k != "findings"})
+        if self.item_hosts and not self.queue and not self.section_filter:  # complete runs only
+            report["items"] = self.items(report["findings"])
+        self.store.finish_run(self.run_id, {k: v for k, v in report.items() if k not in ("findings", "items")})
         return report
 
     # ---- results ----
@@ -443,6 +452,7 @@ class Discovery:
             host = urlsplit(parent).netloc.lower()
             groups[("foreign_child", host, self._group(parent))].append((parent, f"points to {child}", 0))
 
+        self._groups = groups
         roles = {"malformed_child": "listed child", "foreign_child": "sitemap index"}
         for (check, host, section), items in sorted(groups.items()):
             dimension, ftype, title, expected, tier = SITEMAP_CHECKS[check]
@@ -526,6 +536,33 @@ class Discovery:
                 urls=self.store.sample_urls(self.run_id, host, section, "sitemap_count > 1"),
                 observed=f"{n:,} URLs appear in 2+ sitemaps", expected="each URL in exactly one sitemap",
                 affected_pages=n, fix_tier=1))
+        return out
+
+    def items(self, findings: list[dict]) -> dict[str, list[dict]]:
+        """Every issue of the blog subdomains one by one, {host: [{check, sitemap, url}]}: one per listed URL
+        where the check counts URLs (a duplicate, an http:// URL, a URL without hreflang), else one per sitemap
+        (no lastmod, fetch failed, ...), else one per finding (robots.txt). Every blog host gets a list, empty
+        when clean, so a later run can tell that its items were fixed."""
+        out: dict[str, list[dict]] = {h: [] for h in sorted(self.item_hosts)}
+        by_url = {r["url"]: r for r in self.records}
+        for (check, host, _), entries in sorted(self._groups.items()):
+            if host not in out:
+                continue
+            for u, _, _ in entries:
+                for loc in (by_url.get(u) or {}).get("listed", {}).get(check) or [None]:
+                    out[host].append({"check": check, "sitemap": u, "url": loc})
+        grouped = {(check, host) for check, host, _ in self._groups}
+        by_url_checks = {"cross_sitemap_dups": "sitemap_count > 1", "hreflang_partial": "hreflang_count = 0"}
+        for f in findings:
+            host, check = f["subdomain"], f["check"]
+            if host not in out or (check, host) in grouped:
+                continue
+            if check in by_url_checks:
+                section = f["template"].partition(":")[2] if host in self.section_cfg else None
+                out[host] += [{"check": check, "sitemap": None, "url": u} for u in
+                              self.store.sample_urls(self.run_id, host, section, by_url_checks[check], limit=-1)]
+            else:
+                out[host].append({"check": check, "sitemap": (f["evidence"]["urls"] or [None])[0], "url": None})
         return out
 
 

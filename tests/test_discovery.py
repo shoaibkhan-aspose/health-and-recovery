@@ -231,6 +231,29 @@ def test_duplicate_url_keeps_hreflang_and_findings_group_per_host():
     assert partial and partial[0]["evidence"]["urls"] == ["https://www.example.com/de/"]
 
 
+def test_blog_hosts_list_every_sitemap_issue_as_an_item():
+    t = make_tenant()
+    t.raw["collections"] = {"blogs": ["www.example.com"]}
+    a, b = "https://www.example.com/a/", "https://www.example.com/b/"
+    routes = {
+        "https://www.example.com/robots.txt": (404, b""),
+        "https://www.example.com/sitemap.xml": (200, index("https://www.example.com/en.xml",
+                                                           "https://www.example.com/fr.xml")),
+        "https://www.example.com/en.xml": (200, urlset(a, a, a, b, lastmod="2026-10-01")),
+        "https://www.example.com/fr.xml": (200, urlset(b)),  # no lastmod; b also in en.xml
+    }
+    report = discover(t, FakeFetcher(routes), InventoryStore(":memory:"), hosts=["www.example.com"], log=None)
+    got = sorted((i["check"], i["sitemap"] or "", i["url"] or "") for i in report["items"]["www.example.com"])
+    assert got == [("cross_sitemap_dups", "", b),
+                   ("dup_in_file", "https://www.example.com/en.xml", a),   # listed 3 times: 2 items
+                   ("dup_in_file", "https://www.example.com/en.xml", a),
+                   ("lastmod_missing", "https://www.example.com/fr.xml", ""),
+                   ("lastmod_missing", "https://www.example.com/sitemap.xml", ""),  # the index has none either
+                   ("robots_missing", "https://www.example.com/robots.txt", "")]
+    assert "items" not in discover(make_tenant(), FakeFetcher(routes), InventoryStore(":memory:"),
+                                   hosts=["www.example.com"], log=None)  # not a blog: no items
+
+
 def test_double_slash_child_and_guessed_html_probe():
     routes = {
         # GSC-submitted index lists children with "//": listed URL fails, corrected URL works
