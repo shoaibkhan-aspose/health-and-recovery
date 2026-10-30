@@ -82,5 +82,17 @@
     "date": "2026-10-27 (6)",
     "label": "Issue types and open issues tiles",
     "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6"
+  },
+  {
+    "file": "2026-10-30.html",
+    "date": "2026-10-30",
+    "label": "Before sitemap issues counted one by one (downloaded from Pages)",
+    "runs": "discovery run 2, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 6"
+  },
+  {
+    "file": "2026-10-30-2.html",
+    "date": "2026-10-30 (2)",
+    "label": "Sitemap issues counted one by one",
+    "runs": "discovery run 3, crawl audit run 1, speed audit run 3, AI audit run 2, text check run 4, link check run 7"
   }
 ]
