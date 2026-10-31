@@ -75,6 +75,16 @@ details.f > summary:hover { background: var(--tint) }
 details.f > summary:hover .chev { color: var(--accent) }
 details.f[open] > summary .chev { transform: rotate(90deg) }
 .fwhere { color: var(--muted); font-size: 13px }
+/* severity counts that filter the list, and how much was checked */
+.fchips { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center }
+.chip { font: 500 13px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sev); border-radius: 6px; padding: 5px 10px; cursor: pointer }
+.chip b { color: var(--sev); font: 700 15px var(--display); margin-right: 2px }
+.chip:hover { border-color: var(--sev) } .chip[aria-pressed="true"] { background: var(--tint); border-color: var(--sev); box-shadow: inset 0 0 0 1px var(--sev) }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.cover { font-size: 13px; color: var(--muted); margin-left: auto }
+/* a note shows its first line; "more" opens the rest */
+.morebtn { font: inherit; font-weight: 500; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px }
+.morebtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
 .pill { font: 600 11px var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--sev); white-space: nowrap }
 .ftitle { font-weight: 600; min-width: 0 }
 .fpages { font: 500 13px var(--mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums }
@@ -413,7 +423,7 @@ footer a { color: var(--accent) }
 
   <section aria-labelledby="s-find" id="findings">
     <h2 id="s-find">Issues and fixes <small id="find-meta"></small></h2>
-    <p class="lede" id="find-lede">One row per kind of problem. Open a row (▸) for its evidence; "How to fix" opens its row in the <a href="#fix-guide" id="lede-guide">Fix guide</a>. Confidence says how solid the evidence is: <b>complete</b> (every page or file checked), <b>strong</b> (most sampled pages failed), <b>partial</b>, or <b>to confirm</b> (one page, or a manual note not yet re-checked).</p>
+    <p class="lede fold" id="find-lede"><span id="find-first">One row per kind of problem; open a row (▸) for its evidence.</span><span class="rest"> <span id="find-score"></span>"How to fix" opens its row in the <a href="#fix-guide" id="lede-guide">Fix guide</a>. Confidence says how solid the evidence is: <b>complete</b> (every page or file checked), <b>strong</b> (most sampled pages failed), <b>partial</b>, or <b>to confirm</b> (one page, or a manual note not yet re-checked).</span></p>
     <div class="filters">
       <label for="f-src">Source</label><select id="f-src"></select>
       <label for="f-type">Severity</label><select id="f-type"></select>
@@ -438,24 +448,23 @@ footer a { color: var(--accent) }
 
   <section aria-labelledby="s-ref" id="reference">
     <h2 id="s-ref">Reference</h2>
-    <p class="lede">Each table opens on the rows that need attention: ✗ broken first, then ⚠ warnings, by size. The rest is one click away.</p>
     <details class="ref" id="audit" hidden open><summary>Crawl audit per host <small id="audit-st"></small> <small id="audit-meta"></small></summary>
       <div class="scope" id="audit-scope"></div>
       <div class="tablewrap"><table id="audit-hosts"></table></div>
     </details>
     <details class="ref" id="speed" hidden open><summary>Speed per subdomain <small id="speed-st"></small> <small id="speed-meta"></small></summary>
-      <p class="lede">Whole host: real Chrome users over 28 days, 75th percentile, mobile (good: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1). Pages: the most-visited pages per template; "real-user data" counts pages with enough visits for their own numbers. The lab score (Lighthouse, 0-100) varies by up to ~20 points between runs, so it is shown here only, never as a finding.</p>
+      <p class="lede fold">The lab score (Lighthouse, 0-100) varies by up to ~20 points between runs, so it is shown here only, never as a finding.<span class="rest"> Whole host: real Chrome users over 28 days, 75th percentile, mobile (good: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1). Pages: the most-visited pages per template; "real-user data" counts pages with enough visits for their own numbers.</span></p>
       <div class="tablewrap"><table id="speed-hosts"></table></div>
     </details>
     <details class="ref" id="ai" hidden open><summary>AI access per subdomain <small id="ai-st"></small> <small id="ai-meta"></small></summary>
-      <p class="lede">Can AI search and answer engines (ChatGPT search, Perplexity, Claude, Google AI Overviews, Copilot) reach each host? "robots.txt" and "Firewall" test their crawlers; a block there is a finding. Blocks on AI <i>training</i> crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended) are a business choice, shown here only. llms.txt is a proposed convention (llmstxt.org) that some AI tools read: on products, a family counts as covered by its own file or a link from the host's file.</p>
+      <p class="lede fold">Blocks on AI <i>training</i> crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended) are a business choice, shown here only, never as a finding.<span class="rest"> Can AI search and answer engines (ChatGPT search, Perplexity, Claude, Google AI Overviews, Copilot) reach each host? "robots.txt" and "Firewall" test their crawlers; a block there is a finding. llms.txt is a proposed convention (llmstxt.org) that some AI tools read: on products, a family counts as covered by its own file or a link from the host's file.</span></p>
       <div class="tablewrap"><table id="ai-hosts"></table></div>
     </details>
     <details class="ref" open><summary>Subdomains: robots.txt and sitemaps <small id="hosts-st"></small></summary>
       <div class="tablewrap"><table id="hosts"></table></div>
     </details>
     <details class="ref" open><summary>Sections <small id="sections-st"></small> <small id="sec-host"></small></summary>
-      <p class="lede">URLs listed in sitemaps per section, language variants found in the URL paths, and the share of URLs with hreflang alternates in the sitemap. "In GSC" is what Google reports as discovered from the submitted sitemaps (it counts duplicates).</p>
+      <p class="lede fold">URLs listed in sitemaps per section, with their languages and hreflang share.<span class="rest"> Languages: variants found in the URL paths. With hreflang: the share of URLs with hreflang alternates in the sitemap. "In GSC" is what Google reports as discovered from the submitted sitemaps (it counts duplicates).</span></p>
       <div class="tablewrap"><table id="sections"></table></div>
     </details>
     <details class="ref" open><summary>Submitted sitemaps: Search Console vs live <small id="gsc-st"></small></summary>
@@ -1007,6 +1016,7 @@ __METHOD__
     const head = `<div class="fhead" aria-hidden="true"><span>${scored ? "Score" : ""}</span><span>Issue</span><span>Severity</span><span class="n">Pages</span><span class="n">Clicks</span><span>Effort</span><span></span><span></span></div>`;
     const btn = ranked.length > PAGE + 2 ? `<button type="button" class="more" aria-expanded="${!cut}">${cut ? `Show all ${ranked.length}` : `Show the first ${PAGE}`}</button>` : "";
     $("findings-list").innerHTML = ranked.length ? head + shown.map(card).join("") + btn : `<p class="dim">No findings match these filters.</p>`;
+    document.querySelectorAll(".chip[data-t]").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.t === t)));
   }
   // link check evidence: grouped by the page that holds the links; each link with its fix, source line and commit
   const linkEvidence = f => {
@@ -1033,9 +1043,23 @@ __METHOD__
   });
   for (const id of ["f-src", "f-type", "f-host", "f-dim", "f-fam"]) $(id).addEventListener("change", renderFindings);
   $("find-meta").textContent = scored ? "ranked by priority score" : "ranked by severity";
-  if (scored) $("find-lede").insertAdjacentHTML("afterbegin", `Fix from the top: the score is search traffic at stake × severity ÷ effort (<a href="#method-score">how it works</a>). Pages: pages affected. Clicks: Search Console clicks on those pages in 28 days. `);
+  if (scored) {
+    $("find-first").textContent = "One row per kind of problem, fix from the top; open a row (▸) for its evidence.";
+    $("find-score").innerHTML = `The score is search traffic at stake × severity ÷ effort (<a href="#method-score">how it works</a>). Pages: pages affected. Clicks: Search Console clicks on those pages in 28 days. `;
+  }
+  // severity counts as filter chips, and how much was checked, above the list
+  $("find-lede").insertAdjacentHTML("afterend", `<div class="fchips">${ORDER.filter(t => byType[t]).map(t =>
+      `<button type="button" class="chip sev-${t}" data-t="${t}" aria-pressed="false"><b>${byType[t]}</b> ${esc(LABEL[t].toLowerCase())}</button>`).join("")}
+    <span class="cover">Checked: ${hosts.length > 1 ? `${fmt(hosts.length)} subdomains · ` : ""}${fmt(totalUrls)} URLs in sitemaps${A ? ` · ${fmt(A.pages)} pages audited` : ""}${findings.some(f => f._confidence === "to confirm") ? ` · ${findings.filter(f => f._confidence === "to confirm").length} to confirm` : ""}</span></div>`);
+  document.querySelector(".fchips").addEventListener("click", e => {
+    const c = e.target.closest(".chip"); if (!c) return;
+    $("f-type").value = $("f-type").value === c.dataset.t ? "" : c.dataset.t;
+    showAll = true;
+    renderFindings();
+  });
   renderFindings();
-  // changes since the last run
+  // changes since the last run (the Overview layout keeps resolved findings and family moves in Fix progress)
+  let FAM_MOVES = "";
   {
     const T = R._trend || {};
     $("chg-meta").textContent = CH.runs && CH.runs.length ? `latest runs: ${CH.runs.join(", ").replace(/-run/g, " run ")}` : "";
@@ -1044,6 +1068,7 @@ __METHOD__
       const card = ((R._families || {}).hosts ? Object.values(R._families.hosts)[0] : []).find(c => c.family === fam);
       return card && before != null && card.health !== before ? [fam, before, card.health] : null; }).filter(Boolean)
       .sort((a, b) => (a[2] - a[1]) - (b[2] - b[1])) : [];
+    if (moved.length) FAM_MOVES = `Family health since ${esc(day(T.date))}: ${moved.map(([fam, b, a]) => `/${esc(fam)}/ ${b} → <b>${a}</b> <span class="${a > b ? "ok" : "bad"}">${a > b ? "+" : "−"}${Math.abs(a - b)}</span>`).join(" · ")}`;
     $("chg-body").innerHTML = `<div class="chg">
       <div><b>${newF.length}</b> new finding${newF.length === 1 ? "" : "s"}${newF.length ? `:<ul>${newF.map(f => `<li><a href="#f-${esc(f.id)}" data-open="${esc(f.id)}">${termify(esc(plain(f)))}</a> · ${esc(where(f))}</li>`).join("")}</ul>` : "."}</div>
       <div><b>${(CH.resolved || []).length}</b> resolved${(CH.resolved || []).length ? `:<ul>${CH.resolved.map(f => `<li>${esc(f.title)} <span class="dim">(${esc(f.subdomain)}, ${esc(f.id)})</span></li>`).join("")}</ul>` : "."}</div>
@@ -1118,7 +1143,6 @@ __METHOD__
     const st = $(statusId);
     st.className = need ? "need" : "fine";
     st.textContent = need ? `· ${need} of ${rows.length} ${noun} need attention${bad ? ` (${bad} broken)` : ""}` : `· all ${rows.length} fine`;
-    if (!need) details.open = false;
     let all = false;
     const render = () => {
       const shown = all ? rows : rows.slice(0, limit);
@@ -1136,9 +1160,9 @@ __METHOD__
     const runs = A.runs || [{ run_id: A.run_id }];
     $("audit-meta").textContent = `${runs.length > 1 ? "runs " + runs.map(r => r.run_id).join(", ") : "run " + A.run_id}${A.date ? " · " + day(A.date) : ""} · ${fmt(A.pages)} pages · ${fmt(A.requests)} requests`;
     const p = A.params;
+    const secs = Object.entries(A.sections || {}).filter(([, v]) => v.length);
     $("audit-scope").innerHTML = [
-      `<div><b>Sample.</b> Per template: ${p.per_template} pages in the default language plus 1 page in each of up to ${p.other_langs} other languages, picked the same way every run. Every host's homepage and the products hub pages are added.</div>`,
-      `<div><b>Scope.</b> Every host and homepage, plus ${Object.entries(A.sections).map(([h, v]) => `${v.length} sections on <span class="mono">${esc(h)}</span>`).join(", ")}${runs.length > 1 ? `, across ${runs.length} runs (a page checked more than once shows its newest result)` : ""}.</div>`,
+      `<p class="lede fold">A sample: ${p.per_template} pages per template, plus 1 page in each of up to ${p.other_langs} other languages, the same pages every run.<span class="rest"> Every host's homepage and the products hub pages are added. Scope: every host and homepage${secs.length ? `, plus ${secs.map(([h, v]) => `${v.length} sections on <span class="mono">${esc(h)}</span>`).join(", ")}` : ""}${runs.length > 1 ? `, across ${runs.length} runs (a page checked more than once shows its newest result)` : ""}.</span></p>`,
       A.stopped_early ? `<div class="warn"><b>Stopped early</b> (page limit reached): absent findings prove nothing.</div>` : "",
     ].join("");
     const CHECK = c => c.replace(/_/g, " ");
@@ -1287,8 +1311,12 @@ __METHOD__
     document.querySelector('.toc a[href="#priorities"]').textContent = "Top actions required";
     $("host-health").hidden = true; $("toc-host").hidden = true;  // the scoreboard or the subdomain rows say it all
     $("sum-grades").closest(".sumgrid").hidden = true;
-    $("part-dev").after($("sum-numbers"));  // coverage numbers belong with the history and reference
-    $("part-dev").before($("findings"));  // the issues come right after the overview, not under a part heading
+    // Overview, Issues and fixes, Fix progress, Reference (SK, 2026-10-31): no part heading; the severity counts
+    // and coverage are the chips and "Checked" line above the issues; Changes becomes Fix progress
+    $("sum-numbers").hidden = true;
+    $("s-chg").textContent = "Fix progress";
+    document.querySelector('.toc a[href="#changes"]').textContent = "Fix progress";
+    const progress = [];  // filled below: items fixed per check (blogs with a link check), then resolved findings
 
     if (R._page_host) {  // subdomain page: a scoreboard of its own numbers
       const H = HOSTS[0], t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
@@ -1303,15 +1331,15 @@ __METHOD__
           ? `<div class="kpi"><span class="kl">Organic sessions</span><span class="kv">${fmt(cur.sessions)} <small>28 days, GA4</small></span><span class="ks">${delta(cur.sessions, prev.sessions, "previous 28 days")}</span></div>`
           : `<div class="kpi"><span class="kl">Search traffic</span><span class="kv">–</span><span class="ks">no Search Console or GA4 data</span></div>`,
         `<div class="kpi"><span class="kl">${typesLabel}</span><span class="kv">${findings.length}</span><span class="ks"><span class="down">${byType.broken} broken</span> · ${byType.incorrect} incorrect · ${byType.not_optimized + byType.improvable} minor</span>`
-          + `<span class="ks">${before ? `<a href="#changes">${changesSub({ add: (CH.new || []).length, gone: (CH.resolved || []).length }, before)}</a>` : "no earlier run to compare"}</span></div>`,
+          + `<span class="ks">${!before ? "no earlier run to compare" : (CH.resolved || []).length  // resolved ones are named in Fix progress; new ones are tagged in the list
+            ? `<a href="#changes">${changesSub({ add: (CH.new || []).length, gone: CH.resolved.length }, before)}</a>` : changesSub({ add: (CH.new || []).length, gone: 0 }, before)}</span></div>`,
         H.items ? `<div class="kpi"><span class="kl">${itemsLabel}</span><span class="kv">${itemsNum(H.items)}</span><span class="ks">${itemsSub(H.items)}</span></div>` : "",
       ].join("");
       $("kpis").hidden = false;
-      $("part-dev").hidden = false;
-      if (H.items) {  // per check: where the numbers come from
+      if (H.items) {  // per check: where the Open issues tile comes from
         const I = H.items, row = (name, c, b) => `<tr><td>${b ? "<b>" + name + "</b>" : name}</td><td class="n">${fmt(c.issues)}</td><td class="n">${fmt(c.fixed)}</td><td class="n">${fmt(c.open)}</td><td class="n">${c.fixed_pct == null ? "–" : c.fixed_pct + "%"}</td></tr>`;
-        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, one missing language of a post, or one URL or file of a sitemap problem · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
-          <div class="tablewrap"><table><thead><tr><th>Check</th><th class="n">Issues</th><th class="n">Fixed</th><th class="n">Open</th><th class="n">Fixed %</th></tr></thead><tbody>${Object.entries(I.by_check).map(([k, c]) => row(termify(esc(GUIDE[k] ? GUIDE[k].name : k)), c)).join("")}${row("All", I, true)}</tbody></table></div></section>`);
+        progress.push(`<p class="lede fold">Counted one by one since the first scan (${esc(day(I.since))}), last scanned ${esc(day(I.scanned))}.<span class="rest"> One item = one link, one missing language of a post, or one URL or file of a sitemap problem. Issues = fixed + open.${I.removed ? ` ${fmt(I.removed)} items are gone because their post was deleted (not counted as fixed).` : ""}</span></p>
+          <div class="tablewrap" id="fixes"><table><thead><tr><th>Check</th><th class="n">Issues</th><th class="n">Fixed</th><th class="n">Open</th><th class="n">Fixed %</th></tr></thead><tbody>${Object.entries(I.by_check).map(([k, c]) => row(termify(esc(GUIDE[k] ? GUIDE[k].name : k)), c)).join("")}${row("All", I, true)}</tbody></table></div>`);
       }
     } else {  // domain page: one full-width row per subdomain, columns aligned for comparison
       const published = SITE_HOSTS.length > 0;
@@ -1357,9 +1385,15 @@ __METHOD__
       if (published) {  // the details live on the subdomain pages; snapshots keep them here
         for (const id of ["findings", "changes", "reference", "fix-guide"]) if ($(id)) $(id).hidden = true;
         for (const a of document.querySelectorAll('.toc a[href="#findings"], .toc a[href="#changes"], .toc a[href="#reference"], #toc-guide')) a.hidden = true;
-        $("sum-numbers").hidden = true;
-      } else $("part-dev").hidden = false;
+      }
     }
+
+    // Fix progress: page-check findings are not counted one by one, so a resolved one only shows here (SK)
+    const gone = CH.resolved || [];
+    if (gone.length) progress.push(`<p><b>Resolved since the last run:</b> ${gone.map(r => esc(GUIDE[r.check] ? GUIDE[r.check].name : r.title) + (HOSTS.length > 1 ? ` <span class="dim">(${esc(r.subdomain)})</span>` : "")).join(", ")}</p>`);
+    if (FAM_MOVES) progress.push(`<p>${FAM_MOVES}</p>`);
+    $("chg-body").innerHTML = progress.join("");
+    if (!progress.length) { $("changes").hidden = true; document.querySelector('.toc a[href="#changes"]').hidden = true; }
 
     // a subdomain page has its issues ranked by score right below the overview: a top list would repeat them (SK)
     if (R._page_host) {
@@ -1377,6 +1411,15 @@ __METHOD__
       $("acts").addEventListener("click", openFinding);
     }
   }
+
+  // notes: the first line stays, the rest opens with "more" (SK: no paragraphs, nothing lost)
+  document.querySelectorAll("p.fold").forEach(p => {
+    const rest = p.querySelector(".rest"); if (!rest) return;
+    rest.hidden = true;
+    const b = document.createElement("button"); b.type = "button"; b.className = "morebtn"; b.textContent = "more"; b.setAttribute("aria-expanded", "false");
+    b.addEventListener("click", () => { rest.hidden = !rest.hidden; b.textContent = rest.hidden ? "more" : "less"; b.setAttribute("aria-expanded", String(!rest.hidden)); });
+    p.append(" ", b);
+  });
 
   // a link to one finding (#f-<id>, e.g. from the property page): show it even when it sits behind "Show more"
   if (location.hash.startsWith("#f-")) {
