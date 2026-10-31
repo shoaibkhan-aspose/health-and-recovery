@@ -1316,6 +1316,8 @@ __METHOD__
     $("sum-numbers").hidden = true;
     $("s-chg").textContent = "Fix progress";
     document.querySelector('.toc a[href="#changes"]').textContent = "Fix progress";
+    $("findings").before($("changes"));  // progress first, then the issues (SK, 2026-10-31)
+    document.querySelector('.toc a[href="#findings"]').before(document.querySelector('.toc a[href="#changes"]'));
     const progress = [];  // filled below: items fixed per check (blogs with a link check), then resolved findings
 
     if (R._page_host) {  // subdomain page: a scoreboard of its own numbers
