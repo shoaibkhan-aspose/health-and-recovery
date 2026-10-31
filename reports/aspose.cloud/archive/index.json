@@ -88,5 +88,17 @@
     "date": "2026-10-30 (2)",
     "label": "Sitemap issues counted one by one",
     "runs": "discovery run 3, crawl audit run 3, speed audit run 6, AI audit run 4, text check run 7, link check run 10"
+  },
+  {
+    "file": "2026-10-31.html",
+    "date": "2026-10-31",
+    "label": "Before one ranked issues list (downloaded from Pages)",
+    "runs": "discovery run 3, crawl audit run 3, speed audit run 6, AI audit run 4, text check run 7, link check run 10"
+  },
+  {
+    "file": "2026-10-31-2.html",
+    "date": "2026-10-31 (2)",
+    "label": "One ranked issues list, readable link evidence",
+    "runs": "discovery run 3, crawl audit run 3, speed audit run 6, AI audit run 4, text check run 7, link check run 11"
   }
 ]

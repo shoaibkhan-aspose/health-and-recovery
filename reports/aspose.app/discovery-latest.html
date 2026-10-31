@@ -59,10 +59,22 @@ section { display: grid; gap: 16px; min-width: 0 }
 select { font: 14px var(--body); padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--fg) }
 select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
 .count { font-size: 13px; color: var(--muted); margin-left: auto }
-.findings { display: grid; gap: 8px }
-details.f { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sev); border-radius: 6px }
-details.f > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: baseline }
+.findings { display: grid; gap: 8px; --fcols: 3.2em minmax(0, 1fr) 7.5em 5.5em 5em 3.5em 6.5em 1em }
+/* one row per finding, same columns as the header row; the row opens into its evidence */
+.fhead { display: grid; grid-template-columns: var(--fcols); gap: 4px 12px; padding: 0 15px 0 19px; font: 600 12px var(--body); letter-spacing: .04em; text-transform: uppercase; color: var(--muted) }
+.fhead .n { text-align: right }
+details.f { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sev); border-radius: 6px; scroll-margin-top: 64px }
+details.f > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: var(--fcols); gap: 4px 12px; align-items: baseline }
 details.f > summary::-webkit-details-marker { display: none }
+details.f > summary:hover { background: var(--tint) }
+.fmeta { display: contents }
+.fsev { color: var(--sev); font-weight: 600; font-size: 13px }
+.fnum { font: 13px var(--mono); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap }
+.ffix { font-size: 13px; white-space: nowrap } .ffix a { color: var(--accent) }
+.chev { color: var(--muted); font-size: 18px; line-height: 1; transition: transform .15s; justify-self: end }
+details.f > summary:hover .chev { color: var(--accent) }
+details.f[open] > summary .chev { transform: rotate(90deg) }
+.fwhere { color: var(--muted); font-size: 13px }
 .pill { font: 600 11px var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--sev); white-space: nowrap }
 .ftitle { font-weight: 600; min-width: 0 }
 .fpages { font: 500 13px var(--mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums }
@@ -70,10 +82,6 @@ details.f > summary::-webkit-details-marker { display: none }
 .tag { font: 600 11px var(--body); letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; border: 1px solid currentColor }
 .tag.new { color: var(--accent) } .tag.unverified { color: var(--muted); border-style: dashed }
 .fnote { background: var(--tint); border-radius: 6px; padding: 8px 10px }
-.fgroup { display: grid; gap: 8px }
-.fgroup + .fgroup { margin-top: 20px }
-.fgroup h3 { font-size: 17px; display: flex; gap: 8px; align-items: baseline; color: var(--sev) }
-.fgroup h3 small { font: 500 13px var(--body); color: var(--muted) }
 .more { justify-self: start; font: 600 14px var(--body); color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 14px; cursor: pointer }
 .more:hover { border-color: var(--accent) }
 .more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
@@ -99,6 +107,15 @@ ul.obs { margin: 0; padding-left: 18px; display: grid; gap: 3px }
 .locs a { font-family: var(--mono); color: var(--accent); overflow-wrap: anywhere }
 .locs .lnote { grid-column: 2; color: var(--muted); overflow-wrap: anywhere }
 @media (max-width: 560px) { .locs li { grid-template-columns: 1fr } .locs .lnote { grid-column: 1 } }
+/* link check evidence: one block per page, each link with its fix, source line and last commit */
+.lkpages { display: grid; gap: 10px; width: 100% }
+.lkpage { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; display: grid; gap: 6px; min-width: 0 }
+.lkpage > a { font: 600 13px var(--mono); color: var(--accent); overflow-wrap: anywhere }
+.lk { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 3px 10px; font-size: 13px }
+.lk + .lk { border-top: 1px dashed var(--line); padding-top: 6px }
+.lk dt { color: var(--muted) } .lk dd { margin: 0; min-width: 0; overflow-wrap: anywhere; display: block }
+.lk .bad { font-family: var(--mono) } .lk .ok { font-family: var(--mono) } .lk .msg { color: var(--muted) }
+@media (max-width: 560px) { .lk { grid-template-columns: 1fr } .lk dd { margin-bottom: 4px } }
 .sev-broken { --sev: var(--broken) } .sev-incorrect { --sev: var(--incorrect) }
 .sev-not_optimized { --sev: var(--notopt) } .sev-improvable { --sev: var(--improvable) }
 .tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px }
@@ -314,8 +331,15 @@ table.guide td.sev { min-width: 120px; white-space: nowrap; color: var(--sev); f
 footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; max-width: 80ch }
 footer a { color: var(--accent) }
 @media (max-width: 560px) {
-  details.f > summary { grid-template-columns: 1fr auto } .pill { grid-column: 1 / 3 } .fsub { grid-column: 1 / 3 }
+  .pill { grid-column: 1 / 3 } .fsub { grid-column: 1 / 3 }
   .fbody dl { grid-template-columns: 1fr }
+}
+@media (max-width: 760px) {  /* finding rows: score, issue and arrow on top, the numbers below with their labels */
+  .fhead { display: none }
+  details.f > summary { grid-template-columns: auto minmax(0, 1fr) auto }
+  details.f > summary .chev { grid-column: 3; grid-row: 1 }
+  .fmeta { display: flex; flex-wrap: wrap; gap: 4px 12px; grid-column: 1 / 4 }
+  .fmeta .fnum { text-align: left } .fmeta [data-l]::before { content: attr(data-l) " "; font-family: var(--body); color: var(--muted) }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important } }
 </style>
@@ -332,7 +356,7 @@ footer a { color: var(--accent) }
   </header>
 
   <nav class="toc" aria-label="Contents">
-    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Subdomains</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">All findings</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
+    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Subdomains</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">Issues and fixes</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
   </nav>
 
   <section aria-labelledby="s-sum" id="summary">
@@ -385,14 +409,14 @@ footer a { color: var(--accent) }
     <button type="button" class="more" id="sys-more" hidden></button>
   </section>
 
-  <div class="part" id="part-dev" hidden><span>Details</span><p>Every finding with its evidence and fix, what changed since the last run, and the reference tables.</p></div>
+  <div class="part" id="part-dev" hidden><span>History and reference</span><p>What changed since the last run, how the numbers are counted, and the reference tables.</p></div>
 
   <section aria-labelledby="s-find" id="findings">
-    <h2 id="s-find">All findings <small>grouped by severity, ranked by score</small></h2>
-    <p class="lede">Each finding links to its row in the <a href="#fix-guide" id="lede-guide">Fix guide</a>. Confidence says how solid the evidence is: <b>complete</b> (every page or file checked), <b>strong</b> (most sampled pages failed), <b>partial</b>, or <b>to confirm</b> (one page, or a manual note not yet re-checked).</p>
+    <h2 id="s-find">Issues and fixes <small id="find-meta"></small></h2>
+    <p class="lede" id="find-lede">One row per kind of problem. Open a row (▸) for its evidence; "How to fix" opens its row in the <a href="#fix-guide" id="lede-guide">Fix guide</a>. Confidence says how solid the evidence is: <b>complete</b> (every page or file checked), <b>strong</b> (most sampled pages failed), <b>partial</b>, or <b>to confirm</b> (one page, or a manual note not yet re-checked).</p>
     <div class="filters">
       <label for="f-src">Source</label><select id="f-src"></select>
-      <label for="f-type">Type</label><select id="f-type"></select>
+      <label for="f-type">Severity</label><select id="f-type"></select>
       <label for="f-host">Subdomain</label><select id="f-host"></select>
       <label for="f-dim">Dimension</label><select id="f-dim"></select>
       <label for="f-fam" id="f-fam-label" hidden>Family</label><select id="f-fam" hidden></select>
@@ -830,7 +854,7 @@ footer a { color: var(--accent) }
       if (!b) return;
       for (const k of ["f-src", "f-type", "f-host", "f-fam"]) $(k).value = "";
       $("f-dim").value = b.dataset.dim;
-      for (const t of ORDER) expanded.add(t);
+      showAll = true;
       renderFindings();
       $("s-find").scrollIntoView({ behavior: "smooth" });
     });
@@ -866,7 +890,7 @@ footer a { color: var(--accent) }
       if (!b) { if (e.target.closest("a[data-open]")) openFinding(e); return; }
       for (const k of ["f-src", "f-type", "f-dim", "f-fam"]) $(k).value = "";
       $("f-host").value = b.dataset.host;
-      for (const t of ORDER) expanded.add(t);
+      showAll = true;
       renderFindings();
       $("s-find").scrollIntoView({ behavior: "smooth" });
     });
@@ -1024,7 +1048,7 @@ footer a { color: var(--accent) }
       if (b) {
         for (const k of ["f-src", "f-type", "f-host", "f-dim"]) $(k).value = "";
         $("f-fam").value = b.dataset.fam;
-        for (const t of ORDER) expanded.add(t);
+        showAll = true;
         renderFindings();
         $("s-find").scrollIntoView({ behavior: "smooth" });
       } else if (a) {
@@ -1054,7 +1078,7 @@ footer a { color: var(--accent) }
     const a = e.target.closest("a[data-open]"); if (!a) return;
     for (const k of ["f-src", "f-type", "f-host", "f-dim", "f-fam"]) $(k).value = "";
     const id = MERGED[a.dataset.open] || a.dataset.open;
-    const f = findings.find(x => x.id === id); if (f) expanded.add(f.type);
+    showAll = true;
     renderFindings();
     const d = document.getElementById("f-" + id); if (d) d.open = true;
   }
@@ -1063,7 +1087,7 @@ footer a { color: var(--accent) }
   // findings + filters
   const opts = (id, values, all) => { $(id).innerHTML = `<option value="">${all}</option>` + values.map(v => `<option value="${esc(v)}">${esc(LABEL[v] || v)}</option>`).join(""); };
   opts("f-src", [...new Set(findings.map(f => f.source || "discovery"))].sort(), "All sources");
-  opts("f-type", ORDER.filter(t => byType[t]), "All types");
+  opts("f-type", ORDER.filter(t => byType[t]), "All severities");
   const SUBS = [...new Set(findings.map(f => f.subdomain))].sort();
   opts("f-host", SUBS, "All subdomains");
   if (SUBS.length < 2) $("f-host").hidden = document.querySelector('label[for="f-host"]').hidden = true;  // one choice filters nothing (SK)
@@ -1077,21 +1101,33 @@ footer a { color: var(--accent) }
     try { localStorage.setItem("disc-filters", JSON.stringify({ "f-src": src, "f-type": t, "f-host": h, "f-dim": d, "f-fam": fm })); } catch (e) {}
     const list = findings.filter(f => (!src || (f.source || "discovery") === src) && (!t || f.type === t) && (!h || f.subdomain === h) && (!d || f.dimension === d) && (!fm || f._family === fm));
     $("f-count").textContent = `${list.length} of ${findings.length}`;
+    // the section path says where on the subdomain; the subdomain itself only where the page has several
+    const place = f => f._family ? `/${f._family}/` : SUBS.length > 1 ? f.subdomain : "";
+    const pagesText = f => f.affected_pages ? (["crawl-audit", "perf-audit"].includes(f.source) ? "~" : "") + fmt(f.affected_pages) : "sitewide";
     const card = f => `
       <details class="f sev-${f.type}" id="f-${esc(f.id)}">
         <summary>
-          ${scored ? scoreBadge(f) : `<span class="pill">${LABEL[f.type]}</span>`}
-          <span class="ftitle">${termify(esc(plain(f)))} · ${esc(where(f))} ${NEW.has(f.id) ? '<span class="tag new">new</span>' : ""} ${f._confidence === "to confirm" || f._confidence === "partial" ? `<span class="conf">${esc(f._confidence)}</span>` : ""}</span>
-          <span class="fpages">${f.affected_pages ? (["crawl-audit", "perf-audit"].includes(f.source) ? "~" : "") + fmt(f.affected_pages) + " pages affected" : ""}</span>
-          <span class="fsub">${esc(f.subdomain)} · ${esc(f.dimension)} · ${esc(LABEL[f.source || "discovery"])} · confidence: ${esc(f._confidence || "–")} · <span class="mono">${esc(f.id)}</span>${trafficText(f.impact) ? ` · <span class="traffic">${esc(trafficText(f.impact))}</span>` : ""}</span>
+          <span>${scored ? scoreBadge(f) : ""}</span>
+          <span class="ftitle">${termify(esc(plain(f)))}${place(f) ? ` <span class="fwhere">· ${esc(place(f))}</span>` : ""} ${NEW.has(f.id) ? '<span class="tag new">new</span>' : ""} ${f._confidence === "to confirm" || f._confidence === "partial" ? `<span class="conf">${esc(f._confidence)}</span>` : ""}</span>
+          <span class="fmeta">
+            <span class="fsev">${esc(LABEL[f.type])}</span>
+            <span class="fnum" data-l="Pages">${pagesText(f)}</span>
+            <span class="fnum" data-l="Clicks">${f.impact && f.impact.source ? fmt(f.impact.clicks_28d || 0) : "–"}</span>
+            <span class="fnum" data-l="Effort" title="${esc(EFFORT_TEXT[f.effort || "S"] || "")}">${esc(f.effort || "S")}</span>
+            <span class="ffix">${fixLink(f)}</span>
+          </span>
+          <span class="chev" aria-hidden="true">▸</span>
         </summary>
         <div class="fbody">
           ${f._guide && GUIDE[f._guide] ? `<div class="fixline"><b>How to fix:</b> ${esc(GUIDE[f._guide].fix)} ${fixLink(f).replace("How to fix →", "Full guide →")}</div>` : ""}
           <dl>
           <dt>Check</dt><dd>${esc(f.title)}</dd>
+          <dt>Where</dt><dd><span>${esc(f.subdomain)}${f._family ? ` · /${esc(f._family)}/` : ""} · ${esc(f.dimension)} · ${esc(LABEL[f.source || "discovery"])} · confidence: ${esc(f._confidence || "–")} · <span class="mono">${esc(f.id)}</span>${trafficText(f.impact) ? ` · <span class="traffic">${esc(trafficText(f.impact))}</span>` : ""}</span></dd>
           <dt>Observed</dt><dd>${observedHtml(f)}</dd>
           <dt>Expected</dt><dd>${esc(readable(f.evidence.expected))}</dd>
-          <dt>Evidence</dt><dd>${(f.evidence.locations || []).length
+          <dt>Evidence</dt><dd>${(f.evidence.locations || []).some(l => l.page)
+            ? linkEvidence(f)
+            : (f.evidence.locations || []).length
             ? `<ul class="locs">${f.evidence.locations.map(l => `<li><span class="role">${esc(l.role)}</span><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(shortUrls(l.url, f) || l.url)}</a>${l.note ? `<span class="lnote">${esc(readable(shortUrls(l.note, f)).replace(/^canonical /, "canonical → "))}</span>` : ""}</li>`).join("")}</ul>`
             : `<ul class="urls">${f.evidence.urls.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a></li>`).join("")}</ul>`}</dd>
           <dt>Template</dt><dd class="mono">${esc(f.template)}</dd>
@@ -1101,28 +1137,39 @@ footer a { color: var(--accent) }
           ${(f._merged || []).length ? `<dt>Same cause</dt><dd class="merged">${f._merged.map(id => byId[id] ? `${esc(byId[id].title)} <span class="mono">${esc(id)}</span>` : esc(id)).join("<br>")}</dd>` : ""}
         </dl>${(f.notes || []).map(n => `<div class="fnote"><b>Note.</b> ${esc(n)}</div>`).join("")}</div>
       </details>`;
-    const groups = ORDER.map(type => {
-      const items = list.filter(f => f.type === type);
-      if (!items.length) return "";
-      const open = expanded.has(type), shown = open ? items : items.slice(0, PER_TYPE), rest = items.length - PER_TYPE;
-      const pages = items.reduce((n, f) => n + (f.affected_pages || 0), 0);
-      const btn = rest > 0 ? `<button type="button" class="more" data-type="${type}" aria-expanded="${open}">${open ? "Show fewer" : `Show ${rest} more`}</button>` : "";
-      return `<div class="fgroup sev-${type}"><h3>${LABEL[type]} <small>${items.length} finding${items.length === 1 ? "" : "s"}${pages ? " · " + fmt(pages) + " pages" : ""}</small></h3>${shown.map(card).join("")}${btn}</div>`;
-    }).join("");
-    $("findings-list").innerHTML = groups || `<p class="dim">No findings match these filters.</p>`;
+    // one list: by priority score where Search Console scores exist, else by severity (the order of `findings`)
+    const ranked = scored ? list.slice().sort((a, b) => sc(b) - sc(a) || ORDER.indexOf(a.type) - ORDER.indexOf(b.type) || b.affected_pages - a.affected_pages) : list;
+    const cut = !showAll && ranked.length > PAGE + 2, shown = cut ? ranked.slice(0, PAGE) : ranked;
+    const head = `<div class="fhead" aria-hidden="true"><span>${scored ? "Score" : ""}</span><span>Issue</span><span>Severity</span><span class="n">Pages</span><span class="n">Clicks</span><span>Effort</span><span></span><span></span></div>`;
+    const btn = ranked.length > PAGE + 2 ? `<button type="button" class="more" aria-expanded="${!cut}">${cut ? `Show all ${ranked.length}` : `Show the first ${PAGE}`}</button>` : "";
+    $("findings-list").innerHTML = ranked.length ? head + shown.map(card).join("") + btn : `<p class="dim">No findings match these filters.</p>`;
   }
-  const PER_TYPE = 5;
-  const expanded = new Set();
+  // link check evidence: grouped by the page that holds the links; each link with its fix, source line and commit
+  const linkEvidence = f => {
+    const pages = new Map();
+    for (const l of f.evidence.locations) { if (!pages.has(l.page)) pages.set(l.page, []); pages.get(l.page).push(l); }
+    const commit = c => { const m = /^(\S+) (\d{4}-\d{2}-\d{2}): (.*)$/.exec(c || "");
+      return m ? `<span class="mono">${esc(m[1])}</span> · ${esc(day(m[2]))} · <span class="msg">“${esc(m[3])}”</span>` : esc(c); };
+    return `<div class="lkpages">${[...pages].map(([p, ls]) => `<div class="lkpage"><a href="${esc(p)}" target="_blank" rel="noopener">${esc(shortUrls(p, f) || p)}</a>${ls.map(l => `
+      <dl class="lk"><dt>Link</dt><dd class="bad">${esc(shortUrls(l.url, f))}</dd>
+        ${l.fix ? `<dt>Replace with</dt><dd><a class="ok" href="${esc(l.fix)}" target="_blank" rel="noopener">${esc(shortUrls(l.fix, f))}</a></dd>` : ""}
+        <dt>Source file</dt><dd class="mono">${esc(l.file)}, line ${esc(l.line)}</dd>
+        ${l.commit ? `<dt title="the commit that last changed this line (git blame)">Last changed</dt><dd>${commit(l.commit)}</dd>` : ""}</dl>`).join("")}</div>`).join("")}
+      <span class="obs-sub">${f.evidence.locations.length} links shown on ${pages.size} pages; the link check's fix list (CSV) has every one.</span></div>`;
+  };
+  const PAGE = 10;
+  let showAll = false;
   $("findings-list").addEventListener("click", e => {
     const b = e.target.closest("button.more");
     if (!b) return;
-    const type = b.dataset.type;
-    expanded.has(type) ? expanded.delete(type) : expanded.add(type);
+    showAll = !showAll;
     renderFindings();
-    const again = $("findings-list").querySelector(`button.more[data-type="${type}"]`);
+    const again = $("findings-list").querySelector("button.more");
     if (again) again.focus();
   });
   for (const id of ["f-src", "f-type", "f-host", "f-dim", "f-fam"]) $(id).addEventListener("change", renderFindings);
+  $("find-meta").textContent = scored ? "ranked by priority score" : "ranked by severity";
+  if (scored) $("find-lede").insertAdjacentHTML("afterbegin", `Fix from the top: the score is search traffic at stake × severity ÷ effort (<a href="#method-score">how it works</a>). Pages: pages affected. Clicks: Search Console clicks on those pages in 28 days. `);
   renderFindings();
   // changes since the last run
   {
@@ -1355,10 +1402,10 @@ footer a { color: var(--accent) }
                               gone: (CH.resolved || []).filter(f => f.subdomain === h).length });
     // how a score is made: a small formatted panel on hover or keyboard focus, pinned by a tap (phones have no hover)
     const info = (title, H) => `<button type="button" class="info" aria-label="How this score is calculated" data-x="${explain(title, H.health, H.penalties, H.cosmetic_capped)}">ⓘ</button>`;
-    // link-check items as "Open issues: open of issues, fixed and %"; findings are "Issue types" next to it, with
-    // what changed since the last run (SK, 2026-10-27). The scan date is in the age line.
+    // link-check and blog sitemap items as "Open issues: open of issues, fixed and %"; findings are "Issue types"
+    // next to it, with what changed since the last run (SK, 2026-10-27). The scan date is in the age line.
     const note = (title, text) => { EXPLAIN.push(`<b class="xt">${esc(title)}</b><p>${esc(text)}</p>`); return EXPLAIN.length - 1; };
-    const ITEMS_NOTE = note("Open issues", "Each broken link, and each missing or unsupported language of a post, counted one by one by reading the blog's repo. Issues = fixed + open; a fix counts when the item is gone from a post that still exists.");
+    const ITEMS_NOTE = note("Open issues", "Counted one by one: each broken link and each missing or unsupported language of a post (read from the blog's repo, where one is configured), and each URL or sitemap file affected by a sitemap problem. Issues = fixed + open; a fix counts when the item is gone while its post or URL still exists.");
     const TYPES_NOTE = note("Issue types", "Findings of the page checks (crawl, speed, AI readiness, text): one finding is one kind of problem, however many pages it affects.");
     const ask = i => `<button type="button" class="info" aria-label="What is counted" data-x="${i}">?</button>`;
     const itemsLabel = `Open issues ${ask(ITEMS_NOTE)}`, typesLabel = `Issue types ${ask(TYPES_NOTE)}`;
@@ -1376,7 +1423,8 @@ footer a { color: var(--accent) }
     document.querySelector('.toc a[href="#priorities"]').textContent = "Top actions required";
     $("host-health").hidden = true; $("toc-host").hidden = true;  // the scoreboard or the subdomain rows say it all
     $("sum-grades").closest(".sumgrid").hidden = true;
-    $("part-dev").after($("sum-numbers"));  // coverage numbers belong with the details
+    $("part-dev").after($("sum-numbers"));  // coverage numbers belong with the history and reference
+    $("part-dev").before($("findings"));  // the issues come right after the overview, not under a part heading
 
     if (R._page_host) {  // subdomain page: a scoreboard of its own numbers
       const H = HOSTS[0], t = H.traffic || {}, cur = t.current || {}, prev = t.previous || {}, six = t.six_months_ago || {};
@@ -1398,7 +1446,7 @@ footer a { color: var(--accent) }
       $("part-dev").hidden = false;
       if (H.items) {  // per check: where the numbers come from
         const I = H.items, row = (name, c, b) => `<tr><td>${b ? "<b>" + name + "</b>" : name}</td><td class="n">${fmt(c.issues)}</td><td class="n">${fmt(c.fixed)}</td><td class="n">${fmt(c.open)}</td><td class="n">${c.fixed_pct == null ? "–" : c.fixed_pct + "%"}</td></tr>`;
-        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, or one missing language of a post · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
+        $("part-dev").insertAdjacentHTML("afterend", `<section class="sumcard" id="fixes"><span class="dim">Open issues by check, scanned ${esc(day(I.scanned))}: counted since the first scan (${esc(day(I.since))}) · one item = one link, one missing language of a post, or one URL or file of a sitemap problem · issues = fixed + open${I.removed ? ` · ${fmt(I.removed)} gone because their post was deleted (not counted as fixed)` : ""}</span>
           <div class="tablewrap"><table><thead><tr><th>Check</th><th class="n">Issues</th><th class="n">Fixed</th><th class="n">Open</th><th class="n">Fixed %</th></tr></thead><tbody>${Object.entries(I.by_check).map(([k, c]) => row(termify(esc(GUIDE[k] ? GUIDE[k].name : k)), c)).join("")}${row("All", I, true)}</tbody></table></div></section>`);
       }
     } else {  // domain page: one full-width row per subdomain, columns aligned for comparison
@@ -1438,7 +1486,7 @@ footer a { color: var(--accent) }
         const b = e.target.closest("button[data-host]"); if (!b) return;
         for (const k of ["f-src", "f-type", "f-dim", "f-fam"]) $(k).value = "";
         $("f-host").value = b.dataset.host;
-        for (const t of ORDER) expanded.add(t);
+        showAll = true;
         renderFindings();
         $("s-find").scrollIntoView({ behavior: "smooth" });
       });
@@ -1449,8 +1497,13 @@ footer a { color: var(--accent) }
       } else $("part-dev").hidden = false;
     }
 
+    // a subdomain page has its issues ranked by score right below the overview: a top list would repeat them (SK)
+    if (R._page_host) {
+      $("priorities").hidden = true;
+      document.querySelector('.toc a[href="#priorities"]').hidden = true;
+    }
     // top actions as a table of numbers; on the domain page the top 5 across subdomains, linking to their pages
-    if (scored) {
+    else if (scored) {
       const prop = !R._page_host, n = prop ? 5 : 10, multi = prop && HOSTS.length > 1;
       const top = findings.slice().sort((a, b) => sc(b) - sc(a)).slice(0, n);
       const href = f => prop && SITE_HOSTS.includes(f.subdomain) ? `../${esc(f.subdomain)}/#f-${esc(f._orig_id || f.id)}` : `#f-${esc(f.id)}`;
@@ -1464,7 +1517,7 @@ footer a { color: var(--accent) }
   // a link to one finding (#f-<id>, e.g. from the property page): show it even when it sits behind "Show more"
   if (location.hash.startsWith("#f-")) {
     const id = location.hash.slice(3), f = findings.find(x => x.id === (MERGED[id] || id));
-    if (f) { expanded.add(f.type); renderFindings(); const d = document.getElementById("f-" + f.id); if (d) { d.open = true; d.scrollIntoView(); } }
+    if (f) { showAll = true; renderFindings(); const d = document.getElementById("f-" + f.id); if (d) { d.open = true; d.scrollIntoView(); } }
   }
 
   $("foot").innerHTML = `<a href="#method">How this audit works</a>${R._collection ? "" : ` · <a href="${ARCHIVE}">Previous versions</a>`}<br>` + esc(R._collection ? "Built from each member domain's latest runs and findings; every row is scored exactly as on its own page. Read-only audit: nothing on any site was changed." : `Generated from discovery run ${R.run_id}${A ? `, crawl audit run ${A.run_id}` : ""}${R._perf ? `, speed audit run ${R._perf.run_id}` : ""}${R._ai ? `, AI audit run ${R._ai.run_id}` : ""}${R._text ? `, text check run ${R._text.run_id}` : ""}${R._links ? `, link check run ${R._links.run_id}` : ""} and the findings store. Read-only audit: nothing on any site was changed. Each finding lists URLs anyone can open to re-check it. For discovery findings "pages" counts URLs in the affected sitemaps; for crawl audit findings it is an estimate from the sample. Impact from Search Console and GA4 is added in the prioritization step.`);
