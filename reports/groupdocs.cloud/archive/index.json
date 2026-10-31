@@ -88,5 +88,11 @@
     "date": "2026-10-31 (4)",
     "label": "Fix progress before Issues and fixes",
     "runs": "discovery run 3, crawl audit run 2, speed audit run 5, AI audit run 3, text check run 6, link check run 10"
+  },
+  {
+    "file": "2026-10-31-5.html",
+    "date": "2026-10-31 (5)",
+    "label": "Contents bar in page order, shared pages on the right",
+    "runs": "discovery run 3, crawl audit run 2, speed audit run 5, AI audit run 3, text check run 6, link check run 10"
   }
 ]

@@ -207,6 +207,9 @@ header a, .lede a, .mth a, .chg a, #sys-table a, .fixline a, .top .fsub a { colo
 .toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 4px; overflow-x: auto; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 8px; margin-block: -16px }
 .toc a { flex: none; font: 500 13px var(--body); color: var(--muted); text-decoration: none; padding: 4px 10px; border-radius: 6px }
 .toc a:hover, .toc a:focus-visible { color: var(--accent); background: var(--tint); outline: none }
+/* this page's sections first; the shared Fix guide and Method pages at the end, set apart */
+.toc a.shared { margin-left: auto } .toc a.shared:not([hidden]) ~ a.shared { margin-left: 0 }
+.toc a.shared::after { content: " →" }
 section { scroll-margin-top: 56px }
 .sumgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px }
 .sumcard { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; min-width: 0 }
@@ -366,7 +369,7 @@ footer a { color: var(--accent) }
   </header>
 
   <nav class="toc" aria-label="Contents">
-    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Subdomains</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">Issues and fixes</a><a href="#changes">Changes</a><a href="#fix-guide" id="toc-guide">Fix guide</a><a href="#reference">Reference</a><a href="#method">Method</a>
+    <a href="#summary">Summary</a><a href="#families" id="toc-fam">Families</a><a href="#host-health" id="toc-host">Subdomains</a><a href="#priorities">Priorities</a><a href="#systemic" id="toc-sys">Shared problems</a><a href="#findings">Issues and fixes</a><a href="#changes">Changes</a><a href="#reference">Reference</a><a href="#fix-guide" id="toc-guide" class="shared">Fix guide</a><a href="#method" class="shared">Method</a>
   </nav>
 
   <section aria-labelledby="s-sum" id="summary">
