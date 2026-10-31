@@ -124,5 +124,11 @@
     "date": "2026-10-31 (2)",
     "label": "One ranked issues list, readable link evidence",
     "runs": "discovery run 9, crawl audit run 28, speed audit run 26, AI audit run 25, text check run 27"
+  },
+  {
+    "file": "2026-10-31-3.html",
+    "date": "2026-10-31 (3)",
+    "label": "Issues and fixes, Fix progress, Reference open",
+    "runs": "discovery run 9, crawl audit run 28, speed audit run 26, AI audit run 25, text check run 27"
   }
 ]
