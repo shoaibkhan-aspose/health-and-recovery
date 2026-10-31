@@ -60,7 +60,7 @@
     "affected_pages": 29,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 0,
+      "impressions_28d": 1,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
@@ -68,14 +68,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "M",
@@ -119,22 +119,22 @@
     "affected_pages": 0,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 132,
+      "impressions_28d": 141,
       "source": "gsc-host",
       "share": 1.0,
       "past_clicks": 0,
-      "past_impressions": 85,
+      "past_impressions": 83,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -233,22 +233,22 @@
     "affected_pages": 163,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 124,
+      "impressions_28d": 129,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 84,
+      "past_impressions": 82,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -287,22 +287,38 @@
         {
           "role": "link",
           "url": "https://blog.conholdate.cloud/total/manipulate-pdf-documents/",
-          "note": "on https://blog.conholdate.cloud/ar/total/convert-html-files/ (content/Conholdate.Cloud/total/2025-07-09-convert-html-files/index.ar.md:77); use https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/; 4fd3dc9d 2025-08-12: configured and published translations"
+          "page": "https://blog.conholdate.cloud/ar/total/convert-html-files/",
+          "file": "content/Conholdate.Cloud/total/2025-07-09-convert-html-files/index.ar.md",
+          "line": 77,
+          "fix": "https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/",
+          "commit": "4fd3dc9d 2025-08-12: configured and published translations"
         },
         {
           "role": "link",
           "url": "https://blog.conholdate.cloud/total/convert-html-files/",
-          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/ (content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md:69); use https://blog.conholdate.cloud/ar/total/convert-html-files/; 4fd3dc9d 2025-08-12: configured and published translations"
+          "page": "https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/",
+          "file": "content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md",
+          "line": 69,
+          "fix": "https://blog.conholdate.cloud/ar/total/convert-html-files/",
+          "commit": "4fd3dc9d 2025-08-12: configured and published translations"
         },
         {
           "role": "link",
           "url": "https://blog.conholdate.cloud/total/manipulate-pdf-documents/",
-          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/ (content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md:70); use https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/; 4fd3dc9d 2025-08-12: configured and published translations"
+          "page": "https://blog.conholdate.cloud/ar/total/manipulate-excel-spreadsheets/",
+          "file": "content/Conholdate.Cloud/total/2025-07-14-manipulate-excel-files/index.ar.md",
+          "line": 70,
+          "fix": "https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/",
+          "commit": "4fd3dc9d 2025-08-12: configured and published translations"
         },
         {
           "role": "link",
           "url": "https://blog.conholdate.cloud/total/convert-html-files/",
-          "note": "on https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/ (content/Conholdate.Cloud/total/2025-07-08-manipulate-pdf-documents/index.ar.md:82); use https://blog.conholdate.cloud/ar/total/convert-html-files/; 4fd3dc9d 2025-08-12: configured and published translations"
+          "page": "https://blog.conholdate.cloud/ar/total/manipulate-pdf-documents/",
+          "file": "content/Conholdate.Cloud/total/2025-07-08-manipulate-pdf-documents/index.ar.md",
+          "line": 82,
+          "fix": "https://blog.conholdate.cloud/ar/total/convert-html-files/",
+          "commit": "4fd3dc9d 2025-08-12: configured and published translations"
         }
       ]
     },
@@ -317,14 +333,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -335,7 +351,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-26",
     "first_seen_run": "link-audit-run5",
-    "last_seen_run": "link-audit-run7",
+    "last_seen_run": "link-audit-run8",
     "resolved_run": null,
     "resolved_at": null,
     "check": "link_wrong_language",
@@ -418,22 +434,22 @@
     "affected_pages": 64,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 5,
+      "impressions_28d": 7,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 7,
+      "past_impressions": 6,
       "lost_clicks": 0,
-      "lost_impressions": 2,
+      "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -511,22 +527,22 @@
     "affected_pages": 23,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 106,
+      "impressions_28d": 108,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 60,
+      "past_impressions": 59,
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 2,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -624,22 +640,22 @@
     "affected_pages": 64,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 5,
+      "impressions_28d": 7,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 7,
+      "past_impressions": 6,
       "lost_clicks": 0,
-      "lost_impressions": 2,
+      "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",

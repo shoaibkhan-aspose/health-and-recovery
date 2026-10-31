@@ -380,10 +380,10 @@ class LinkAudit:
                     copied = sum(1 for i in items if i["note"].startswith("same broken"))
                     if copied:
                         observed += f"; {copied:,} copied from the original post"
+                # separate fields, so the report can lay out page, link, fix, file and commit on their own lines
                 locs = [{"role": "link", "url": i["link"] if i["link"].startswith("http") else f"https://{host}{i['link']}",
-                         "note": f"on {i['page']} ({i['file']}:{i['line']})"
-                                 + (f"; use {i['fix']}" if i["fix"] else "")
-                                 + (f"; {i['commit']}" if i.get("commit") else "")}
+                         "page": i["page"], "file": i["file"], "line": i["line"], "fix": i["fix"],
+                         "commit": i.get("commit")}
                         for i in sorted(items, key=lambda i: (i["page"], i["line"]))]
                 out.append(self._finding(ids, check, host, pages, observed, locs, len(pages)))
             if r["partial"]:

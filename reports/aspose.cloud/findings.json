@@ -44,18 +44,18 @@
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 145,
+      "past_impressions": 167,
       "lost_clicks": 0,
-      "lost_impressions": 126,
+      "lost_impressions": 148,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "lost",
       "score": 2,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "M",
@@ -98,23 +98,23 @@
     },
     "affected_pages": 0,
     "impact": {
-      "clicks_28d": 623,
-      "impressions_28d": 56492,
+      "clicks_28d": 613,
+      "impressions_28d": 56793,
       "source": "gsc-host",
       "share": 1.0,
-      "past_clicks": 1220,
-      "past_impressions": 78004,
-      "lost_clicks": 597,
-      "lost_impressions": 21512,
+      "past_clicks": 1242,
+      "past_impressions": 78473,
+      "lost_clicks": 629,
+      "lost_impressions": 21680,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 12,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -187,22 +187,22 @@
     "affected_pages": 132,
     "impact": {
       "clicks_28d": 6,
-      "impressions_28d": 554,
+      "impressions_28d": 557,
       "source": "gsc-host",
       "share": 0.01,
       "past_clicks": 12,
-      "past_impressions": 765,
+      "past_impressions": 770,
       "lost_clicks": 6,
-      "lost_impressions": 211,
+      "lost_impressions": 213,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 9,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -260,14 +260,14 @@
       "lost_clicks": 0,
       "lost_impressions": 4,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -312,14 +312,14 @@
       "lost_clicks": 0,
       "lost_impressions": 2,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -426,202 +426,362 @@
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ar/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ar.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/ar/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ar.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ar/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ar.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/ar/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ar.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/ar/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.ar.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/ar/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.ar.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//categories/aspose.cells-cloud-product-family/",
-          "note": "on https://blog.aspose.cloud/cells/manipulate-charts-pivot-tables-and-sparklines-using-cloud-api/ (content/Aspose.Cloud/cells/2020-09-28-manipulate-charts-pivot-tables-and-sparklines-using-cloud-api/index.md:73); c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/manipulate-charts-pivot-tables-and-sparklines-using-cloud-api/",
+          "file": "content/Aspose.Cloud/cells/2020-09-28-manipulate-charts-pivot-tables-and-sparklines-using-cloud-api/index.md",
+          "line": 73,
+          "fix": null,
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/da/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/da/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.da.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/da/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.da.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/da/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/da/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.da.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/da/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.da.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/da/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/da/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.da.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/da/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.da.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/de/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/de/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.de.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/de/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.de.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/de/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/de/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.de.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/de/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.de.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/de/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/de/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.de.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/de/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.de.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/el/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/el/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.el.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/el/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.el.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/el/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/el/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.el.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/el/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.el.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/el/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/el/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.el.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/el/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.el.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/es//total/convierta-facilmente-sus-archivos-de-correo-electrónico-en-publicaciones-de-wordpress-usando-el-complemento-de-correo-electrónico-a-publicación-de-aspose-cloud/",
-          "note": "on https://blog.aspose.cloud/es/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.es.md:77); 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/es/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.es.md",
+          "line": 77,
+          "fix": null,
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/es/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/es/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.es.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/es/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.es.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/es/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/es/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.es.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/es/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.es.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/es/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/es/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.es.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/es/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.es.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fa/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/fa/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.fa.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/fa/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.fa.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fa/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/fa/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.fa.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/fa/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.fa.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fa/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/fa/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.fa.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/fa/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.fa.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fr/swords/convert-epub-to-jpg-with-dotnet-rest-api/",
-          "note": "on https://blog.aspose.cloud/fr/cells/convert-json-to-csv-with-dotnet-cloud-sdk/ (content/Aspose.Cloud/cells/2023-12-27-convert-json-to-csv-in-csharp/index.fr.md:157); 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/fr/cells/convert-json-to-csv-with-dotnet-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2023-12-27-convert-json-to-csv-in-csharp/index.fr.md",
+          "line": 157,
+          "fix": null,
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fr/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/fr/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.fr.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/fr/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.fr.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fr/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/fr/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.fr.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/fr/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.fr.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fr/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/fr/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.fr.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/fr/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.fr.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/he/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/he/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.he.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/he/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.he.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/he/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/he/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.he.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/he/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.he.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/he/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/he/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.he.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/he/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.he.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.md:108); 3b3a1080 2024-07-08: convert HTMl to JPG fixed"
+          "page": "https://blog.aspose.cloud/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.md",
+          "line": 108,
+          "fix": null,
+          "commit": "3b3a1080 2024-07-08: convert HTMl to JPG fixed"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/hu/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/hu/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.hu.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/hu/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.hu.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/hu/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/hu/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.hu.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/hu/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.hu.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/hu/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/hu/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.hu.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/hu/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.hu.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/it//total/converti-facilmente-i-tuoi-file-di-posta-e-mail-in-post-di-wordpress-utilizzando-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/it/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.it.md:77); 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/it/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.it.md",
+          "line": 77,
+          "fix": null,
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/it/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/it/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.it.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/it/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.it.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/it/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/it/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.it.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/it/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.it.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/it/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/it/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.it.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/it/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.it.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ja/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ja/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ja.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/ja/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ja.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ja/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ja/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ja.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/ja/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ja.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ja/wp-admin/post.php?post=53470&action=edit#DOC-to-PDF-in-Node.js",
-          "note": "on https://blog.aspose.cloud/ja/words/convert-doc-to-pdf-in-node.js/ (content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.ja.md:156); f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
+          "page": "https://blog.aspose.cloud/ja/words/convert-doc-to-pdf-in-node.js/",
+          "file": "content/Aspose.Cloud/words/2021-07-18-convert-doc-to-pdf-in-node.js/index.ja.md",
+          "line": 156,
+          "fix": null,
+          "commit": "f24ea414 2025-02-23: Translations for Aspose.Words Cloud ased"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ka/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ka/html/convert-html-to-jpg-in-csharp/ (content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ka.md:161); 6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
+          "page": "https://blog.aspose.cloud/ka/html/convert-html-to-jpg-in-csharp/",
+          "file": "content/Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.ka.md",
+          "line": 161,
+          "fix": null,
+          "commit": "6a26e905 2024-08-08: translations for HTML to Word and HTML to JPEG conversion blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ka/pdf/convert-json-to-xml-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ka/slides/convert-ppt-to-mp4-in-csharp/ (content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ka.md:166); 22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
+          "page": "https://blog.aspose.cloud/ka/slides/convert-ppt-to-mp4-in-csharp/",
+          "file": "content/Aspose.Cloud/slides/2024-08-30-convert-powerpoint-to-mp4-with-csharp/index.ka.md",
+          "line": 166,
+          "fix": null,
+          "commit": "22e1b5e6 2024-09-03: Translations for PPT to MP4 Conversion added"
         }
       ]
     },
@@ -631,19 +791,19 @@
       "impressions_28d": 365,
       "source": "gsc-pages",
       "share": null,
-      "past_clicks": 10,
-      "past_impressions": 1198,
-      "lost_clicks": 6,
-      "lost_impressions": 833,
+      "past_clicks": 9,
+      "past_impressions": 1203,
+      "lost_clicks": 5,
+      "lost_impressions": 838,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 12,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "M",
@@ -654,7 +814,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "link_broken",
@@ -1669,224 +1829,384 @@
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
-          "note": "on https://blog.aspose.cloud/ar/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/ (content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.ar.md:148); use https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/ar/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/",
+          "file": "content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.ar.md",
+          "line": 148,
+          "fix": "https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
-          "note": "on https://blog.aspose.cloud/ar/3d/glb-to-fbx-conversion-using-cloud-apis/ (content/Aspose.Cloud/3d/2020-07-22-glb-to-fbx-conversion-using-cloud-apis/index.ar.md:163); use https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/ar/3d/glb-to-fbx-conversion-using-cloud-apis/",
+          "file": "content/Aspose.Cloud/3d/2020-07-22-glb-to-fbx-conversion-using-cloud-apis/index.ar.md",
+          "line": 163,
+          "fix": "https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
-          "note": "on https://blog.aspose.cloud/ar/3d/glb-to-fbx-in-node.js/ (content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.ar.md:176); use https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/ar/3d/glb-to-fbx-in-node.js/",
+          "file": "content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.ar.md",
+          "line": 176,
+          "fix": "https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/add-speaker-notes-to-powerpoint-via-rest-in-python/ (content/Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.ar.md:272); use https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/; 4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/add-speaker-notes-to-powerpoint-via-rest-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.ar.md",
+          "line": 272,
+          "fix": "https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/",
+          "commit": "4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/add-speaker-notes-to-powerpoint-via-rest-in-python/ (content/Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.ar.md:274); use https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/; 4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/add-speaker-notes-to-powerpoint-via-rest-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.ar.md",
+          "line": 274,
+          "fix": "https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
+          "commit": "4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/csv-to-html-conversion-in-java-step-by-step-code-guide/ (content/Aspose.Cloud/barcode/2026-06-15-csv-to-html-conversion-in-java-step-by-step-code-guide/index.ar.md:289); use https://blog.aspose.cloud/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/; 9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/csv-to-html-conversion-in-java-step-by-step-code-guide/",
+          "file": "content/Aspose.Cloud/barcode/2026-06-15-csv-to-html-conversion-in-java-step-by-step-code-guide/index.ar.md",
+          "line": 289,
+          "fix": "https://blog.aspose.cloud/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/",
+          "commit": "9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/csv-to-html-conversion-in-java-step-by-step-code-guide/ (content/Aspose.Cloud/barcode/2026-06-15-csv-to-html-conversion-in-java-step-by-step-code-guide/index.ar.md:290); use https://blog.aspose.cloud/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/; 9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/csv-to-html-conversion-in-java-step-by-step-code-guide/",
+          "file": "content/Aspose.Cloud/barcode/2026-06-15-csv-to-html-conversion-in-java-step-by-step-code-guide/index.ar.md",
+          "line": 290,
+          "fix": "https://blog.aspose.cloud/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/",
+          "commit": "9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/create-read-and-recognize-barcodes-using-saaspose-barcode/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/generate-barcode-for-healthcare-applications-in-dotnet/ (content/Aspose.Cloud/barcode/2026-06-05-generate-barcode-for-healthcare-applications-in-net/index.ar.md:205); use https://blog.aspose.cloud/barcode/create-read-and-recognize-barcodes-using-saaspose-barcode/; 862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/generate-barcode-for-healthcare-applications-in-dotnet/",
+          "file": "content/Aspose.Cloud/barcode/2026-06-05-generate-barcode-for-healthcare-applications-in-net/index.ar.md",
+          "line": 205,
+          "fix": "https://blog.aspose.cloud/barcode/create-read-and-recognize-barcodes-using-saaspose-barcode/",
+          "commit": "862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/generate-and-recognize-barcode-using-new-aspose.barcode-cloud-sdk-for-csharp/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/generate-barcode-for-healthcare-applications-in-dotnet/ (content/Aspose.Cloud/barcode/2026-06-05-generate-barcode-for-healthcare-applications-in-net/index.ar.md:206); use https://blog.aspose.cloud/total/generate-and-recognize-barcode-using-new-aspose.barcode-cloud-sdk-for-csharp/; 862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/generate-barcode-for-healthcare-applications-in-dotnet/",
+          "file": "content/Aspose.Cloud/barcode/2026-06-05-generate-barcode-for-healthcare-applications-in-net/index.ar.md",
+          "line": 206,
+          "fix": "https://blog.aspose.cloud/total/generate-and-recognize-barcode-using-new-aspose.barcode-cloud-sdk-for-csharp/",
+          "commit": "862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/ (content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md:315); use https://blog.aspose.cloud/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/; fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/",
+          "file": "content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md",
+          "line": 315,
+          "fix": "https://blog.aspose.cloud/barcode/save-barcode-in-bmp-svg-gif-and-tiff-format-using-aspose.barcode-for-cloud-18.3/",
+          "commit": "fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/ (content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md:316); use https://blog.aspose.cloud/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/; fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/",
+          "file": "content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md",
+          "line": 316,
+          "fix": "https://blog.aspose.cloud/barcode/support-codablockf-barcode-read-barcode-request-body-using-aspose.barcode-cloud-17.4/",
+          "commit": "fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/new-perl-sdk-for-barcode-generation-and-recognition-using-powerful-aspose.barcode-cloud-apis/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/ (content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md:317); use https://blog.aspose.cloud/barcode/new-perl-sdk-for-barcode-generation-and-recognition-using-powerful-aspose.barcode-cloud-apis/; fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/json-to-csv-code-example-in-php-full-tutorial/",
+          "file": "content/Aspose.Cloud/barcode/2026-07-29-json-to-csv-code-example-in-php-full-tutorial/index.ar.md",
+          "line": 317,
+          "fix": "https://blog.aspose.cloud/barcode/new-perl-sdk-for-barcode-generation-and-recognition-using-powerful-aspose.barcode-cloud-apis/",
+          "commit": "fb128197 2026-07-30: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/master-csv-to-json-conversion-in-python/ (content/Aspose.Cloud/barcode/2026-05-30-master-csv-to-json-conversion-in-python/index.ar.md:223); use https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/; 862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/master-csv-to-json-conversion-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-30-master-csv-to-json-conversion-in-python/index.ar.md",
+          "line": 223,
+          "fix": "https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
+          "commit": "862f7424 2026-06-15: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/create-manipulate-and-convert-microsoft-powerpoint-or-openoffice-impress-presentations-through-new-aspose.slides-cloud-sdk-for-.net/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/modify-pptx-slides-in-java-programmatically/ (content/Aspose.Cloud/barcode/2026-06-08-modify-pptx-slides-in-java-programmatically/index.ar.md:251); use https://blog.aspose.cloud/total/create-manipulate-and-convert-microsoft-powerpoint-or-openoffice-impress-presentations-through-new-aspose.slides-cloud-sdk-for-.net/; 9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/modify-pptx-slides-in-java-programmatically/",
+          "file": "content/Aspose.Cloud/barcode/2026-06-08-modify-pptx-slides-in-java-programmatically/index.ar.md",
+          "line": 251,
+          "fix": "https://blog.aspose.cloud/total/create-manipulate-and-convert-microsoft-powerpoint-or-openoffice-impress-presentations-through-new-aspose.slides-cloud-sdk-for-.net/",
+          "commit": "9aaf74ee 2026-06-16: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/ (content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md:332); use https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/; 4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md",
+          "line": 332,
+          "fix": "https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-python-sdk/",
+          "commit": "4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/ (content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md:333); use https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/; 4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md",
+          "line": 333,
+          "fix": "https://blog.aspose.cloud/barcode/more-features-to-work-with-barcodes-using-aspose-for-cloud-python-sdk/",
+          "commit": "4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/new-release-of-aspose.barcode-cloud-sdk-for-python-a-complete-solution-for-barcode-generation-and-recognition-in-python-using-powerful-aspose.barcode-cloud-apis/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/ (content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md:334); use https://blog.aspose.cloud/total/new-release-of-aspose.barcode-cloud-sdk-for-python-a-complete-solution-for-barcode-generation-and-recognition-in-python-using-powerful-aspose.barcode-cloud-apis/; 4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/",
+          "file": "content/Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.ar.md",
+          "line": 334,
+          "fix": "https://blog.aspose.cloud/total/new-release-of-aspose.barcode-cloud-sdk-for-python-a-complete-solution-for-barcode-generation-and-recognition-in-python-using-powerful-aspose.barcode-cloud-apis/",
+          "commit": "4ca20c75 2026-06-14: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-php-sdk/",
-          "note": "on https://blog.aspose.cloud/ar/barcode/txt-to-csv-without-external-tools-in-php/ (content/Aspose.Cloud/barcode/2026-08-17-txt-to-csv-without-external-tools-in-php/index.ar.md:337); use https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-php-sdk/; c5cf61c8 2026-08-18: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/barcode/txt-to-csv-without-external-tools-in-php/",
+          "file": "content/Aspose.Cloud/barcode/2026-08-17-txt-to-csv-without-external-tools-in-php/index.ar.md",
+          "line": 337,
+          "fix": "https://blog.aspose.cloud/barcode/recognize-barcode-from-external-url-with-checksum-option-specific-region-and-count-of-barcodes-using-the-aspose-for-cloud-php-sdk/",
+          "commit": "c5cf61c8 2026-08-18: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/pdf/remove-pages-from-pdf-in-csharp/",
-          "note": "on https://blog.aspose.cloud/ar/cells/convert-csv-to-xml-in-dotnet/ (content/Aspose.Cloud/cells/2025-11-05-convert-csv-to-xml-in-csharp/index.ar.md:231); use https://blog.aspose.cloud/pdf/remove-pages-from-pdf-in-csharp/; 19b7bd9b 2025-11-08: translations added for CSV to XML conversion"
+          "page": "https://blog.aspose.cloud/ar/cells/convert-csv-to-xml-in-dotnet/",
+          "file": "content/Aspose.Cloud/cells/2025-11-05-convert-csv-to-xml-in-csharp/index.ar.md",
+          "line": 231,
+          "fix": "https://blog.aspose.cloud/pdf/remove-pages-from-pdf-in-csharp/",
+          "commit": "19b7bd9b 2025-11-08: translations added for CSV to XML conversion"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/cells/export-spreadsheet-to-markdown-format/",
-          "note": "on https://blog.aspose.cloud/ar/cells/create-chart-and-export-chart-to-image/ (content/Aspose.Cloud/cells/2020-03-03-create-chart-and-export-chart-to-image/index.ar.md:126); use https://blog.aspose.cloud/cells/export-spreadsheet-to-markdown-format/; fc402f46 2025-02-07: translations for export chart to image"
+          "page": "https://blog.aspose.cloud/ar/cells/create-chart-and-export-chart-to-image/",
+          "file": "content/Aspose.Cloud/cells/2020-03-03-create-chart-and-export-chart-to-image/index.ar.md",
+          "line": 126,
+          "fix": "https://blog.aspose.cloud/cells/export-spreadsheet-to-markdown-format/",
+          "commit": "fc402f46 2025-02-07: translations for export chart to image"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/",
-          "note": "on https://blog.aspose.cloud/ar/cells/create-edit-or-convert-excel-files-without-using-ms-excel/ (content/Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.ar.md:131); use https://blog.aspose.cloud/cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/ar/cells/create-edit-or-convert-excel-files-without-using-ms-excel/",
+          "file": "content/Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.ar.md",
+          "line": 131,
+          "fix": "https://blog.aspose.cloud/cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/work-with-email-messages-and-attachments-in-python-using-aspose-for-cloud/",
-          "note": "on https://blog.aspose.cloud/ar/email/create-eml-file-in-python-programmatically/ (content/Aspose.Cloud/email/2026-04-09-create-eml-file-in-python-programmatically/index.ar.md:176); use https://blog.aspose.cloud/total/work-with-email-messages-and-attachments-in-python-using-aspose-for-cloud/; 26cb02a0 2026-04-10: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/email/create-eml-file-in-python-programmatically/",
+          "file": "content/Aspose.Cloud/email/2026-04-09-create-eml-file-in-python-programmatically/index.ar.md",
+          "line": 176,
+          "fix": "https://blog.aspose.cloud/total/work-with-email-messages-and-attachments-in-python-using-aspose-for-cloud/",
+          "commit": "26cb02a0 2026-04-10: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-java-app/ (content/Aspose.Cloud/email/2022-04-01-email-sending-using-aspose.email-cloud-in-heroku-java-app/index.ar.md:191); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-java-app/",
+          "file": "content/Aspose.Cloud/email/2022-04-01-email-sending-using-aspose.email-cloud-in-heroku-java-app/index.ar.md",
+          "line": 191,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-java-app/ (content/Aspose.Cloud/email/2022-04-01-email-sending-using-aspose.email-cloud-in-heroku-java-app/index.ar.md:194); use https://blog.aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-java-app/",
+          "file": "content/Aspose.Cloud/email/2022-04-01-email-sending-using-aspose.email-cloud-in-heroku-java-app/index.ar.md",
+          "line": 194,
+          "fix": "https://blog.aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-node.js-app/ (content/Aspose.Cloud/email/2022-03-02-email-sending-using-aspose.email-cloud-in-heroku-node.js-app/index.ar.md:163); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-node.js-app/",
+          "file": "content/Aspose.Cloud/email/2022-03-02-email-sending-using-aspose.email-cloud-in-heroku-node.js-app/index.ar.md",
+          "line": 163,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/ (content/Aspose.Cloud/email/2022-03-16-email-sending-using-aspose.email-cloud-in-heroku-php-app-2/index.ar.md:176); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/",
+          "file": "content/Aspose.Cloud/email/2022-03-16-email-sending-using-aspose.email-cloud-in-heroku-php-app-2/index.ar.md",
+          "line": 176,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/ (content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.ar.md:162); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/",
+          "file": "content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.ar.md",
+          "line": 162,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/ (content/Aspose.Cloud/email/2022-03-25-email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/index.ar.md:166); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/",
+          "file": "content/Aspose.Cloud/email/2022-03-25-email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/index.ar.md",
+          "line": 166,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/",
-          "note": "on https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/ (content/Aspose.Cloud/email/2022-03-25-email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/index.ar.md:169); use https://blog.aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/; 78f93c9b 2025-01-31: translations for Aspose.Email blogs"
+          "page": "https://blog.aspose.cloud/ar/email/email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/",
+          "file": "content/Aspose.Cloud/email/2022-03-25-email-sending-using-aspose.email-cloud-in-heroku-ruby-on-rails/index.ar.md",
+          "line": 169,
+          "fix": "https://blog.aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-php-app/",
+          "commit": "78f93c9b 2025-01-31: translations for Aspose.Email blogs"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/total/work-with-email-messages-and-attachments-in-node-js-using-aspose-for-cloud/",
-          "note": "on https://blog.aspose.cloud/ar/email/how-to-compare-text-in-nodejs/ (content/Aspose.Cloud/email/2026-10-14-how-to-compare-text-in-nodejs/index.ar.md:290); use https://blog.aspose.cloud/total/work-with-email-messages-and-attachments-in-node-js-using-aspose-for-cloud/; 1f2ff081 2026-10-15: Translate articles for: \"How to Compare Text in Node.JS\" - (21 files)"
+          "page": "https://blog.aspose.cloud/ar/email/how-to-compare-text-in-nodejs/",
+          "file": "content/Aspose.Cloud/email/2026-10-14-how-to-compare-text-in-nodejs/index.ar.md",
+          "line": 290,
+          "fix": "https://blog.aspose.cloud/total/work-with-email-messages-and-attachments-in-node-js-using-aspose-for-cloud/",
+          "commit": "1f2ff081 2026-10-15: Translate articles for: \"How to Compare Text in Node.JS\" - (21 files)"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/html/download-html-page-from-web-using-aspose.html-cloud-18.12/",
-          "note": "on https://blog.aspose.cloud/ar/html/convert-html-files-to-pdf-with-aspose.html-cloud-api/ (content/Aspose.Cloud/html/2020-01-31-convert-html-files-to-pdf-with-aspose.html-cloud-api/index.ar.md:113); use https://blog.aspose.cloud/html/download-html-page-from-web-using-aspose.html-cloud-18.12/; 647c7bc7 2025-03-26: translations for Aspose.Cloud HTML and Apsose.Cloud Slides product family"
+          "page": "https://blog.aspose.cloud/ar/html/convert-html-files-to-pdf-with-aspose.html-cloud-api/",
+          "file": "content/Aspose.Cloud/html/2020-01-31-convert-html-files-to-pdf-with-aspose.html-cloud-api/index.ar.md",
+          "line": 113,
+          "fix": "https://blog.aspose.cloud/html/download-html-page-from-web-using-aspose.html-cloud-18.12/",
+          "commit": "647c7bc7 2025-03-26: translations for Aspose.Cloud HTML and Apsose.Cloud Slides product family"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
-          "note": "on https://blog.aspose.cloud/ar/html/csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/ (content/Aspose.Cloud/html/2026-07-08-csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/index.ar.md:357); use https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/; 8de48eb7 2026-07-09: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/html/csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/",
+          "file": "content/Aspose.Cloud/html/2026-07-08-csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/index.ar.md",
+          "line": 357,
+          "fix": "https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
+          "commit": "8de48eb7 2026-07-09: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
-          "note": "on https://blog.aspose.cloud/ar/html/docx-to-html-conversion-in-php-high-fidelity-tutorial/ (content/Aspose.Cloud/html/2026-07-24-docx-to-html-conversion-in-php-high-fidelity-tutorial/index.ar.md:175); use https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/; b973344d 2026-07-25: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/html/docx-to-html-conversion-in-php-high-fidelity-tutorial/",
+          "file": "content/Aspose.Cloud/html/2026-07-24-docx-to-html-conversion-in-php-high-fidelity-tutorial/index.ar.md",
+          "line": 175,
+          "fix": "https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
+          "commit": "b973344d 2026-07-25: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
-          "note": "on https://blog.aspose.cloud/ar/html/docx-to-html-conversion-in-php-high-fidelity-tutorial/ (content/Aspose.Cloud/barcode/2026-07-24-docx-to-html-conversion-in-php-high-fidelity-tutorial/index.ar.md:178); use https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/; c4ce7c26 2026-07-28: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/html/docx-to-html-conversion-in-php-high-fidelity-tutorial/",
+          "file": "content/Aspose.Cloud/barcode/2026-07-24-docx-to-html-conversion-in-php-high-fidelity-tutorial/index.ar.md",
+          "line": 178,
+          "fix": "https://blog.aspose.cloud/html/changed-the-structure-of-zip-archive-folder-and-removed-redundant-apis-and-unneeded-parameters-in-aspose.html-for-cloud-18.3/",
+          "commit": "c4ce7c26 2026-07-28: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/html/a-group-of-conversion-api-methods-added-and-api-documentation-refined-in-aspose.html-cloud-18.6/",
-          "note": "on https://blog.aspose.cloud/ar/html/how-to-perform-dwg-to-png-conversion-in-nodejs/ (content/Aspose.Cloud/html/2026-06-30-how-to-perform-dwg-to-png-conversion-in-nodejs/index.ar.md:209); use https://blog.aspose.cloud/html/a-group-of-conversion-api-methods-added-and-api-documentation-refined-in-aspose.html-cloud-18.6/; 15f41f78 2026-07-01: Daily Blogs Translation: blog.aspose.cloud"
+          "page": "https://blog.aspose.cloud/ar/html/how-to-perform-dwg-to-png-conversion-in-nodejs/",
+          "file": "content/Aspose.Cloud/html/2026-06-30-how-to-perform-dwg-to-png-conversion-in-nodejs/index.ar.md",
+          "line": 209,
+          "fix": "https://blog.aspose.cloud/html/a-group-of-conversion-api-methods-added-and-api-documentation-refined-in-aspose.html-cloud-18.6/",
+          "commit": "15f41f78 2026-07-01: Daily Blogs Translation: blog.aspose.cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/2022/08/26/convert-html-to-markdown-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/imaging/convert-jpg-to-tiff-in-java/ (content/Aspose.Cloud/imaging/2024-10-25-convert-jpg-to-tiff-in-java/index.ar.md:201); use https://blog.aspose.cloud/2022/08/26/convert-html-to-markdown-in-java/; 6be419aa 2024-10-28: JPG to TIFF conversion translations"
+          "page": "https://blog.aspose.cloud/ar/imaging/convert-jpg-to-tiff-in-java/",
+          "file": "content/Aspose.Cloud/imaging/2024-10-25-convert-jpg-to-tiff-in-java/index.ar.md",
+          "line": 201,
+          "fix": "https://blog.aspose.cloud/2022/08/26/convert-html-to-markdown-in-java/",
+          "commit": "6be419aa 2024-10-28: JPG to TIFF conversion translations"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/2022/08/26/convert-html-to-markdown-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/imaging/convert-tiff-to-jpg-in-java/ (content/Aspose.Cloud/imaging/2024-10-23-convert-tiff-to-jpg-in-java/index.ar.md:202); use https://blog.aspose.cloud/2022/08/26/convert-html-to-markdown-in-java/; f3df58c8 2024-10-28: translations for TIFF to JPG"
+          "page": "https://blog.aspose.cloud/ar/imaging/convert-tiff-to-jpg-in-java/",
+          "file": "content/Aspose.Cloud/imaging/2024-10-23-convert-tiff-to-jpg-in-java/index.ar.md",
+          "line": 202,
+          "fix": "https://blog.aspose.cloud/2022/08/26/convert-html-to-markdown-in-java/",
+          "commit": "f3df58c8 2024-10-28: translations for TIFF to JPG"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/omr/aspose.omr-for-cloud-is-available-now/",
-          "note": "on https://blog.aspose.cloud/ar/imaging/resize-tiff-frame-in-java/ (content/Aspose.Cloud/imaging/2022-11-11-resize-tiff-frame-in-java/index.ar.md:128); use https://blog.aspose.cloud/omr/aspose.omr-for-cloud-is-available-now/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/ar/imaging/resize-tiff-frame-in-java/",
+          "file": "content/Aspose.Cloud/imaging/2022-11-11-resize-tiff-frame-in-java/index.ar.md",
+          "line": 128,
+          "fix": "https://blog.aspose.cloud/omr/aspose.omr-for-cloud-is-available-now/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/imaging/introducing-aspose.imaging-cloud-v3/",
-          "note": "on https://blog.aspose.cloud/ar/imaging/reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/ (content/Aspose.Cloud/imaging/2020-02-20-reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/index.ar.md:240); use https://blog.aspose.cloud/imaging/introducing-aspose.imaging-cloud-v3/; 87b230d9 2025-03-26: Translations for Aspose.Imaging Cloud Product family added"
+          "page": "https://blog.aspose.cloud/ar/imaging/reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/",
+          "file": "content/Aspose.Cloud/imaging/2020-02-20-reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/index.ar.md",
+          "line": 240,
+          "fix": "https://blog.aspose.cloud/imaging/introducing-aspose.imaging-cloud-v3/",
+          "commit": "87b230d9 2025-03-26: Translations for Aspose.Imaging Cloud Product family added"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar/pdf/convert-pdf-file-to-images-and-recognize-text-using-saaspose-apis/",
-          "note": "on https://blog.aspose.cloud/ar/ocr/convert-docx-to-png-in-java/ (content/Aspose.Cloud/ocr/2026-10-02-convert-docx-to-png-in-java/index.ar.md:238); use https://blog.aspose.cloud/pdf/convert-pdf-file-to-images-and-recognize-text-using-saaspose-apis/; 8be382c7 2026-10-03: Translate articles for: \"Convert DOCX to PNG in Java\" - (21 files)"
+          "page": "https://blog.aspose.cloud/ar/ocr/convert-docx-to-png-in-java/",
+          "file": "content/Aspose.Cloud/ocr/2026-10-02-convert-docx-to-png-in-java/index.ar.md",
+          "line": 238,
+          "fix": "https://blog.aspose.cloud/pdf/convert-pdf-file-to-images-and-recognize-text-using-saaspose-apis/",
+          "commit": "8be382c7 2026-10-03: Translate articles for: \"Convert DOCX to PNG in Java\" - (21 files)"
         }
       ]
     },
     "affected_pages": 990,
     "impact": {
       "clicks_28d": 8,
-      "impressions_28d": 1186,
+      "impressions_28d": 1171,
       "source": "gsc-pages",
       "share": null,
-      "past_clicks": 20,
-      "past_impressions": 1270,
-      "lost_clicks": 12,
-      "lost_impressions": 84,
+      "past_clicks": 21,
+      "past_impressions": 1280,
+      "lost_clicks": 13,
+      "lost_impressions": 109,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 26,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -1897,7 +2217,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "link_missing_translation",
@@ -1938,154 +2258,258 @@
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//words/convert-doc-to-odt-in-csharp/",
-          "note": "on https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/ (content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md:158); use https://blog.aspose.cloud/words/convert-doc-to-odt-in-csharp/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/",
+          "file": "content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md",
+          "line": 158,
+          "fix": "https://blog.aspose.cloud/words/convert-doc-to-odt-in-csharp/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//diagram/convert-vsd-to-svg-in-csharp/",
-          "note": "on https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/ (content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md:159); use https://blog.aspose.cloud/diagram/convert-vsd-to-svg-in-csharp/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/",
+          "file": "content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md",
+          "line": 159,
+          "fix": "https://blog.aspose.cloud/diagram/convert-vsd-to-svg-in-csharp/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//pdf/convert-epub-to-pdf-in-csharp/",
-          "note": "on https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/ (content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md:160); use https://blog.aspose.cloud/pdf/convert-epub-to-pdf-in-csharp/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/convert-fbx-to-obj-in-csharp/",
+          "file": "content/Aspose.Cloud/3d/2021-10-24-convert-fbx-to-obj-in-csharp/index.md",
+          "line": 160,
+          "fix": "https://blog.aspose.cloud/pdf/convert-epub-to-pdf-in-csharp/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
-          "note": "on https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/ (content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.md:73); use https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/",
+          "file": "content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.md",
+          "line": 73,
+          "fix": "https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//cells/manipulate-sparklines-in-excel-using-free-cloud-api/",
-          "note": "on https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/ (content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.md:74); use https://blog.aspose.cloud/cells/manipulate-sparklines-in-excel-using-free-cloud-api/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/",
+          "file": "content/Aspose.Cloud/3d/2020-02-08-convert-fbx-to-pdf-with-aspose-3d-cloud-api/index.md",
+          "line": 74,
+          "fix": "https://blog.aspose.cloud/cells/manipulate-sparklines-in-excel-using-free-cloud-api/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//words/convert-doc-to-pdf-in-node.js/",
-          "note": "on https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/ (content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md:119); use https://blog.aspose.cloud/words/convert-doc-to-pdf-in-node.js/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/",
+          "file": "content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md",
+          "line": 119,
+          "fix": "https://blog.aspose.cloud/words/convert-doc-to-pdf-in-node.js/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/",
-          "note": "on https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/ (content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md:120); use https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/",
+          "file": "content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md",
+          "line": 120,
+          "fix": "https://blog.aspose.cloud/3d/convert-fbx-to-pdf-with-aspose-3d-cloud-api/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
-          "note": "on https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/ (content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md:121); use https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/3d/glb-to-fbx-in-node.js/",
+          "file": "content/Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md",
+          "line": 121,
+          "fix": "https://blog.aspose.cloud/3d/manipulate-3d-models-and-objects-with-aspose.3d-cloud/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ar//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ar/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ar.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/ar/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ar.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/",
-          "note": "on https://blog.aspose.cloud/cells/create-edit-or-convert-excel-files-without-using-ms-excel/ (content/Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.md:78); use https://blog.aspose.cloud/cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/create-edit-or-convert-excel-files-without-using-ms-excel/",
+          "file": "content/Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.md",
+          "line": 78,
+          "fix": "https://blog.aspose.cloud/cells/apply-conditional-formatting-to-excel-files-using-aspose.cells-for-cloud-17.8/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//total/how-to-install-aspose.cloud-sdks/",
-          "note": "on https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/ (content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md:24); use https://blog.aspose.cloud/total/how-to-install-aspose.cloud-sdks/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "line": 24,
+          "fix": "https://blog.aspose.cloud/total/how-to-install-aspose.cloud-sdks/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//total/how-to-obtain-jwt-token-using-a-client-id-and-client-secret-key/",
-          "note": "on https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/ (content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md:25); use https://blog.aspose.cloud/total/how-to-obtain-jwt-token-using-a-client-id-and-client-secret-key/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "line": 25,
+          "fix": "https://blog.aspose.cloud/total/how-to-obtain-jwt-token-using-a-client-id-and-client-secret-key/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//cells/convert-txt-to-csv-in-java/",
-          "note": "on https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/ (content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md:122); use https://blog.aspose.cloud/cells/convert-txt-to-csv-in-java/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "line": 122,
+          "fix": "https://blog.aspose.cloud/cells/convert-txt-to-csv-in-java/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//cells/xml-to-json-in-java/",
-          "note": "on https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/ (content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md:123); use https://blog.aspose.cloud/cells/xml-to-json-in-java/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "line": 123,
+          "fix": "https://blog.aspose.cloud/cells/xml-to-json-in-java/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//3d/3ds-to-stl-in-java/",
-          "note": "on https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/ (content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md:124); use https://blog.aspose.cloud/3d/3ds-to-stl-in-java/; c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
+          "page": "https://blog.aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/",
+          "file": "content/Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "line": 124,
+          "fix": "https://blog.aspose.cloud/3d/3ds-to-stl-in-java/",
+          "commit": "c3ac5ba5 2025-02-13: Missing translations added for Aspose.Cells Cloud and Aspose.3D cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/de//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/de/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.de.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/de/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.de.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/fr//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/fr/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.fr.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/fr/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.fr.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ja//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ja/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ja.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/ja/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ja.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/pt//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/pt/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.pt.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/pt/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.pt.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/pt//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/ (content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.pt.md:162); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/",
+          "file": "content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.pt.md",
+          "line": 162,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/pt//email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/",
-          "note": "on https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/ (content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.pt.md:164); use https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-python-app/",
+          "file": "content/Aspose.Cloud/email/2022-03-23-email-sending-using-aspose.email-cloud-in-heroku-php-app/index.pt.md",
+          "line": 164,
+          "fix": "https://blog.aspose.cloud/pt/email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/ru//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/ru/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ru.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/ru/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.ru.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/th//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/th/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.th.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/th/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.th.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/vi//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/vi/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.vi.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/vi/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.vi.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud//imaging/convert-png-to-pdf-in-csharp/",
-          "note": "on https://blog.aspose.cloud/words/convert-word-to-tiff-document-in-python-doc-to-tiff-online/ (content/Aspose.Cloud/words/2022-04-30-convert-word-to-tiff-document-in-python-doc-to-tiff-online/index.md:94); use https://blog.aspose.cloud/imaging/convert-png-to-pdf-in-csharp/; 43f9c20a 2025-02-16: Missing translations for Aspose.Words Cloud"
+          "page": "https://blog.aspose.cloud/words/convert-word-to-tiff-document-in-python-doc-to-tiff-online/",
+          "file": "content/Aspose.Cloud/words/2022-04-30-convert-word-to-tiff-document-in-python-doc-to-tiff-online/index.md",
+          "line": 94,
+          "fix": "https://blog.aspose.cloud/imaging/convert-png-to-pdf-in-csharp/",
+          "commit": "43f9c20a 2025-02-16: Missing translations for Aspose.Words Cloud"
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/zh//total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
-          "note": "on https://blog.aspose.cloud/zh/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/ (content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.zh.md:77); use https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/; 92c9b8b7 2025-06-20: localized internal link FIX"
+          "page": "https://blog.aspose.cloud/zh/email/add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/",
+          "file": "content/Aspose.Cloud/email/2015-04-27-add-download-email-attachments-and-work-with-email-properties-using-aspose-for-cloud-.net-sdk/index.zh.md",
+          "line": 77,
+          "fix": "https://blog.aspose.cloud/total/easily-convert-your-email-files-into-wordpress-posts-using-aspose-cloud-email-to-post-plugin/",
+          "commit": "92c9b8b7 2025-06-20: localized internal link FIX"
         }
       ]
     },
     "affected_pages": 16,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 74,
+      "impressions_28d": 78,
       "source": "gsc-pages",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 104,
+      "past_impressions": 105,
       "lost_clicks": 0,
-      "lost_impressions": 30,
+      "lost_impressions": 27,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 5,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2096,7 +2520,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "link_damaged",
@@ -2153,224 +2577,384 @@
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ar.md:85); use https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ar.md",
+          "line": 85,
+          "fix": "https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ar.md:86); use https://blog.aspose.cloud/ar/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ar.md",
+          "line": 86,
+          "fix": "https://blog.aspose.cloud/ar/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ar.md:80); use https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ar.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/ar/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ar.md:81); use https://blog.aspose.cloud/ar/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ar/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ar.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/ar/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.de.md:86); use https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.de.md",
+          "line": 86,
+          "fix": "https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.de.md:87); use https://blog.aspose.cloud/de/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.de.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/de/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.de.md:80); use https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.de.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/de/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.de.md:81); use https://blog.aspose.cloud/de/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/de/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.de.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/de/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.es.md:87); use https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.es.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.es.md:88); use https://blog.aspose.cloud/es/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.es.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/es/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.es.md:79); use https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.es.md",
+          "line": 79,
+          "fix": "https://blog.aspose.cloud/es/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.es.md:80); use https://blog.aspose.cloud/es/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/es/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.es.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/es/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fa.md:87); use https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fa.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fa.md:88); use https://blog.aspose.cloud/fa/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fa.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/fa/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fa.md:80); use https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fa.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/fa/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fa.md:81); use https://blog.aspose.cloud/fa/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fa/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fa.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/fa/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fr.md:83); use https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fr.md",
+          "line": 83,
+          "fix": "https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fr.md:84); use https://blog.aspose.cloud/fr/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.fr.md",
+          "line": 84,
+          "fix": "https://blog.aspose.cloud/fr/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fr.md:80); use https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fr.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/fr/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fr.md:81); use https://blog.aspose.cloud/fr/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/fr/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.fr.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/fr/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.he.md:87); use https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.he.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.he.md:88); use https://blog.aspose.cloud/he/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.he.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/he/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.he.md:80); use https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.he.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/he/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.he.md:81); use https://blog.aspose.cloud/he/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/he/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.he.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/he/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.it.md:87); use https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.it.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.it.md:88); use https://blog.aspose.cloud/it/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.it.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/it/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.it.md:80); use https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.it.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/it/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.it.md:81); use https://blog.aspose.cloud/it/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/it/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.it.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/it/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ja.md:86); use https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ja.md",
+          "line": 86,
+          "fix": "https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ja.md:87); use https://blog.aspose.cloud/ja/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ja.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/ja/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ja.md:80); use https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ja.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/ja/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ja.md:81); use https://blog.aspose.cloud/ja/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ja/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ja.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/ja/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ko.md:87); use https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ko.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ko.md:88); use https://blog.aspose.cloud/ko/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.ko.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/ko/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ko.md:80); use https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ko.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/ko/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ko.md:81); use https://blog.aspose.cloud/ko/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/ko/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.ko.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/ko/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-java/",
-          "note": "on https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.pt.md:87); use https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.pt.md",
+          "line": 87,
+          "fix": "https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.pt.md:88); use https://blog.aspose.cloud/pt/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-word-in-java/index.pt.md",
+          "line": 88,
+          "fix": "https://blog.aspose.cloud/pt/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-file-to-word-in-java/",
-          "note": "on https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.pt.md:80); use https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.pt.md",
+          "line": 80,
+          "fix": "https://blog.aspose.cloud/pt/cells/convert-excel-file-to-word-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         },
         {
           "role": "link",
           "url": "https://blog.aspose.cloud/cells/convert-excel-to-jpg-in-java/",
-          "note": "on https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/ (content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.pt.md:81); use https://blog.aspose.cloud/pt/cells/convert-excel-to-jpg-in-java/; 7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
+          "page": "https://blog.aspose.cloud/pt/cells/convert-excel-to-pdf-in-java/",
+          "file": "content/Aspose.Cloud/cells/2025-12-05-convert-excel-to-pdf-in-java/index.pt.md",
+          "line": 81,
+          "fix": "https://blog.aspose.cloud/pt/cells/convert-excel-to-jpg-in-java/",
+          "commit": "7c04b3a2 2025-12-07: Added functionality to convert Excel files to Word and PDF files via Cells Java."
         }
       ]
     },
     "affected_pages": 32,
     "impact": {
       "clicks_28d": 1,
-      "impressions_28d": 36,
+      "impressions_28d": 33,
       "source": "gsc-pages",
       "share": null,
       "past_clicks": 2,
-      "past_impressions": 62,
+      "past_impressions": 64,
       "lost_clicks": 1,
-      "lost_impressions": 26,
+      "lost_impressions": 31,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 5,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2381,7 +2965,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "link_wrong_language",
@@ -2428,14 +3012,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2446,7 +3030,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "translation_partial",
@@ -2493,14 +3077,14 @@
       "lost_clicks": 0,
       "lost_impressions": 0,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 0,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2511,7 +3095,7 @@
     "superseded_by": null,
     "detected_at": "2026-10-22",
     "first_seen_run": "link-audit-run1",
-    "last_seen_run": "link-audit-run10",
+    "last_seen_run": "link-audit-run11",
     "resolved_run": null,
     "resolved_at": null,
     "check": "language_unsupported",
@@ -2606,23 +3190,23 @@
     },
     "affected_pages": 13394,
     "impact": {
-      "clicks_28d": 559,
-      "impressions_28d": 51412,
+      "clicks_28d": 554,
+      "impressions_28d": 51682,
       "source": "gsc-template",
       "share": null,
-      "past_clicks": 1015,
-      "past_impressions": 68826,
-      "lost_clicks": 456,
-      "lost_impressions": 17414,
+      "past_clicks": 1027,
+      "past_impressions": 69217,
+      "lost_clicks": 473,
+      "lost_impressions": 17535,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 12,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2695,23 +3279,23 @@
     },
     "affected_pages": 1206,
     "impact": {
-      "clicks_28d": 51,
-      "impressions_28d": 4659,
+      "clicks_28d": 50,
+      "impressions_28d": 4683,
       "source": "gsc-template",
       "share": null,
-      "past_clicks": 92,
-      "past_impressions": 6199,
-      "lost_clicks": 41,
-      "lost_impressions": 1540,
+      "past_clicks": 93,
+      "past_impressions": 6227,
+      "lost_clicks": 43,
+      "lost_impressions": 1544,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 11,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "M",
@@ -2813,23 +3397,23 @@
     },
     "affected_pages": 1317,
     "impact": {
-      "clicks_28d": 51,
-      "impressions_28d": 4838,
+      "clicks_28d": 50,
+      "impressions_28d": 4859,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 93,
-      "past_impressions": 6890,
-      "lost_clicks": 42,
-      "lost_impressions": 2052,
+      "past_impressions": 7003,
+      "lost_clicks": 43,
+      "lost_impressions": 2144,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 8,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -2911,18 +3495,18 @@
       "source": "gsc-template",
       "share": null,
       "past_clicks": 0,
-      "past_impressions": 102,
+      "past_impressions": 104,
       "lost_clicks": 0,
-      "lost_impressions": 86,
+      "lost_impressions": 88,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "lost",
       "score": 1,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -3001,23 +3585,23 @@
     },
     "affected_pages": 1207,
     "impact": {
-      "clicks_28d": 51,
-      "impressions_28d": 4661,
+      "clicks_28d": 50,
+      "impressions_28d": 4685,
       "source": "gsc-template",
       "share": null,
-      "past_clicks": 92,
-      "past_impressions": 6209,
-      "lost_clicks": 41,
-      "lost_impressions": 1548,
+      "past_clicks": 93,
+      "past_impressions": 6236,
+      "lost_clicks": 43,
+      "lost_impressions": 1551,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 11,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "M",
@@ -3115,23 +3699,23 @@
     },
     "affected_pages": 1293,
     "impact": {
-      "clicks_28d": 51,
-      "impressions_28d": 4822,
+      "clicks_28d": 50,
+      "impressions_28d": 4843,
       "source": "gsc-template",
       "share": null,
       "past_clicks": 93,
-      "past_impressions": 6788,
-      "lost_clicks": 42,
-      "lost_impressions": 1966,
+      "past_impressions": 6899,
+      "lost_clicks": 43,
+      "lost_impressions": 2056,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "at stake",
       "score": 8,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",
@@ -3249,22 +3833,22 @@
     "affected_pages": 11,
     "impact": {
       "clicks_28d": 0,
-      "impressions_28d": 15,
+      "impressions_28d": 13,
       "source": "gsc-pages",
       "share": null,
       "past_clicks": 2,
-      "past_impressions": 42,
+      "past_impressions": 41,
       "lost_clicks": 2,
-      "lost_impressions": 27,
+      "lost_impressions": 28,
       "past_window": [
-        "2026-04-01",
-        "2026-04-28"
+        "2026-04-02",
+        "2026-04-29"
       ],
       "scored_on": "lost",
       "score": 5,
       "window": [
-        "2026-09-30",
-        "2026-10-27"
+        "2026-10-01",
+        "2026-10-28"
       ]
     },
     "effort": "S",

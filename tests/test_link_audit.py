@@ -1,5 +1,6 @@
 """Link auditor: links read from a Hugo repo, classified against the sitemap inventory and live checks. Offline."""
 
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -202,3 +203,7 @@ def test_blame_names_the_translation_commit(tmp_path):
     assert ru and all(i["by_translation_commit"] for i in ru)
     assert all(" T:" not in i["commit"] and "Translate articles for" in i["commit"] for i in ru)  # no author
     assert report["hosts"][HOST]["repo"]["commit"]
+    # the report lays out each link's page, file, line, fix and commit on separate lines
+    loc = next(loc for f in report["findings"] for loc in f["evidence"]["locations"] if loc["role"] == "link")
+    assert {"page", "file", "line", "fix", "commit"} <= set(loc) and "note" not in loc
+    assert re.match(r"^[0-9a-f]{8} \d{4}-\d{2}-\d{2}: ", loc["commit"])  # the format the report splits
